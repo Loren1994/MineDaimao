@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+                                                                   
+
+    
+
+                 
+                       
+                               
+           
+
+    <LinearLayout
+        android:id="@+id/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" android:tag="layout/activity_main_0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <TextView
+            android:id="@+id/five_star_tv"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/orange"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Five Star"
+            android:textColor="@color/real_white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/click_me"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/orange"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Mine Collection"
+            android:textColor="@color/real_white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:tag="binding_1"                
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:tag="binding_2"   
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:tag="binding_3"       
+            android:textSize="20sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#eeeeee"
+            android:overScrollMode="never" />
+    </LinearLayout>
+
+         
