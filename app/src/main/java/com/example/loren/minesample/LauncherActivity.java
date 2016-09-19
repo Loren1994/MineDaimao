@@ -9,7 +9,7 @@ import android.view.View;
  * Copyright (c) 16-9-19 by loren
  */
 
-public class Java2LotlinActivity extends AppCompatActivity {
+public class LauncherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,7 +17,7 @@ public class Java2LotlinActivity extends AppCompatActivity {
         findViewById(R.id.fs_tv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Java2LotlinActivity.this, CustomViewActivity.class));
+                startActivity(new Intent(LauncherActivity.this, CustomViewActivity.class));
             }
         });
     }

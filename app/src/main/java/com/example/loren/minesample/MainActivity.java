@@ -46,7 +46,7 @@
 //        binding.fiveStarTv.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                startActivity(new Intent(MainActivity.this, Java2LotlinActivity.class));
+//                startActivity(new Intent(MainActivity.this, LauncherActivity.class));
 //            }
 //        });
 //        binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
