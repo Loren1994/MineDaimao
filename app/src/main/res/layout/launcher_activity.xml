@@ -13,4 +13,15 @@
         android:text="Five start"
         android:textColor="@color/real_white"
         android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/flag_tv"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#ff0000"
+        android:gravity="center"
+        android:text="China Flag"
+        android:textColor="@color/real_white"
+        android:textSize="30sp" />
+
 </LinearLayout>

@@ -19,6 +19,7 @@
         </activity>
         <!--<activity android:name=".MineCollectionActivity" />-->
         <activity android:name=".CustomViewActivity" />
+        <activity android:name=".FlagActivity" />
     </application>
 
 </manifest>

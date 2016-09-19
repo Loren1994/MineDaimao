@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:background="#ff0000">
+
+        <com.example.loren.minesample.widget.FiveStarView
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="23dp"
+            app:color="@color/yellow" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="90dp">
+
+            <com.example.loren.minesample.widget.FiveStarView
+                android:layout_width="18dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:rotation="-55"
+                app:color="@color/yellow" />
+
+            <com.example.loren.minesample.widget.FiveStarView
+                android:layout_width="18dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="35dp"
+                android:rotation="-30"
+                app:color="@color/yellow" />
+
+            <com.example.loren.minesample.widget.FiveStarView
+                android:layout_width="18dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="60dp"
+                android:rotation="5"
+                app:color="@color/yellow" />
+
+            <com.example.loren.minesample.widget.FiveStarView
+                android:layout_width="18dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="80dp"
+                android:rotation="20"
+                app:color="@color/yellow" />
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>
