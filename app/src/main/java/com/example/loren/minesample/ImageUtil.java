@@ -5,11 +5,10 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
-import org.jetbrains.annotations.NotNull;
 
 public class ImageUtil {
 
-    static void bind(@NotNull ImageView imageView, String url) {
+    static void bind( ImageView imageView, String url) {
         Glide.with(imageView.getContext())
                 .load(url)
                 .centerCrop()
