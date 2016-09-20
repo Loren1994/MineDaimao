@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:htext="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -53,5 +54,30 @@
                 android:rotation="20"
                 app:color="@color/yellow" />
         </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.hanks.htextview.HTextView
+            android:id="@+id/htv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/yellow0"
+            android:gravity="center"
+            android:textColor="#ff0000"
+            android:textSize="30sp"
+            htext:animateType="scale" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:text="特别鸣谢:Victor.chou"
+            android:textColor="@color/real_white"
+            android:textSize="5sp" />
     </RelativeLayout>
 </LinearLayout>
