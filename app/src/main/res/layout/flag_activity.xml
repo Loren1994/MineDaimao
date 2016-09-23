@@ -78,6 +78,6 @@
             android:gravity="center"
             android:text="特别鸣谢:Victor.chou"
             android:textColor="@color/real_white"
-            android:textSize="5sp" />
+            android:textSize="3sp" />
     </RelativeLayout>
 </LinearLayout>

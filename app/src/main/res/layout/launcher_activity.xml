@@ -24,4 +24,14 @@
         android:textColor="@color/real_white"
         android:textSize="30sp" />
 
+    <TextView
+        android:id="@+id/move_view"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/yellow0"
+        android:gravity="center"
+        android:text="Move View"
+        android:textColor="@color/real_white"
+        android:textSize="30sp" />
+
 </LinearLayout>

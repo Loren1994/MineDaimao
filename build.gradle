@@ -12,7 +12,7 @@ buildscript {
 //        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.0-rc2'
+        classpath 'com.android.tools.build:gradle:2.2.0'
         classpath 'org.codehaus.groovy:gradle-groovy-android-plugin:0.3.6'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 //        classpath 'com.example.groovyplugindemo:TestPlugin:1.0.0'
