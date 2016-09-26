@@ -24,6 +24,8 @@ public class LauncherActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.move_view).setOnClickListener(this);
         findViewById(R.id.custom_recycler).setOnClickListener(this);
         findViewById(R.id.remind_tv).setOnClickListener(this);
+        findViewById(R.id.person_detail_tv).setOnClickListener(this);
+        findViewById(R.id.yingshi_tv).setOnClickListener(this);
     }
 
     @Override
@@ -43,6 +45,12 @@ public class LauncherActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.remind_tv:
                 startActivity(new Intent(mContext, RemindActivity.class));
+                break;
+            case R.id.person_detail_tv:
+                startActivity(new Intent(mContext, ApplicationJumpActivity.class));
+                break;
+            case R.id.yingshi_tv:
+                startActivity(new Intent(mContext, YingshiActivity.class));
                 break;
             default:
                 break;

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MineSample</string>
     <string name="func_name">MVVM SimDemo</string>
+    <string name="device_is_added">%s设备已添加</string>
 </resources>
