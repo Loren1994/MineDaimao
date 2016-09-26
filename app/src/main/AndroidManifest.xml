@@ -21,6 +21,8 @@
         <activity android:name=".CustomViewActivity" />
         <activity android:name=".FlagActivity" />
         <activity android:name=".MoveViewActivity" />
+        <activity android:name=".ZzBeeLayoutActivity" />
+        <activity android:name=".RemindActivity" />
     </application>
 
 </manifest>

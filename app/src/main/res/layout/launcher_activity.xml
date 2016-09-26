@@ -1,37 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/fs_tv"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/orange"
-        android:gravity="center"
-        android:text="Five start"
-        android:textColor="@color/real_white"
-        android:textSize="30sp" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/flag_tv"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="#ff0000"
-        android:gravity="center"
-        android:text="China Flag"
-        android:textColor="@color/real_white"
-        android:textSize="30sp" />
+        <TextView
+            android:id="@+id/fs_tv"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/orange"
+            android:gravity="center"
+            android:text="Five start"
+            android:textColor="@color/real_white"
+            android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/move_view"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/yellow0"
-        android:gravity="center"
-        android:text="Move View"
-        android:textColor="@color/real_white"
-        android:textSize="30sp" />
+        <TextView
+            android:id="@+id/flag_tv"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#ff0000"
+            android:gravity="center"
+            android:text="China Flag"
+            android:textColor="@color/real_white"
+            android:textSize="30sp" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/move_view"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/orange"
+            android:gravity="center"
+            android:text="Move View"
+            android:textColor="@color/real_white"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/custom_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#ff0000"
+            android:gravity="center"
+            android:text="ZzBeeLayout"
+            android:textColor="@color/real_white"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/remind_tv"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/orange"
+            android:gravity="center"
+            android:text="who remind me ?"
+            android:textColor="@color/real_white"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+</ScrollView>

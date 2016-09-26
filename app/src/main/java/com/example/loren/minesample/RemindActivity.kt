@@ -2,7 +2,6 @@ package com.example.loren.minesample
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.launcher_activity.*
 
 /**
  *                            _ooOoo_
@@ -27,12 +26,11 @@ import kotlinx.android.synthetic.main.launcher_activity.*
  *         .............................................
  *                  佛祖保佑             永无BUG
  *
- *                Copyright (c) 16-9-22 by loren
+ *                Copyright (c) 16-9-26 by loren
  */
-class MoveViewActivity : AppCompatActivity() {
-
+class RemindActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.move_view_activity)
+        setContentView(R.layout.remind_activity)
     }
 }

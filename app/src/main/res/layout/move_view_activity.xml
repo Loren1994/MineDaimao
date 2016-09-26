@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <com.example.loren.minesample.widget.MoveView
+        android:id="@+id/move_view"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:background="@color/red" />

@@ -53,6 +53,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 //    compile 'com.example.groovyplugindemo:TestPlugin:1.0.0'
     compile 'hanks.xyz:htextview-library:0.1.2'
+    compile 'me.zhouzhuo.zzbeelayout:zz-bee-layout:1.0.1'
 }
 repositories {
     maven {

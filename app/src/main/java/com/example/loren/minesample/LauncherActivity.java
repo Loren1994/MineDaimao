@@ -22,6 +22,8 @@ public class LauncherActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.fs_tv).setOnClickListener(this);
         findViewById(R.id.flag_tv).setOnClickListener(this);
         findViewById(R.id.move_view).setOnClickListener(this);
+        findViewById(R.id.custom_recycler).setOnClickListener(this);
+        findViewById(R.id.remind_tv).setOnClickListener(this);
     }
 
     @Override
@@ -35,6 +37,12 @@ public class LauncherActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.fs_tv:
                 startActivity(new Intent(mContext, CustomViewActivity.class));
+                break;
+            case R.id.custom_recycler:
+                startActivity(new Intent(mContext, ZzBeeLayoutActivity.class));
+                break;
+            case R.id.remind_tv:
+                startActivity(new Intent(mContext, RemindActivity.class));
                 break;
             default:
                 break;
