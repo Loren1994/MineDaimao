@@ -58,7 +58,7 @@ dependencies {
     compile 'hanks.xyz:htextview-library:0.1.2'
     compile 'me.zhouzhuo.zzbeelayout:zz-bee-layout:1.0.1'
     compile 'com.facebook.fresco:fresco:0.13.0'
-    compile files('libs/EZOpenSDK.jar')
+    compile 'fm.jiecao:jiecaovideoplayer:4.7.0'
 }
 repositories {
     maven {

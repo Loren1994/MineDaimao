@@ -29,27 +29,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".MineCollectionActivity" />-->
+        <!-- <activity android:name=".MineCollectionActivity" /> -->
         <activity android:name=".CustomViewActivity" />
         <activity android:name=".FlagActivity" />
         <activity android:name=".MoveViewActivity" />
         <activity android:name=".ZzBeeLayoutActivity" />
         <activity android:name=".RemindActivity" />
         <activity android:name=".ApplicationJumpActivity" />
-        <activity android:name=".YingshiActivity" />
-        <!--萤石云sdk-->
-        <activity
-            android:name="com.videogo.main.EzvizWebViewActivity"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"/>
-        <receiver
-            android:name=".EzvizBroadcastReceiver"
-            android:exported="false" >
-            <intent-filter>
-                <action android:name="com.videogo.action.OAUTH_SUCCESS_ACTION" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-        </receiver>
+        <activity android:name=".VideoActivity" />
+        <activity android:name=".CopyWxActivity" />
+        <activity android:name=".CopyWxPullActivity"></activity>
     </application>
 
 </manifest>
