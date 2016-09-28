@@ -37,8 +37,12 @@
         <activity android:name=".RemindActivity" />
         <activity android:name=".ApplicationJumpActivity" />
         <activity android:name=".VideoActivity" />
-        <activity android:name=".CopyWxActivity" />
-        <activity android:name=".CopyWxPullActivity"></activity>
+        <activity
+            android:name=".CopyWxActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".CopyWxPullActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

@@ -3,7 +3,7 @@
     android:id="@+id/activity_copy_wx_pull"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/grey2"
     android:orientation="vertical">
 
     <com.example.loren.minesample.widget.EyeView
@@ -13,6 +13,7 @@
         android:background="@color/black" />
 
     <TextView
+        android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"

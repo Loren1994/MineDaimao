@@ -23,6 +23,7 @@
         android:layout_gravity="center"
         android:background="@mipmap/bg_movie_add_shoot"
         android:text="按住拍"
-        android:textColor="#ECEBF1" />
+        android:textColor="#ECEBF1"
+        android:visibility="gone" />
 
 </LinearLayout>
