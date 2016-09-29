@@ -33,7 +33,7 @@ public class LauncherActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.flag_tv).setOnClickListener(this);
         findViewById(R.id.move_view).setOnClickListener(this);
         findViewById(R.id.custom_recycler).setOnClickListener(this);
-//        findViewById(R.id.remind_tv).setOnClickListener(this);
+        findViewById(R.id.remind_tv).setOnClickListener(this);
         findViewById(R.id.person_detail_tv).setOnClickListener(this);
         findViewById(R.id.yingshi_tv).setOnClickListener(this);
         findViewById(R.id.wx_vedio).setOnClickListener(this);
@@ -54,9 +54,9 @@ public class LauncherActivity extends AppCompatActivity implements View.OnClickL
             case R.id.custom_recycler:
                 startActivity(new Intent(mContext, ZzBeeLayoutActivity.class));
                 break;
-//            case R.id.remind_tv:
-//                startActivity(new Intent(mContext, RemindActivity.class));
-//                break;
+            case R.id.remind_tv:
+                startActivity(new Intent(mContext, RemindActivity.class));
+                break;
             case R.id.person_detail_tv:
                 startActivity(new Intent(mContext, ApplicationJumpActivity.class));
                 break;

@@ -14,14 +14,17 @@ android {
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
-        ndk {
-            abiFilters "armeabi"
-        }
+//        ndk {
+//            abiFilters "armeabi"
+//        }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
         }
     }
     sourceSets {
@@ -59,6 +62,7 @@ dependencies {
     compile 'me.zhouzhuo.zzbeelayout:zz-bee-layout:1.0.1'
     compile 'com.facebook.fresco:fresco:0.13.0'
     compile 'fm.jiecao:jiecaovideoplayer:4.7.0'
+    compile 'com.android.support:design:24.2.1'
 }
 repositories {
     maven {

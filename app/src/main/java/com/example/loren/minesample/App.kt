@@ -2,6 +2,7 @@ package com.example.loren.minesample
 
 import android.app.Application
 import com.facebook.drawee.backends.pipeline.Fresco
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
 
 /**
  *                            _ooOoo_
@@ -29,9 +30,13 @@ import com.facebook.drawee.backends.pipeline.Fresco
  *                Copyright (c) 16-9-26 by loren
  */
 class App : Application() {
+    companion object {
+        lateinit var videoPlayer: JCVideoPlayerStandard
+    }
 
     override fun onCreate() {
         super.onCreate()
         Fresco.initialize(this)
+        videoPlayer=JCVideoPlayerStandard(this)
     }
 }

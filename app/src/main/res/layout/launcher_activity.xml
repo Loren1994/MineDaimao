@@ -46,15 +46,14 @@
             android:textColor="@color/real_white"
             android:textSize="30sp" />
 
-        <!--<TextView-->
-            <!--android:id="@+id/remind_tv"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="80dp"-->
-            <!--android:gravity="center"-->
-            <!--android:text="who remind me ?"-->
-            <!--android:textColor="@color/real_white"-->
-            <!--android:textSize="30sp"-->
-            <!--android:visibility="gone" />-->
+        <TextView
+            android:id="@+id/remind_tv"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="Take Photo"
+            android:textColor="@color/real_white"
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/person_detail_tv"
