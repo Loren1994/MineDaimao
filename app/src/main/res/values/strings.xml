@@ -2,4 +2,8 @@
     <string name="app_name">MineSample</string>
     <string name="func_name">MVVM SimDemo</string>
     <string name="device_is_added">%s设备已添加</string>
+
+    <string name="settings_short_name">Google Clock</string>
+    <string name="settings_long_name">Google Clock(google)</string>
+    <string name="settings_disable_msg">Google Clock不可用</string>
 </resources>

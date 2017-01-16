@@ -82,5 +82,20 @@
             android:textColor="@color/real_white"
             android:textSize="30sp" />
 
+        <TextView
+            android:id="@+id/loren"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="Google Clock"
+            android:textColor="@color/real_white"
+            android:textSize="30sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never" />
+
     </LinearLayout>
 </ScrollView>

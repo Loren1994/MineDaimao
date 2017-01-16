@@ -1,0 +1,16 @@
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="settings"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/settings_short_name"
+        android:shortcutLongLabel="@string/settings_long_name"
+        android:shortcutDisabledMessage="@string/settings_disable_msg">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.loren.minesample"
+            android:targetClass="com.example.loren.minesample.LorenActivity" />
+        <categories android:name="android.shortcut.conversation"/>
+    </shortcut>
+</shortcuts>
