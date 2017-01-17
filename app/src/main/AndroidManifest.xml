@@ -60,6 +60,7 @@
             android:name=".ChatActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".PlayActivity"></activity>
     </application>
 
 </manifest>

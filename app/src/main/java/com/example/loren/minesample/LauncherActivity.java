@@ -2,17 +2,11 @@ package com.example.loren.minesample;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ShortcutInfo;
-import android.content.pm.ShortcutManager;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
-
-import java.util.ArrayList;
 
 /**
  * Copyright (c) 16-9-19 by loren
@@ -47,6 +41,7 @@ public class LauncherActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.wx_vedio).setOnClickListener(this);
         findViewById(R.id.loren).setOnClickListener(this);
         findViewById(R.id.chat).setOnClickListener(this);
+        findViewById(R.id.play).setOnClickListener(this);
 
 //        RecyclerView recycler = (RecyclerView) findViewById(R.id.recycler);
 //        recycler.setLayoutManager(new GridLayoutManager(this, 1));
@@ -100,6 +95,9 @@ public class LauncherActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.chat:
                 startActivity(new Intent(mContext, ChatActivity.class));
+                break;
+            case R.id.play:
+                startActivity(new Intent(mContext, PlayActivity.class));
                 break;
 
             default:
