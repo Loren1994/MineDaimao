@@ -55,7 +55,11 @@
             android:name=".RemindActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light" />
         <activity android:name=".LorenActivity" />
-        <activity android:name=".ShortCutsActivity"></activity>
+        <activity android:name=".ShortCutsActivity" />
+        <activity
+            android:name=".ChatActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.loren.minesample.widget.AdjustLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/adjust_ll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/orange"
+        android:gravity="center"
+        android:text="聊天"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/chat_rv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/input_edt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/orange"
+            android:hint="请输入内容..."
+            android:maxHeight="120dp"
+            android:paddingEnd="5dp"
+            android:paddingStart="10dp" />
+
+        <Button
+            android:id="@+id/send_btn"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_gravity="top"
+            android:layout_marginEnd="10dp"
+            android:background="@color/orange"
+            android:text="发送"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+
+</com.example.loren.minesample.widget.AdjustLinearLayout>

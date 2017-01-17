@@ -91,6 +91,15 @@
             android:textColor="@color/real_white"
             android:textSize="30sp" />
 
+        <TextView
+            android:id="@+id/chat"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="CHAT"
+            android:textColor="@color/real_white"
+            android:textSize="30sp" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="wrap_content"

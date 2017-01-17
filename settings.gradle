@@ -1,1 +1,1 @@
-include ':app', ':GroovyPluginDemo'
+include ':app'

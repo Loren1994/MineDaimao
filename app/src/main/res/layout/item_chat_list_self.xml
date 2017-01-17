@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/other_head_sd"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            fresco:roundAsCircle="true"
+            fresco:roundingBorderColor="@color/orange"
+            fresco:roundingBorderWidth="1dp" />
+
+        <TextView
+            android:id="@+id/other_msg_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/bg_white_coner"
+            android:maxWidth="260dp"
+            android:padding="10dp"
+            android:text="西哦啊手i啊哈地卡双开数量发货收快来大家发给还电视剧看个还是大家看房"
+            android:textColor="@color/green" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -46,25 +46,26 @@ public class LauncherActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.yingshi_tv).setOnClickListener(this);
         findViewById(R.id.wx_vedio).setOnClickListener(this);
         findViewById(R.id.loren).setOnClickListener(this);
+        findViewById(R.id.chat).setOnClickListener(this);
 
-        RecyclerView recycler = (RecyclerView) findViewById(R.id.recycler);
-        recycler.setLayoutManager(new GridLayoutManager(this, 1));
-        ShortcutAdapter mAdapter = new ShortcutAdapter(this, mList);
-        recycler.setAdapter(mAdapter);
-        ShortcutManager shortCutsManager = getSystemService(ShortcutManager.class);
-        ArrayList<ShortcutInfo> shortcutInfo = new ArrayList<>();
-        for (int i = 0; i < shortCutsManager.getMaxShortcutCountPerActivity(); i++) {
-            Intent intent = new Intent(this, LorenActivity.class).
-                    putExtra("message", "联系人:" + mAdapter.getMdata()[i]);
-            intent.setAction(Intent.ACTION_VIEW);
-            ShortcutInfo info = new ShortcutInfo.Builder(this, "id" + i)
-                    .setShortLabel(mAdapter.getMdata()[i])
-                    .setLongLabel("联系人:" + mAdapter.getMdata()[i])
-                    .setIntent(intent)
-                    .build();
-            shortcutInfo.add(i, info);
-        }
-        shortCutsManager.setDynamicShortcuts(shortcutInfo);
+//        RecyclerView recycler = (RecyclerView) findViewById(R.id.recycler);
+//        recycler.setLayoutManager(new GridLayoutManager(this, 1));
+//        ShortcutAdapter mAdapter = new ShortcutAdapter(this, mList);
+//        recycler.setAdapter(mAdapter);
+//        ShortcutManager shortCutsManager = getSystemService(ShortcutManager.class);
+//        ArrayList<ShortcutInfo> shortcutInfo = new ArrayList<>();
+//        for (int i = 0; i < shortCutsManager.getMaxShortcutCountPerActivity(); i++) {
+//            Intent intent = new Intent(this, LorenActivity.class).
+//                    putExtra("message", "联系人:" + mAdapter.getMdata()[i]);
+//            intent.setAction(Intent.ACTION_VIEW);
+//            ShortcutInfo info = new ShortcutInfo.Builder(this, "id" + i)
+//                    .setShortLabel(mAdapter.getMdata()[i])
+//                    .setLongLabel("联系人:" + mAdapter.getMdata()[i])
+//                    .setIntent(intent)
+//                    .build();
+//            shortcutInfo.add(i, info);
+//        }
+//        shortCutsManager.setDynamicShortcuts(shortcutInfo);
     }
 
     @Override
@@ -96,6 +97,9 @@ public class LauncherActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.loren:
                 startActivity(new Intent(mContext, LorenActivity.class));
+                break;
+            case R.id.chat:
+                startActivity(new Intent(mContext, ChatActivity.class));
                 break;
 
             default:
