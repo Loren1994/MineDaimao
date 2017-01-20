@@ -61,8 +61,9 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".PlayActivity" />
-        <activity android:name=".OCRActivity" />
-        <activity android:name=".OpenScreenActivity"></activity>
+        <activity
+            android:name=".OpenScreenActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     </application>
 
 </manifest>

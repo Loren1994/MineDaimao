@@ -2,10 +2,10 @@ package com.example.loren.minesample;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -20,7 +20,7 @@ import com.example.loren.minesample.widget.OpenScreen;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class OpenScreenActivity extends AppCompatActivity implements OpenScreen.onDialogListener {
+public class OpenScreenActivity extends Activity implements OpenScreen.onDialogListener {
 
     @BindView(R.id.open_os)
     OpenScreen openOs;
