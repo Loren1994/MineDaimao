@@ -13,7 +13,7 @@ public class ImageUtil {
                 .load(url)
                 .centerCrop()
                 .crossFade()
-                .placeholder(ContextCompat.getDrawable(imageView.getContext(), R.mipmap.ic_launcher))
+                .placeholder(ContextCompat.getDrawable(imageView.getContext(), R.drawable.ic_launcher))
                 .into(imageView);
     }
 }

@@ -23,7 +23,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LauncherActivity">
@@ -60,7 +60,9 @@
             android:name=".ChatActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".PlayActivity"></activity>
+        <activity android:name=".PlayActivity" />
+        <activity android:name=".OCRActivity" />
+        <activity android:name=".OpenScreenActivity"></activity>
     </application>
 
 </manifest>

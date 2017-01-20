@@ -39,7 +39,7 @@ public class EyeView extends FrameLayout {
         if (Build.VERSION.SDK_INT >= 11) {
             setLayerType(LAYER_TYPE_SOFTWARE, null);
         }
-        setBackgroundResource(R.mipmap.eye);
+        setBackgroundResource(R.drawable.eye);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         // default hide
         post(new Runnable() {

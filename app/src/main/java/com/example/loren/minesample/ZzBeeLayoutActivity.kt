@@ -32,14 +32,14 @@ import kotlinx.android.synthetic.main.zz_bee_layout.*
  */
 class ZzBeeLayoutActivity : AppCompatActivity() {
 
-    private var drawArr = intArrayOf(R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher)
-    private var urlArr = arrayOf("http://img0.imgtn.bdimg.com/it/u=3273293410,2667810732&fm=11&gp=0.jpg",
-            "http://img0.imgtn.bdimg.com/it/u=3271149477,3744926107&fm=11&gp=0.jpg",
-            "http://img4.imgtn.bdimg.com/it/u=4186654312,3515491732&fm=23&gp=0.jpg",
-            "http://img2.imgtn.bdimg.com/it/u=1192715945,443541801&fm=21&gp=0.jpg",
-            "http://img3.imgtn.bdimg.com/it/u=2016448457,3556493612&fm=23&gp=0.jpg",
-            "http://img0.imgtn.bdimg.com/it/u=2155062783,607707723&fm=23&gp=0.jpg",
-            "http://img5.imgtn.bdimg.com/it/u=2404996392,2561119365&fm=23&gp=0.jpg")
+    private var drawArr = intArrayOf(R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher)
+    private var urlArr = arrayOf("",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

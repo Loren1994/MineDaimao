@@ -9,7 +9,7 @@
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_default_avatar" />
+        android:src="@drawable/ic_default_avatar" />
 
     <TextView
         android:id="@+id/item"

@@ -11,6 +11,6 @@
         android:layout_height="300dp"
         android:layout_gravity="center"
         app:zz_child_size="100dp"
-        app:zz_def_res="@mipmap/ic_launcher" />
+        app:zz_def_res="@drawable/ic_launcher" />
 
 </LinearLayout>
