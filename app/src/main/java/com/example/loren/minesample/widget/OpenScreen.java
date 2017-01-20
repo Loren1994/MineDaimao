@@ -30,6 +30,7 @@ public class OpenScreen extends View {
     private float moveY = 0f;
     private onDialogListener listener;
     private String password = "";
+    private Paint mClickPaint;
 
     public OpenScreen(Context context) {
         super(context);
@@ -67,6 +68,11 @@ public class OpenScreen extends View {
         for (int i = 0; i < 9; i++) {
             positionArr.add(new PointF());
         }
+        mClickPaint = new Paint();
+        mClickPaint.setColor(Color.GRAY);
+        mClickPaint.setStyle(Paint.Style.STROKE);
+        mClickPaint.setStrokeWidth(30);
+        mClickPaint.setAntiAlias(true);
         mLinePaint = new Paint();
         mLinePaint.setColor(Color.YELLOW);
         mLinePaint.setAntiAlias(true);
@@ -111,11 +117,10 @@ public class OpenScreen extends View {
     protected void onDraw(Canvas canvas) {
         for (int i = 0; i < positionArr.size(); i++) {
             if (curCircle.contains(i)) {
-                mPaint.setStrokeWidth(30);
+                canvas.drawCircle(positionArr.get(i).x, positionArr.get(i).y, CIRCLE_RADIUS, mClickPaint);
             } else {
-                mPaint.setStrokeWidth(10);
+                canvas.drawCircle(positionArr.get(i).x, positionArr.get(i).y, CIRCLE_RADIUS, mPaint);
             }
-            canvas.drawCircle(positionArr.get(i).x, positionArr.get(i).y, CIRCLE_RADIUS, mPaint);
         }
         for (int i = 0; i < curCircle.size(); i++) {
             if (i + 1 < curCircle.size()) {
@@ -158,6 +163,7 @@ public class OpenScreen extends View {
             listener.checkListener(pwd);
             if (!password.equals(pwd)) {
                 mLinePaint.setColor(Color.RED);
+                mClickPaint.setColor(Color.RED);
                 postInvalidate();
                 isTouch = false;
                 postDelayed(new Runnable() {
@@ -174,6 +180,7 @@ public class OpenScreen extends View {
 
     private void reset() {
         mLinePaint.setColor(Color.YELLOW);
+        mClickPaint.setColor(Color.GRAY);
         curCircle.clear();
         postInvalidate();
         isTouch = true;
