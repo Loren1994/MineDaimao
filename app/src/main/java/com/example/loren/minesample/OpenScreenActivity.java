@@ -1,5 +1,6 @@
 package com.example.loren.minesample;
 
+import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -7,6 +8,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -42,6 +45,7 @@ public class OpenScreenActivity extends AppCompatActivity implements OpenScreen.
         openOs.setPassword(password);
         animator = ObjectAnimator.ofFloat(victorIv, "alpha", 0f, 1f).setDuration(1000);
         timer = new Timer(TOTAL_TIME, 1000);
+        startAnim();
     }
 
     @Override
@@ -69,6 +73,25 @@ public class OpenScreenActivity extends AppCompatActivity implements OpenScreen.
     protected void onDestroy() {
         timer.cancel();
         super.onDestroy();
+    }
+
+    private void startAnim() {
+        parentRl.post(new Runnable() {
+            @Override
+            public void run() {
+                // 圆形动画的x,y坐标  位于View的中心
+                int cx = (parentRl.getLeft() + parentRl.getRight()) / 2;
+                int cy = (parentRl.getTop() + parentRl.getBottom()) / 2;
+                //起始大小半径
+                float startX = 0f;
+                //结束大小半径 大小为对角线的一半
+                float startY = (float) Math.sqrt(cx * cx + cy * cy);
+                Animator animator = ViewAnimationUtils.createCircularReveal(parentRl, cx, cy, startX, startY);
+                animator.setInterpolator(new AccelerateInterpolator());
+                animator.setDuration(600);
+                animator.start();
+            }
+        });
     }
 
 

@@ -102,6 +102,7 @@ public class LauncherActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.open:
                 startActivity(new Intent(mContext, OpenScreenActivity.class));
+                overridePendingTransition(0, 0);
                 break;
 
             default:
