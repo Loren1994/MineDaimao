@@ -29,7 +29,7 @@ public class OpenScreenActivity extends AppCompatActivity implements OpenScreen.
     RelativeLayout parentRl;
     private String password = "0124678";
     private ObjectAnimator animator;
-    private long TOTAL_TIME = 5000;
+    private long TOTAL_TIME = 10000;
     private int errorNum = 0;
     private Timer timer;
 
@@ -82,7 +82,7 @@ public class OpenScreenActivity extends AppCompatActivity implements OpenScreen.
         public void onTick(long millisUntilFinished) {
             msgTv.setVisibility(View.VISIBLE);
             openOs.setIsTouch(false);
-            msgTv.setText("手机已停用，请" + millisUntilFinished / 1000 + "s后重试");
+            msgTv.setText("手机已停用，请" + (millisUntilFinished / 1000) + "s后重试");
             parentRl.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.grey));
         }
 
