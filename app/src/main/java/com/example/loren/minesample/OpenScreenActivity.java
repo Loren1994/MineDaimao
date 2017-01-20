@@ -14,15 +14,8 @@ import android.widget.Toast;
 
 import com.example.loren.minesample.widget.OpenScreen;
 
-import java.util.concurrent.TimeUnit;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class OpenScreenActivity extends AppCompatActivity implements OpenScreen.onDialogListener {
 
@@ -78,32 +71,6 @@ public class OpenScreenActivity extends AppCompatActivity implements OpenScreen.
         super.onDestroy();
     }
 
-    private void startCountDown() {
-        msgTv.setVisibility(View.VISIBLE);
-        Observable.interval(1, TimeUnit.SECONDS, Schedulers.newThread())
-                .take(TOTAL_TIME).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Long>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(Long aLong) {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
 
     class Timer extends CountDownTimer {
 
@@ -127,4 +94,30 @@ public class OpenScreenActivity extends AppCompatActivity implements OpenScreen.
             parentRl.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
         }
     }
+//    private void startCountDown() {
+//        msgTv.setVisibility(View.VISIBLE);
+//        Observable.interval(1, TimeUnit.SECONDS, Schedulers.newThread())
+//                .take(TOTAL_TIME).observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<Long>() {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(Long aLong) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
+//    }
 }
