@@ -37,14 +37,6 @@
             android:textColor="@color/real_white"
             android:textSize="30sp" />
 
-        <TextView
-            android:id="@+id/custom_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:gravity="center"
-            android:text="ZzBeeLayout"
-            android:textColor="@color/real_white"
-            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/remind_tv"
@@ -74,14 +66,6 @@
             android:textColor="@color/real_white"
             android:textSize="30sp" />
 
-        <TextView
-            android:id="@+id/loren"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:gravity="center"
-            android:text="Google Clock"
-            android:textColor="@color/real_white"
-            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/chat"
@@ -97,10 +81,11 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:gravity="center"
-            android:text="我玩"
+            android:text="XRecyclerView"
             android:textColor="@color/real_white"
             android:textSize="30sp" />
- <TextView
+
+        <TextView
             android:id="@+id/open"
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -125,5 +110,26 @@
             android:textColor="@color/real_white"
             android:textSize="30sp"
             android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/custom_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="ZzBeeLayout"
+            android:textColor="@color/real_white"
+            android:textSize="30sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/loren"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="Google Clock"
+            android:textColor="@color/real_white"
+            android:textSize="30sp"
+            android:visibility="gone" />
+
     </LinearLayout>
 </ScrollView>

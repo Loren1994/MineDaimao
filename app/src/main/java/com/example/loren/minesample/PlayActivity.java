@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -38,6 +39,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     int curpage = 1;
     String url = "http://o2o.teligong.com/mobile/index.php?act=store&op=store_list";
     Context mContext;
+    LinearLayout emptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,8 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         xrv.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         xrv.setLoadingMoreProgressStyle(ProgressStyle.Pacman);
         xrv.setArrowImageView(R.drawable.iconfont_downgrey);
+        emptyView = (LinearLayout) findViewById(R.id.no_data_ll);
+        xrv.setEmptyView(emptyView);
         mAdapter = new XAdapter(this);
         xrv.setAdapter(mAdapter);
         xrv.setLoadingListener(new XRecyclerView.LoadingListener() {
@@ -85,7 +89,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
             jo.put("lng", "120.493378");
             jo.put("sort_by", "");
             jo.put("curpage", curpage);
-            jo.put("page", "20");
+            jo.put("page", "50");
             jo.put("key", "eb6b40decbb06c0b86e3d82b59617438");
         } catch (JSONException e) {
             e.printStackTrace();
@@ -96,9 +100,15 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
                 if (isRefresh) {
                     data.clear();
                 }
-                data.addAll(new Gson().fromJson(json, ShopListBean.class).getResult().getStore_list());
+                ShopListBean bean = new Gson().fromJson(json, ShopListBean.class);
+                if (bean.getResult().getStore_list() != null) {
+                    data.addAll(bean.getResult().getStore_list());
+                }
+                if (bean.getResult().isHasmore())
+                    loadComplete(isRefresh);
+
+                xrv.setNoMore(!bean.getResult().isHasmore());
                 xrv.getAdapter().notifyDataSetChanged();
-                loadComplete(isRefresh);
                 curpage++;
             }
 
@@ -180,7 +190,6 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
             ImageView image;
             @BindView(R.id.item_tv)
             TextView itemTv;
-
 
             ViewHolder(View itemView) {
                 super(itemView);
