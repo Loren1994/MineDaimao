@@ -25,6 +25,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:supportsRtl="true"
+        android:name=".App"
         android:theme="@style/AppTheme">
         <activity android:name=".LauncherActivity">
             <intent-filter>
