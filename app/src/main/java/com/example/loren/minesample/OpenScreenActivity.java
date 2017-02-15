@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.content.ContextCompat;
+import android.transition.Fade;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -41,13 +42,20 @@ public class OpenScreenActivity extends Activity implements OpenScreen.onDialogL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_screen);
+        setAnim();
         ButterKnife.bind(this);
         openOs.setListener(this);
         openOs.setPassword(password);
         animator = ObjectAnimator.ofFloat(victorIv, "alpha", 0f, 1f).setDuration(1000);
         timer = new Timer(TOTAL_TIME, 1000);
 
-        startAnim();
+//        startAnim();
+    }
+
+
+    private void setAnim() {
+        getWindow().setEnterTransition(new Fade().setDuration(1000));
+        getWindow().setExitTransition(new Fade().setDuration(1000));
     }
 
     @Override
@@ -116,7 +124,6 @@ public class OpenScreenActivity extends Activity implements OpenScreen.onDialogL
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         finish();
-                        overridePendingTransition(0, 0);
                     }
 
                     @Override

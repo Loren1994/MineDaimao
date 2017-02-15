@@ -105,8 +105,8 @@ public class LauncherActivity extends AppCompatActivity implements View.OnClickL
                 startActivity(new Intent(mContext, PlayActivity.class));
                 break;
             case R.id.open:
+//                startActivity(new Intent(mContext, OpenScreenActivity.class),ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
                 startActivity(new Intent(mContext, OpenScreenActivity.class));
-                overridePendingTransition(0, 0);
                 break;
 
             default:
