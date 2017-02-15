@@ -124,6 +124,7 @@ public class OpenScreenActivity extends Activity implements OpenScreen.onDialogL
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         finish();
+                        overridePendingTransition(0, 0);
                     }
 
                     @Override
