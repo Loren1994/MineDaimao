@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.provider.MediaStore
 import android.text.TextUtils
+import android.transition.Explode
+import android.transition.Slide
 import kotlinx.android.synthetic.main.remind_activity.*
 
 /**

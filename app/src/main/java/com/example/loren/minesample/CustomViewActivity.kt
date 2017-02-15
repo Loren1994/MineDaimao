@@ -3,6 +3,7 @@ package com.example.loren.minesample
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.transition.Fade
 import android.widget.SeekBar
 import kotlinx.android.synthetic.main.custom_view_activity.*
 
@@ -19,6 +20,7 @@ class CustomViewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.custom_view_activity)
+        setAnim()
         r.max = 255
         g.max = 255
         b.max = 255
@@ -58,5 +60,10 @@ class CustomViewActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
             }
         })
+    }
+
+    fun setAnim() {
+        window.enterTransition = Fade().setDuration(1000)
+        window.enterTransition = Fade().setDuration(1000)
     }
 }

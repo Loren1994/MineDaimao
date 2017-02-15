@@ -9,6 +9,7 @@
     </style>
 
     <style name="AppTheme.NoActionBar">
+        <item name="android:windowContentTransitions">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -17,6 +18,21 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="transition" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowContentTransitions">true</item>
+    </style>
+
+    <style name="Translucent" parent="@android:style/Theme.Translucent.NoTitleBar">
+        <item name="android:windowContentTransitions">true</item>
+    </style>
+
+    <style name="DeviceDefault.Light" parent="@android:style/Theme.DeviceDefault.Light">
+        <item name="android:windowContentTransitions">true</item>
+    </style>
+
+    <style name="light" parent="@android:style/Theme.DeviceDefault.Light">
+        <item name="android:windowContentTransitions">true</item>
+    </style>
 
 
 </resources>

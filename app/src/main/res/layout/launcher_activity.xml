@@ -29,6 +29,7 @@
             android:textSize="30sp" />
 
         <TextView
+            android:transitionName="share_tv"
             android:id="@+id/move_view"
             android:layout_width="match_parent"
             android:layout_height="80dp"

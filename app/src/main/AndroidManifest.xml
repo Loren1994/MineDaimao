@@ -22,10 +22,10 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:supportsRtl="true"
-        android:name=".App"
         android:theme="@style/AppTheme">
         <activity android:name=".LauncherActivity">
             <intent-filter>
@@ -41,7 +41,9 @@
         <activity android:name=".FlagActivity" />
         <activity android:name=".MoveViewActivity" />
         <activity android:name=".ZzBeeLayoutActivity" />
-        <activity android:name=".ApplicationJumpActivity" />
+        <activity
+            android:name=".ApplicationJumpActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".VideoActivity" />
         <activity
             android:name=".CopyWxActivity"
@@ -51,10 +53,10 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".TakePhotoActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@style/Translucent" />
         <activity
             android:name=".RemindActivity"
-            android:theme="@android:style/Theme.DeviceDefault.Light" />
+            android:theme="@style/DeviceDefault.Light" />
         <activity android:name=".LorenActivity" />
         <activity android:name=".ShortCutsActivity" />
         <activity

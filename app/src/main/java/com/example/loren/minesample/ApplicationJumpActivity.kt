@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.transition.Slide
 import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.application_jump_activity.*
@@ -14,6 +15,7 @@ class ApplicationJumpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.application_jump_activity)
+        setAnim()
         app_tv.setOnClickListener {
             try {
                 //首页
@@ -49,5 +51,10 @@ class ApplicationJumpActivity : AppCompatActivity() {
                 Toast.makeText(this, "未安装此应用", Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    fun setAnim() {
+        window.enterTransition = Slide().setDuration(1000)
+        window.exitTransition = Slide().setDuration(1000)
     }
 }

@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.transition.Explode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,7 +50,7 @@ public class ChatActivity extends AppCompatActivity implements AdjustLinearLayou
         Fresco.initialize(this);
         setContentView(R.layout.activity_chat);
         ButterKnife.bind(this);
-
+        setAnim();
         Observable.interval(10, TimeUnit.SECONDS, Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Long>() {
@@ -112,6 +112,11 @@ public class ChatActivity extends AppCompatActivity implements AdjustLinearLayou
             }
         });
         adjustLl.setListener(this);
+    }
+
+    private void setAnim() {
+        getWindow().setEnterTransition(new Explode().setDuration(1000));
+        getWindow().setExitTransition(new Explode().setDuration(1000));
     }
 
     private void refresh(MessageBean.DataBean bean) {
