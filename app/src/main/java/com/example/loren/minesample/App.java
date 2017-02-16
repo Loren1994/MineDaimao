@@ -1,7 +1,7 @@
 package com.example.loren.minesample;
 
 import android.app.Application;
-import android.content.Context;
+import android.util.DisplayMetrics;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 
@@ -36,6 +36,10 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 public class App extends Application {
     public static JCVideoPlayerStandard videoPlayer;
     public static Application mContext;
+    public static int SCREEN_WIDTH;
+    public static int SCREEN_HEIGHT;
+    public static float SCREEN_DENSITY;
+    public static float SCALED_DENSITY;
 
     @Override
     public void onCreate() {
@@ -43,5 +47,15 @@ public class App extends Application {
         Fresco.initialize(this);
         videoPlayer = new JCVideoPlayerStandard(this);
         mContext = this;
+        getDisplayMetrics();
+    }
+
+    /*获取高度、宽度、密度、缩放比例*/
+    private void getDisplayMetrics() {
+        DisplayMetrics metric = mContext.getResources().getDisplayMetrics();
+        SCREEN_WIDTH = metric.widthPixels;
+        SCREEN_HEIGHT = metric.heightPixels;
+        SCREEN_DENSITY = metric.density;
+        SCALED_DENSITY = metric.scaledDensity;
     }
 }

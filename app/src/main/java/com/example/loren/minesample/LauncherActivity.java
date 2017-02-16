@@ -66,6 +66,18 @@ public class LauncherActivity extends AppCompatActivity implements View.OnClickL
 //            shortcutInfo.add(i, info);
 //        }
 //        shortCutsManager.setDynamicShortcuts(shortcutInfo);
+
+        startWindowService();
+    }
+
+    private void startWindowService() {
+        startService(new Intent(this, WindowsService.class));
+    }
+
+    @Override
+    protected void onDestroy() {
+
+        super.onDestroy();
     }
 
     @Override
