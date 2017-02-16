@@ -34,9 +34,10 @@ public class WindowsService extends Service {
     private int startY = 0;
     private int endX = 0;
     private int endY = 0;
-    private int leftOffset = -40;
+    private int offset = -40;
     private int lastY = 0;
     private Timer timer;
+    private boolean isLeft = true;
 
     @Override
 
@@ -55,7 +56,7 @@ public class WindowsService extends Service {
         windowParams.format = PixelFormat.TRANSLUCENT;
         windowParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS;
         windowParams.gravity = Gravity.START | Gravity.TOP;
-        windowParams.x = leftOffset;
+        windowParams.x = offset;
         windowParams.y = 500;
         windowParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
         windowParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
@@ -77,7 +78,7 @@ public class WindowsService extends Service {
                         startY = (int) event.getRawY();
                         break;
                     case MotionEvent.ACTION_MOVE:
-                        timer.onFinish();
+                        timer.cancel();
                         endX = (int) event.getRawX();
                         endY = (int) event.getRawY();
                         if (isInterrupt()) {
@@ -93,6 +94,7 @@ public class WindowsService extends Service {
                         lastY = (int) event.getRawY() - windowView.getMeasuredHeight() / 2 - getStatusBarHeight();
                         if (isInterrupt()) {
                             if (event.getRawX() >= App.SCREEN_WIDTH / 2) {
+                                isLeft = false;
                                 ValueAnimator animator = new ValueAnimator();
                                 animator.setDuration(200);
                                 animator.setIntValues((int) event.getRawX() - windowView.getMeasuredWidth() / 2, App.SCREEN_WIDTH - windowView.getMeasuredWidth());
@@ -107,6 +109,7 @@ public class WindowsService extends Service {
                                 });
                                 animator.start();
                             } else {
+                                isLeft = true;
                                 ValueAnimator animator = new ValueAnimator();
                                 animator.setDuration(200);
                                 animator.setIntValues((int) event.getRawX() - windowView.getMeasuredWidth() / 2, 0);
@@ -138,8 +141,11 @@ public class WindowsService extends Service {
 
     private void autoGone() {
         ValueAnimator animator = new ValueAnimator();
-        animator.setDuration(100);
-        animator.setIntValues(0, leftOffset);
+        animator.setDuration(150);
+        if (isLeft)
+            animator.setIntValues(0, offset);
+        else
+            animator.setIntValues(App.SCREEN_WIDTH - windowView.getMeasuredWidth(), App.SCREEN_WIDTH - windowView.getMeasuredWidth() + Math.abs(offset));
         animator.setInterpolator(new DecelerateInterpolator());
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
