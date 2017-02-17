@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
-
+    android:id="@+id/container">
 
     <TextView
         android:id="@+id/windows_tv"
@@ -17,20 +16,19 @@
 
     <LinearLayout
         android:id="@+id/parent_ll"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:background="#9b008000"
         android:orientation="vertical"
-        android:padding="10dp"
         android:visibility="gone">
 
         <TextView
             android:id="@+id/open_screen_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="5dp"
+            android:gravity="center"
+            android:padding="10dp"
             android:text="解锁功能"
             android:textColor="@color/white"
             android:textSize="18sp" />
@@ -42,10 +40,11 @@
 
         <TextView
             android:id="@+id/flag_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="5dp"
+            android:gravity="center"
+            android:padding="10dp"
             android:text="五星红旗"
             android:textColor="@color/white"
             android:textSize="18sp" />
@@ -57,10 +56,11 @@
 
         <TextView
             android:id="@+id/chat_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="5dp"
+            android:gravity="center"
+            android:padding="10dp"
             android:text="聊天页面"
             android:textColor="@color/white"
             android:textSize="18sp" />

@@ -1,6 +1,7 @@
 package com.example.loren.minesample;
 
 import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Application;
 import android.app.Service;
@@ -39,6 +40,7 @@ public class WindowsService extends Service {
     private Timer timer;
     private boolean isLeft = true;
     private boolean isClickVisible = false;
+    private LinearLayout windowLl;
 
     @Override
 
@@ -67,6 +69,7 @@ public class WindowsService extends Service {
         windowView = LayoutInflater.from(this).inflate(R.layout.windows_service, null);
         windowTv = (TextView) windowView.findViewById(R.id.windows_tv);
         windowParent = (LinearLayout) windowView.findViewById(R.id.parent_ll);
+        windowLl = (LinearLayout) windowView.findViewById(R.id.container);
         setWindowItemListener((TextView) windowView.findViewById(R.id.open_screen_tv), OpenScreenActivity.class);
         setWindowItemListener((TextView) windowView.findViewById(R.id.flag_tv), FlagActivity.class);
         setWindowItemListener((TextView) windowView.findViewById(R.id.chat_tv), ChatActivity.class);
@@ -83,6 +86,7 @@ public class WindowsService extends Service {
                         endX = (int) event.getRawX();
                         endY = (int) event.getRawY();
                         if (isInterrupt()) {
+                            isClickVisible = true;
                             windowParams.x = (int) event.getRawX() - windowView.getMeasuredWidth() / 2;
                             windowParams.y = (int) event.getRawY() - windowView.getMeasuredHeight() / 2 - getStatusBarHeight();
                             windowManager.updateViewLayout(windowView, windowParams);
@@ -137,7 +141,6 @@ public class WindowsService extends Service {
             public void onClick(View v) {
                 if (isClickVisible)
                     controlWindowParent();
-
                 else
                     clickVisible();
             }
@@ -185,42 +188,47 @@ public class WindowsService extends Service {
 
     private void autoGone() {
         windowParent.setVisibility(View.GONE);
-        ValueAnimator animator = new ValueAnimator();
-        animator.setDuration(150);
-        if (isLeft)
-            animator.setIntValues(0, offset);
-        else
-            animator.setIntValues(App.SCREEN_WIDTH - windowView.getMeasuredWidth(), App.SCREEN_WIDTH - windowView.getMeasuredWidth() + Math.abs(offset));
-        animator.setInterpolator(new DecelerateInterpolator());
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        windowView.post(new Runnable() {
             @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                windowParams.x = (int) animation.getAnimatedValue();
-                windowManager.updateViewLayout(windowView, windowParams);
+            public void run() {
+                ValueAnimator animator = new ValueAnimator();
+                animator.setDuration(150);
+                if (isLeft)
+                    animator.setIntValues(0, offset);
+                else
+                    animator.setIntValues(App.SCREEN_WIDTH - windowView.getMeasuredWidth(), App.SCREEN_WIDTH - windowView.getMeasuredWidth() + Math.abs(offset));
+                animator.setInterpolator(new DecelerateInterpolator());
+                animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        windowParams.x = (int) animation.getAnimatedValue();
+                        windowManager.updateViewLayout(windowView, windowParams);
+                    }
+                });
+                animator.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        isClickVisible = false;
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+                animator.start();
             }
         });
-        animator.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                isClickVisible = false;
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
-        animator.start();
     }
 
     private boolean isInterrupt() {
@@ -245,7 +253,27 @@ public class WindowsService extends Service {
 
     private void controlWindowParent() {
         windowParent.setVisibility(windowParent.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
-        windowManager.updateViewLayout(windowView, windowParams);
+        if (isLeft) {
+            windowLl.removeView(windowParent);
+            windowLl.addView(windowParent);
+        } else {
+            windowView.post(new Runnable() {
+                @Override
+                public void run() {
+                    windowParams.x = App.SCREEN_WIDTH - windowView.getMeasuredWidth();
+                    windowManager.updateViewLayout(windowView, windowParams);
+                }
+            });
+            windowLl.removeAllViews();
+            windowLl.addView(windowParent);
+            windowLl.addView(windowTv);
+        }
+        if (windowParent.getVisibility() == View.VISIBLE) {
+            ObjectAnimator animator = ObjectAnimator.ofFloat(windowParent, "alpha", 0, 1);
+            animator.setDuration(500);
+            animator.setInterpolator(new DecelerateInterpolator());
+            animator.start();
+        }
     }
 
     @Override
