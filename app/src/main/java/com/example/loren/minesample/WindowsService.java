@@ -1,5 +1,6 @@
 package com.example.loren.minesample;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.app.Application;
 import android.app.Service;
@@ -35,9 +36,9 @@ public class WindowsService extends Service {
     private int endX = 0;
     private int endY = 0;
     private int offset = -40;
-    private int lastY = 0;
     private Timer timer;
     private boolean isLeft = true;
+    private boolean isClickVisible = false;
 
     @Override
 
@@ -90,8 +91,8 @@ public class WindowsService extends Service {
                         }
                         break;
                     case MotionEvent.ACTION_UP:
+                        timer.cancel();
                         timer.start();
-                        lastY = (int) event.getRawY() - windowView.getMeasuredHeight() / 2 - getStatusBarHeight();
                         if (isInterrupt()) {
                             if (event.getRawX() >= App.SCREEN_WIDTH / 2) {
                                 isLeft = false;
@@ -134,12 +135,56 @@ public class WindowsService extends Service {
         windowTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                controlWindowParent();
+                if (isClickVisible)
+                    controlWindowParent();
+
+                else
+                    clickVisible();
             }
         });
     }
 
+    private void clickVisible() {
+        ValueAnimator animator = new ValueAnimator();
+        animator.setDuration(150);
+        if (isLeft)
+            animator.setIntValues(offset, 0);
+        else
+            animator.setIntValues(App.SCREEN_WIDTH - windowView.getMeasuredWidth() + Math.abs(offset), App.SCREEN_WIDTH - windowView.getMeasuredWidth());
+        animator.setInterpolator(new DecelerateInterpolator());
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                windowParams.x = (int) animation.getAnimatedValue();
+                windowManager.updateViewLayout(windowView, windowParams);
+            }
+        });
+        animator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                isClickVisible = true;
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        animator.start();
+    }
+
     private void autoGone() {
+        windowParent.setVisibility(View.GONE);
         ValueAnimator animator = new ValueAnimator();
         animator.setDuration(150);
         if (isLeft)
@@ -151,8 +196,28 @@ public class WindowsService extends Service {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 windowParams.x = (int) animation.getAnimatedValue();
-                windowParams.y = lastY;
                 windowManager.updateViewLayout(windowView, windowParams);
+            }
+        });
+        animator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                isClickVisible = false;
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
             }
         });
         animator.start();
