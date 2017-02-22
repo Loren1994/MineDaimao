@@ -47,6 +47,7 @@ public class LauncherActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.chat).setOnClickListener(this);
         findViewById(R.id.play).setOnClickListener(this);
         findViewById(R.id.open).setOnClickListener(this);
+        findViewById(R.id.vector).setOnClickListener(this);
 
 //        RecyclerView recycler = (RecyclerView) findViewById(R.id.recycler);
 //        recycler.setLayoutManager(new GridLayoutManager(this, 1));
@@ -115,6 +116,9 @@ public class LauncherActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.play:
                 startActivity(new Intent(mContext, PlayActivity.class));
+                break;
+            case R.id.vector:
+                startActivity(new Intent(mContext, VectorActivity.class));
                 break;
             case R.id.open:
 //                startActivity(new Intent(mContext, OpenScreenActivity.class),ActivityOptions.makeSceneTransitionAnimation(this).toBundle());

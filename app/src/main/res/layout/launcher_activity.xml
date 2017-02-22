@@ -29,14 +29,14 @@
             android:textSize="30sp" />
 
         <TextView
-            android:transitionName="share_tv"
             android:id="@+id/move_view"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:gravity="center"
             android:text="Move View"
             android:textColor="@color/real_white"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:transitionName="share_tv" />
 
 
         <TextView
@@ -131,6 +131,15 @@
             android:textColor="@color/real_white"
             android:textSize="30sp"
             android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/vector"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="Vector"
+            android:textColor="@color/real_white"
+            android:textSize="30sp" />
 
     </LinearLayout>
 </ScrollView>
