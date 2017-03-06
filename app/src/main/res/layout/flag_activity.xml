@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="225dp"
-        android:background="#ff0000">
+        android:background="@color/red">
 
         <com.example.loren.minesample.widget.FiveStarView
             android:layout_width="65dp"
@@ -64,9 +64,9 @@
             android:id="@+id/htv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/yellow0"
+            android:background="@color/text_common"
             android:gravity="center"
-            android:textColor="#ff0000"
+            android:textColor="@color/main"
             android:textSize="30sp"
             htext:animateType="scale" />
 
@@ -77,7 +77,7 @@
             android:layout_marginBottom="5dp"
             android:gravity="center"
             android:text="特别鸣谢:Victor.chou"
-            android:textColor="@color/real_white"
+            android:textColor="@color/white"
             android:textSize="3sp" />
     </RelativeLayout>
 </LinearLayout>

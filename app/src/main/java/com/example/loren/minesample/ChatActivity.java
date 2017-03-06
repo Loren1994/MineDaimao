@@ -20,12 +20,6 @@ import java.util.concurrent.TimeUnit;
 import bean.MessageBean;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 import util.Constant;
 
 public class ChatActivity extends AppCompatActivity implements AdjustLinearLayout.onSizeChangeListener {
@@ -40,7 +34,7 @@ public class ChatActivity extends AppCompatActivity implements AdjustLinearLayou
     TextView titleTv;
     @BindView(R.id.adjust_ll)
     AdjustLinearLayout adjustLl;
-    private Disposable disposable;
+//    private Disposable disposable;
     private ArrayList<MessageBean.DataBean> data = null;
     private ChatAdapter mAdapter;
 
@@ -51,42 +45,42 @@ public class ChatActivity extends AppCompatActivity implements AdjustLinearLayou
         setContentView(R.layout.activity_chat);
         ButterKnife.bind(this);
         setAnim();
-        Observable.interval(10, TimeUnit.SECONDS, Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Long>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        disposable = d;
-                    }
-
-                    @Override
-                    public void onNext(Long aLong) {
-                        MessageBean.DataBean bean = new MessageBean.DataBean();
-                        bean.setId("");
-                        bean.setName("");
-                        bean.setMsg("嗯！");
-                        bean.setType("1");
-                        bean.setUrl("http://tupian.enterdesk.com/2014/lxy/2014/12/01/5/1.jpg");
-                        //refresh(bean);
-                        Observable.just(bean)
-                                .subscribe(new Consumer<MessageBean.DataBean>() {
-                                    @Override
-                                    public void accept(MessageBean.DataBean bean) throws Exception {
-                                        refresh(bean);
-                                    }
-                                });
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+//        Observable.interval(10, TimeUnit.SECONDS, Schedulers.newThread())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<Long>() {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//                        disposable = d;
+//                    }
+//
+//                    @Override
+//                    public void onNext(Long aLong) {
+//                        MessageBean.DataBean bean = new MessageBean.DataBean();
+//                        bean.setId("");
+//                        bean.setName("");
+//                        bean.setMsg("嗯！");
+//                        bean.setType("1");
+//                        bean.setUrl("http://tupian.enterdesk.com/2014/lxy/2014/12/01/5/1.jpg");
+//                        //refresh(bean);
+//                        Observable.just(bean)
+//                                .subscribe(new Consumer<MessageBean.DataBean>() {
+//                                    @Override
+//                                    public void accept(MessageBean.DataBean bean) throws Exception {
+//                                        refresh(bean);
+//                                    }
+//                                });
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
 
         data = new Gson().fromJson(Constant.JSON, MessageBean.class).getData();
         titleTv.setText(data.get(1).getName());
@@ -128,9 +122,9 @@ public class ChatActivity extends AppCompatActivity implements AdjustLinearLayou
 
     @Override
     protected void onDestroy() {
-        if (disposable != null && !disposable.isDisposed()) {
-            disposable.dispose();
-        }
+//        if (disposable != null && !disposable.isDisposed()) {
+//            disposable.dispose();
+//        }
         super.onDestroy();
     }
 

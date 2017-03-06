@@ -12,7 +12,7 @@
         android:gravity="center"
         android:padding="10dp"
         android:text="预览拍照"
-        android:textColor="@color/real_white"
+        android:textColor="@color/background_grey"
         android:textSize="30sp" />
 
     <TextView
@@ -24,7 +24,7 @@
         android:gravity="center"
         android:padding="10dp"
         android:text="无预览拍照"
-        android:textColor="@color/real_white"
+        android:textColor="@color/background_grey"
         android:textSize="30sp" />
 
     <ImageView

@@ -3,7 +3,7 @@
     android:id="@+id/activity_copy_wx_pull"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey2"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <com.example.loren.minesample.widget.EyeView

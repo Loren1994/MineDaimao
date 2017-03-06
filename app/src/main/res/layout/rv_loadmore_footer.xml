@@ -17,7 +17,7 @@
         android:layout_margin="10dp"
         android:gravity="center"
         android:text="暂无更多"
-        android:textColor="@color/text_default"
+        android:textColor="@color/text_common"
         android:visibility="gone" />
 
 </LinearLayout>

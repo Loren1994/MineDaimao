@@ -68,7 +68,6 @@
             android:name=".ChatActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".PlayActivity" />
         <activity
             android:name=".OpenScreenActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />

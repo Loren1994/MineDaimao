@@ -7,7 +7,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/grey1"
+        android:background="@color/main"
         android:orientation="vertical">
 
         <TextView
@@ -16,7 +16,7 @@
             android:layout_height="80dp"
             android:gravity="center"
             android:text="Five start"
-            android:textColor="@color/real_white"
+            android:textColor="@color/background_grey"
             android:textSize="30sp" />
 
         <TextView
@@ -25,7 +25,7 @@
             android:layout_height="80dp"
             android:gravity="center"
             android:text="China Flag"
-            android:textColor="@color/real_white"
+            android:textColor="@color/background_grey"
             android:textSize="30sp" />
 
         <TextView
@@ -34,7 +34,7 @@
             android:layout_height="80dp"
             android:gravity="center"
             android:text="Move View"
-            android:textColor="@color/real_white"
+            android:textColor="@color/background_grey"
             android:textSize="30sp"
             android:transitionName="share_tv" />
 
@@ -45,16 +45,7 @@
             android:layout_height="80dp"
             android:gravity="center"
             android:text="Take Photo"
-            android:textColor="@color/real_white"
-            android:textSize="30sp" />
-
-        <TextView
-            android:id="@+id/person_detail_tv"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:gravity="center"
-            android:text="App Jump"
-            android:textColor="@color/real_white"
+            android:textColor="@color/background_grey"
             android:textSize="30sp" />
 
 
@@ -64,7 +55,7 @@
             android:layout_height="80dp"
             android:gravity="center"
             android:text="Copy Wx"
-            android:textColor="@color/real_white"
+            android:textColor="@color/background_grey"
             android:textSize="30sp" />
 
 
@@ -74,16 +65,7 @@
             android:layout_height="80dp"
             android:gravity="center"
             android:text="CHAT"
-            android:textColor="@color/real_white"
-            android:textSize="30sp" />
-
-        <TextView
-            android:id="@+id/play"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:gravity="center"
-            android:text="XRecyclerView"
-            android:textColor="@color/real_white"
+            android:textColor="@color/background_grey"
             android:textSize="30sp" />
 
         <TextView
@@ -92,45 +74,8 @@
             android:layout_height="80dp"
             android:gravity="center"
             android:text="解锁"
-            android:textColor="@color/real_white"
+            android:textColor="@color/background_grey"
             android:textSize="30sp" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:overScrollMode="never"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/yingshi_tv"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:gravity="center"
-            android:text="JCVideo"
-            android:textColor="@color/real_white"
-            android:textSize="30sp"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/custom_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:gravity="center"
-            android:text="ZzBeeLayout"
-            android:textColor="@color/real_white"
-            android:textSize="30sp"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/loren"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:gravity="center"
-            android:text="Google Clock"
-            android:textColor="@color/real_white"
-            android:textSize="30sp"
-            android:visibility="gone" />
 
         <TextView
             android:id="@+id/vector"
@@ -138,7 +83,7 @@
             android:layout_height="80dp"
             android:gravity="center"
             android:text="Vector"
-            android:textColor="@color/real_white"
+            android:textColor="@color/background_grey"
             android:textSize="30sp" />
 
     </LinearLayout>

@@ -5,7 +5,6 @@ import android.util.DisplayMetrics;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 
-import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
 /**
  * _ooOoo_
@@ -34,7 +33,6 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
  */
 
 public class App extends Application {
-    public static JCVideoPlayerStandard videoPlayer;
     public static Application mContext;
     public static int SCREEN_WIDTH;
     public static int SCREEN_HEIGHT;
@@ -45,7 +43,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         Fresco.initialize(this);
-        videoPlayer = new JCVideoPlayerStandard(this);
         mContext = this;
         getDisplayMetrics();
     }

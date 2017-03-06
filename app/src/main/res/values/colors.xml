@@ -1,55 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#027ffd</color>
-    <color name="colorPrimaryDark">#555555</color>
-    <color name="colorAccent">#027ffd</color>
+
+    <color name="colorPrimary">@color/main</color>
+    <color name="colorPrimaryDark">@color/status_bar</color>
+    <color name="colorAccent">@color/main</color>
+
+    <color name="main">#777788</color>
+    <color name="match">#6F9183</color>
+    <color name="purple_dark">#666699</color>
 
     <color name="transparent">#00000000</color>
-    <color name="transparent1">#11000000</color>
-    <color name="transparent2">#33000000</color>
-    <color name="transparent3">#66000000</color>
-    <color name="tomato">#FF6347</color>
-    <color name="orange">#FFA500</color>
-    <color name="pink">#FF69B4</color>
-
-    <color name="green">#008000</color>
-    <color name="green2">#3CB371</color>
-
-    <color name="blue">#0000FF</color>
-    <color name="blue_text">#2579c7</color>
-    <color name="blue_bg">#226cb3</color>
-
-    <color name="yellow0">#f9b72c</color>
-    <color name="yellow">#ffff00</color>
-    <color name="yellow1">#FA6B07</color>
-    <color name="trans_yellow1">#AAF59900</color>
-
-    <color name="trans_white">#ccfafafa</color>
-
-    <color name="white">#fcfcfc</color>
-    <color name="white1">#f9f9f9</color>
-    <color name="real_white">#ffffff</color>
-    <color name="purple">#8b668b</color>
-
-
-    <color name="trans_black">#CC000000</color>
-    <color name="trans_black2">#B0000000</color>
+    <color name="white">#ffffff</color>
     <color name="black">#000000</color>
-    <color name="black1">#21211F</color>
-    <color name="black2">#333333</color>
-    <color name="black3">#444444</color>
-
-    <color name="trans_grey0">#80333333</color>
-    <color name="trans_grey1">#CC555555</color>
-    <color name="grey0">#696969</color>
-    <color name="grey">#aaaaaa</color>
-    <color name="grey1">#e1e1e1</color>
-    <color name="grey2">#f0f0f0</color>
-
-    <color name="red0">#cc0000</color>
-    <color name="red">#CA0202</color>
-
-    <color name="text_default">#ff757575</color>
-
-    <color name="viewfinder_mask">#60000000</color>
+    <color name="status_bar">#444444</color>
+    <color name="background_grey">#ececec</color>
+    <color name="province_line_border">#D0D0D0</color>
+    <color name="blue">#38abfc</color>
+    <color name="green">#68d559</color>
+    <color name="green_dark">#57b54c</color>
+    <color name="yellow">#b09834</color>
+    <color name="orange">#ffb018</color>
+    <color name="orange2">#f26c13</color>
+    <color name="red">#e35152</color>
+    <color name="purple">#786ef7</color>
+    <color name="text_black">#333333</color>
+    <color name="text_common">#808080</color>
+    <color name="text_white">#f8f8f8</color>
+    <color name="line">#bbbbbb</color>
+    <color name="background">#f4f7f6</color>
+    <color name="grey">#666666</color>
+    <color name="trans_black">#a0333333</color>
 </resources>
