@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -125,7 +126,8 @@ public class LauncherActivity extends AppCompatActivity {
         headLl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Snackbar.make(getWindow().getDecorView(), "this is 胜利哥.png", 3000).show();
+                drawLayout.closeDrawer(Gravity.START);
             }
         });
         initBottomNavigation();

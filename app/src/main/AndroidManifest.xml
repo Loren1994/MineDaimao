@@ -66,6 +66,9 @@
             android:name=".OpenScreenActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".VectorActivity" />
+        <activity
+            android:name=".AmazingActivity"
+            android:theme="@style/NoTitleTranslucentTheme" />
     </application>
 
 </manifest>
