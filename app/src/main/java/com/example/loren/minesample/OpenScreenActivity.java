@@ -79,12 +79,6 @@ public class OpenScreenActivity extends Activity implements OpenScreen.onDialogL
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        timer.cancel();
-        super.onDestroy();
-    }
-
     private void startAnim() {
         parentRl.post(new Runnable() {
             @Override
@@ -123,6 +117,8 @@ public class OpenScreenActivity extends Activity implements OpenScreen.onDialogL
 
                     @Override
                     public void onAnimationEnd(Animator animation) {
+                        timer.cancel();
+                        getWindow().getDecorView().getRootView().setAlpha(0f);
                         finish();
                         overridePendingTransition(0, 0);
                     }

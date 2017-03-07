@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/fs_tv"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="Five start"
+            android:textColor="@color/background_grey"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/flag_tv"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="China Flag"
+            android:textColor="@color/background_grey"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/move_view"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="Move View"
+            android:textColor="@color/background_grey"
+            android:textSize="30sp"
+            android:transitionName="share_tv" />
+
+
+        <TextView
+            android:id="@+id/remind_tv"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="Take Photo"
+            android:textColor="@color/background_grey"
+            android:textSize="30sp" />
+
+
+        <TextView
+            android:id="@+id/wx_vedio"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="Copy Wx"
+            android:textColor="@color/background_grey"
+            android:textSize="30sp" />
+
+
+        <TextView
+            android:id="@+id/chat"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="CHAT"
+            android:textColor="@color/background_grey"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/open"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="解锁"
+            android:textColor="@color/background_grey"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/vector"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="Vector"
+            android:textColor="@color/background_grey"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+</ScrollView>
