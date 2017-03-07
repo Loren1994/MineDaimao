@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+
 /**
  * Copyright (c) 16-9-19 by loren
  */
@@ -35,6 +38,26 @@ public class LauncherActivity extends AppCompatActivity implements View.OnClickL
             }
         }
         shareTv = (TextView) findViewById(R.id.move_view);
+        AHBottomNavigation navigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_1, R.drawable.ic_home, R.color.purple_dark);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_2, R.drawable.ic_util, R.color.purple_dark);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_3, R.drawable.ic_person, R.color.purple_dark);
+        navigation.addItem(item1);
+        navigation.addItem(item2);
+        navigation.addItem(item3);
+        navigation.setDefaultBackgroundColor(ContextCompat.getColor(mContext, R.color.gray_dark));
+        navigation.setInactiveColor(ContextCompat.getColor(mContext, R.color.match));
+        navigation.setAccentColor(ContextCompat.getColor(mContext, R.color.text_white));
+        navigation.setForceTint(true);
+        navigation.setTitleState(AHBottomNavigation.TitleState.ALWAYS_HIDE);
+        navigation.setBehaviorTranslationEnabled(true);
+        navigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
+            @Override
+            public boolean onTabSelected(int position, boolean wasSelected) {
+                return true;
+            }
+        });
+
         findViewById(R.id.fs_tv).setOnClickListener(this);
         findViewById(R.id.flag_tv).setOnClickListener(this);
         shareTv.setOnClickListener(this);

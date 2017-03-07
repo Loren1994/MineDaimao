@@ -45,6 +45,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     compile 'com.facebook.fresco:fresco:0.13.0'
+    compile 'com.aurelhubert:ahbottomnavigation:2.0.5'
 //    compile 'org.greenrobot:eventbus:3.0.0'
 //    compile 'com.orhanobut:logger:1.15'
 //    compile 'me.zhouzhuo.zzbeelayout:zz-bee-layout:1.0.1'
