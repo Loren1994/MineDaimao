@@ -31,6 +31,12 @@ import butterknife.ButterKnife;
 
 /**
  * Copyright (c) 16-9-19 by loren
+ * ._       _____    ____    _____   __   _
+ * | |     /  _  \ |  _  \  | ____| |  \ | |
+ * | |     | | | | | |_| |  | |__   |   \| |
+ * | |     | | | | |  _  /  |  __|  | |\   |
+ * | |___  | |_| | | | \ \  | |___  | | \  |
+ * |_____| \_____/ |_|  \_\ |_____| |_|  \_|
  */
 
 public class LauncherActivity extends AppCompatActivity {
