@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.loren.minesample.AmazingActivity;
 import com.example.loren.minesample.R;
+import com.example.loren.minesample.TranslationActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,6 +24,8 @@ import butterknife.ButterKnife;
 public class UserFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.amazing_tv)
     TextView amazingTv;
+    @BindView(R.id.translation_tv)
+    TextView translationTv;
     private Context mContext;
 
     @Override
@@ -37,6 +40,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         mContext = getActivity();
         amazingTv.setOnClickListener(this);
+        translationTv.setOnClickListener(this);
     }
 
     @Override
@@ -44,6 +48,9 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.amazing_tv:
                 startActivity(new Intent(mContext, AmazingActivity.class));
+                break;
+            case R.id.translation_tv:
+                startActivity(new Intent(mContext, TranslationActivity.class));
                 break;
         }
     }

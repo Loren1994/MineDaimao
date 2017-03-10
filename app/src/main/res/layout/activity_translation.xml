@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/input_edt"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_main_coner"
+        android:gravity="start"
+        android:padding="10dp"
+        android:textColor="@color/white" />
+
+    <LinearLayout
+        android:id="@+id/container_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="英文"
+            android:textColor="@color/text_black" />
+
+        <ImageView
+            android:id="@+id/translation_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/translation_ic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="中文"
+            android:textColor="@color/text_black" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/output_edt"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:background="@drawable/bg_white_coner"
+        android:gravity="start"
+        android:padding="10dp"
+        android:textColor="@color/main" />
+
+
+</LinearLayout>
