@@ -24,6 +24,9 @@ import android.view.SurfaceHolder
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_take_photo.*
+import me.weyye.hipermission.HiPermission
+import me.weyye.hipermission.PermissionCallback
+import me.weyye.hipermission.PermissionItem
 import java.io.*
 import java.nio.ByteBuffer
 import java.util.*
@@ -54,6 +57,24 @@ class TakePhotoActivity : Activity(), View.OnClickListener {
         ORIENTATIONS.append(Surface.ROTATION_90, 0)
         ORIENTATIONS.append(Surface.ROTATION_180, 270)
         ORIENTATIONS.append(Surface.ROTATION_270, 180)
+        val permissionItems = arrayListOf<PermissionItem>()
+        permissionItems.add(PermissionItem(Manifest.permission.WRITE_EXTERNAL_STORAGE, "WRITE_EXTERNAL_STORAGE", R.drawable.permission_ic_storage))
+        permissionItems.add(PermissionItem(Manifest.permission.READ_EXTERNAL_STORAGE, "READ_EXTERNAL_STORAGE", R.drawable.permission_ic_storage))
+        HiPermission.create(this)
+                .permissions(permissionItems)
+                .checkMutiPermission(object : PermissionCallback {
+                    override fun onClose() {
+                    }
+
+                    override fun onFinish() {
+                    }
+
+                    override fun onDeny(permission: String, position: Int) {
+                    }
+
+                    override fun onGuarantee(permission: String, position: Int) {
+                    }
+                })
 //        init()
 //        mCamera.setPreviewDisplay(surfaceHolder)
 //        mCamera.startPreview()
@@ -72,7 +93,8 @@ class TakePhotoActivity : Activity(), View.OnClickListener {
 //                    })
 //        }
 //        thread1.start()
-        if (!this.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT)) {
+//        if (!this.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT)) {
+        if (!this.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
             Toast.makeText(this, "无前置摄像头", Toast.LENGTH_LONG).show()
             finish()
             return
