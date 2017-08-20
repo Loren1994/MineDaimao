@@ -5,10 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.ImageFormat
-import android.graphics.Matrix
+import android.graphics.*
 import android.hardware.Camera
 import android.hardware.camera2.*
 import android.media.Image
@@ -57,7 +54,6 @@ class TakePhotoActivity : Activity(), View.OnClickListener {
         ORIENTATIONS.append(Surface.ROTATION_90, 0)
         ORIENTATIONS.append(Surface.ROTATION_180, 270)
         ORIENTATIONS.append(Surface.ROTATION_270, 180)
-//        surfaceview.visibility = View.INVISIBLE
 //        init()
 //        mCamera.setPreviewDisplay(surfaceHolder)
 //        mCamera.startPreview()
@@ -76,6 +72,11 @@ class TakePhotoActivity : Activity(), View.OnClickListener {
 //                    })
 //        }
 //        thread1.start()
+        if (!this.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT)) {
+            Toast.makeText(this, "无前置摄像头", Toast.LENGTH_LONG).show()
+            finish()
+            return
+        }
         initView()
         Thread {
             Thread.sleep(2000)
@@ -88,6 +89,8 @@ class TakePhotoActivity : Activity(), View.OnClickListener {
         surfaceview.setOnClickListener(this)
         mSurfaceHolder = surfaceview.holder
         mSurfaceHolder!!.setKeepScreenOn(true)
+        surfaceview.setZOrderOnTop(true)
+        mSurfaceHolder!!.setFormat(PixelFormat.TRANSLUCENT)
         // surfaceview添加回调
         mSurfaceHolder!!.addCallback(object : SurfaceHolder.Callback {
             override fun surfaceChanged(p0: SurfaceHolder?, p1: Int, p2: Int, p3: Int) {
@@ -148,7 +151,6 @@ class TakePhotoActivity : Activity(), View.OnClickListener {
         mImageReader!!.setOnImageAvailableListener({ p0 ->
             //可以在这里处理拍照得到的临时照片 例如，写入本地
             mCameraDevice!!.close()
-//                surfaceview.setVisibility(View.GONE)
             // 拿到拍照照片数据
             val image: Image = p0!!.acquireNextImage()
             val buffer: ByteBuffer = image.planes[0].buffer
@@ -269,6 +271,7 @@ class TakePhotoActivity : Activity(), View.OnClickListener {
             e.printStackTrace()
         }
         Toast.makeText(this, "保存成功${dirFile.path}", Toast.LENGTH_LONG).show()
+        finish()
         return flag
     }
 
