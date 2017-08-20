@@ -34,8 +34,8 @@ public class AudioRecordDemo {
                     int r = mAudioRecord.read(buffer, 0, BUFFER_SIZE);
                     long v = 0;
                     // 将 buffer 内容取出，进行平方和运算
-                    for (int i = 0; i < buffer.length; i++) {
-                        v += buffer[i] * buffer[i];
+                    for (short aBuffer : buffer) {
+                        v += aBuffer * aBuffer;
                     }
                     // 平方和除以数据总长度，得到音量大小。
                     double mean = v / (double) r;
