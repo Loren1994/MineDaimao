@@ -7,8 +7,10 @@ import android.app.Application;
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.PixelFormat;
+import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -49,7 +51,18 @@ public class WindowsService extends Service {
         timer = new Timer(3000, 1000);
         initWindows();
         initView();
-        windowManager.addView(windowView, windowParams);
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (!Settings.canDrawOverlays(getApplicationContext())) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+                startActivity(intent);
+            } else {
+                //执行6.0以上绘制代码
+                windowManager.addView(windowView, windowParams);
+            }
+        } else {
+            //执行6.0以下绘制代码
+            windowManager.addView(windowView, windowParams);
+        }
     }
 
     private void initWindows() {
