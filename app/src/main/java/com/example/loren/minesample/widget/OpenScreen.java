@@ -17,20 +17,20 @@ import java.util.ArrayList;
 
 public class OpenScreen extends View {
 
-    public boolean isTouch = true;
+    public boolean isTouch = true;//是否可用
     private float widthArea = 0f;
     private float heightArea = 0f;
-    private ArrayList<PointF> positionArr = new ArrayList<>();
-    private float CIRCLE_RADIUS = 0;
+    private ArrayList<PointF> positionArr = new ArrayList<>();//9个点的坐标
+    private float CIRCLE_RADIUS = 0;//9个圆的半径
     private Paint mPaint;
-    private Paint mLinePaint;
-    private float[][] a = new float[9][2];
-    private ArrayList<Integer> curCircle = new ArrayList<>();
+    private Paint mLinePaint;//圆和触摸点的线
+    private float[][] a = new float[9][2];//9个点的二维数组
+    private ArrayList<Integer> curCircle = new ArrayList<>();//已连接的所有点的下标
     private float moveX = 0f;
     private float moveY = 0f;
     private onDialogListener listener;
-    private String password = "";
-    private Paint mClickPaint;
+    private String password = "";//设置的锁屏密码(一串数字)
+    private Paint mClickPaint;//点击的点
 
     public OpenScreen(Context context) {
         super(context);
@@ -60,6 +60,7 @@ public class OpenScreen extends View {
     }
 
     private void init() {
+        //点正常状态的属性
         mPaint = new Paint();
         mPaint.setColor(Color.GRAY);
         mPaint.setStyle(Paint.Style.STROKE);
@@ -68,11 +69,13 @@ public class OpenScreen extends View {
         for (int i = 0; i < 9; i++) {
             positionArr.add(new PointF());
         }
+        //点击的点的属性
         mClickPaint = new Paint();
         mClickPaint.setColor(Color.GRAY);
         mClickPaint.setStyle(Paint.Style.STROKE);
         mClickPaint.setStrokeWidth(30);
         mClickPaint.setAntiAlias(true);
+        //点击的点和触摸点之间的连线
         mLinePaint = new Paint();
         mLinePaint.setColor(Color.YELLOW);
         mLinePaint.setAntiAlias(true);
@@ -81,13 +84,18 @@ public class OpenScreen extends View {
         mLinePaint.setStrokeCap(Paint.Cap.ROUND);
     }
 
+    /**
+     * 9等分屏幕
+     */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
+        //锁屏3x3点矩阵
         widthArea = width / 3;
         heightArea = height / 3;
-        CIRCLE_RADIUS = widthArea / 4;
+        CIRCLE_RADIUS = widthArea / 4;//设置半径
+        //根据屏幕设置9个坐标点
         a[0][0] = widthArea / 2;
         a[1][0] = widthArea * 2 * 0.75f;
         a[2][0] = widthArea * 3 * 5 / 6;
@@ -115,6 +123,7 @@ public class OpenScreen extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        //画出已连接的点
         for (int i = 0; i < positionArr.size(); i++) {
             if (curCircle.contains(i)) {
                 canvas.drawCircle(positionArr.get(i).x, positionArr.get(i).y, CIRCLE_RADIUS, mClickPaint);
@@ -132,6 +141,9 @@ public class OpenScreen extends View {
         }
     }
 
+    /**
+     * 根据触摸区域判断触摸点并存入数组
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
@@ -154,14 +166,18 @@ public class OpenScreen extends View {
         return true;
     }
 
+    /**
+     * 检查密码是否正确
+     */
     private void checkPassword() {
-        String pwd = "";
+        StringBuilder pwd = new StringBuilder();
         for (Integer pos : curCircle) {
-            pwd += pos + "";
+            pwd.append(pos).append("");
         }
+        //连接点数小于等于2则忽略此次连接
         if (curCircle.size() > 2) {
-            listener.checkListener(pwd);
-            if (!password.equals(pwd)) {
+            listener.checkListener(pwd.toString());
+            if (!password.equals(pwd.toString())) {
                 mLinePaint.setColor(Color.RED);
                 mClickPaint.setColor(Color.RED);
                 postInvalidate();
@@ -178,6 +194,9 @@ public class OpenScreen extends View {
         }
     }
 
+    /**
+     * 重置锁屏页
+     */
     private void reset() {
         mLinePaint.setColor(Color.YELLOW);
         mClickPaint.setColor(Color.GRAY);
@@ -186,6 +205,9 @@ public class OpenScreen extends View {
         isTouch = true;
     }
 
+    /**
+     * 判断触摸的是哪一个点
+     */
     private int whichCircle(float x, float y) {
         int position = -1;
         for (int i = 0; i < positionArr.size(); i++) {
@@ -196,6 +218,9 @@ public class OpenScreen extends View {
         return position;
     }
 
+    /**
+     * 将密码回调，在activity里判断密码是否正确
+     */
     public interface onDialogListener {
         void checkListener(String pwd);
     }

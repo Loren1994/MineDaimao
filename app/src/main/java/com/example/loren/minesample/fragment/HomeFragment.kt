@@ -9,19 +9,7 @@ import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
-
-import com.example.loren.minesample.ChatActivity
-import com.example.loren.minesample.CopyWxPullActivity
-import com.example.loren.minesample.CustomViewActivity
-import com.example.loren.minesample.FlagActivity
-import com.example.loren.minesample.MoveViewActivity
-import com.example.loren.minesample.OpenScreenActivity
-import com.example.loren.minesample.R
-import com.example.loren.minesample.RemindActivity
-import com.example.loren.minesample.VectorActivity
-
+import com.example.loren.minesample.*
 import kotlinx.android.synthetic.main.home_fragment.*
 
 /**
