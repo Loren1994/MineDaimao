@@ -131,11 +131,13 @@ public class OpenScreen extends View {
                 canvas.drawCircle(positionArr.get(i).x, positionArr.get(i).y, CIRCLE_RADIUS, mPaint);
             }
         }
+        //已连接的点之间的线
         for (int i = 0; i < curCircle.size(); i++) {
             if (i + 1 < curCircle.size()) {
                 canvas.drawLine(positionArr.get(curCircle.get(i)).x, positionArr.get(curCircle.get(i)).y, positionArr.get(curCircle.get(i + 1)).x, positionArr.get(curCircle.get(i + 1)).y, mLinePaint);
             }
         }
+        //最后的点与触摸位置之间的线
         if (moveX != 0 && moveY != 0 && curCircle.size() > 0 && curCircle.size() < 9 && isTouch) {
             canvas.drawLine(positionArr.get(curCircle.get(curCircle.size() - 1)).x, positionArr.get(curCircle.get(curCircle.size() - 1)).y, moveX, moveY, mLinePaint);
         }
@@ -155,7 +157,9 @@ public class OpenScreen extends View {
             case MotionEvent.ACTION_MOVE:
                 moveX = event.getX();
                 moveY = event.getY();
+                //判断触摸点下标
                 int pos = whichCircle(event.getX(), event.getY());
+                //存入数组
                 if (pos != -1 && !curCircle.contains(pos)) {
                     curCircle.add(pos);
                     System.out.println(pos);
