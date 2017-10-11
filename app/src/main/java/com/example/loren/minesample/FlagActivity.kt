@@ -44,7 +44,7 @@ class FlagActivity : AppCompatActivity() {
         mThread.start()
     }
 
-    fun AutoCycleStr() {
+    private fun AutoCycleStr() {
         while (true) {
             songArr.forEachIndexed { i, s ->
                 SystemClock.sleep(randomArr[Random().nextInt(randomArr.size - 1)].toLong())

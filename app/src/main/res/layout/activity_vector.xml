@@ -4,14 +4,14 @@
     android:layout_height="match_parent"
     android:background="@color/match">
 
-    <TextView
-        android:id="@+id/vector_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:background="@drawable/vector_drawable"
-        android:visibility="gone" />
+    <!--<TextView-->
+        <!--android:id="@+id/vector_view"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:background="@drawable/vector_drawable"-->
+        <!--android:visibility="gone" />-->
 
     <TextView
         android:id="@+id/cur_volume_tv"

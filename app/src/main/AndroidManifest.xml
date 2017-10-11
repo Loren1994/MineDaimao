@@ -70,7 +70,7 @@
         <activity
             android:name=".AmazingActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
-        <activity android:name=".TranslationActivity"></activity>
+        <activity android:name=".TranslationActivity" />
     </application>
 
 </manifest>
