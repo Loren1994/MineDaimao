@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
+import com.example.loren.minesample.R
 import java.util.*
 
 
@@ -12,33 +13,38 @@ import java.util.*
  */
 class Bezier1View(context: Context, attributes: AttributeSet) : View(context, attributes) {
 
-    private val BEZIER_COEFICIENT = 0.551915024494f
+    private val BEZIER_COEFICIENT = 0.551915024494f //bezier倍数
     private val DURING = 1000
     private val mCount = 100f// 将时长总共划分多少份
     private var mCurrent = 0f // 当前已进行时长
     private val mPiece = DURING / mCount// 每一份的时长
-    private var RADIUS = 0
+    private var RADIUS = 0 //半径
     private var centerPoint = PointF() //坐标系中心点
     private var controlPoint = ArrayList<PointF>() //12个控制点
     private var controlArr = Array(12) { FloatArray(2) } //12个控制点二维数组
-    private var mPaint: Paint? = null
-    private var linePaint: Paint? = null
+    private var mPaint: Paint? = null //心形Paint
+    private var linePaint: Paint? = null //辅助线Paint
     private var mPath: Path? = null
+    private var color = 0 //颜色
+    var showSubline = true //是否显示辅助线
 
     init {
-        init()
+        init(context, attributes)
     }
 
-    private fun init() {
+    private fun init(context: Context, attributes: AttributeSet) {
+        val typedArray = context.obtainStyledAttributes(attributes, R.styleable.HeartView)
+        color = typedArray.getColor(R.styleable.HeartView_heart_color, Color.RED)
+        typedArray.recycle()
         mPath = Path()
         mPaint = Paint()
         linePaint = Paint()
         linePaint!!.color = Color.BLUE
-        linePaint!!.strokeWidth = 5f
+        linePaint!!.strokeWidth = 3f
         linePaint!!.isAntiAlias = true
-        mPaint!!.color = Color.WHITE
-        mPaint!!.style = Paint.Style.STROKE
-        mPaint!!.strokeWidth = 10f
+        mPaint!!.color = color
+        mPaint!!.style = Paint.Style.FILL
+        mPaint!!.strokeWidth = 3f
         mPaint!!.isAntiAlias = true
         for (i in 0..11) {
             controlPoint.add(PointF())
@@ -94,11 +100,7 @@ class Bezier1View(context: Context, attributes: AttributeSet) : View(context, at
     }
 
     override fun onDraw(canvas: Canvas?) {
-        canvas!!.drawPoint(centerPoint.x, centerPoint.y, mPaint)
-        canvas.drawColor(Color.RED)
-        controlPoint.forEach {
-            canvas.drawPoint(it.x, it.y, mPaint)
-        }
+        mPath!!.reset()
         //二阶
         //mPath!!.quadTo(controlPoint[0].x, controlPoint[0].y, controlPoint[1].x, controlPoint[1].y)
         //三阶
@@ -107,17 +109,22 @@ class Bezier1View(context: Context, attributes: AttributeSet) : View(context, at
         mPath!!.cubicTo(controlPoint[2].x, controlPoint[2].y, controlPoint[1].x, controlPoint[1].y, controlPoint[0].x, controlPoint[0].y)
         mPath!!.cubicTo(controlPoint[11].x, controlPoint[11].y, controlPoint[10].x, controlPoint[10].y, controlPoint[9].x, controlPoint[9].y)
         mPath!!.cubicTo(controlPoint[8].x, controlPoint[8].y, controlPoint[7].x, controlPoint[7].y, controlPoint[6].x, controlPoint[6].y)
-        canvas.drawPath(mPath, mPaint)
+        canvas!!.drawPath(mPath, mPaint)
 
-        canvas.drawLine(controlPoint[11].x, controlPoint[11].y, controlPoint[0].x, controlPoint[0].y, linePaint)
-        canvas.drawLine(controlPoint[0].x, controlPoint[0].y, controlPoint[1].x, controlPoint[1].y, linePaint)
-        canvas.drawLine(controlPoint[2].x, controlPoint[2].y, controlPoint[3].x, controlPoint[3].y, linePaint)
-        canvas.drawLine(controlPoint[3].x, controlPoint[3].y, controlPoint[4].x, controlPoint[4].y, linePaint)
-        canvas.drawLine(controlPoint[5].x, controlPoint[5].y, controlPoint[6].x, controlPoint[6].y, linePaint)
-        canvas.drawLine(controlPoint[6].x, controlPoint[6].y, controlPoint[7].x, controlPoint[7].y, linePaint)
-        canvas.drawLine(controlPoint[8].x, controlPoint[8].y, controlPoint[9].x, controlPoint[9].y, linePaint)
-        canvas.drawLine(controlPoint[9].x, controlPoint[9].y, controlPoint[10].x, controlPoint[10].y, linePaint)
-
+        if (showSubline) {
+            canvas.drawPoint(centerPoint.x, centerPoint.y, mPaint)
+            controlPoint.forEach {
+                canvas.drawPoint(it.x, it.y, mPaint)
+            }
+            canvas.drawLine(controlPoint[11].x, controlPoint[11].y, controlPoint[0].x, controlPoint[0].y, linePaint)
+            canvas.drawLine(controlPoint[0].x, controlPoint[0].y, controlPoint[1].x, controlPoint[1].y, linePaint)
+            canvas.drawLine(controlPoint[2].x, controlPoint[2].y, controlPoint[3].x, controlPoint[3].y, linePaint)
+            canvas.drawLine(controlPoint[3].x, controlPoint[3].y, controlPoint[4].x, controlPoint[4].y, linePaint)
+            canvas.drawLine(controlPoint[5].x, controlPoint[5].y, controlPoint[6].x, controlPoint[6].y, linePaint)
+            canvas.drawLine(controlPoint[6].x, controlPoint[6].y, controlPoint[7].x, controlPoint[7].y, linePaint)
+            canvas.drawLine(controlPoint[8].x, controlPoint[8].y, controlPoint[9].x, controlPoint[9].y, linePaint)
+            canvas.drawLine(controlPoint[9].x, controlPoint[9].y, controlPoint[10].x, controlPoint[10].y, linePaint)
+        }
 
         mCurrent += mPiece
         if (mCurrent < DURING) {
@@ -128,7 +135,6 @@ class Bezier1View(context: Context, attributes: AttributeSet) : View(context, at
             controlPoint[10].x += (RADIUS / 21) / mCount
             postInvalidateDelayed(mPiece.toLong())
         }
-        super.onDraw(canvas)
     }
 
 }

@@ -3,6 +3,9 @@
     <declare-styleable name="FiveStarView">
         <attr name="color" format="color" />
     </declare-styleable>
+    <declare-styleable name="HeartView">
+        <attr name="heart_color" format="color" />
+    </declare-styleable>
     <declare-styleable name="CircleTextImageView">
         <attr name="citv_border_width" format="dimension" />
         <attr name="citv_border_color" format="color" />
