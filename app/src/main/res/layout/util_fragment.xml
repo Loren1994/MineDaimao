@@ -5,8 +5,13 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="user fragment" />
+        android:id="@+id/bezier_tv"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:background="@drawable/rectangle_gradient"
+        android:text="Bezier"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
 
 </LinearLayout>

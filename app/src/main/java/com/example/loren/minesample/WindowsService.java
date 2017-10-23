@@ -54,6 +54,7 @@ public class WindowsService extends Service {
         if (Build.VERSION.SDK_INT >= 23) {
             if (!Settings.canDrawOverlays(getApplicationContext())) {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             } else {
                 //执行6.0以上绘制代码
