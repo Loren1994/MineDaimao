@@ -1,8 +1,10 @@
 package com.example.loren.minesample.widget
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import com.example.loren.minesample.R
 import java.util.*
@@ -14,19 +16,19 @@ import java.util.*
 class Bezier1View(context: Context, attributes: AttributeSet) : View(context, attributes) {
 
     private val BEZIER_COEFICIENT = 0.551915024494f //bezier倍数
-    private val DURING = 1000
-    private val mCount = 100f// 将时长总共划分多少份
-    private var mCurrent = 0f // 当前已进行时长
-    private val mPiece = DURING / mCount// 每一份的时长
+    private val DURING = 1000L
     private var RADIUS = 0 //半径
     private var centerPoint = PointF() //坐标系中心点
     private var controlPoint = ArrayList<PointF>() //12个控制点
     private var controlArr = Array(12) { FloatArray(2) } //12个控制点二维数组
-    private var mPaint: Paint? = null //心形Paint
-    private var linePaint: Paint? = null //辅助线Paint
+    private lateinit var mPaint: Paint //心形Paint
+    private lateinit var linePaint: Paint//辅助线Paint
     private var mPath: Path? = null
     private var color = 0 //颜色
+    private lateinit var startAnim: ValueAnimator
+    private lateinit var endAnim: ValueAnimator
     var showSubline = true //是否显示辅助线
+    var isCircle = true //是否是圆形
 
     init {
         init(context, attributes)
@@ -39,23 +41,24 @@ class Bezier1View(context: Context, attributes: AttributeSet) : View(context, at
         mPath = Path()
         mPaint = Paint()
         linePaint = Paint()
-        linePaint!!.color = Color.BLUE
-        linePaint!!.strokeWidth = 3f
-        linePaint!!.isAntiAlias = true
-        mPaint!!.color = color
-        mPaint!!.style = Paint.Style.FILL
-        mPaint!!.strokeWidth = 3f
-        mPaint!!.isAntiAlias = true
+        linePaint.color = Color.BLUE
+        linePaint.strokeWidth = 3f
+        linePaint.isAntiAlias = true
+        mPaint.color = color
+        mPaint.style = Paint.Style.FILL
+        mPaint.strokeWidth = 3f
+        mPaint.isAntiAlias = true
         for (i in 0..11) {
             controlPoint.add(PointF())
         }
     }
 
-
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         centerPoint.x = (View.MeasureSpec.getSize(widthMeasureSpec) / 2).toFloat()
         centerPoint.y = (View.MeasureSpec.getSize(heightMeasureSpec) / 2).toFloat()
         RADIUS = (View.MeasureSpec.getSize(heightMeasureSpec) / 2)
+        startAnim = ValueAnimator.ofFloat(1f, (RADIUS / 2f)).setDuration(DURING)
+        endAnim = ValueAnimator.ofFloat((RADIUS / 2f), 1f).setDuration(DURING)
         //p11
         controlArr[11][0] = centerPoint.x - RADIUS * BEZIER_COEFICIENT
         controlArr[11][1] = centerPoint.y + RADIUS
@@ -125,15 +128,47 @@ class Bezier1View(context: Context, attributes: AttributeSet) : View(context, at
             canvas.drawLine(controlPoint[8].x, controlPoint[8].y, controlPoint[9].x, controlPoint[9].y, linePaint)
             canvas.drawLine(controlPoint[9].x, controlPoint[9].y, controlPoint[10].x, controlPoint[10].y, linePaint)
         }
+    }
 
-        mCurrent += mPiece
-        if (mCurrent < DURING) {
-            controlPoint[6].y += (RADIUS / 2) / mCount
-            controlPoint[11].y -= (RADIUS / 3) / mCount
-            controlPoint[1].y -= (RADIUS / 3) / mCount
-            controlPoint[2].x -= (RADIUS / 21) / mCount
-            controlPoint[10].x += (RADIUS / 21) / mCount
-            postInvalidateDelayed(mPiece.toLong())
+    private fun startTransformation() {
+        if (startAnim.isRunning || endAnim.isRunning) {
+            return
+        }
+        startAnim.removeAllUpdateListeners()
+        startAnim.addUpdateListener {
+            controlPoint[6].y = it.animatedValue as Float
+            controlPoint[11].y = 2f * RADIUS - 2f / 3f * it.animatedValue as Float
+            controlPoint[1].y = 2f * RADIUS - 2f / 3f * it.animatedValue as Float
+            controlPoint[2].x = 2f * RADIUS - 2f / 21f * it.animatedValue as Float
+            controlPoint[10].x = 2f / 21f * it.animatedValue as Float
+            postInvalidate()
+        }
+        startAnim.start()
+        isCircle = false
+    }
+
+    private fun resetShape() {
+        if (startAnim.isRunning || endAnim.isRunning) {
+            return
+        }
+        endAnim.removeAllUpdateListeners()
+        endAnim.addUpdateListener {
+            controlPoint[6].y = it.animatedValue as Float
+            controlPoint[11].y = 2f * RADIUS - 2f / 3f * it.animatedValue as Float
+            controlPoint[1].y = 2f * RADIUS - 2f / 3f * it.animatedValue as Float
+            controlPoint[2].x = 2f * RADIUS - 2f / 21f * it.animatedValue as Float
+            controlPoint[10].x = 2f / 21f * it.animatedValue as Float
+            postInvalidate()
+        }
+        endAnim.start()
+        isCircle = true
+    }
+
+    fun transformation() {
+        if (isCircle) {
+            startTransformation()
+        } else {
+            resetShape()
         }
     }
 

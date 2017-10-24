@@ -12,5 +12,6 @@ class BezierActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.bezier_activity)
         bezier_view.showSubline = false
+        bezier_view.setOnClickListener { bezier_view.transformation() }
     }
 }

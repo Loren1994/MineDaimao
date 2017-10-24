@@ -5,9 +5,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="点它变形"
+        android:textColor="@color/black" />
+
     <com.example.loren.minesample.widget.Bezier1View
-        android:layout_width="300dp"
         android:id="@+id/bezier_view"
+        android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
