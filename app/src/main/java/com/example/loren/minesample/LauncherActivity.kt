@@ -36,6 +36,7 @@ import pers.victor.ext.findColor
 class LauncherActivity : BaseActivity() {
     override fun useTitleBar() = false
     override fun initWidgets() {
+        setDoubleBackFinish()
         tool_bar!!.title = titleArr[0]
         setSupportActionBar(tool_bar)
         tool_bar!!.setBackgroundColor(findColor(R.color.gray_dark))
