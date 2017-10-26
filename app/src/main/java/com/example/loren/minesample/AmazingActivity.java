@@ -2,23 +2,36 @@ package com.example.loren.minesample;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.graphics.drawable.ColorDrawable;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
+import android.view.View;
 
-public class AmazingActivity extends AppCompatActivity {
+import com.example.loren.minesample.base.ui.BaseActivity;
+
+import org.jetbrains.annotations.NotNull;
+
+import static pers.victor.ext.CommonExtKt.findColor;
+
+
+/**
+ * Copyright (c) 16-9-19 by loren
+ * ._       _____    ____    _____   __   _
+ * | |     /  _  \ |  _  \  | ____| |  \ | |
+ * | |     | | | | | |_| |  | |__   |   \| |
+ * | |     | | | | |  _  /  |  __|  | |\   |
+ * | |___  | |_| | | | \ \  | |___  | | \  |
+ * |_____| \_____/ |_|  \_\ |_____| |_|  \_|
+ */
+public class AmazingActivity extends BaseActivity {
 
     private boolean isStart = false;
     private float curX;
     private VelocityTracker velocityTracker;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_amazing);
-
+    public boolean useTitleBar() {
+        return false;
     }
 
     @Override
@@ -80,5 +93,25 @@ public class AmazingActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void initWidgets() {
+        getWindow().setBackgroundDrawable(new ColorDrawable(findColor(R.color.transparent)));
+    }
+
+    @Override
+    public void setListeners() {
+
+    }
+
+    @Override
+    public void onWidgetsClick(@NotNull View v) {
+
+    }
+
+    @Override
+    public int bindLayout() {
+        return R.layout.activity_amazing;
     }
 }

@@ -3,23 +3,30 @@ package com.example.loren.minesample
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
+import android.view.View
 import android.widget.LinearLayout
+import com.example.loren.minesample.base.ui.BaseActivity
 import kotlinx.android.synthetic.main.activity_copy_wx_pull.*
 
-class CopyWxPullActivity : AppCompatActivity() {
+class CopyWxPullActivity : BaseActivity() {
+    override fun initWidgets() {
+
+    }
+
+    override fun setListeners() {
+    }
+
+    override fun onWidgetsClick(v: View) {
+    }
+
+    override fun bindLayout() = R.layout.activity_copy_wx_pull
 
     private var downY = 0
     private var isOpen = false
     private var radius = 0
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_copy_wx_pull)
-    }
 
     override fun onResume() {
         super.onResume()
@@ -58,7 +65,7 @@ class CopyWxPullActivity : AppCompatActivity() {
         return super.dispatchTouchEvent(ev)
     }
 
-    fun reset(radius: Int) {
+    private fun reset(radius: Int) {
         val animator = ObjectAnimator.ofInt(eyes, "Y", eyes.y.toInt(), 0).setDuration(800)
         val radiuAnim = ObjectAnimator.ofInt(eyes, "Y", radius, 0).setDuration(800)
         radiuAnim.addUpdateListener { radiuAnim -> eyes.setRadius(radiuAnim.animatedValue as Int) }

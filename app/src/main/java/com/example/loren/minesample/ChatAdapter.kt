@@ -1,31 +1,21 @@
 package com.example.loren.minesample
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
-
-import com.facebook.drawee.view.SimpleDraweeView
-
-import java.util.ArrayList
-
 import bean.MessageBean
+import com.example.loren.minesample.base.ext.CommonAdapter
+import com.example.loren.minesample.base.ext.Holder
 import kotlinx.android.synthetic.main.item_chat_list_other.view.*
+import java.util.*
 
 /**
  * Copyright (c) 17-1-16 by loren
  */
 
-class ChatAdapter(private val mContext: Context, private val data: ArrayList<MessageBean.DataBean>) : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
+class ChatAdapter(private val mContext: Context, private val data: ArrayList<MessageBean.DataBean>) : CommonAdapter() {
+    override fun getItemCount() = data.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_chat_list_other, parent, false))
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: Holder, position: Int) {
         if (data[position].type == "1") {//self
             holder.itemView.other_ll!!.visibility = View.GONE
             holder.itemView.self_ll!!.visibility = View.VISIBLE
@@ -40,9 +30,6 @@ class ChatAdapter(private val mContext: Context, private val data: ArrayList<Mes
         }
     }
 
-    override fun getItemCount(): Int {
-        return data.size
-    }
+    override fun bindLayout() = R.layout.item_chat_list_other
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

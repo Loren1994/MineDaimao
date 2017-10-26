@@ -5,6 +5,8 @@ import android.util.DisplayMetrics;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 
+import pers.victor.ext.Ext;
+
 
 /**
  * _ooOoo_
@@ -42,6 +44,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Ext.ctx = this;
         Fresco.initialize(this);
         mContext = this;
         getDisplayMetrics();

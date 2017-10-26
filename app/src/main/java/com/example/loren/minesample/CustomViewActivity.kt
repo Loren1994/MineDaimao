@@ -4,22 +4,17 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.transition.Fade
+import android.view.View
 import android.widget.SeekBar
+import com.example.loren.minesample.base.ui.BaseActivity
 import kotlinx.android.synthetic.main.custom_view_activity.*
 
 /**
  * Copyright (c) 16-9-18 by loren
  */
 
-class CustomViewActivity : AppCompatActivity() {
-
-    private var mR: Int = 0
-    private var mG: Int = 0
-    private var mB: Int = 0
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.custom_view_activity)
+class CustomViewActivity : BaseActivity() {
+    override fun initWidgets() {
         setAnim()
         r.max = 255
         g.max = 255
@@ -62,7 +57,19 @@ class CustomViewActivity : AppCompatActivity() {
         })
     }
 
-    fun setAnim() {
+    override fun setListeners() {
+    }
+
+    override fun onWidgetsClick(v: View) {
+    }
+
+    override fun bindLayout()=R.layout.custom_view_activity
+
+    private var mR: Int = 0
+    private var mG: Int = 0
+    private var mB: Int = 0
+
+    private fun setAnim() {
         window.enterTransition = Fade().setDuration(1000)
         window.enterTransition = Fade().setDuration(1000)
     }

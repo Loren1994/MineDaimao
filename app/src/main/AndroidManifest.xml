@@ -46,18 +46,12 @@
         <activity android:name=".CustomViewActivity" />
         <activity android:name=".FlagActivity" />
         <activity android:name=".MoveViewActivity" />
-        <activity
-            android:name=".CopyWxActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity
-            android:name=".CopyWxPullActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".CopyWxActivity" />
+        <activity android:name=".CopyWxPullActivity" />
         <activity
             android:name=".TakePhotoActivity"
-            android:theme="@style/Translucent" />
-        <activity
-            android:name=".RemindActivity"
-            android:theme="@style/DeviceDefault.Light" />
+            android:theme="@style/ActivityTransparent" />
+        <activity android:name=".RemindActivity" />
         <activity android:name=".ShortCutsActivity" />
         <activity
             android:name=".ChatActivity"
@@ -65,11 +59,11 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".OpenScreenActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@style/ActivityTransparent" />
         <activity android:name=".VectorActivity" />
         <activity
             android:name=".AmazingActivity"
-            android:theme="@style/NoTitleTranslucentTheme" />
+            android:theme="@style/ActivityTransparent" />
         <activity android:name=".BezierActivity" />
         <activity android:name=".TranslationActivity" />
     </application>

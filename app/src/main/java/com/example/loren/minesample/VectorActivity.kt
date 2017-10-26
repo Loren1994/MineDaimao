@@ -2,47 +2,24 @@ package com.example.loren.minesample
 
 import android.Manifest
 import android.animation.ValueAnimator
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.widget.RelativeLayout
 import android.widget.TextView
+import com.example.loren.minesample.base.ui.BaseActivity
 import com.hanks.htextview.util.DisplayUtils
 import kotlinx.android.synthetic.main.activity_vector.*
-import me.weyye.hipermission.HiPermission
-import me.weyye.hipermission.PermissionCallback
-import me.weyye.hipermission.PermissionItem
+import pers.victor.ext.toast
 import java.util.*
 
 
-class VectorActivity : AppCompatActivity() {
-
-    private var mAudioRecord: AudioRecordDemo? = null
-    private val CHANGE_SIZE = 50
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_vector)
-        val permissionItems = arrayListOf<PermissionItem>()
-        permissionItems.add(PermissionItem(Manifest.permission.RECORD_AUDIO, "RECORD_AUDIO", R.drawable.permission_ic_micro_phone))
-        HiPermission.create(this)
-                .permissions(permissionItems)
-                .checkMutiPermission(object : PermissionCallback {
-                    override fun onClose() {
-                    }
-
-                    override fun onFinish() {
-                    }
-
-                    override fun onDeny(permission: String, position: Int) {
-                    }
-
-                    override fun onGuarantee(permission: String, position: Int) {
-                    }
-                })
+class VectorActivity : BaseActivity() {
+    @SuppressLint("SetTextI18n")
+    override fun initWidgets() {
+        requestPermission(Manifest.permission.RECORD_AUDIO, granted = { }, denied = { toast("没有权限，请授权后重试") })
         for (i in 0..14) {
             val item = LayoutInflater.from(this).inflate(R.layout.volume_item, null)
             volume_container_ll!!.addView(item)
@@ -70,6 +47,17 @@ class VectorActivity : AppCompatActivity() {
         })
         mAudioRecord!!.getNoiseLevel()
     }
+
+    override fun setListeners() {
+    }
+
+    override fun onWidgetsClick(v: View) {
+    }
+
+    override fun bindLayout() = R.layout.activity_vector
+
+    private var mAudioRecord: AudioRecordDemo? = null
+    private val CHANGE_SIZE = 50
 
     private fun addListener(view: View) {
         view.setOnTouchListener { v, event ->

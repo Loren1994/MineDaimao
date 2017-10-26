@@ -28,5 +28,41 @@
         <!-- 视频分辨率高度 -->
         <attr name="video_height" format="integer"/>
     </declare-styleable>
+    <declare-styleable name="FlexibleImageView">
+        <attr name="proportion_height" format="integer" />
+        <attr name="proportion_width" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="RoundImageView">
+        <attr name="img_radius" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="DrawableTextView">
+        <attr name="start_height" format="dimension" />
+        <attr name="start_width" format="dimension" />
+        <attr name="end_height" format="dimension" />
+        <attr name="end_width" format="dimension" />
+        <attr name="top_height" format="dimension" />
+        <attr name="top_width" format="dimension" />
+        <attr name="bottom_height" format="dimension" />
+        <attr name="bottom_width" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="FixedFlowLayout">
+        <attr name="columns_per_line" format="integer" />
+        <attr name="single_selected" format="boolean" />
+        <attr name="horizontal_spacing" format="dimension" />
+        <attr name="vertical_spacing" format="dimension" />
+        <attr name="child_gravity" format="integer">
+            <flag name="center" value="17" />
+            <flag name="top" value="48" />
+            <flag name="bottom" value="80" />
+            <flag name="start" value="3" />
+            <flag name="end" value="5" />
+            <flag name="center_vertical" value="16" />
+            <flag name="center_horizontal" value="1" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="FixedFlowLayout_Layout">
+        <attr name="span_column" format="integer" />
+    </declare-styleable>
 
 </resources>

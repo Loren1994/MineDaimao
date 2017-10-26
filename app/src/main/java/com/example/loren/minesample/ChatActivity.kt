@@ -1,66 +1,19 @@
 package com.example.loren.minesample
 
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.transition.Explode
 import android.view.View
 import bean.MessageBean
+import com.example.loren.minesample.base.ui.BaseActivity
 import com.example.loren.minesample.widget.AdjustLinearLayout
-import com.facebook.drawee.backends.pipeline.Fresco
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_chat.*
 import util.Constant
 import java.util.*
 
-class ChatActivity : AppCompatActivity(), AdjustLinearLayout.onSizeChangeListener {
-
-    //    private Disposable disposable;
-    private var data: ArrayList<MessageBean.DataBean>? = null
-    private var mAdapter: ChatAdapter? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Fresco.initialize(this)
-        setContentView(R.layout.activity_chat)
+class ChatActivity : BaseActivity(), AdjustLinearLayout.onSizeChangeListener {
+    override fun initWidgets() {
         setAnim()
-        //        Observable.interval(10, TimeUnit.SECONDS, Schedulers.newThread())
-        //                .observeOn(AndroidSchedulers.mainThread())
-        //                .subscribe(new Observer<Long>() {
-        //                    @Override
-        //                    public void onSubscribe(Disposable d) {
-        //                        disposable = d;
-        //                    }
-        //
-        //                    @Override
-        //                    public void onNext(Long aLong) {
-        //                        MessageBean.DataBean bean = new MessageBean.DataBean();
-        //                        bean.setId("");
-        //                        bean.setName("");
-        //                        bean.setMsg("嗯！");
-        //                        bean.setType("1");
-        //                        bean.setUrl("http://tupian.enterdesk.com/2014/lxy/2014/12/01/5/1.jpg");
-        //                        //refresh(bean);
-        //                        Observable.just(bean)
-        //                                .subscribe(new Consumer<MessageBean.DataBean>() {
-        //                                    @Override
-        //                                    public void accept(MessageBean.DataBean bean) throws Exception {
-        //                                        refresh(bean);
-        //                                    }
-        //                                });
-        //                    }
-        //
-        //                    @Override
-        //                    public void onError(Throwable e) {
-        //
-        //                    }
-        //
-        //                    @Override
-        //                    public void onComplete() {
-        //
-        //                    }
-        //                });
-
         data = Gson().fromJson(Constant.JSON, MessageBean::class.java).data
         title_tv!!.text = data!![1].name
         mAdapter = ChatAdapter(this, data!!)
@@ -81,8 +34,21 @@ class ChatActivity : AppCompatActivity(), AdjustLinearLayout.onSizeChangeListene
             refresh(bean)
             input_edt!!.setText("")
         })
-        adjust_ll!!.setListener(this)
     }
+
+    override fun setListeners() {
+        click(adjust_ll)
+    }
+
+    override fun onWidgetsClick(v: View) {
+    }
+
+    override fun bindLayout() = R.layout.activity_chat
+
+    //    private Disposable disposable;
+    private var data: ArrayList<MessageBean.DataBean>? = null
+    private var mAdapter: ChatAdapter? = null
+
 
     private fun setAnim() {
         window.enterTransition = Explode().setDuration(1000)

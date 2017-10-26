@@ -6,51 +6,34 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.os.Bundle
 import android.preference.PreferenceManager
 import android.provider.MediaStore
+import android.view.View
+import com.example.loren.minesample.base.ui.BaseActivity
 import kotlinx.android.synthetic.main.remind_activity.*
-import me.weyye.hipermission.HiPermission
-import me.weyye.hipermission.PermissionCallback
-import me.weyye.hipermission.PermissionItem
+import pers.victor.ext.toast
 
 /**
  *                Copyright (c) 16-9-26 by loren
  */
-class RemindActivity : Activity() {
+class RemindActivity : BaseActivity() {
+    override fun initWidgets() {
+        sharedPrefrences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        take_photo_tv.setOnClickListener { requestPermission(Manifest.permission.CAMERA, granted = { takePhotoIntent() }, denied = { toast("没有权限，请授权后重试") }) }
+        bg_take_photo_tv.setOnClickListener { requestPermission(Manifest.permission.CAMERA, granted = { startActivityForResult(Intent(this, TakePhotoActivity::class.java), TAKE_PHOTO) }, denied = { toast("没有权限，请授权后重试") }) }
+    }
+
+    override fun setListeners() {
+    }
+
+    override fun onWidgetsClick(v: View) {
+    }
+
+    override fun bindLayout() = R.layout.remind_activity
 
     val REQUEST_IMAGE_CAPTURE = 1
     val TAKE_PHOTO = 2
     lateinit var sharedPrefrences: SharedPreferences
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.remind_activity)
-        val permissionItems = arrayListOf<PermissionItem>()
-        permissionItems.add(PermissionItem(Manifest.permission.CAMERA, "Camera", R.drawable.permission_ic_camera))
-        HiPermission.create(this)
-                .permissions(permissionItems)
-                .checkMutiPermission(object : PermissionCallback {
-                    override fun onClose() {
-                    }
-
-                    override fun onFinish() {
-                    }
-
-                    override fun onDeny(permission: String, position: Int) {
-                    }
-
-                    override fun onGuarantee(permission: String, position: Int) {
-                    }
-                })
-        sharedPrefrences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
-//        if (!TextUtils.isEmpty(sharedPrefrences.getString("bitmap", ""))) {
-//            val byteExtra = sharedPrefrences.getString("bitmap", "").toByteArray()
-//            image.setImageBitmap(BitmapFactory.decodeByteArray(byteExtra, 0, byteExtra.size))
-//        }
-        take_photo_tv.setOnClickListener { takePhotoIntent() }
-        bg_take_photo_tv.setOnClickListener { startActivityForResult(Intent(this, TakePhotoActivity::class.java), TAKE_PHOTO) }
-    }
 
     private fun takePhotoIntent() {
         val takeIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)

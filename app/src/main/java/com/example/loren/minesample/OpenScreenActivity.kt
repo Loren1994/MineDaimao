@@ -15,24 +15,14 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
+import com.example.loren.minesample.base.ui.BaseActivity
 
 import com.example.loren.minesample.widget.OpenScreen
 import kotlinx.android.synthetic.main.activity_open_screen.*
 
 
-class OpenScreenActivity : Activity(), OpenScreen.onDialogListener {
-
-    private val password = "0124678"
-    private var animator: ObjectAnimator? = null
-    private val TOTAL_TIME: Long = 10000
-    private var errorNum = 0
-    private var timer: Timer? = null
-    private var endAnim: Animator? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_open_screen)
-        //        setAnim();
+class OpenScreenActivity : BaseActivity(), OpenScreen.onDialogListener {
+    override fun initWidgets() {
         open_os!!.setListener(this)
         open_os!!.setPassword(password)
         animator = ObjectAnimator.ofFloat(victor_iv, "alpha", 0f, 1f).setDuration(1000)
@@ -41,6 +31,20 @@ class OpenScreenActivity : Activity(), OpenScreen.onDialogListener {
         startAnim()
     }
 
+    override fun setListeners() {
+    }
+
+    override fun onWidgetsClick(v: View) {
+    }
+
+    override fun bindLayout()=R.layout.activity_open_screen
+
+    private val password = "0124678"
+    private var animator: ObjectAnimator? = null
+    private val TOTAL_TIME: Long = 10000
+    private var errorNum = 0
+    private var timer: Timer? = null
+    private var endAnim: Animator? = null
 
     private fun setAnim() {
         window.enterTransition = Fade().setDuration(1000)

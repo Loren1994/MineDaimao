@@ -1,8 +1,7 @@
 package com.example.loren.minesample
 
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.launcher_activity.*
+import android.view.View
+import com.example.loren.minesample.base.ui.BaseActivity
 
 /**
  *                            _ooOoo_
@@ -29,10 +28,17 @@ import kotlinx.android.synthetic.main.launcher_activity.*
  *
  *                Copyright (c) 16-9-22 by loren
  */
-class MoveViewActivity : AppCompatActivity() {
+class MoveViewActivity : BaseActivity() {
+    override fun initWidgets() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.move_view_activity)
     }
+
+    override fun setListeners() {
+    }
+
+    override fun onWidgetsClick(v: View) {
+    }
+
+    override fun bindLayout() = R.layout.move_view_activity
+
 }

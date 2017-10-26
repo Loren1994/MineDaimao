@@ -1,33 +1,19 @@
 package com.example.loren.minesample.fragment
 
 import android.app.ActivityOptions
-import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.example.loren.minesample.*
+import com.example.loren.minesample.base.ui.BaseFragment
 import kotlinx.android.synthetic.main.home_fragment.*
 
 /**
- * Created by loren on 2017/3/7.
+ * Copyright © 2017/3/7 by loren
  */
 
-class HomeFragment : Fragment(), View.OnClickListener {
-    private var mContext: Context? = null
-
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater!!.inflate(R.layout.home_fragment, container, false)
-        return view
-
-    }
-
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        mContext = activity
+class HomeFragment : BaseFragment() {
+    override fun initWidgets() {
         for (i in 0 until container!!.childCount) {
             if (i % 2 == 0) {
                 container!!.getChildAt(i).setBackgroundColor(ContextCompat.getColor(mContext!!, R.color.main))
@@ -35,17 +21,15 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 container!!.getChildAt(i).setBackgroundColor(ContextCompat.getColor(mContext!!, R.color.match))
             }
         }
-        move_view!!.setOnClickListener(this)
-        fs_tv!!.setOnClickListener(this)
-        flag_tv!!.setOnClickListener(this)
-        remind_tv!!.setOnClickListener(this)
-        wx_vedio!!.setOnClickListener(this)
-        chat!!.setOnClickListener(this)
-        open!!.setOnClickListener(this)
-        vector!!.setOnClickListener(this)
     }
 
-    override fun onClick(v: View) {
+    override fun useTitleBar() = false
+
+    override fun setListeners() {
+        click(move_view, fs_tv, flag_tv, remind_tv, wx_vedio, chat, open, vector)
+    }
+
+    override fun onWidgetsClick(v: View) {
         when (v.id) {
             R.id.move_view -> startActivity(Intent(mContext, MoveViewActivity::class.java), ActivityOptions.makeSceneTransitionAnimation(activity, move_view, "share_tv").toBundle())
             R.id.flag_tv -> startActivity(Intent(mContext, FlagActivity::class.java))
@@ -57,11 +41,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
             R.id.open -> {
                 //                startActivity(new Intent(mContext, OpenScreenActivity.class),ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
                 startActivity(Intent(mContext, OpenScreenActivity::class.java))
-                activity.overridePendingTransition(0, 0)
-            }
-
-            else -> {
+                mContext.overridePendingTransition(0, 0)
             }
         }
     }
+
+    override fun bindLayout() = R.layout.home_fragment
 }

@@ -1,7 +1,6 @@
 package com.example.loren.minesample
 
 import android.Manifest
-import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -11,7 +10,6 @@ import android.hardware.camera2.*
 import android.media.Image
 import android.media.ImageReader
 import android.os.Build
-import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
 import android.preference.PreferenceManager
@@ -23,15 +21,39 @@ import android.view.Surface
 import android.view.SurfaceHolder
 import android.view.View
 import android.widget.Toast
+import com.example.loren.minesample.base.ui.BaseActivity
 import kotlinx.android.synthetic.main.activity_take_photo.*
-import me.weyye.hipermission.HiPermission
-import me.weyye.hipermission.PermissionCallback
-import me.weyye.hipermission.PermissionItem
+import pers.victor.ext.toast
 import java.io.*
 import java.nio.ByteBuffer
 import java.util.*
 
-class TakePhotoActivity : Activity(), View.OnClickListener {
+class TakePhotoActivity : BaseActivity() {
+    override fun initWidgets() {
+        ORIENTATIONS.append(Surface.ROTATION_0, 90)
+        ORIENTATIONS.append(Surface.ROTATION_90, 0)
+        ORIENTATIONS.append(Surface.ROTATION_180, 270)
+        ORIENTATIONS.append(Surface.ROTATION_270, 180)
+        requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, granted = { }, denied = { toast("没有权限，请授权后重试") })
+        if (!this.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+            Toast.makeText(this, "无前置摄像头", Toast.LENGTH_LONG).show()
+            finish()
+            return
+        }
+        initView()
+        Thread {
+            Thread.sleep(2000)
+            takePicture()
+        }.start()
+    }
+
+    override fun setListeners() {
+    }
+
+    override fun onWidgetsClick(v: View) {
+    }
+
+    override fun bindLayout() = R.layout.activity_take_photo
 
     private lateinit var mCamera: Camera
     private lateinit var surfaceHolder: SurfaceHolder
@@ -49,62 +71,6 @@ class TakePhotoActivity : Activity(), View.OnClickListener {
     private var mCameraDevice: CameraDevice? = null
 
     private val ORIENTATIONS: SparseIntArray = SparseIntArray()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_take_photo)
-        ORIENTATIONS.append(Surface.ROTATION_0, 90)
-        ORIENTATIONS.append(Surface.ROTATION_90, 0)
-        ORIENTATIONS.append(Surface.ROTATION_180, 270)
-        ORIENTATIONS.append(Surface.ROTATION_270, 180)
-        val permissionItems = arrayListOf<PermissionItem>()
-        permissionItems.add(PermissionItem(Manifest.permission.WRITE_EXTERNAL_STORAGE, "WRITE_EXTERNAL_STORAGE", R.drawable.permission_ic_storage))
-        permissionItems.add(PermissionItem(Manifest.permission.READ_EXTERNAL_STORAGE, "READ_EXTERNAL_STORAGE", R.drawable.permission_ic_storage))
-        HiPermission.create(this)
-                .permissions(permissionItems)
-                .checkMutiPermission(object : PermissionCallback {
-                    override fun onClose() {
-                    }
-
-                    override fun onFinish() {
-                    }
-
-                    override fun onDeny(permission: String, position: Int) {
-                    }
-
-                    override fun onGuarantee(permission: String, position: Int) {
-                    }
-                })
-//        init()
-//        mCamera.setPreviewDisplay(surfaceHolder)
-//        mCamera.startPreview()
-//        mCamera.autoFocus { b, camera -> }
-//        thread1 = Thread() {
-//            mCamera.takePicture(null, null,
-//                    Camera.PictureCallback { data, camera ->
-//                        thread2 = Thread {
-////                            sharedPrefrence.edit().putString("bitmap", data.toString()).apply()
-//                            val bitmap = zoomImage(BitmapFactory.decodeByteArray(data, 0, data.size))
-//                            saveMyBitmap(bitmap, "无预览${System.currentTimeMillis()}")
-//                            runOnUiThread { Toast.makeText(this, "已保存到本地", Toast.LENGTH_SHORT).show() }
-//                        }
-//                        thread2.start()
-//                        finish()
-//                    })
-//        }
-//        thread1.start()
-//        if (!this.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT)) {
-        if (!this.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
-            Toast.makeText(this, "无前置摄像头", Toast.LENGTH_LONG).show()
-            finish()
-            return
-        }
-        initView()
-        Thread {
-            Thread.sleep(2000)
-            takePicture()
-        }.start()
-    }
 
     private fun initView() {
         //surfaceview
@@ -134,9 +100,9 @@ class TakePhotoActivity : Activity(), View.OnClickListener {
         })
     }
 
-    override fun onClick(p0: View?) {
-        takePicture()
-    }
+//    override fun onClick(p0: View?) {
+//        takePicture()
+//    }
 
     private fun takePicture() {
         Toast.makeText(this, "点击拍照", Toast.LENGTH_LONG).show()

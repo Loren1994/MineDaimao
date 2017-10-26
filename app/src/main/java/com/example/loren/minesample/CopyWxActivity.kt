@@ -4,10 +4,11 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.MotionEvent
+import android.view.View
 import android.widget.Toast
+import com.example.loren.minesample.base.ui.BaseActivity
 import kotlinx.android.synthetic.main.copy_wx_activity.*
 
 /**
@@ -35,16 +36,12 @@ import kotlinx.android.synthetic.main.copy_wx_activity.*
  *
  *                Copyright (c) 16-9-27 by loren
  */
-class CopyWxActivity : AppCompatActivity() {
+class CopyWxActivity : BaseActivity() {
+    override fun initWidgets() {
 
-    private var isFinish = true
-    private var mContext: Context? = null
+    }
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.copy_wx_activity)
-        mContext = this
+    override fun setListeners() {
         shoot_button!!.setOnTouchListener { view, motionEvent ->
             if (motionEvent.action === MotionEvent.ACTION_DOWN) {
                 movieRecorderView!!.record { handler.sendEmptyMessage(1) }
@@ -61,6 +58,15 @@ class CopyWxActivity : AppCompatActivity() {
             return@setOnTouchListener true
         }
     }
+
+    override fun onWidgetsClick(v: View) {
+    }
+
+    override fun bindLayout() = R.layout.copy_wx_activity
+
+    private var isFinish = true
+    private var mContext: Context? = null
+
 
     override fun onResume() {
         super.onResume()

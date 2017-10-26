@@ -1,23 +1,29 @@
 package com.example.loren.minesample
 
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.widget.Toast
 import bean.TranslationBean
+import com.example.loren.minesample.base.ui.BaseActivity
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_translation.*
 import util.HttpUtil
 
-class TranslationActivity : AppCompatActivity() {
-
-    private val TRANSLATION_URL = "http://fanyi.youdao.com/openapi.do?keyfrom=Skykai521&key=977124034&type=data&doctype=json&version=1.1&q="
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_translation)
+class TranslationActivity : BaseActivity() {
+    override fun initWidgets() {
         translation_iv!!.setOnClickListener { toTranslation() }
         container_ll!!.getChildAt(0).setOnClickListener { translate() }
+
     }
+
+    override fun setListeners() {
+    }
+
+    override fun onWidgetsClick(v: View) {
+    }
+
+    override fun bindLayout() = R.layout.activity_translation
+
+    private val TRANSLATION_URL = "http://fanyi.youdao.com/openapi.do?keyfrom=Skykai521&key=977124034&type=data&doctype=json&version=1.1&q="
 
     private fun translate() {
 
