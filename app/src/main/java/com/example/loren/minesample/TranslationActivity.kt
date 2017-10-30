@@ -6,7 +6,7 @@ import bean.TranslationBean
 import com.example.loren.minesample.base.ui.BaseActivity
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_translation.*
-import util.HttpUtil
+import com.example.loren.minesample.util.HttpUtil
 
 class TranslationActivity : BaseActivity() {
     override fun initWidgets() {
