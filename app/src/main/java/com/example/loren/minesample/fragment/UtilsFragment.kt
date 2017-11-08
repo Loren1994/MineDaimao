@@ -1,9 +1,9 @@
 package com.example.loren.minesample.fragment
 
-import android.content.Intent
 import android.view.View
 import com.example.loren.minesample.BezierActivity
 import com.example.loren.minesample.R
+import com.example.loren.minesample.ScreenShotActivity
 import com.example.loren.minesample.base.ui.BaseFragment
 import kotlinx.android.synthetic.main.util_fragment.*
 
@@ -13,17 +13,21 @@ import kotlinx.android.synthetic.main.util_fragment.*
 
 class UtilsFragment : BaseFragment() {
     override fun initWidgets() {
-        bezier_tv.setOnClickListener { startActivity(Intent(activity, BezierActivity::class.java)) }
     }
 
-    override fun useTitleBar() = false
 
     override fun setListeners() {
+        click(bezier_tv, screen_shot_tv)
     }
 
     override fun onWidgetsClick(v: View) {
+        when (v.id) {
+            R.id.bezier_tv -> startActivity<BezierActivity>()
+            R.id.screen_shot_tv -> startActivity<ScreenShotActivity>()
+        }
     }
 
+    override fun useTitleBar() = false
     override fun bindLayout() = R.layout.util_fragment
 
 }

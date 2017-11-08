@@ -49,6 +49,7 @@ dependencies {
     implementation('com.github.VictorChow:kotlin-android-lib:1.2.1') {
         transitive = false
     }
+    implementation 'com.hulab.android:debugkit:1.1.0'
 }
 androidExtensions {
     experimental = true

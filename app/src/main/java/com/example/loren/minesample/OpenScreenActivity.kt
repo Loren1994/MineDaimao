@@ -2,8 +2,6 @@ package com.example.loren.minesample
 
 import android.animation.Animator
 import android.animation.ObjectAnimator
-import android.app.Activity
-import android.os.Bundle
 import android.os.CountDownTimer
 import android.support.v4.content.ContextCompat
 import android.transition.Fade
@@ -11,12 +9,8 @@ import android.util.Log
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.animation.AccelerateInterpolator
-import android.widget.ImageView
-import android.widget.RelativeLayout
-import android.widget.TextView
 import android.widget.Toast
 import com.example.loren.minesample.base.ui.BaseActivity
-
 import com.example.loren.minesample.widget.OpenScreen
 import kotlinx.android.synthetic.main.activity_open_screen.*
 
@@ -31,13 +25,15 @@ class OpenScreenActivity : BaseActivity(), OpenScreen.onDialogListener {
         startAnim()
     }
 
+    override fun useTitleBar() = false
+
     override fun setListeners() {
     }
 
     override fun onWidgetsClick(v: View) {
     }
 
-    override fun bindLayout()=R.layout.activity_open_screen
+    override fun bindLayout() = R.layout.activity_open_screen
 
     private val password = "0124678"
     private var animator: ObjectAnimator? = null

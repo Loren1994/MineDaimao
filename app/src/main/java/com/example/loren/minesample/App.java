@@ -4,6 +4,9 @@ import android.app.Application;
 import android.util.DisplayMetrics;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
+import com.orhanobut.logger.PrettyFormatStrategy;
 
 import pers.victor.ext.Ext;
 
@@ -45,9 +48,19 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         Ext.ctx = this;
+        initLogger();
         Fresco.initialize(this);
         mContext = this;
         getDisplayMetrics();
+    }
+
+    private void initLogger() {
+        PrettyFormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
+                .showThreadInfo(false)
+                .methodCount(0)
+                .tag("HiSmart")
+                .build();
+        Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy));
     }
 
     /*获取高度、宽度、密度、缩放比例*/
