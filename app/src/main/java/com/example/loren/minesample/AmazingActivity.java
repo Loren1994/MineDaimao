@@ -56,7 +56,7 @@ public class AmazingActivity extends BaseActivity {
                     if (velocityTracker.getXVelocity() > 5000) {
                         startAnim(event.getRawX(), true);
                     } else {
-                        startAnim(event.getRawX(), event.getRawX() > App.SCREEN_WIDTH / 2);
+                        startAnim(event.getRawX(), event.getRawX() > App.Companion.getSCREEN_WIDTH() / 2);
                     }
                 }
                 velocityTracker.clear();
@@ -67,7 +67,7 @@ public class AmazingActivity extends BaseActivity {
 
     private void startAnim(float curX, final boolean isFinish) {
         ObjectAnimator animator = ObjectAnimator.ofFloat(getWindow().getDecorView(), "x",
-                curX, isFinish ? App.SCREEN_WIDTH : 0f).setDuration(500);
+                curX, isFinish ? App.Companion.getSCREEN_WIDTH() : 0f).setDuration(500);
         animator.start();
         animator.addListener(new Animator.AnimatorListener() {
             @Override

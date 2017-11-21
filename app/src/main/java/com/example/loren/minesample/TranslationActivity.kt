@@ -4,9 +4,10 @@ import android.view.View
 import android.widget.Toast
 import bean.TranslationBean
 import com.example.loren.minesample.base.ui.BaseActivity
+import com.example.loren.minesample.util.http
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_translation.*
-import com.example.loren.minesample.util.HttpUtil
+import pers.victor.ext.toast
 
 class TranslationActivity : BaseActivity() {
     override fun initWidgets() {
@@ -31,10 +32,11 @@ class TranslationActivity : BaseActivity() {
 
 
     private fun toTranslation() {
-        HttpUtil.get(TRANSLATION_URL + input_edt!!.text.toString().trim { it <= ' ' }, object : HttpUtil.NetCallBack {
-            override fun onSuccess(json: String) {
+        http {
+            url = TRANSLATION_URL + input_edt!!.text.toString().trim { it <= ' ' }
+            success {
                 try {
-                    val bean = Gson().fromJson(json, TranslationBean::class.java)
+                    val bean = Gson().fromJson(it, TranslationBean::class.java)
                     var result = ""
                     for (i in 0 until bean.basic.explains.size) {
                         result += bean.basic.explains[i] + "  "
@@ -44,12 +46,10 @@ class TranslationActivity : BaseActivity() {
                     e.printStackTrace()
                     Toast.makeText(this@TranslationActivity, "异常了哈哈哈哈哈", Toast.LENGTH_LONG).show()
                 }
-
             }
-
-            override fun onFailure(reason: String) {
-                Toast.makeText(this@TranslationActivity, reason, Toast.LENGTH_LONG).show()
+            fail {
+                toast(it)
             }
-        })
+        }
     }
 }

@@ -112,11 +112,11 @@ public class WindowsService extends Service {
                         timer.cancel();
                         timer.start();
                         if (isInterrupt()) {
-                            if (event.getRawX() >= App.SCREEN_WIDTH / 2) {
+                            if (event.getRawX() >= App.Companion.getSCREEN_WIDTH() / 2) {
                                 isLeft = false;
                                 ValueAnimator animator = new ValueAnimator();
                                 animator.setDuration(200);
-                                animator.setIntValues((int) event.getRawX() - windowView.getMeasuredWidth() / 2, App.SCREEN_WIDTH - windowView.getMeasuredWidth());
+                                animator.setIntValues((int) event.getRawX() - windowView.getMeasuredWidth() / 2, App.Companion.getSCREEN_WIDTH() - windowView.getMeasuredWidth());
                                 animator.setInterpolator(new DecelerateInterpolator());
                                 animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                                     @Override
@@ -167,7 +167,7 @@ public class WindowsService extends Service {
         if (isLeft)
             animator.setIntValues(offset, 0);
         else
-            animator.setIntValues(App.SCREEN_WIDTH - windowView.getMeasuredWidth() + Math.abs(offset), App.SCREEN_WIDTH - windowView.getMeasuredWidth());
+            animator.setIntValues(App.Companion.getSCREEN_WIDTH() - windowView.getMeasuredWidth() + Math.abs(offset), App.Companion.getSCREEN_WIDTH() - windowView.getMeasuredWidth());
         animator.setInterpolator(new DecelerateInterpolator());
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -210,7 +210,7 @@ public class WindowsService extends Service {
                 if (isLeft)
                     animator.setIntValues(0, offset);
                 else
-                    animator.setIntValues(App.SCREEN_WIDTH - windowView.getMeasuredWidth(), App.SCREEN_WIDTH - windowView.getMeasuredWidth() + Math.abs(offset));
+                    animator.setIntValues(App.Companion.getSCREEN_WIDTH() - windowView.getMeasuredWidth(), App.Companion.getSCREEN_WIDTH() - windowView.getMeasuredWidth() + Math.abs(offset));
                 animator.setInterpolator(new DecelerateInterpolator());
                 animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
@@ -274,7 +274,7 @@ public class WindowsService extends Service {
             windowView.post(new Runnable() {
                 @Override
                 public void run() {
-                    windowParams.x = App.SCREEN_WIDTH - windowView.getMeasuredWidth();
+                    windowParams.x = App.Companion.getSCREEN_WIDTH() - windowView.getMeasuredWidth();
                     windowManager.updateViewLayout(windowView, windowParams);
                 }
             });

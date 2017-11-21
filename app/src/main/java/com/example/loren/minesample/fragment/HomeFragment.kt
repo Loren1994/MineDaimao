@@ -16,9 +16,9 @@ class HomeFragment : BaseFragment() {
     override fun initWidgets() {
         for (i in 0 until container!!.childCount) {
             if (i % 2 == 0) {
-                container!!.getChildAt(i).setBackgroundColor(ContextCompat.getColor(mContext!!, R.color.main))
+                container!!.getChildAt(i).setBackgroundColor(ContextCompat.getColor(mContext, R.color.main))
             } else {
-                container!!.getChildAt(i).setBackgroundColor(ContextCompat.getColor(mContext!!, R.color.match))
+                container!!.getChildAt(i).setBackgroundColor(ContextCompat.getColor(mContext, R.color.match))
             }
         }
     }

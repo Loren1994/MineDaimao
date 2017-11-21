@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android.sourceSets.main.java.srcDirs += 'build/generated/source/objectbox'
 
 android {
     compileSdkVersion compile_sdk_version
@@ -11,9 +14,9 @@ android {
         targetSdkVersion target_sdk_version
         versionCode 1
         versionName "1.0"
-//        ndk {
-//            abiFilters "armeabi"
-//        }
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
     }
     buildTypes {
         release {
@@ -37,20 +40,26 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:$android_support_version"
     implementation "com.android.support:design:$android_support_version"
     implementation "com.android.support:cardview-v7:$android_support_version"
-    implementation 'com.squareup.okhttp3:okhttp:3.8.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
     implementation 'hanks.xyz:htextview-library:0.1.2'
     implementation 'com.facebook.fresco:fresco:0.13.0'
     implementation 'com.aurelhubert:ahbottomnavigation:2.0.6'
     implementation 'com.balysv.materialmenu:material-menu:2.0.0'
-    implementation 'com.google.code.gson:gson:2.8.1'
-    implementation 'pub.devrel:easypermissions:1.0.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'pub.devrel:easypermissions:1.0.1'
     implementation 'com.orhanobut:logger:2.1.1'
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation('com.github.VictorChow:kotlin-android-lib:1.2.1') {
         transitive = false
     }
     implementation 'com.hulab.android:debugkit:1.1.0'
+    implementation "io.objectbox:objectbox-kotlin:$objectboxVersion"
+    kapt "io.objectbox:objectbox-processor:$objectboxVersion"
+    debugCompile "io.objectbox:objectbox-android-objectbrowser:$objectboxVersion"
+    releaseCompile "io.objectbox:objectbox-android:$objectboxVersion"
 }
 androidExtensions {
     experimental = true
 }
+apply plugin: 'io.objectbox'
+

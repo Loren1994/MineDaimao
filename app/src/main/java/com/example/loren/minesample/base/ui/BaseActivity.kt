@@ -14,16 +14,19 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.LinearLayout
+import com.example.loren.minesample.App
 import com.example.loren.minesample.R
 import com.example.loren.minesample.base.view.AutoRecyclerView
 import com.example.loren.minesample.base.view.LoadingDialog
 import com.example.loren.minesample.base.view.TitleBar
+import io.objectbox.BoxStore
 import org.greenrobot.eventbus.EventBus
 import pers.victor.ext.ActivityMgr
 import pers.victor.ext.findColor
 import pers.victor.ext.inputMethodManager
 import pers.victor.ext.toast
 import pub.devrel.easypermissions.EasyPermissions
+
 
 /**
  * Author : victor
@@ -32,6 +35,7 @@ import pub.devrel.easypermissions.EasyPermissions
 abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPermissions.PermissionCallbacks {
     private lateinit var layoutMain: LinearLayout
     private lateinit var loadingDialog: LoadingDialog
+    lateinit var boxStore: BoxStore
     private var titleBar: TitleBar? = null
     private var exitTime = 0L
     private var lastClickTime = 0L
@@ -45,6 +49,7 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loadingDialog = LoadingDialog(this)
+        boxStore = (application as App).boxStore
         if (savedInstanceState != null) {
             finishAffinity()
             ActivityMgr.removeAll()
