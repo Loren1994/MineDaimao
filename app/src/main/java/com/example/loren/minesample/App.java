@@ -1,6 +1,8 @@
 package com.example.loren.minesample;
 
+import android.app.ActivityManager;
 import android.app.Application;
+import android.content.Context;
 import android.util.DisplayMetrics;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -52,6 +54,10 @@ public class App extends Application {
         Fresco.initialize(this);
         mContext = this;
         getDisplayMetrics();
+
+//        ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+//        activityManager.getMemoryClass();
+
     }
 
     private void initLogger() {

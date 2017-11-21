@@ -2,6 +2,7 @@ package com.example.loren.minesample
 
 import android.animation.Animator
 import android.animation.ObjectAnimator
+import android.graphics.drawable.ColorDrawable
 import android.os.CountDownTimer
 import android.support.v4.content.ContextCompat
 import android.transition.Fade
@@ -13,10 +14,12 @@ import android.widget.Toast
 import com.example.loren.minesample.base.ui.BaseActivity
 import com.example.loren.minesample.widget.OpenScreen
 import kotlinx.android.synthetic.main.activity_open_screen.*
+import pers.victor.ext.findColor
 
 
 class OpenScreenActivity : BaseActivity(), OpenScreen.onDialogListener {
     override fun initWidgets() {
+        window.setBackgroundDrawable(ColorDrawable(findColor(R.color.transparent)))
         open_os!!.setListener(this)
         open_os!!.setPassword(password)
         animator = ObjectAnimator.ofFloat(victor_iv, "alpha", 0f, 1f).setDuration(1000)
