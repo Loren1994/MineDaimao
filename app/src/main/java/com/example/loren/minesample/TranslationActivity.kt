@@ -1,7 +1,6 @@
 package com.example.loren.minesample
 
 import android.view.View
-import android.widget.Toast
 import bean.TranslationBean
 import com.example.loren.minesample.base.ui.BaseActivity
 import com.example.loren.minesample.util.http
@@ -39,12 +38,12 @@ class TranslationActivity : BaseActivity() {
                     val bean = Gson().fromJson(it, TranslationBean::class.java)
                     var result = ""
                     for (i in 0 until bean.basic.explains.size) {
-                        result += bean.basic.explains[i] + "  "
+                        result += bean.basic.explains[i] + "; "
                     }
                     output_edt!!.setText(result)
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    Toast.makeText(this@TranslationActivity, "异常了哈哈哈哈哈", Toast.LENGTH_LONG).show()
+                    toast("异常了哈哈哈哈哈")
                 }
             }
             fail {

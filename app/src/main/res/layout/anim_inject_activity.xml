@@ -5,42 +5,32 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/bezier_tv"
+        android:id="@+id/test_tv1"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@drawable/rectangle_gradient"
         android:gravity="center"
-        android:text="Bezier"
+        android:text="TEST1"
         android:textColor="@color/main"
         android:textSize="30sp" />
 
     <TextView
-        android:id="@+id/screen_shot_tv"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@drawable/rectangle_gradient_1"
-        android:gravity="center"
-        android:text="Sceen Shot"
-        android:textColor="@color/text_white"
-        android:textSize="30sp" />
-
-    <TextView
-        android:id="@+id/test_tv"
+        android:id="@+id/test_tv2"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@drawable/rectangle_gradient"
         android:gravity="center"
-        android:text="Object Box"
+        android:text="TEST2"
         android:textColor="@color/main"
         android:textSize="30sp" />
+
     <TextView
-        android:id="@+id/inject_tv"
+        android:id="@+id/test_tv3"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@drawable/rectangle_gradient"
         android:gravity="center"
-        android:text="Inject Anim"
+        android:text="TEST3"
         android:textColor="@color/main"
         android:textSize="30sp" />
-
 </LinearLayout>

@@ -3,6 +3,8 @@ package com.example.loren.minesample
 import android.annotation.SuppressLint
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
+import com.example.loren.minesample.annotation.LorenAnn
+import com.example.loren.minesample.annotation.LorenInject
 import com.example.loren.minesample.base.ext.log
 import com.example.loren.minesample.base.ui.BaseActivity
 import com.example.loren.minesample.entity.User

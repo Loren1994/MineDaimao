@@ -1,4 +1,4 @@
-package com.example.loren.minesample
+package com.example.loren.minesample.annotation
 
 import java.lang.annotation.Inherited
 

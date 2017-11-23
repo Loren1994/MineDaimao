@@ -109,6 +109,12 @@ private fun httpResponse(response: Response, http: Http) {
                 handler.post { http.success?.invoke(jo.getJSONObject("result").getString("content")) }
             else -> handler.post { http.fail?.invoke("请求失败") }
         }
+    } else if (jo.has("basic")) {
+        when {
+            (jo.getString("errorCode")).contentEquals("0") ->
+                handler.post { http.success?.invoke(jo.toString()) }
+            else -> handler.post { http.fail?.invoke("请求失败") }
+        }
     } else {
         err(result)
         handler.post { http.fail?.invoke("无result") }
