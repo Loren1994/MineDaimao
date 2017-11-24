@@ -12,5 +12,5 @@ annotation class AnimationClick(@IdRes val viewIds: IntArray = intArrayOf(View.N
 
 enum class AnimationClickType {
     ALPHA,
-    FLOAT
+    SCALE
 }

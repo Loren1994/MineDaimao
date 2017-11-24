@@ -5,16 +5,16 @@
     android:orientation="vertical">
 
     <TextView
-        android:textColor="@color/white"
         android:id="@+id/click_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
         android:background="@color/blue"
-        android:gravity="center" />
+        android:gravity="center"
+        android:padding="16dp"
+        android:textColor="@color/white" />
 
-    <android.support.v7.widget.RecyclerView
+    <com.example.loren.minesample.widget.ClickRecyclerView
         android:id="@+id/test_rv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 </LinearLayout>
