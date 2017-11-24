@@ -37,10 +37,10 @@
         android:id="@+id/inject_tv"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@drawable/rectangle_gradient"
+        android:background="@drawable/rectangle_gradient_1"
         android:gravity="center"
         android:text="Inject Anim"
-        android:textColor="@color/main"
+        android:textColor="@color/white"
         android:textSize="30sp" />
 
 </LinearLayout>
