@@ -11,6 +11,10 @@ class BezierActivity : BaseActivity() {
     override fun initWidgets() {
         bezier_view.showSubline = false
         bezier_view.setOnClickListener { bezier_view.transformation() }
+        tv_1.setOnClickListener {
+            bezier_view.showSubline = !bezier_view.showSubline
+            bezier_view.postInvalidate()
+        }
     }
 
     override fun setListeners() {

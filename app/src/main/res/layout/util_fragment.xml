@@ -10,9 +10,9 @@
         android:layout_height="80dp"
         android:background="@drawable/rectangle_gradient"
         android:gravity="center"
-        android:text="Bezier"
-        android:textColor="@color/main"
-        android:textSize="30sp" />
+        android:text="自定义View - Bezier爱心"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/screen_shot_tv"
@@ -20,9 +20,9 @@
         android:layout_height="80dp"
         android:background="@drawable/rectangle_gradient_1"
         android:gravity="center"
-        android:text="Sceen Shot"
+        android:text="一个调试工具"
         android:textColor="@color/text_white"
-        android:textSize="30sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/test_tv"
@@ -30,17 +30,17 @@
         android:layout_height="80dp"
         android:background="@drawable/rectangle_gradient"
         android:gravity="center"
-        android:text="Object Box"
-        android:textColor="@color/main"
-        android:textSize="30sp" />
+        android:text="自定义注解动画 + Object Box列表"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
     <TextView
         android:id="@+id/inject_tv"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@drawable/rectangle_gradient_1"
         android:gravity="center"
-        android:text="Inject Anim"
+        android:text="自定义注解动画 - 各个View"
         android:textColor="@color/white"
-        android:textSize="30sp" />
+        android:textSize="20sp" />
 
 </LinearLayout>

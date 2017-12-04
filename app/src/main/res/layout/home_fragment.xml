@@ -15,27 +15,27 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:gravity="center"
-            android:text="Five start"
+            android:text="自定义View - 五星"
             android:textColor="@color/background_grey"
-            android:textSize="30sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/flag_tv"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:gravity="center"
-            android:text="China Flag"
+            android:text="自定义View - 五星红旗"
             android:textColor="@color/background_grey"
-            android:textSize="30sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/move_view"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:gravity="center"
-            android:text="Move View"
+            android:text="自定义View - 移动View"
             android:textColor="@color/background_grey"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:transitionName="share_tv" />
 
 
@@ -44,9 +44,9 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:gravity="center"
-            android:text="Take Photo"
+            android:text="预览拍照"
             android:textColor="@color/background_grey"
-            android:textSize="30sp" />
+            android:textSize="20sp" />
 
 
         <TextView
@@ -54,9 +54,9 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:gravity="center"
-            android:text="Copy Wx"
+            android:text="仿老版微信下拉睁眼"
             android:textColor="@color/background_grey"
-            android:textSize="30sp" />
+            android:textSize="20sp" />
 
 
         <TextView
@@ -64,27 +64,27 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:gravity="center"
-            android:text="CHAT"
+            android:text="智能问答 - ALI API"
             android:textColor="@color/background_grey"
-            android:textSize="30sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/open"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:gravity="center"
-            android:text="解锁"
+            android:text="自定义View - 九宫格解锁"
             android:textColor="@color/background_grey"
-            android:textSize="30sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/vector"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:gravity="center"
-            android:text="Vector"
+            android:text="实时获取分贝值"
             android:textColor="@color/background_grey"
-            android:textSize="30sp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 </ScrollView>

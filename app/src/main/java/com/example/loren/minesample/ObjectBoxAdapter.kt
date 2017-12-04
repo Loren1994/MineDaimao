@@ -19,6 +19,9 @@ class ObjectBoxAdapter(val list: MutableList<User>) : RecyclerView.Adapter<Objec
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.test_tv.text = list[position].name
+//        holder.itemView.test_tv.setOnClickListener {
+//            toast("item text click")
+//        }
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

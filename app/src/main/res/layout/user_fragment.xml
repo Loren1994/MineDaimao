@@ -11,7 +11,7 @@
         android:layout_margin="10dp"
         android:background="@drawable/bg_main_coner"
         android:gravity="center"
-        android:text="amazing\nactivity"
+        android:text="滑动返回Activity"
         android:textColor="@color/white" />
 
     <TextView
@@ -21,7 +21,7 @@
         android:layout_margin="10dp"
         android:background="@drawable/bg_match_coner"
         android:gravity="center"
-        android:text="translation\nactivity"
+        android:text="翻译 - YouDao"
         android:textColor="@color/white" />
 
 </LinearLayout>

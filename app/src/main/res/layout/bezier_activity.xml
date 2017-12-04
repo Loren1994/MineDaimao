@@ -13,6 +13,16 @@
         android:text="点它变形"
         android:textColor="@color/black" />
 
+    <Button
+        android:id="@+id/tv_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:background="@null"
+        android:text="点我显示/隐藏辅助线"
+        android:textColor="@color/black" />
+
     <com.example.loren.minesample.widget.Bezier1View
         android:id="@+id/bezier_view"
         android:layout_width="300dp"

@@ -24,7 +24,7 @@ class InjectAnimActivity : BaseActivity(), View.OnClickListener {
 //        }.start()
     }
 
-    @AnimationClick(viewIds = intArrayOf(R.id.test_tv1, R.id.test_tv2), animType = AnimationClickType.SCALE)
+    @AnimationClick(viewIds = [(R.id.test_tv1), (R.id.test_tv2)], animType = AnimationClickType.SCALE)
     override fun onClick(v: View) {
         when (v.id) {
             R.id.test_tv1 -> toast("tv1")
