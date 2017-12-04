@@ -18,6 +18,10 @@ class InjectAnimActivity : BaseActivity(), View.OnClickListener {
         LorenInject.into(this)
 //        test_tv3.setOnClickListener { toast("onWidgetsClick") }
 //        test_tv3.setOnClickListener(this)
+
+//        Thread {
+//            test_tv1.text = "child thread setter"
+//        }.start()
     }
 
     @AnimationClick(viewIds = intArrayOf(R.id.test_tv1, R.id.test_tv2), animType = AnimationClickType.SCALE)
