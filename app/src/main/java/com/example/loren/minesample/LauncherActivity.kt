@@ -115,7 +115,8 @@ class LauncherActivity : BaseActivity() {
 
 
     private fun startWindowService() {
-        startService(Intent(this, WindowsService::class.java))
+        //悬浮窗
+//        startService(Intent(this, WindowsService::class.java))
     }
 
     private fun initBottomNavigation() {

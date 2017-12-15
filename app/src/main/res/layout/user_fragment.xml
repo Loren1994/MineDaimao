@@ -11,7 +11,7 @@
         android:layout_margin="10dp"
         android:background="@drawable/bg_main_coner"
         android:gravity="center"
-        android:text="滑动返回Activity"
+        android:text="滑动返回"
         android:textColor="@color/white" />
 
     <TextView
@@ -21,7 +21,17 @@
         android:layout_margin="10dp"
         android:background="@drawable/bg_match_coner"
         android:gravity="center"
-        android:text="翻译 - YouDao"
+        android:text="YouDao翻译"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/phone_tv"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_main_coner"
+        android:gravity="center"
+        android:text="提取APK"
         android:textColor="@color/white" />
 
 </LinearLayout>

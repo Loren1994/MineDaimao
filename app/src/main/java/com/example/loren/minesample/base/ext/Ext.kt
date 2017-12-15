@@ -1,7 +1,11 @@
 package com.example.loren.minesample.base.ext
 
+import android.widget.ImageView
+import com.example.loren.minesample.R
+import com.google.gson.Gson
 import com.orhanobut.logger.Logger
 import org.greenrobot.eventbus.EventBus
+import java.lang.reflect.Type
 
 /**
  * Created by Victor on 2017/6/29. (ง •̀_•́)ง
@@ -12,8 +16,8 @@ import org.greenrobot.eventbus.EventBus
 //        .load(url)
 //        .into(this)!!
 
-//inline fun <reified T> parseObject(json: String?) = Gson().fromJson(json, T::class.java)!!
-//fun <T> parseObject(json: String?, type: Type): T = Gson().fromJson(json, type)
+inline fun <reified T> parseObject(json: String?) = Gson().fromJson(json, T::class.java)!!
+fun <T> parseObject(json: String?, type: Type): T = Gson().fromJson(json, type)
 
 fun postEvent(event: Any) = EventBus.getDefault().post(event)
 
