@@ -1,14 +1,12 @@
 package com.example.loren.minesample
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.app.AlertDialog
-import android.app.AppOpsManager
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.os.Environment
-import android.provider.Settings
 import android.text.format.Formatter
 import android.view.View
 import android.widget.TextView
@@ -38,33 +36,6 @@ class AppManagerActivity : BaseActivity() {
     private lateinit var am: ActivityManager
     private lateinit var dialog: AlertDialog.Builder
 
-    override fun initData() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (!hasPermission()) {
-                startActivityForResult(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS), 1)
-            }
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 1) {
-            if (!hasPermission()) {
-                startActivityForResult(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS), 1)
-            }
-        }
-    }
-
-    private fun hasPermission(): Boolean {
-        val appOps = getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
-        var mode = 0
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
-                    android.os.Process.myUid(), packageName)
-        }
-        return mode == AppOpsManager.MODE_ALLOWED
-    }
-
     override fun initWidgets() {
         setTitleBarText("手机信息")
         setTitleBarRight("全部的")
@@ -84,8 +55,11 @@ class AppManagerActivity : BaseActivity() {
             dialog.setTitle("提取Apk文件")
                     .setMessage("待提取:${data[it].sourceDir}")
                     .setPositiveButton("嗯!") { _, _ ->
-                        val arr = data[it].packageName.split(".")
-                        saveApk(data[it].sourceDir, arr[arr.size - 1])
+                        val pos = it
+                        val arr = data[pos].packageName.split(".")
+                        requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                granted = { saveApk(data[pos].sourceDir, arr[arr.size - 1]) },
+                                denied = { toast("没有权限,请重试") })
                     }
                     .setNegativeButton("啥?") { _, _ -> }
                     .show()
