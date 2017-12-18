@@ -119,7 +119,7 @@ class AppManagerActivity : BaseActivity() {
             }
             fileInputStream.close()
             fileOutputStream.close()
-            log("$outPath/$name.apk提取成功")
+            toast("$outPath/$name.apk提取成功")
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
