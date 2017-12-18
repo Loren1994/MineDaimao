@@ -7,6 +7,7 @@ import android.app.AppOpsManager
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.Environment
 import android.provider.Settings
 import android.text.format.Formatter
 import android.view.View
@@ -18,7 +19,11 @@ import com.example.loren.minesample.entity.AppBean
 import kotlinx.android.synthetic.main.app_manager_activity.*
 import pers.victor.ext.dp2px
 import pers.victor.ext.no
+import pers.victor.ext.toast
 import pers.victor.ext.yes
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
 
 
 /**
@@ -78,12 +83,46 @@ class AppManagerActivity : BaseActivity() {
         allAdapter = AppListAdapter(this, data, {
             dialog.setTitle("提取Apk文件")
                     .setMessage("待提取:${data[it].sourceDir}")
-                    .setPositiveButton("嗯!") { dialog, which -> }
-                    .setNegativeButton("啥?") { a, b -> }
+                    .setPositiveButton("嗯!") { _, _ ->
+                        val arr = data[it].packageName.split(".")
+                        saveApk(data[it].sourceDir, arr[arr.size - 1])
+                    }
+                    .setNegativeButton("啥?") { _, _ -> }
                     .show()
         })
         app_rv.adapter = allAdapter
         setAllAppList()
+    }
+
+    private fun saveApk(path: String, name: String) {
+        try {
+            val outPath = "${Environment.getExternalStorageDirectory()}/getApk/"
+            val newFile = File("$outPath/$name.apk")
+            if (newFile.exists()) {
+                toast("已经提取过同名apk")
+                return
+            }
+            val newPath = File(outPath)
+            if (!newPath.exists()) {
+                newPath.mkdirs()
+            }
+            val fileInputStream = FileInputStream(path)
+            val fileOutputStream = FileOutputStream("$outPath/$name.apk")
+            val bt = ByteArray(8192)
+            var c = 0
+            fun read(): Int {
+                c = fileInputStream.read(bt)
+                return c
+            }
+            while (read() > 0) {
+                fileOutputStream.write(bt, 0, c)
+            }
+            fileInputStream.close()
+            fileOutputStream.close()
+            log("$outPath/$name.apk提取成功")
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
     }
 
     private fun filterRunningProcess() {
