@@ -4,9 +4,15 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.app.AlertDialog
+import android.content.BroadcastReceiver
 import android.content.Context
-import android.os.Build
+import android.content.Intent
+import android.content.IntentFilter
+import android.graphics.Color
+import android.net.wifi.WifiManager
+import android.os.BatteryManager
 import android.os.Environment
+import android.telephony.TelephonyManager
 import android.text.format.Formatter
 import android.view.View
 import android.widget.TextView
@@ -35,8 +41,14 @@ class AppManagerActivity : BaseActivity() {
     private var runList: List<ActivityManager.RunningAppProcessInfo> = arrayListOf()
     private lateinit var am: ActivityManager
     private lateinit var dialog: AlertDialog.Builder
+    private lateinit var batteryTv: TextView
+    private lateinit var batteryStatusTv: TextView
+    private lateinit var voltageTv: TextView
+    private lateinit var voltageStatusTv: TextView
+    private lateinit var tempTv: TextView
 
     override fun initWidgets() {
+        registerReceiver(mBatInfoReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
         setTitleBarText("手机信息")
         setTitleBarRight("全部的")
         setTitleBarRightClick {
@@ -50,6 +62,7 @@ class AppManagerActivity : BaseActivity() {
         }
         dialog = AlertDialog.Builder(this)
         am = this.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        initTv()
         initDeviceInfo()
         allAdapter = AppListAdapter(this, data, {
             dialog.setTitle("提取Apk文件")
@@ -137,23 +150,104 @@ class AppManagerActivity : BaseActivity() {
         allAdapter.notifyItemRangeChanged(0, data.size)
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "MissingPermission", "HardwareIds")
     private fun initDeviceInfo() {
+        val deviceInfoMap = hashMapOf<String, String>()
         val memoryInfo = ActivityManager.MemoryInfo()
+        val mTm = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        val wn = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        val macAddress = wn.connectionInfo.macAddress
+        val ipAddress = wn.connectionInfo.ipAddress
+        val curWifi = wn.connectionInfo.ssid.replace("\"", "")
         am.getMemoryInfo(memoryInfo)
         val memSize = memoryInfo.availMem
+        val totalSize = memoryInfo.totalMem
         val restMemSize = Formatter.formatFileSize(baseContext, memSize)
-        val tv1 = TextView(this)
-        tv1.text = "剩余的内存:$restMemSize"
-        tv1.setPadding(dp2px(5), dp2px(3), dp2px(5), dp2px(3))
-        info_container_ll.addView(tv1)
-        val fields = Build::class.java.declaredFields
-        fields.forEach {
+        val talMemSize = Formatter.formatFileSize(baseContext, totalSize)
+        mTm.line1Number?.let { deviceInfoMap.put("手机号", mTm.line1Number) }
+        deviceInfoMap.put("是否ROOT", isRoot())
+        deviceInfoMap.put("总内存", talMemSize)
+        deviceInfoMap.put("剩余内存", restMemSize)
+        deviceInfoMap.put("MAC地址", macAddress)
+        deviceInfoMap.put("当前WIFI", curWifi)
+        deviceInfoMap.put("IP地址", intToIp(ipAddress))
+        deviceInfoMap.put("手机品牌", android.os.Build.BRAND)
+        deviceInfoMap.put("手机型号", android.os.Build.MODEL)
+        deviceInfoMap.put("屏幕", "${resources.displayMetrics.widthPixels} x ${resources.displayMetrics.heightPixels}")
+        deviceInfoMap.forEach { (k, v) ->
             val tv = TextView(this)
-            it.isAccessible = true
-            tv.text = "${it.name}:${it.get(null)}"
+            tv.text = "$k: $v"
             tv.setPadding(dp2px(5), dp2px(3), dp2px(5), dp2px(3))
+            tv.setTextColor(Color.WHITE)
             info_container_ll.addView(tv)
+        }
+    }
+
+    private fun isRoot(): String {
+        return (!File("/system/bin/su").exists() && !File("/system/xbin/su").exists())
+                .yes { "未获取" }.no { "已获取" }
+    }
+
+    private fun initTv() {
+        tempTv = TextView(this)
+        voltageTv = TextView(this)
+        voltageStatusTv = TextView(this)
+        batteryTv = TextView(this)
+        batteryStatusTv = TextView(this)
+        arrayOf(tempTv, voltageTv, voltageStatusTv, batteryTv, batteryStatusTv).forEach {
+            it.setPadding(dp2px(5), dp2px(3), dp2px(5), dp2px(3))
+            it.setTextColor(Color.WHITE)
+            info_container_ll.addView(it)
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun setTv(batteryN: String, batteryStatus: String, batteryV: String, batteryTemp: String, batteryT: String) {
+        batteryTv.text = "电量: $batteryN%"
+        batteryStatusTv.text = "电池状态: $batteryStatus"
+        voltageTv.text = "电压: ${batteryV}mV"
+        voltageStatusTv.text = "电池健康: $batteryTemp"
+        tempTv.text = "电池温度: $batteryT℃"
+    }
+
+    private fun intToIp(i: Int): String {
+        return (i and 0xFF).toString() + "." +
+                (i shr 8 and 0xFF) + "." +
+                (i shr 16 and 0xFF) + "." +
+                (i shr 24 and 0xFF)
+    }
+
+    override fun onDestroy() {
+        unregisterReceiver(mBatInfoReceiver)
+        super.onDestroy()
+    }
+
+    private val mBatInfoReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            var batteryStatus = ""
+            var batteryTemp = ""
+            val action = intent.action
+            if (Intent.ACTION_BATTERY_CHANGED == action) {
+                val batteryN = intent.getIntExtra("level", 0)
+                val batteryV = intent.getIntExtra("voltage", 0)
+                val batteryT = intent.getIntExtra("temperature", 0)
+                when (intent.getIntExtra("status", BatteryManager.BATTERY_STATUS_UNKNOWN)) {
+                    BatteryManager.BATTERY_STATUS_CHARGING -> batteryStatus = "充电中"
+                    BatteryManager.BATTERY_STATUS_DISCHARGING -> batteryStatus = "放电中"
+                    BatteryManager.BATTERY_STATUS_NOT_CHARGING -> batteryStatus = "未充电"
+                    BatteryManager.BATTERY_STATUS_FULL -> batteryStatus = "充满电"
+                    BatteryManager.BATTERY_STATUS_UNKNOWN -> batteryStatus = "未知"
+                }
+
+                when (intent.getIntExtra("health", BatteryManager.BATTERY_HEALTH_UNKNOWN)) {
+                    BatteryManager.BATTERY_HEALTH_UNKNOWN -> batteryTemp = "未知错误"
+                    BatteryManager.BATTERY_HEALTH_GOOD -> batteryTemp = "状态良好"
+                    BatteryManager.BATTERY_HEALTH_DEAD -> batteryTemp = "电池没电"
+                    BatteryManager.BATTERY_HEALTH_OVER_VOLTAGE -> batteryTemp = "电池电压过高"
+                    BatteryManager.BATTERY_HEALTH_OVERHEAT -> batteryTemp = "电池过热"
+                }
+                setTv(batteryN.toString(), batteryStatus, batteryV.toString(), batteryTemp, (batteryT * 0.1).toString())
+            }
         }
     }
 

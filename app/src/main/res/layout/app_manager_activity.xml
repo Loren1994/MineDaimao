@@ -6,9 +6,9 @@
     android:orientation="vertical">
 
     <ScrollView
-        android:background="@color/background_grey"
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="150dp"
+        android:background="@color/green">
 
         <LinearLayout
             android:id="@+id/info_container_ll"
