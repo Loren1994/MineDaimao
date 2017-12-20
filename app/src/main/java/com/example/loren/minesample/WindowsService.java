@@ -3,14 +3,13 @@ package com.example.loren.minesample;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.PixelFormat;
-import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.IBinder;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -51,25 +50,13 @@ public class WindowsService extends Service {
         timer = new Timer(3000, 1000);
         initWindows();
         initView();
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (!Settings.canDrawOverlays(getApplicationContext())) {
-                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            } else {
-                //执行6.0以上绘制代码
-                windowManager.addView(windowView, windowParams);
-            }
-        } else {
-            //执行6.0以下绘制代码
-            windowManager.addView(windowView, windowParams);
-        }
+        windowManager.addView(windowView, windowParams);
     }
 
     private void initWindows() {
         windowManager = (WindowManager) getApplication().getSystemService(Application.WINDOW_SERVICE);
-        windowParams = new WindowManager.LayoutParams();
-        windowParams.type = WindowManager.LayoutParams.TYPE_PHONE;
+        //TYPE_TOAST:无需申请悬浮窗权限
+        windowParams = new WindowManager.LayoutParams(WindowManager.LayoutParams.TYPE_TOAST);
         windowParams.format = PixelFormat.TRANSLUCENT;
         windowParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS;
         windowParams.gravity = Gravity.START | Gravity.TOP;
@@ -79,14 +66,23 @@ public class WindowsService extends Service {
         windowParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void initView() {
         windowView = LayoutInflater.from(this).inflate(R.layout.windows_service, null);
-        windowTv = (TextView) windowView.findViewById(R.id.windows_tv);
-        windowParent = (LinearLayout) windowView.findViewById(R.id.parent_ll);
-        windowLl = (LinearLayout) windowView.findViewById(R.id.container);
+        windowTv = windowView.findViewById(R.id.windows_tv);
+        windowParent = windowView.findViewById(R.id.parent_ll);
+        windowLl = windowView.findViewById(R.id.container);
         setWindowItemListener((TextView) windowView.findViewById(R.id.open_screen_tv), OpenScreenActivity.class);
         setWindowItemListener((TextView) windowView.findViewById(R.id.flag_tv), FlagActivity.class);
         setWindowItemListener((TextView) windowView.findViewById(R.id.chat_tv), ChatActivity.class);
+        windowView.findViewById(R.id.stop_tv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                controlWindowParent();
+                stopSelf();
+                windowManager.removeViewImmediate(windowView);
+            }
+        });
         windowTv.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, final MotionEvent event) {
@@ -246,11 +242,7 @@ public class WindowsService extends Service {
     }
 
     private boolean isInterrupt() {
-        if (Math.abs(endX - startX) > 30 || Math.abs(endY - startY) > 30) {
-            return true;
-        } else {
-            return false;
-        }
+        return Math.abs(endX - startX) > 30 || Math.abs(endY - startY) > 30;
     }
 
     private void setWindowItemListener(TextView tv, final Class clazz) {
@@ -301,6 +293,7 @@ public class WindowsService extends Service {
         return null;
     }
 
+    @SuppressLint("PrivateApi")
     private int getStatusBarHeight() {
         Class<?> c;
         Object obj;

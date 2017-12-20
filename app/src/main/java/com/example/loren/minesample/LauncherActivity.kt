@@ -23,6 +23,7 @@ import com.example.loren.minesample.fragment.UtilsFragment
 import kotlinx.android.synthetic.main.launcher_activity.*
 import pers.victor.ext.findColor
 
+
 /**
  * Copyright (c) 16-9-19 by loren
  * ._       _____    ____    _____   __   _
@@ -34,7 +35,9 @@ import pers.victor.ext.findColor
  */
 
 class LauncherActivity : BaseActivity() {
+
     override fun useTitleBar() = false
+
     override fun initWidgets() {
         setDoubleBackFinish()
         tool_bar!!.title = titleArr[0]
@@ -96,7 +99,7 @@ class LauncherActivity : BaseActivity() {
         }
         initBottomNavigation()
         initViewpager()
-        startWindowService()
+        startService(Intent(this, WindowsService::class.java))
     }
 
     override fun setListeners() {
@@ -112,12 +115,6 @@ class LauncherActivity : BaseActivity() {
     var frag = arrayOf(HomeFragment(), UtilsFragment(), UserFragment())
     lateinit var materialDrawable: MaterialMenuDrawable
     var isDrawerOpened = false
-
-
-    private fun startWindowService() {
-        //悬浮窗
-//        startService(Intent(this, WindowsService::class.java))
-    }
 
     private fun initBottomNavigation() {
         val item1 = AHBottomNavigationItem(R.string.tab_1, R.drawable.ic_home, R.color.purple_dark)

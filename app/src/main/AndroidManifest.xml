@@ -31,7 +31,9 @@
         android:theme="@style/AppTheme.NoActionBar">
         <service android:name=".WindowsService" />
 
-        <activity android:name=".LauncherActivity">
+        <activity
+            android:name=".LauncherActivity"
+            android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
