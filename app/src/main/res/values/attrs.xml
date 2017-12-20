@@ -11,7 +11,6 @@
         <attr name="citv_border_color" format="color" />
         <attr name="citv_border_overlay" format="boolean" />
         <attr name="citv_fill_color" format="color" />
-        <!--增强文字属性-->
         <attr name="citv_text_text" format="string" />
         <attr name="citv_text_color" format="color" />
         <attr name="citv_text_size" format="dimension" />
@@ -19,14 +18,10 @@
     </declare-styleable>
 
     <declare-styleable name="MovieRecorderView">
-        <!-- 开始是否打开摄像头 -->
         <attr name="is_open_camera" format="boolean" />
-        <!-- 一次拍摄最长时间 -->
-        <attr name="record_max_time" format="integer"/>
-        <!-- 视频分辨率宽度 -->
-        <attr name="video_width" format="integer"/>
-        <!-- 视频分辨率高度 -->
-        <attr name="video_height" format="integer"/>
+        <attr name="record_max_time" format="integer" />
+        <attr name="video_width" format="integer" />
+        <attr name="video_height" format="integer" />
     </declare-styleable>
     <declare-styleable name="FlexibleImageView">
         <attr name="proportion_height" format="integer" />
@@ -47,8 +42,9 @@
         <attr name="bottom_width" format="dimension" />
     </declare-styleable>
     <declare-styleable name="FixedFlowLayout">
-        <attr name="columns_per_line" format="integer" />
+        <attr name="click_support" format="boolean" />
         <attr name="single_selected" format="boolean" />
+        <attr name="columns_per_line" format="integer" />
         <attr name="horizontal_spacing" format="dimension" />
         <attr name="vertical_spacing" format="dimension" />
         <attr name="child_gravity" format="integer">
@@ -60,7 +56,10 @@
             <flag name="center_vertical" value="16" />
             <flag name="center_horizontal" value="1" />
         </attr>
+        <attr name="child_ratio_width" format="integer" />
+        <attr name="child_ratio_height" format="integer" />
     </declare-styleable>
+
     <declare-styleable name="FixedFlowLayout_Layout">
         <attr name="span_column" format="integer" />
     </declare-styleable>
