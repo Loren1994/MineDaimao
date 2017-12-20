@@ -63,7 +63,7 @@ class AppManagerActivity : BaseActivity() {
         dialog = AlertDialog.Builder(this)
         am = this.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         initTv()
-        initDeviceInfo()
+        requestPermission(Manifest.permission.READ_SMS, granted = { initDeviceInfo() }, denied = { toast("无权限,请重试") })
         allAdapter = AppListAdapter(this, data, {
             dialog.setTitle("提取Apk文件")
                     .setMessage("待提取:${data[it].sourceDir}")
