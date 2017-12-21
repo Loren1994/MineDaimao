@@ -40,6 +40,14 @@
             android:textColor="@color/grey"
             android:textSize="12sp"
             android:textStyle="bold" />
+        <TextView
+            android:id="@+id/app_size_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="apk:"
+            android:textColor="@color/grey"
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/process_tv"

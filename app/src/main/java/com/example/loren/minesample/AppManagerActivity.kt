@@ -31,6 +31,7 @@ import pers.victor.ext.yes
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
+import java.math.BigDecimal
 
 
 /**
@@ -76,6 +77,10 @@ class AppManagerActivity : BaseActivity() {
         })
         app_rv.adapter = allAdapter
         setAllAppList()
+
+        // Android O
+        // val storageManager = getSystemService(Context.STORAGE_STATS_SERVICE) as StorageStatsManager
+
     }
 
     private fun initPopupWindow() {
@@ -177,6 +182,7 @@ class AppManagerActivity : BaseActivity() {
             appBean.packageName = it.packageName
             appBean.pid = ""
             appBean.sourceDir = it.applicationInfo.sourceDir
+            appBean.apkSize = parseApkSize(File(it.applicationInfo.sourceDir).length()).toString()
             data.add(appBean)
         }
         data.sortByDescending { it.lastUpdateTime }
@@ -282,6 +288,11 @@ class AppManagerActivity : BaseActivity() {
                 setTv(batteryN.toString(), batteryStatus, batteryV.toString(), batteryTemp, (batteryT * 0.1).toString())
             }
         }
+    }
+
+    private fun parseApkSize(size: Long): BigDecimal {
+        val bd = BigDecimal(size / (1024.0 * 1024.0))
+        return bd.setScale(2, BigDecimal.ROUND_DOWN)
     }
 
     override fun setListeners() {

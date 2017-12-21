@@ -15,4 +15,5 @@ public class AppBean {
     public String packageName;
     public String pid = "";
     public String sourceDir = "";
+    public String apkSize;
 }

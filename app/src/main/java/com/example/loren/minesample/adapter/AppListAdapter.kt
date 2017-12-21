@@ -15,7 +15,7 @@ import pers.victor.ext.yes
 /**
  * Copyright © 15/12/2017 by loren
  */
-class AppListAdapter(val context: Context, private val list: List<AppBean>,val onItemClick: ((pos: Int) -> Unit)) : CommonAdapter() {
+class AppListAdapter(val context: Context, private val list: List<AppBean>, val onItemClick: ((pos: Int) -> Unit)) : CommonAdapter() {
 
     override fun bindLayout() = R.layout.item_app_list
 
@@ -24,6 +24,7 @@ class AppListAdapter(val context: Context, private val list: List<AppBean>,val o
         holder.app_iv.setImageDrawable(list[position].applicationInfo.loadIcon(context.packageManager))
         holder.app_name_tv.text = list[position].applicationInfo.loadLabel(context.packageManager)
         holder.app_package_tv.text = list[position].packageName
+        holder.app_size_tv.text = "apk:${list[position].apkSize}M"
         holder.update_time_tv.text = "修改时间:${list[position].lastUpdateTime.date()}"
         holder.process_tv.text = "PID:${list[position].pid}"
         holder.process_tv.visibility = list[position].pid.isEmpty().yes { View.GONE }.no { View.VISIBLE }
