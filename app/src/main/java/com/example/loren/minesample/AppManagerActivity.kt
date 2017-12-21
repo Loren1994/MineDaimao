@@ -9,9 +9,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Color
+import android.net.Uri
 import android.net.wifi.WifiManager
 import android.os.BatteryManager
 import android.os.Environment
+import android.provider.Settings
 import android.telephony.TelephonyManager
 import android.text.format.Formatter
 import android.view.View
@@ -20,6 +22,7 @@ import com.example.loren.minesample.adapter.AppListAdapter
 import com.example.loren.minesample.base.ext.log
 import com.example.loren.minesample.base.ui.BaseActivity
 import com.example.loren.minesample.entity.AppBean
+import com.example.loren.minesample.widget.CommonPopupWindow
 import kotlinx.android.synthetic.main.app_manager_activity.*
 import pers.victor.ext.dp2px
 import pers.victor.ext.no
@@ -46,6 +49,8 @@ class AppManagerActivity : BaseActivity() {
     private lateinit var voltageTv: TextView
     private lateinit var voltageStatusTv: TextView
     private lateinit var tempTv: TextView
+    private lateinit var popupWindow: CommonPopupWindow
+    private var clickPos = 0
 
     override fun initWidgets() {
         registerReceiver(mBatInfoReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
@@ -60,25 +65,53 @@ class AppManagerActivity : BaseActivity() {
                 setAllAppList()
             }
         }
+        initPopupWindow()
         dialog = AlertDialog.Builder(this)
         am = this.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         initTv()
         requestPermission(Manifest.permission.READ_SMS, granted = { initDeviceInfo() }, denied = { toast("无权限,请重试") })
         allAdapter = AppListAdapter(this, data, {
-            dialog.setTitle("提取Apk文件")
-                    .setMessage("待提取:${data[it].sourceDir}")
-                    .setPositiveButton("嗯!") { _, _ ->
-                        val pos = it
-                        val arr = data[pos].packageName.split(".")
-                        requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                granted = { saveApk(data[pos].sourceDir, arr[arr.size - 1]) },
-                                denied = { toast("没有权限,请重试") })
-                    }
-                    .setNegativeButton("啥?") { _, _ -> }
-                    .show()
+            clickPos = it
+            popupWindow.show(window.decorView)
         })
         app_rv.adapter = allAdapter
         setAllAppList()
+    }
+
+    private fun initPopupWindow() {
+        popupWindow = CommonPopupWindow(this, View.OnClickListener {
+            when (it.id) {
+                R.id.tv_1 -> {
+                    dialog.setTitle("提取Apk文件")
+                            .setMessage("待提取:${data[clickPos].sourceDir}")
+                            .setPositiveButton("嗯!") { _, _ ->
+                                val arr = data[clickPos].packageName.split(".")
+                                requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                        granted = { saveApk(data[clickPos].sourceDir, arr[arr.size - 1]) },
+                                        denied = { toast("没有权限,请重试") })
+                            }
+                            .setNegativeButton("啥?") { _, _ -> }
+                            .show()
+                }
+                R.id.tv_2 -> {
+                    val packageManager = packageManager
+                    val intent = packageManager.getLaunchIntentForPackage(data[clickPos].packageName)
+                    startActivity(intent)
+                }
+                R.id.tv_3 -> {
+                    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                    intent.data = Uri.fromParts("package", data[clickPos].packageName, null)
+                    startActivity(intent)
+                }
+                R.id.tv_4 -> {
+                    val packageURI = Uri.parse("package:${data[clickPos].packageName}")
+                    val uninstallIntent = Intent(Intent.ACTION_DELETE, packageURI)
+                    startActivity(uninstallIntent)
+                }
+            }
+            popupWindow.dismiss()
+        })
+        popupWindow.setBtnText("提取", "打开", "详情", "卸载")
     }
 
     private fun saveApk(path: String, name: String) {
