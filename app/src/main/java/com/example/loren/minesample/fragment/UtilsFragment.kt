@@ -15,7 +15,7 @@ class UtilsFragment : BaseFragment() {
 
 
     override fun setListeners() {
-        click(bezier_tv, screen_shot_tv, test_tv, inject_tv)
+        click(bezier_tv, screen_shot_tv, test_tv, inject_tv,remote_tv)
     }
 
     override fun onWidgetsClick(v: View) {
@@ -24,10 +24,12 @@ class UtilsFragment : BaseFragment() {
             R.id.screen_shot_tv -> startActivity<ScreenShotActivity>()
             R.id.test_tv -> startActivity<ObjectBoxActivity>()
             R.id.inject_tv -> startActivity<InjectAnimActivity>()
+            R.id.remote_tv -> startActivity<RemoteViewActivity>()
         }
     }
 
     override fun useTitleBar() = false
+
     override fun bindLayout() = R.layout.util_fragment
 
 }

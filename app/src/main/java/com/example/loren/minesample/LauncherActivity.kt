@@ -1,5 +1,6 @@
 package com.example.loren.minesample
 
+import android.appwidget.AppWidgetManager
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -21,7 +22,9 @@ import com.example.loren.minesample.fragment.HomeFragment
 import com.example.loren.minesample.fragment.UserFragment
 import com.example.loren.minesample.fragment.UtilsFragment
 import kotlinx.android.synthetic.main.launcher_activity.*
+import pers.victor.ext.date
 import pers.victor.ext.findColor
+import pers.victor.ext.spSetString
 
 
 /**
@@ -100,6 +103,13 @@ class LauncherActivity : BaseActivity() {
         initBottomNavigation()
         initViewpager()
         startService(Intent(this, WindowsService::class.java))
+    }
+
+    override fun onResume() {
+        spSetString("open_time", System.currentTimeMillis().date()!!)
+        val intent = Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE)
+        sendBroadcast(intent)
+        super.onResume()
     }
 
     override fun setListeners() {
