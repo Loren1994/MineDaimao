@@ -51,9 +51,8 @@
         android:layout_height="80dp"
         android:background="@drawable/rectangle_gradient_1"
         android:gravity="center"
-        android:text="测试"
+        android:text="创建/查看PDF"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        android:visibility="gone" />
+        android:textSize="20sp" />
 
 </LinearLayout>
