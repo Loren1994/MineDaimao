@@ -23,12 +23,21 @@
             android:textColor="@color/white" />
 
         <TextView
-            android:id="@+id/translation_tv"
+            android:id="@+id/clip_tv"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="@drawable/bg_match_coner"
-            android:text="YouDao翻译"
+            android:text="粘贴板"
             android:textColor="@color/white" />
+
+        <!--<TextView-->
+        <!--android:visibility="gone"-->
+        <!--android:id="@+id/translation_tv"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:background="@drawable/bg_match_coner"-->
+        <!--android:text="YouDao翻译"-->
+        <!--android:textColor="@color/white" />-->
 
         <TextView
             android:id="@+id/phone_tv"
@@ -38,19 +47,12 @@
             android:text="提取APK"
             android:textColor="@color/white" />
 
-        <TextView
-            android:id="@+id/clip_tv"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/bg_match_coner"
-            android:text="粘贴板"
-            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/access_tv"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:background="@drawable/bg_main_coner"
+            android:background="@drawable/bg_match_coner"
             android:text="悬浮窗"
             android:textColor="@color/white" />
     </com.example.loren.minesample.widget.FixedFlowLayout>

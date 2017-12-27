@@ -28,7 +28,7 @@ class UserFragment : BaseFragment(), View.OnClickListener {
     override fun useTitleBar() = false
 
     override fun setListeners() {
-        click(amazing_tv, translation_tv, phone_tv, clip_tv, access_tv)
+        click(amazing_tv, phone_tv, clip_tv, access_tv)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -48,8 +48,8 @@ class UserFragment : BaseFragment(), View.OnClickListener {
 
     override fun onWidgetsClick(v: View) {
         when (v.id) {
+//            R.id.translation_tv -> startActivity(Intent(mContext, TranslationActivity::class.java))
             R.id.amazing_tv -> startActivity(Intent(mContext, AmazingActivity::class.java))
-            R.id.translation_tv -> startActivity(Intent(mContext, TranslationActivity::class.java))
             R.id.phone_tv -> startActivity(Intent(mContext, AppManagerActivity::class.java))
             R.id.clip_tv -> startActivity(Intent(mContext, ClipActivity::class.java))
             R.id.access_tv -> {

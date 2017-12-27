@@ -26,7 +26,9 @@ class TranslationActivity : BaseActivity() {
     private val TRANSLATION_URL = "http://fanyi.youdao.com/openapi.do?keyfrom=Skykai521&key=977124034&type=data&doctype=json&version=1.1&q="
 
     private fun translate() {
-
+//        Studio
+//        27831fbc1bc7cb9b
+//        ZD2OteTJFdbHVOCqmSExjVIZnYGYYejs
     }
 
 
