@@ -45,6 +45,14 @@
             android:background="@drawable/bg_match_coner"
             android:text="粘贴板"
             android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/access_tv"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/bg_main_coner"
+            android:text="悬浮窗"
+            android:textColor="@color/white" />
     </com.example.loren.minesample.widget.FixedFlowLayout>
 
 </LinearLayout>

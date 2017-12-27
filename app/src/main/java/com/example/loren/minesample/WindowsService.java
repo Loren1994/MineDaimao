@@ -55,7 +55,7 @@ public class WindowsService extends Service {
 
     private void initWindows() {
         windowManager = (WindowManager) getApplication().getSystemService(Application.WINDOW_SERVICE);
-        //TYPE_TOAST:无需申请悬浮窗权限
+        //TYPE_TOAST:无需申请悬浮窗权限(<=Build.VERSION_CODES.N) TYPE_PHONE:需申请
         windowParams = new WindowManager.LayoutParams(WindowManager.LayoutParams.TYPE_TOAST);
         windowParams.format = PixelFormat.TRANSLUCENT;
         windowParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS;

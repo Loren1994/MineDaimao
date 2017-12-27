@@ -35,6 +35,12 @@ import pers.victor.ext.spSetString
  * | |     | | | | |  _  /  |  __|  | |\   |
  * | |___  | |_| | | | \ \  | |___  | | \  |
  * |_____| \_____/ |_|  \_\ |_____| |_|  \_|
+ *
+ * 记录:
+ * 目前还没加的android适配问题
+ * 1.悬浮窗:Build.VERSION.SDK_INT <= Build.VERSION_CODES.N ?
+ *   WindowManager.LayoutParams.TYPE_TOAST: WindowManager.LayoutParams.TYPE_PHONE
+ * 2.创建PDF动态申请权限
  */
 
 class LauncherActivity : BaseActivity() {
@@ -103,6 +109,7 @@ class LauncherActivity : BaseActivity() {
         initBottomNavigation()
         initViewpager()
         startService(Intent(this, WindowsService::class.java))
+        startService(Intent(this, ShowActivityService::class.java))
     }
 
     override fun onResume() {
@@ -122,7 +129,7 @@ class LauncherActivity : BaseActivity() {
 
     var titleArr = arrayOf("首页", "工具", "个人")
     private lateinit var mAdapter: VpAdapter
-    var frag = arrayOf(HomeFragment(), UtilsFragment(), UserFragment())
+    var frag = arrayOf(UserFragment(), UtilsFragment(), HomeFragment())
     lateinit var materialDrawable: MaterialMenuDrawable
     var isDrawerOpened = false
 
