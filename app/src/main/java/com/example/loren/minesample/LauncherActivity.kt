@@ -108,8 +108,6 @@ class LauncherActivity : BaseActivity() {
         }
         initBottomNavigation()
         initViewpager()
-        startService(Intent(this, WindowsService::class.java))
-        startService(Intent(this, ShowActivityService::class.java))
     }
 
     override fun onResume() {
