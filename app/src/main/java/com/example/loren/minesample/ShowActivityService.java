@@ -1,5 +1,7 @@
 package com.example.loren.minesample;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Application;
@@ -8,7 +10,6 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -30,6 +31,7 @@ public class ShowActivityService extends Service {
     private WindowManager.LayoutParams windowParams;
     private long clickTime = 0;
     private boolean isClick = false;
+    private boolean isMoving = false;
 
     public static void setTv(String pkg, String act, String dePkg, String deAct) {
         if (null == windowView) {
@@ -67,6 +69,9 @@ public class ShowActivityService extends Service {
         windowView.findViewById(R.id.container).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (isMoving) {
+                    return;
+                }
                 if (System.currentTimeMillis() - clickTime < 500) {
                     isClick = true;
                     stopSelf();
@@ -85,6 +90,7 @@ public class ShowActivityService extends Service {
                         break;
                     case MotionEvent.ACTION_MOVE:
                         isClick = false;
+                        isMoving = true;
                         windowParams.x = (int) event.getRawX() - windowView.getMeasuredWidth() / 2;
                         windowParams.y = (int) event.getRawY() - windowView.getMeasuredHeight() / 2 - getStatusBarHeight();
                         windowManager.updateViewLayout(windowView, windowParams);
@@ -93,35 +99,29 @@ public class ShowActivityService extends Service {
                         if (isClick) {
                             return false;
                         }
+                        ValueAnimator animator = new ValueAnimator();
+                        animator.setDuration(200);
+                        animator.setInterpolator(new DecelerateInterpolator());
+                        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                            @Override
+                            public void onAnimationUpdate(ValueAnimator animation) {
+                                windowParams.x = (int) animation.getAnimatedValue();
+                                windowParams.y = (int) event.getRawY() - windowView.getMeasuredHeight() / 2 - getStatusBarHeight();
+                                windowManager.updateViewLayout(windowView, windowParams);
+                            }
+                        });
+                        animator.addListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                isMoving = false;
+                            }
+                        });
                         if (event.getRawX() >= App.Companion.getSCREEN_WIDTH() / 2) {
-                            ValueAnimator animator = new ValueAnimator();
-                            animator.setDuration(200);
                             animator.setIntValues((int) event.getRawX() - windowView.getMeasuredWidth() / 2, App.Companion.getSCREEN_WIDTH() - windowView.getMeasuredWidth());
-                            animator.setInterpolator(new DecelerateInterpolator());
-                            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                                @Override
-                                public void onAnimationUpdate(ValueAnimator animation) {
-                                    windowParams.x = (int) animation.getAnimatedValue();
-                                    windowParams.y = (int) event.getRawY() - windowView.getMeasuredHeight() / 2 - getStatusBarHeight();
-                                    windowManager.updateViewLayout(windowView, windowParams);
-                                }
-                            });
-                            animator.start();
                         } else {
-                            ValueAnimator animator = new ValueAnimator();
-                            animator.setDuration(200);
                             animator.setIntValues((int) event.getRawX() - windowView.getMeasuredWidth() / 2, 0);
-                            animator.setInterpolator(new DecelerateInterpolator());
-                            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                                @Override
-                                public void onAnimationUpdate(ValueAnimator animation) {
-                                    windowParams.x = (int) animation.getAnimatedValue();
-                                    windowParams.y = (int) event.getRawY() - windowView.getMeasuredHeight() / 2 - getStatusBarHeight();
-                                    windowManager.updateViewLayout(windowView, windowParams);
-                                }
-                            });
-                            animator.start();
                         }
+                        animator.start();
                         break;
                 }
                 return false;
