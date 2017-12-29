@@ -86,6 +86,8 @@
         <activity android:name=".AppManagerActivity" />
         <activity android:name=".ClipActivity" />
         <activity android:name=".RemoteViewActivity" />
+        <activity android:name="socket.SocketClientActivity" />
+        <activity android:name="socket.SocketServerActivity" />
 
         <receiver android:name=".DemoAppWidget">
             <intent-filter>

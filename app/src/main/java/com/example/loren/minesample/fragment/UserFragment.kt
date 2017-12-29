@@ -8,6 +8,8 @@ import com.example.loren.minesample.*
 import com.example.loren.minesample.base.ui.BaseFragment
 import kotlinx.android.synthetic.main.user_fragment.*
 import pers.victor.ext.toast
+import socket.SocketClientActivity
+import socket.SocketServerActivity
 
 
 /**
@@ -28,7 +30,7 @@ class UserFragment : BaseFragment(), View.OnClickListener {
     override fun useTitleBar() = false
 
     override fun setListeners() {
-        click(amazing_tv, phone_tv, clip_tv, access_tv)
+        click(amazing_tv, phone_tv, clip_tv, access_tv, server_tv, client_tv)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -59,7 +61,8 @@ class UserFragment : BaseFragment(), View.OnClickListener {
                     dialog.show()
                 }
             }
-
+            R.id.server_tv -> startActivity<SocketServerActivity>()
+            R.id.client_tv -> startActivity<SocketClientActivity>()
         }
     }
 

@@ -55,6 +55,23 @@
             android:background="@drawable/bg_match_coner"
             android:text="悬浮窗"
             android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/client_tv"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/bg_main_coner"
+            android:text="Client"
+            android:textColor="@color/white" />
+
+
+        <TextView
+            android:id="@+id/server_tv"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/bg_match_coner"
+            android:text="Server"
+            android:textColor="@color/white" />
     </com.example.loren.minesample.widget.FixedFlowLayout>
 
 </LinearLayout>

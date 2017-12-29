@@ -41,6 +41,8 @@ import pers.victor.ext.spSetString
  * 1.悬浮窗:Build.VERSION.SDK_INT <= Build.VERSION_CODES.N ?
  *   WindowManager.LayoutParams.TYPE_TOAST: WindowManager.LayoutParams.TYPE_PHONE
  * 2.创建PDF动态申请权限
+ * 不够kotlin的地方
+ * 1.In/OutputStream的各种操作
  */
 
 class LauncherActivity : BaseActivity() {
