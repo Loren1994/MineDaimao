@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:gravity="center"
-            android:text="预览拍照"
+            android:text="预览/无预览拍照"
             android:textColor="@color/background_grey"
             android:textSize="20sp" />
 

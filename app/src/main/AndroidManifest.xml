@@ -28,7 +28,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_red_super_man"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         <service android:name=".WindowsService" />
         <service android:name=".ShowActivityService" />
@@ -65,7 +65,9 @@
         <activity
             android:name=".TakePhotoActivity"
             android:theme="@style/ActivityTransparent" />
-        <activity android:name=".RemindActivity" />
+        <activity
+            android:name=".RemindActivity"
+            android:theme="@style/ActivityTransparent" />
         <activity android:name=".ShortCutsActivity" />
         <activity
             android:name=".ChatActivity"

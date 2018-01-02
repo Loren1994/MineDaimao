@@ -21,3 +21,4 @@
 * 桌面小工具
 * TopActivity悬浮框
 * 应用内创建/查看PDF文件
+* 局域网socket通信

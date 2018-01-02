@@ -2,17 +2,18 @@ package com.example.loren.minesample
 
 import android.Manifest
 import android.content.Context
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.graphics.*
-import android.hardware.Camera
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.ImageFormat
+import android.graphics.PixelFormat
+import android.graphics.drawable.ColorDrawable
 import android.hardware.camera2.*
 import android.media.Image
 import android.media.ImageReader
 import android.os.Build
 import android.os.Handler
 import android.os.HandlerThread
-import android.preference.PreferenceManager
 import android.support.annotation.RequiresApi
 import android.support.v4.app.ActivityCompat
 import android.util.Log
@@ -20,15 +21,25 @@ import android.util.SparseIntArray
 import android.view.Surface
 import android.view.SurfaceHolder
 import android.view.View
-import android.widget.Toast
+import com.example.loren.minesample.base.ext.log
 import com.example.loren.minesample.base.ui.BaseActivity
 import kotlinx.android.synthetic.main.activity_take_photo.*
+import pers.victor.ext.findColor
 import pers.victor.ext.toast
-import java.io.*
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
+import java.io.IOException
 import java.nio.ByteBuffer
 import java.util.*
 
 class TakePhotoActivity : BaseActivity() {
+    override fun useTitleBar() = false
+
+    override fun initData() {
+        window.setBackgroundDrawable(ColorDrawable(findColor(R.color.transparent)))
+    }
+
     override fun initWidgets() {
         ORIENTATIONS.append(Surface.ROTATION_0, 90)
         ORIENTATIONS.append(Surface.ROTATION_90, 0)
@@ -36,13 +47,13 @@ class TakePhotoActivity : BaseActivity() {
         ORIENTATIONS.append(Surface.ROTATION_270, 180)
         requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, granted = { }, denied = { toast("没有权限，请授权后重试") })
         if (!this.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
-            Toast.makeText(this, "无前置摄像头", Toast.LENGTH_LONG).show()
+            toast("无前置摄像头")
             finish()
             return
         }
         initView()
         Thread {
-            Thread.sleep(2000)
+            Thread.sleep(1000)
             takePicture()
         }.start()
     }
@@ -55,12 +66,6 @@ class TakePhotoActivity : BaseActivity() {
 
     override fun bindLayout() = R.layout.activity_take_photo
 
-    private lateinit var mCamera: Camera
-    private lateinit var surfaceHolder: SurfaceHolder
-    private lateinit var sharedPrefrence: SharedPreferences
-    private lateinit var thread1: Thread
-    private lateinit var thread2: Thread
-    //
     private var mSurfaceHolder: SurfaceHolder? = null
     private var mCameraManager: CameraManager? = null//摄像头管理器
     private var childHandler: Handler? = null
@@ -73,13 +78,11 @@ class TakePhotoActivity : BaseActivity() {
     private val ORIENTATIONS: SparseIntArray = SparseIntArray()
 
     private fun initView() {
-        //surfaceview
         surfaceview.setOnClickListener(this)
         mSurfaceHolder = surfaceview.holder
-        mSurfaceHolder!!.setKeepScreenOn(true)
-        surfaceview.setZOrderOnTop(true)
+        mSurfaceHolder!!.setKeepScreenOn(false)
+        surfaceview.setZOrderOnTop(false)
         mSurfaceHolder!!.setFormat(PixelFormat.TRANSLUCENT)
-        // surfaceview添加回调
         mSurfaceHolder!!.addCallback(object : SurfaceHolder.Callback {
             override fun surfaceChanged(p0: SurfaceHolder?, p1: Int, p2: Int, p3: Int) {
             }
@@ -100,12 +103,7 @@ class TakePhotoActivity : BaseActivity() {
         })
     }
 
-//    override fun onClick(p0: View?) {
-//        takePicture()
-//    }
-
     private fun takePicture() {
-        Toast.makeText(this, "点击拍照", Toast.LENGTH_LONG).show()
         if (mCameraDevice == null) return
         // 创建拍照需要的CaptureRequest.Builder
         val captureRequestBuilder: CaptureRequest.Builder = mCameraDevice!!.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE)
@@ -133,8 +131,8 @@ class TakePhotoActivity : BaseActivity() {
         handlerThread.start()
         childHandler = Handler(handlerThread.looper)
         mainHandler = Handler(mainLooper)
-        mCameraID = "" + CameraCharacteristics.LENS_FACING_FRONT//后摄像头
-//        mCameraID = "" + CameraCharacteristics.LENS_FACING_BACK//前摄像头
+//        mCameraID = "" + CameraCharacteristics.LENS_FACING_FRONT//后摄像头
+        mCameraID = "" + CameraCharacteristics.LENS_FACING_BACK//前摄像头
         mImageReader = ImageReader.newInstance(1080, 1920, ImageFormat.JPEG, 1)
         mImageReader!!.setOnImageAvailableListener({ p0 ->
             //可以在这里处理拍照得到的临时照片 例如，写入本地
@@ -195,7 +193,7 @@ class TakePhotoActivity : BaseActivity() {
         // 创建CameraCaptureSession，该对象负责管理处理预览请求和拍照请求
         mCameraDevice!!.createCaptureSession(Arrays.asList(mSurfaceHolder!!.surface, mImageReader!!.surface), object : CameraCaptureSession.StateCallback() {
             override fun onConfigureFailed(p0: CameraCaptureSession?) {
-                Log.d("", "配置失败")
+                log("配置失败")
             }
 
             override fun onConfigured(p0: CameraCaptureSession?) {
@@ -206,25 +204,11 @@ class TakePhotoActivity : BaseActivity() {
                 previewRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE)
                 // 打开闪光灯
                 previewRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH)
-                // 显示预览
-                val previewRequest = previewRequestBuilder.build()
-                mCameraCaptureSession!!.setRepeatingRequest(previewRequest, null, childHandler)
+                // 显示预览(此处无预览拍照)
+                //val previewRequest = previewRequestBuilder.build()
+                //mCameraCaptureSession!!.setRepeatingRequest(previewRequest, null, childHandler)
             }
         }, childHandler)
-    }
-
-    fun init() {
-        surfaceHolder = surfaceview.holder
-        mCamera = Camera.open(1)
-        sharedPrefrence = PreferenceManager.getDefaultSharedPreferences(applicationContext)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-//        mCamera.stopPreview()
-//        mCamera.release()
-//        thread1.interrupt()
-//        thread2.interrupt()
     }
 
     @Throws(IOException::class)
@@ -239,9 +223,7 @@ class TakePhotoActivity : BaseActivity() {
         var fOut: FileOutputStream? = null
         try {
             fOut = FileOutputStream(f)
-
             bmp.compress(Bitmap.CompressFormat.PNG, 85, fOut)
-
             flag = true
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
@@ -258,41 +240,9 @@ class TakePhotoActivity : BaseActivity() {
         } catch (e: IOException) {
             e.printStackTrace()
         }
-        Toast.makeText(this, "保存成功${dirFile.path}", Toast.LENGTH_LONG).show()
+        toast("保存成功${dirFile.path}")
         finish()
         return flag
     }
 
-    fun zoomImage(bgimage: Bitmap): Bitmap {
-        val baos = ByteArrayOutputStream()
-        val bitmap = rotationBitmap(bgimage)
-        bitmap.compress(Bitmap.CompressFormat.PNG, 10, baos)
-//        val options = 10
-//        while (baos.toByteArray().size / 1024 > 1024) {
-//            baos.reset()
-//            bgimage.compress(Bitmap.CompressFormat.PNG, options, baos)
-//        }
-        val isBm = ByteArrayInputStream(baos.toByteArray())
-        val bm = BitmapFactory.decodeStream(isBm, null, null)
-        return bm
-    }
-
-    fun rotationBitmap(bitmap: Bitmap): Bitmap {
-        val matrix = Matrix()
-
-        val width = bitmap.width
-        val height = bitmap.height
-        val scale = bitmap.width / bitmap.height
-
-        val newWidth = 480
-        val newheight = newWidth / scale
-
-        val widthScale = newWidth.toFloat() / width
-        val heightScale = newheight.toFloat() / height
-
-        matrix.postScale(widthScale, heightScale)
-        matrix.preRotate(270f)
-        val bm = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true)
-        return bm
-    }
 }
