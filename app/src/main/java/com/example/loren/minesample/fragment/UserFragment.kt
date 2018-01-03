@@ -30,7 +30,7 @@ class UserFragment : BaseFragment(), View.OnClickListener {
     override fun useTitleBar() = false
 
     override fun setListeners() {
-        click(amazing_tv, phone_tv, clip_tv, access_tv, server_tv, client_tv)
+        click(amazing_tv, phone_tv, clip_tv, access_tv, server_tv, client_tv, blur_tv)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -63,6 +63,7 @@ class UserFragment : BaseFragment(), View.OnClickListener {
             }
             R.id.server_tv -> startActivity<SocketServerActivity>()
             R.id.client_tv -> startActivity<SocketClientActivity>()
+            R.id.blur_tv -> startActivity<BlurListActivity>()
         }
     }
 

@@ -12,10 +12,12 @@ android {
         applicationId "com.example.loren.minesample"
         minSdkVersion min_sdk_version
         targetSdkVersion target_sdk_version
+        renderscriptTargetApi 19
+        renderscriptSupportModeEnabled true
         versionCode 1
         versionName "1.0"
         ndk {
-            abiFilters "armeabi","x86","armeabi-v7a"
+            abiFilters "armeabi", "x86", "armeabi-v7a"
         }
     }
     buildTypes {
