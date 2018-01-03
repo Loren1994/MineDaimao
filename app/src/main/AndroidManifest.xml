@@ -45,9 +45,8 @@
                 android:resource="@xml/accessibility_service_config" />
         </service>
 
-        <activity
-            android:name=".LauncherActivity"
-            android:excludeFromRecents="true">
+        <!--android:excludeFromRecents="true"-->
+        <activity android:name=".LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

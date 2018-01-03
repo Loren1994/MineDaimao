@@ -5,13 +5,14 @@ import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.drawable.ColorDrawable
 import android.preference.PreferenceManager
 import android.provider.MediaStore
 import android.view.View
 import com.example.loren.minesample.base.ui.BaseActivity
+import com.example.loren.minesample.constant.MessageEvent
 import kotlinx.android.synthetic.main.remind_activity.*
+import org.greenrobot.eventbus.Subscribe
 import pers.victor.ext.findColor
 import pers.victor.ext.toast
 
@@ -25,6 +26,7 @@ class RemindActivity : BaseActivity() {
     }
 
     override fun initWidgets() {
+        registerEventBus()
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         take_photo_tv.setOnClickListener { requestPermission(Manifest.permission.CAMERA, granted = { takePhotoIntent() }, denied = { toast("没有权限，请授权后重试") }) }
         bg_take_photo_tv.setOnClickListener { requestPermission(Manifest.permission.CAMERA, granted = { startActivityForResult(Intent(this, TakePhotoActivity::class.java), TAKE_PHOTO) }, denied = { toast("没有权限，请授权后重试") }) }
@@ -55,9 +57,10 @@ class RemindActivity : BaseActivity() {
             val bitmap = extra.get("data") as Bitmap
             image.setImageBitmap(bitmap)
         }
-        if (requestCode == TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
-            val byteExtra = sharedPreferences.getString("bitmap", "").toByteArray()
-            image.setImageBitmap(BitmapFactory.decodeByteArray(byteExtra, 0, byteExtra.size))
-        }
+    }
+
+    @Subscribe
+    fun onEvent(event: MessageEvent.TakePhoto) {
+        image.setImageBitmap(event.bitmap)
     }
 }
