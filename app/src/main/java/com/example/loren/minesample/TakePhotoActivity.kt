@@ -1,9 +1,7 @@
 package com.example.loren.minesample
 
 import android.Manifest
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -14,7 +12,6 @@ import android.hardware.camera2.*
 import android.media.Image
 import android.media.ImageReader
 import android.os.Build
-import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
 import android.support.annotation.RequiresApi
@@ -26,7 +23,9 @@ import android.view.SurfaceHolder
 import android.view.View
 import com.example.loren.minesample.base.ext.log
 import com.example.loren.minesample.base.ui.BaseActivity
+import com.example.loren.minesample.constant.MessageEvent
 import kotlinx.android.synthetic.main.activity_take_photo.*
+import org.greenrobot.eventbus.EventBus
 import pers.victor.ext.findColor
 import pers.victor.ext.toast
 import java.io.File
@@ -214,11 +213,6 @@ class TakePhotoActivity : BaseActivity() {
         }, childHandler)
     }
 
-    override fun onDestroy() {
-        //FIXME 无预览拍照后,预览拍照不好用
-        super.onDestroy()
-    }
-
     @Throws(IOException::class)
     private fun saveMyBitmap(bmp: Bitmap, bitName: String): Boolean {
         val dirFile = File("./sdcard/DCIM/Camera/")
@@ -249,11 +243,7 @@ class TakePhotoActivity : BaseActivity() {
             e.printStackTrace()
         }
         toast("保存成功${dirFile.path}")
-        val intent = Intent()
-        val bundle = Bundle()
-        bundle.putParcelable("data", bmp)
-        intent.putExtra("bundle", bundle)
-        this.setResult(Activity.RESULT_OK, intent)
+        EventBus.getDefault().post(MessageEvent.TakePhoto(bmp))
         finish()
         return flag
     }
