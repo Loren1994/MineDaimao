@@ -9,10 +9,10 @@ import android.renderscript.RenderScript
 import android.renderscript.ScriptIntrinsicBlur
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.view.WindowManager
 import com.example.loren.minesample.adapter.BlurListAdapter
 import com.example.loren.minesample.base.ui.BaseActivity
 import kotlinx.android.synthetic.main.blur_list_activity.*
+import pers.victor.ext.screenHeight
 
 
 /**
@@ -26,13 +26,12 @@ class BlurListActivity : BaseActivity() {
     private var mAlpha = 0
     private var data: MutableList<String> = arrayListOf()
     private lateinit var mAdapter: BlurListAdapter
+    private val IMAGE_OFFSET = 100
 
     override fun initWidgets() {
-        allowFullScreen()
-        val originBmp = BitmapFactory.decodeResource(resources, R.drawable.victor_chou)
-        val blurBmp = blurBitmap(this, originBmp)
-        blur_iv.setImageBitmap(blurBmp)
-        origin_iv.setImageBitmap(originBmp)
+        //加此flag,全屏包括虚拟键部分
+        //window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        initImage()
         repeat(20) {
             data.add("ITEM - $it")
         }
@@ -48,8 +47,29 @@ class BlurListActivity : BaseActivity() {
                     0
                 }
                 origin_iv.imageAlpha = mAlpha
+                if (mScrollY <= IMAGE_OFFSET) {
+                    setTop(-mScrollY)
+                }
             }
         })
+    }
+
+    private fun setTop(y: Int) {
+        origin_iv.top = y
+        blur_iv.top = y
+    }
+
+    private fun initImage() {
+        val originBmp = BitmapFactory.decodeResource(resources, R.drawable.victor_chou)
+        val blurBmp = blurBitmap(this, originBmp)
+        blur_iv.setImageBitmap(blurBmp)
+        origin_iv.setImageBitmap(originBmp)
+        val originParam = origin_iv.layoutParams
+        val blurParam = blur_iv.layoutParams
+        originParam.height = screenHeight + IMAGE_OFFSET
+        blurParam.height = screenHeight + IMAGE_OFFSET
+        origin_iv.layoutParams = originParam
+        blur_iv.layoutParams = blurParam
     }
 
     override fun setListeners() {
@@ -86,6 +106,8 @@ class BlurListActivity : BaseActivity() {
     }
 
     override fun useTitleBar() = false
+
+    override fun allowFullScreen() = true
 
     override fun bindLayout() = R.layout.blur_list_activity
 }
