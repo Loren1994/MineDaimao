@@ -1,17 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/header_parent"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="bottom"
+    android:layout_height="match_parent"
+    android:background="@color/trans_black"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/temp_tv"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-thin"
-        android:text="37°"
-        android:textColor="@color/white"
-        android:textSize="90sp" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/temp_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/type_container_ll"
+            android:fontFamily="sans-serif-thin"
+            android:padding="16dp"
+            android:text="3°~7"
+            android:textColor="@color/white"
+            android:textSize="60sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/healthy_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:padding="16dp"
+            android:text="天气较凉，较易发生感冒，请适当增加衣服。体质较弱的朋友尤其应该注意防护。"
+            android:textColor="@color/text_white" />
+
+        <LinearLayout
+            android:id="@+id/type_container_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/healthy_tv"
+            android:layout_alignEnd="@+id/temp_tv"
+            android:layout_alignParentEnd="true"
+            android:gravity="end"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/head_type_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3-4级"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/head_wind_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="晴"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

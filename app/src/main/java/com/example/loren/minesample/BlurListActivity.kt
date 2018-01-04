@@ -10,9 +10,14 @@ import android.renderscript.ScriptIntrinsicBlur
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.example.loren.minesample.adapter.BlurListAdapter
+import com.example.loren.minesample.base.ext.parseObject
 import com.example.loren.minesample.base.ui.BaseActivity
+import com.example.loren.minesample.entity.WeatherBean
+import com.example.loren.minesample.util.http
 import kotlinx.android.synthetic.main.blur_list_activity.*
+import pers.victor.ext.dateOnly
 import pers.victor.ext.screenHeight
+import pers.victor.ext.toast
 
 
 /**
@@ -24,19 +29,21 @@ class BlurListActivity : BaseActivity() {
     private val BLUR_RADIUS = 25f
     private var mScrollY = 0
     private var mAlpha = 0
-    private var data: MutableList<String> = arrayListOf()
+    private var data: MutableList<WeatherBean.Data.Forecast> = arrayListOf()
     private lateinit var mAdapter: BlurListAdapter
-    private val IMAGE_OFFSET = 100
+    private val IMAGE_OFFSET = 150
+    private val CITY_NAME = "青岛"
+    private val GET_WEATHER_URL
+        get() = "http://wthrcdn.etouch.cn/weather_mini?city=$CITY_NAME"
+    private lateinit var weatherBean: WeatherBean
 
     override fun initWidgets() {
         //加此flag,全屏包括虚拟键部分
         //window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-        initImage()
-        repeat(20) {
-            data.add("ITEM - $it")
-        }
         mAdapter = BlurListAdapter(data)
         list_rv.adapter = mAdapter
+        initImage()
+        getWeather()
         list_rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -59,8 +66,31 @@ class BlurListActivity : BaseActivity() {
         blur_iv.top = y
     }
 
+    private fun getWeather() {
+        showLoadingDialog()
+        city_name.text = CITY_NAME
+        time_tv.text = System.currentTimeMillis().dateOnly()
+        http {
+            url = GET_WEATHER_URL
+            success {
+                dismissLoadingDialog()
+                weatherBean = parseObject(it)
+                val header = weatherBean.data.forecast[0].copy()
+                header.date = weatherBean.data.ganmao
+                data.add(header)
+                weatherBean.data.forecast.forEach { data.add(it) }
+                mAdapter.notifyDataSetChanged()
+            }
+            fail {
+                toast(it)
+                dismissLoadingDialog()
+            }
+        }
+    }
+
+    //根布局必须为FrameLayout,否则图片超出屏幕部分为空白
     private fun initImage() {
-        val originBmp = BitmapFactory.decodeResource(resources, R.drawable.victor_chou)
+        val originBmp = BitmapFactory.decodeResource(resources, R.drawable.wangye)
         val blurBmp = blurBitmap(this, originBmp)
         blur_iv.setImageBitmap(blurBmp)
         origin_iv.setImageBitmap(originBmp)

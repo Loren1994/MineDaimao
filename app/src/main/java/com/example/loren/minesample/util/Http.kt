@@ -115,6 +115,8 @@ private fun httpResponse(response: Response, http: Http) {
                 handler.post { http.success?.invoke(jo.toString()) }
             else -> handler.post { http.fail?.invoke("请求失败") }
         }
+    } else if (jo.has("data")) { //天气接口
+        handler.post { http.success?.invoke(jo.toString()) }
     } else {
         err(result)
         handler.post { http.fail?.invoke("无result") }
