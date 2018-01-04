@@ -2,6 +2,7 @@ package com.example.loren.minesample.annotation
 
 import android.view.View
 import com.example.loren.minesample.widget.ClickRecyclerView
+import java.lang.reflect.Method
 
 /**
  * Copyright © 22/11/2017 by loren
@@ -9,7 +10,20 @@ import com.example.loren.minesample.widget.ClickRecyclerView
 object LorenInject {
     fun into(obj: Any) {
         val clazz = obj.javaClass
-        val findMethod = clazz.getMethod("findViewById", Int::class.java)
+        var isFragment: Boolean
+        var findMethod: Method
+        var getView: View? = null
+        try {
+            isFragment = false
+            findMethod = clazz.getMethod("findViewById", Int::class.java)
+        } catch (e: NoSuchMethodException) {
+            isFragment = true
+            getView = clazz.getMethod("getView").invoke(obj) as View
+            findMethod = getView.javaClass.getMethod("findViewById", Int::class.java)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return
+        }
         //field
         clazz.declaredFields.forEach {
             if (it.isAnnotationPresent(LorenAnn::class.java)) {
@@ -30,7 +44,7 @@ object LorenInject {
                 val listener = DynamicOnClickListener(obj as View.OnClickListener, annValue.animType)
                 findMethod.isAccessible = true
                 viewIds.forEach {
-                    val itemView = findMethod.invoke(obj, it) as View
+                    val itemView = findMethod.invoke(if (isFragment) getView else obj, it) as View
                     val setListenerMethod = itemView.javaClass.getMethod(setter, targetType.java)
                     setListenerMethod.isAccessible = true
                     setListenerMethod.invoke(itemView, listener)
@@ -43,7 +57,7 @@ object LorenInject {
                 val targetType = ClickRecyclerView.OnItemClickListener::class
                 val setter = "setOnItemClickListener"
                 val listener = DynamicOnItemClickListener(obj as ClickRecyclerView.OnItemClickListener, annValue.animType)
-                val recyclerView = findMethod.invoke(obj, recyclerViewId) as ClickRecyclerView
+                val recyclerView = findMethod.invoke(if (isFragment) getView else obj, recyclerViewId) as ClickRecyclerView
                 val setListenerMethod = recyclerView.javaClass.getMethod(setter, targetType.java)
                 setListenerMethod.isAccessible = true
                 setListenerMethod.invoke(recyclerView, listener)

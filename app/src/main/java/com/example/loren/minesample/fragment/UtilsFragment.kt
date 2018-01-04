@@ -2,8 +2,10 @@ package com.example.loren.minesample.fragment
 
 import android.view.View
 import com.example.loren.minesample.*
+import com.example.loren.minesample.annotation.AnimationClick
+import com.example.loren.minesample.annotation.AnimationClickType
+import com.example.loren.minesample.annotation.LorenInject
 import com.example.loren.minesample.base.ui.BaseFragment
-import kotlinx.android.synthetic.main.util_fragment.*
 
 /**
  * Copyright © 2017/3/7 by loren
@@ -11,14 +13,11 @@ import kotlinx.android.synthetic.main.util_fragment.*
 
 class UtilsFragment : BaseFragment() {
     override fun initWidgets() {
+        LorenInject.into(this)
     }
 
-
-    override fun setListeners() {
-        click(bezier_tv, screen_shot_tv, test_tv, inject_tv,remote_tv)
-    }
-
-    override fun onWidgetsClick(v: View) {
+    @AnimationClick([R.id.bezier_tv, R.id.screen_shot_tv, R.id.test_tv, R.id.inject_tv, R.id.remote_tv], AnimationClickType.ALPHA)
+    override fun onClick(v: View) {
         when (v.id) {
             R.id.bezier_tv -> startActivity<BezierActivity>()
             R.id.screen_shot_tv -> startActivity<ScreenShotActivity>()
@@ -26,6 +25,13 @@ class UtilsFragment : BaseFragment() {
             R.id.inject_tv -> startActivity<InjectAnimActivity>()
             R.id.remote_tv -> startActivity<RemoteViewActivity>()
         }
+    }
+
+    override fun setListeners() {
+    }
+
+    override fun onWidgetsClick(v: View) {
+
     }
 
     override fun useTitleBar() = false

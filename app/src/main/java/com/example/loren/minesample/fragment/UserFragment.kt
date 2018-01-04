@@ -5,8 +5,10 @@ import android.content.Intent
 import android.provider.Settings
 import android.view.View
 import com.example.loren.minesample.*
+import com.example.loren.minesample.annotation.AnimationClick
+import com.example.loren.minesample.annotation.AnimationClickType
+import com.example.loren.minesample.annotation.LorenInject
 import com.example.loren.minesample.base.ui.BaseFragment
-import kotlinx.android.synthetic.main.user_fragment.*
 import pers.victor.ext.toast
 import socket.SocketClientActivity
 import socket.SocketServerActivity
@@ -16,10 +18,11 @@ import socket.SocketServerActivity
  * Created by loren on 2017/3/7.
  */
 
-class UserFragment : BaseFragment(), View.OnClickListener {
+class UserFragment : BaseFragment() {
     private lateinit var dialog: AlertDialog.Builder
     private var clickPos = 0
     override fun initWidgets() {
+        LorenInject.into(this)
         val list = arrayOf("TopActivity悬浮框", "吸附式悬浮框")
         dialog = AlertDialog.Builder(activity)
                 .setTitle("请选择悬浮框")
@@ -30,7 +33,6 @@ class UserFragment : BaseFragment(), View.OnClickListener {
     override fun useTitleBar() = false
 
     override fun setListeners() {
-        click(amazing_tv, phone_tv, clip_tv, access_tv, server_tv, client_tv, blur_tv)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -48,7 +50,8 @@ class UserFragment : BaseFragment(), View.OnClickListener {
                 android.provider.Settings.Secure.ACCESSIBILITY_ENABLED) == 1
     }
 
-    override fun onWidgetsClick(v: View) {
+    @AnimationClick([R.id.amazing_tv, R.id.phone_tv, R.id.clip_tv, R.id.access_tv, R.id.server_tv, R.id.client_tv, R.id.blur_tv], AnimationClickType.SCALE)
+    override fun onClick(v: View) {
         when (v.id) {
 //            R.id.translation_tv -> startActivity(Intent(mContext, TranslationActivity::class.java))
             R.id.amazing_tv -> startActivity(Intent(mContext, AmazingActivity::class.java))
@@ -65,6 +68,10 @@ class UserFragment : BaseFragment(), View.OnClickListener {
             R.id.client_tv -> startActivity<SocketClientActivity>()
             R.id.blur_tv -> startActivity<BlurListActivity>()
         }
+    }
+
+    override fun onWidgetsClick(v: View) {
+
     }
 
     private fun startWindowService() {
