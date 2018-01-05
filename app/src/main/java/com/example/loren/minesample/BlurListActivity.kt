@@ -75,7 +75,7 @@ class BlurListActivity : BaseActivity() {
         http {
             url = GET_WEATHER_URL
             success {
-                dismissLoadingDialog()
+//                dismissLoadingDialog()
                 weatherBean = parseObject(it)
                 setData()
             }
