@@ -37,7 +37,7 @@ public class Constant {
             "}\n" +
             "]\n" +
             "}";
-    public static String WEATHER_JSON="{\n" +
+    public static String WEATHER_JSON = "{\n" +
             "  \"data\": {\n" +
             "    \"yesterday\": {\n" +
             "      \"date\": \"4日星期四\",\n" +
@@ -95,5 +95,6 @@ public class Constant {
             "    \"wendu\": \"-1\"\n" +
             "  },\n" +
             "  \"status\": 1000,\n" +
-            "  \"desc\": \"OK\"";
+            "  \"desc\": \"OK\"\n" +
+            "}";
 }
