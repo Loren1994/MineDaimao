@@ -13,6 +13,7 @@ import com.example.loren.minesample.adapter.BlurListAdapter
 import com.example.loren.minesample.base.ext.parseObject
 import com.example.loren.minesample.base.ui.BaseActivity
 import com.example.loren.minesample.entity.WeatherBean
+import com.example.loren.minesample.util.Constant
 import com.example.loren.minesample.util.http
 import kotlinx.android.synthetic.main.blur_list_activity.*
 import pers.victor.ext.dateOnly
@@ -25,13 +26,14 @@ import pers.victor.ext.toast
  */
 class BlurListActivity : BaseActivity() {
 
+    private val IMAGE_OFFSET = 100
+    private val OFFSET_MULTIPLE = 8
     private val BITMAP_SCALE = 0.4f
     private val BLUR_RADIUS = 25f
     private var mScrollY = 0
     private var mAlpha = 0
     private var data: MutableList<WeatherBean.Data.Forecast> = arrayListOf()
     private lateinit var mAdapter: BlurListAdapter
-    private val IMAGE_OFFSET = 150
     private val CITY_NAME = "青岛"
     private val GET_WEATHER_URL
         get() = "http://wthrcdn.etouch.cn/weather_mini?city=$CITY_NAME"
@@ -54,8 +56,8 @@ class BlurListActivity : BaseActivity() {
                     0
                 }
                 origin_iv.imageAlpha = mAlpha
-                if (mScrollY <= IMAGE_OFFSET) {
-                    setTop(-mScrollY)
+                if (mScrollY <= IMAGE_OFFSET * OFFSET_MULTIPLE) {
+                    setTop(-mScrollY / OFFSET_MULTIPLE)
                 }
             }
         })
@@ -75,17 +77,24 @@ class BlurListActivity : BaseActivity() {
             success {
                 dismissLoadingDialog()
                 weatherBean = parseObject(it)
-                val header = weatherBean.data.forecast[0].copy()
-                header.date = weatherBean.data.ganmao
-                data.add(header)
-                weatherBean.data.forecast.forEach { data.add(it) }
-                mAdapter.notifyDataSetChanged()
+                setData()
             }
             fail {
                 toast(it)
                 dismissLoadingDialog()
+                weatherBean = parseObject(Constant.WEATHER_JSON)
+                setData()
             }
         }
+    }
+
+    private fun setData() {
+        val header = weatherBean.data.forecast[0].copy()
+        header.date = weatherBean.data.ganmao
+        header.high = weatherBean.data.wendu
+        data.add(header)
+        weatherBean.data.forecast.forEach { data.add(it) }
+        mAdapter.notifyDataSetChanged()
     }
 
     //根布局必须为FrameLayout,否则图片超出屏幕部分为空白

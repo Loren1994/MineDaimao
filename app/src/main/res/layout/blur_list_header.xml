@@ -9,17 +9,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/temp_tv"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/type_container_ll"
-            android:fontFamily="sans-serif-thin"
-            android:padding="16dp"
-            android:text="3°~7"
-            android:textColor="@color/white"
-            android:textSize="60sp"
-            android:textStyle="bold" />
+            android:layout_above="@+id/healthy_tv"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/temp_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-thin"
+                android:text="3"
+                android:textColor="@color/white"
+                android:textSize="90sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="sans-serif-thin"
+                android:text="℃"
+                android:textColor="@color/white"
+                android:textSize="50sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/healthy_tv"

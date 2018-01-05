@@ -9,7 +9,6 @@ import com.example.loren.minesample.entity.WeatherBean
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.blur_list_header.*
 import kotlinx.android.synthetic.main.blur_list_item.*
-import pers.victor.ext.getStatusBarHeight
 import pers.victor.ext.getVirNavBarHeight
 import pers.victor.ext.inflate
 import pers.victor.ext.screenHeight
@@ -35,7 +34,7 @@ class BlurListAdapter(val data: MutableList<WeatherBean.Data.Forecast>) : Recycl
             val params = holder.itemView.layoutParams
             params.height = screenHeight - getVirNavBarHeight()
             holder.itemView.layoutParams = params
-            holder.temp_tv.text = "${data[position].low.split(" ")[1]} ~ ${data[position].high.split(" ")[1]}"
+            holder.temp_tv.text = data[position].high
             holder.head_wind_tv.text = data[position].fengxiang + data[position].fengli.split("[")[2].replace("]]>", "")
             holder.head_type_tv.text = data[position].type
             holder.healthy_tv.text = data[position].date
