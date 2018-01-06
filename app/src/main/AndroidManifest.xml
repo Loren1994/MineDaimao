@@ -90,6 +90,7 @@
         <activity android:name=".BlurListActivity" />
         <activity android:name="socket.SocketClientActivity" />
         <activity android:name="socket.SocketServerActivity" />
+        <activity android:name=".PwdInputActivity" />
 
         <receiver android:name=".DemoAppWidget">
             <intent-filter>
