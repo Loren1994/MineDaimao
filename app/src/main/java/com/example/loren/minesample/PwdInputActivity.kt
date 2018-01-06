@@ -17,7 +17,11 @@ class PwdInputActivity : BaseActivity() {
                 key_board.KB_CANCEL -> input_edt.setText(str)
             }
         }
-
+        val list = arrayListOf<String>()
+        repeat(10) {
+            list.add(it.toString())
+        }
+        key_board.setKeyBoardText(list)
     }
 
     override fun setListeners() {
