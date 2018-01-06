@@ -85,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="@drawable/bg_match_coner"
-            android:text="数字键盘"
+            android:text="自定义键盘"
             android:textColor="@color/white" />
     </com.example.loren.minesample.widget.FixedFlowLayout>
 

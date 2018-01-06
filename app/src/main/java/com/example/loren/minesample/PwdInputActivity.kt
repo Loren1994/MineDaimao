@@ -17,10 +17,7 @@ class PwdInputActivity : BaseActivity() {
                 key_board.KB_CANCEL -> input_edt.setText(str)
             }
         }
-        val list = arrayListOf<String>()
-        repeat(10) {
-            list.add(it.toString())
-        }
+        val list = arrayListOf("鸭", "门", "前", "大", "桥", "下", "游", "过", "一", "群")
         key_board.setKeyBoardText(list)
     }
 
