@@ -46,8 +46,10 @@ class KeyBoardView(context: Context, attrs: AttributeSet) : FrameLayout(context,
         when (v.id) {
             R.id.confirm_ll -> onKBEvent?.invoke("", KB_CONFIRM)
             R.id.cancel_ll -> {
-                inputResult.deleteCharAt(inputResult.lastIndex)
-                onKBEvent?.invoke(inputResult.toString(), KB_CANCEL)
+                if (inputResult.isNotEmpty()) {
+                    inputResult.deleteCharAt(inputResult.lastIndex)
+                    onKBEvent?.invoke(inputResult.toString(), KB_CANCEL)
+                }
             }
             else -> {
                 inputResult.append((v as TextView).text)
