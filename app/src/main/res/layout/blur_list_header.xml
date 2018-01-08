@@ -36,7 +36,6 @@
                 android:textSize="50sp"
                 android:textStyle="bold" />
 
-
         </LinearLayout>
 
         <TextView
@@ -44,7 +43,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:padding="16dp"
+            android:paddingBottom="48dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
             android:text="天气较凉，较易发生感冒，请适当增加衣服。体质较弱的朋友尤其应该注意防护。"
             android:textColor="@color/text_white" />
 
@@ -53,7 +54,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/healthy_tv"
-            android:layout_alignEnd="@+id/temp_tv"
             android:layout_alignParentEnd="true"
             android:gravity="end"
             android:orientation="vertical"
