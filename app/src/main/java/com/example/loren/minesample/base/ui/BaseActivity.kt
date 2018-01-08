@@ -55,6 +55,9 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
             ActivityMgr.removeAll()
             startActivity<LauncherActivity>()
             finish()
+//            val intent = Intent(this, LauncherActivity::class.java)
+//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//            startActivity(intent)
             return
         }
         if (useTitleBar()) {
@@ -69,9 +72,15 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
         }
         if (allowFullScreen()) {
             requestWindowFeature(Window.FEATURE_NO_TITLE)
-            window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+            window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN or WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_FULLSCREEN or WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         }
         setContentView(bindLayout())
+        if (useImmersive()) {
+            window.navigationBarColor = findColor(R.color.transparent)
+            val option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            window.decorView.systemUiVisibility = option
+            window.statusBarColor = findColor(R.color.transparent)
+        }
         window.setBackgroundDrawable(ColorDrawable(findColor(R.color.background)))
         ActivityMgr.add(this)
         initData()
@@ -223,6 +232,7 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
     }
 
     open protected fun allowFullScreen() = false
+    open protected fun useImmersive() = false
 
     fun showLoadingDialog(msg: String = "加载中…", cancelable: Boolean = true) {
         if (loadingDialog.isShowing) {

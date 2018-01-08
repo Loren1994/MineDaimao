@@ -16,9 +16,7 @@ import com.example.loren.minesample.entity.WeatherBean
 import com.example.loren.minesample.util.Constant
 import com.example.loren.minesample.util.http
 import kotlinx.android.synthetic.main.blur_list_activity.*
-import pers.victor.ext.dateOnly
-import pers.victor.ext.screenHeight
-import pers.victor.ext.toast
+import pers.victor.ext.*
 
 
 /**
@@ -42,6 +40,11 @@ class BlurListActivity : BaseActivity() {
     override fun initWidgets() {
         //加此flag,全屏包括虚拟键部分
         //window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        weather_toolbar.post {
+            val param = weather_toolbar.layoutParams
+            param.height = weather_toolbar.measuredHeight + getStatusBarHeight()
+            weather_toolbar.layoutParams = param
+        }
         mAdapter = BlurListAdapter(data)
         list_rv.adapter = mAdapter
         initImage()
@@ -105,8 +108,8 @@ class BlurListActivity : BaseActivity() {
         origin_iv.setImageBitmap(originBmp)
         val originParam = origin_iv.layoutParams
         val blurParam = blur_iv.layoutParams
-        originParam.height = screenHeight + IMAGE_OFFSET
-        blurParam.height = screenHeight + IMAGE_OFFSET
+        originParam.height = screenHeight + IMAGE_OFFSET + getVirNavBarHeight()
+        blurParam.height = screenHeight + IMAGE_OFFSET + getVirNavBarHeight()
         origin_iv.layoutParams = originParam
         blur_iv.layoutParams = blurParam
     }
@@ -146,7 +149,9 @@ class BlurListActivity : BaseActivity() {
 
     override fun useTitleBar() = false
 
-    override fun allowFullScreen() = true
+//    override fun allowFullScreen() = false
+
+    override fun useImmersive() = true
 
     override fun bindLayout() = R.layout.blur_list_activity
 }
