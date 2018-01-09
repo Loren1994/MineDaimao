@@ -91,6 +91,7 @@
         <activity android:name="socket.SocketClientActivity" />
         <activity android:name="socket.SocketServerActivity" />
         <activity android:name=".PwdInputActivity" />
+        <activity android:name=".DownloadingActivity" />
 
         <receiver android:name=".DemoAppWidget">
             <intent-filter>
