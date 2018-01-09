@@ -70,6 +70,15 @@
             android:text="仿应用宝下载进度条"
             android:textColor="@color/grey"
             android:textSize="20sp" />
+        <TextView
+            android:id="@+id/sign_tv"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/rectangle_gradient"
+            android:gravity="center"
+            android:text="签字板"
+            android:textColor="@color/grey"
+            android:textSize="20sp" />
 
     </LinearLayout>
 </ScrollView>

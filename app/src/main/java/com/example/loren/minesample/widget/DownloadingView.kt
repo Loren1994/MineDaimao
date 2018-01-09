@@ -110,7 +110,6 @@ class DownloadingView(context: Context, attributeSet: AttributeSet) : View(conte
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        log("onDraw>>>>>>>>")
         drawBackground(canvas)
         drawText(canvas)
         drawProgress(canvas)
