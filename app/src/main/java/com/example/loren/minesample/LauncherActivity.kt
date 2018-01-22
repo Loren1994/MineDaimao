@@ -137,15 +137,17 @@ class LauncherActivity : BaseActivity() {
         val item1 = AHBottomNavigationItem(R.string.tab_1, R.drawable.ic_home, R.color.purple_dark)
         val item2 = AHBottomNavigationItem(R.string.tab_2, R.drawable.ic_util, R.color.purple_dark)
         val item3 = AHBottomNavigationItem(R.string.tab_3, R.drawable.ic_person, R.color.purple_dark)
-        bottom_navigation!!.addItem(item1)
-        bottom_navigation!!.addItem(item2)
-        bottom_navigation!!.addItem(item3)
-        bottom_navigation!!.defaultBackgroundColor = findColor(R.color.gray_dark)
-        bottom_navigation!!.inactiveColor = findColor(R.color.match)
-        bottom_navigation!!.accentColor = findColor(R.color.text_white)
-        bottom_navigation!!.isForceTint = true
-        bottom_navigation!!.titleState = AHBottomNavigation.TitleState.ALWAYS_HIDE
-        bottom_navigation!!.isBehaviorTranslationEnabled = true
+        bottom_navigation.addItem(item1)
+        bottom_navigation.addItem(item2)
+        bottom_navigation.addItem(item3)
+        bottom_navigation.defaultBackgroundColor = findColor(R.color.gray_dark)
+        bottom_navigation.inactiveColor = findColor(R.color.match)
+        bottom_navigation.accentColor = findColor(R.color.text_white)
+        bottom_navigation.isForceTint = true
+        bottom_navigation.titleState = AHBottomNavigation.TitleState.SHOW_WHEN_ACTIVE
+        bottom_navigation.isBehaviorTranslationEnabled = true
+        bottom_navigation.isTranslucentNavigationEnabled = true
+//        bottom_navigation.isColored = true
     }
 
     private fun initViewpager() {

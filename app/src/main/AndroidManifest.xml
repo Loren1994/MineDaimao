@@ -93,6 +93,7 @@
         <activity android:name=".PwdInputActivity" />
         <activity android:name=".DownloadingActivity" />
         <activity android:name=".SignActivity" />
+        <activity android:name=".HtmlFileActivity" />
 
         <receiver android:name=".DemoAppWidget">
             <intent-filter>

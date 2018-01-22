@@ -45,7 +45,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.9.0'
     implementation 'hanks.xyz:htextview-library:0.1.2'
     implementation 'com.facebook.fresco:fresco:0.13.0'
-    implementation 'com.aurelhubert:ahbottomnavigation:2.0.6'
+    implementation 'com.aurelhubert:ahbottomnavigation:2.1.0'
     implementation 'com.balysv.materialmenu:material-menu:2.0.0'
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'pub.devrel:easypermissions:1.0.1'
@@ -59,6 +59,7 @@ dependencies {
     kapt "io.objectbox:objectbox-processor:$objectboxVersion"
     debugCompile "io.objectbox:objectbox-android-objectbrowser:$objectboxVersion"
     releaseCompile "io.objectbox:objectbox-android:$objectboxVersion"
+    implementation 'com.yanzhenjie:andserver:1.1.0'
 }
 androidExtensions {
     experimental = true

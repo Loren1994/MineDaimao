@@ -50,7 +50,7 @@ class UserFragment : BaseFragment() {
                 android.provider.Settings.Secure.ACCESSIBILITY_ENABLED) == 1
     }
 
-    @AnimationClick([R.id.input_tv, R.id.amazing_tv, R.id.phone_tv, R.id.clip_tv, R.id.access_tv, R.id.server_tv, R.id.client_tv, R.id.blur_tv], AnimationClickType.SCALE)
+    @AnimationClick([R.id.html_tv, R.id.input_tv, R.id.amazing_tv, R.id.phone_tv, R.id.clip_tv, R.id.access_tv, R.id.server_tv, R.id.client_tv, R.id.blur_tv], AnimationClickType.SCALE)
     override fun onClick(v: View) {
         when (v.id) {
 //            R.id.translation_tv -> startActivity(Intent(mContext, TranslationActivity::class.java))
@@ -68,6 +68,7 @@ class UserFragment : BaseFragment() {
             R.id.client_tv -> startActivity<SocketClientActivity>()
             R.id.blur_tv -> startActivity<BlurListActivity>()
             R.id.input_tv -> startActivity<PwdInputActivity>()
+            R.id.html_tv -> startActivity<HtmlFileActivity>()
         }
     }
 

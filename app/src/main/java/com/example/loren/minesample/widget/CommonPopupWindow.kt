@@ -18,10 +18,10 @@ import com.example.loren.minesample.R
 class CommonPopupWindow(context: Activity, itemsOnClick: View.OnClickListener) : PopupWindow(context) {
 
     private val animator = ValueAnimator()
-    private lateinit var tv1: TextView
-    private lateinit var tv2: TextView
-    private lateinit var tv3: TextView
-    private lateinit var tv4: TextView
+    private var tv1: TextView
+    private var tv2: TextView
+    private var tv3: TextView
+    private var tv4: TextView
 
     init {
         val mMenuView = View.inflate(context, R.layout.common_popup, null)

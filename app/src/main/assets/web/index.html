@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+
+<body>
+
+    <div ng-app="loren" ng-controller="videoCtr">
+        <p>名字 :
+            <input type="text" ng-model="name">
+        </p>
+        <h1>Hello {{name}}</h1>
+        <li>
+            <a href="http://t66y.com">android学习</a>
+        </li>
+        <li>
+            <a href="http://91.91p17.space">ios学习</a>
+        </li>
+    </div>
+
+</body>
+
+<script>
+    var app = angular.module("loren", []);
+    app.controller("videoCtr", function ($scope, $http) {
+        $http({
+            method: 'GET',
+            url: '/video'
+        }).then(function successCallback(response) {
+            $scope.name = response.data
+        }, function errorCallback(response) {
+            console.log(response.data)
+        });
+    });
+</script>
+
+</html>

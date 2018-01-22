@@ -8,9 +8,9 @@
     <string name="settings_disable_msg">Google Clock不可用</string>
 
 
-    <string name="tab_1">One</string>
-    <string name="tab_2">Two</string>
-    <string name="tab_3">Three</string>
+    <string name="tab_1">高级</string>
+    <string name="tab_2">中级</string>
+    <string name="tab_3">初级</string>
 
     <string name="rationale_camera">This app needs access to your camera so you can take pictures.</string>
     <string name="rationale_location_contacts">This app needs access to your location and contacts to know where and who you are.</string>

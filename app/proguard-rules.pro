@@ -15,3 +15,9 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-keepclassmembers class ** {
+    @com.yanzhenjie.andserver.annotation.RequestMapping <methods>;
+}
+-keepclassmembers public class com.yanzhenjie.andserver.RequestMethod {
+    <fields>;
+}
