@@ -1,6 +1,7 @@
 package com.example.loren.minesample
 
 import android.app.Application
+import android.content.Context
 import com.example.loren.minesample.entity.MyObjectBox
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.orhanobut.logger.AndroidLogAdapter
@@ -45,6 +46,7 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        application = applicationContext
         Ext.ctx = this
         initLogger()
         Fresco.initialize(this)
@@ -81,5 +83,6 @@ class App : Application() {
         var SCREEN_HEIGHT: Int = 0
         var SCREEN_DENSITY: Float = 0.toFloat()
         var SCALED_DENSITY: Float = 0.toFloat()
+        lateinit var application: Context
     }
 }

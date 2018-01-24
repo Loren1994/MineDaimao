@@ -12,6 +12,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.net.wifi.WifiManager
 import android.os.BatteryManager
+import android.os.Build
 import android.os.Environment
 import android.provider.Settings
 import android.telephony.TelephonyManager
@@ -204,15 +205,15 @@ class AppManagerActivity : BaseActivity() {
         val restMemSize = Formatter.formatFileSize(baseContext, memSize)
         val talMemSize = Formatter.formatFileSize(baseContext, totalSize)
         mTm.line1Number?.let { deviceInfoMap.put("手机号", mTm.line1Number) }
-        deviceInfoMap.put("是否ROOT", isRoot())
-        deviceInfoMap.put("总内存", talMemSize)
-        deviceInfoMap.put("剩余内存", restMemSize)
-        deviceInfoMap.put("MAC地址", macAddress)
-        deviceInfoMap.put("当前WIFI", curWifi)
-        deviceInfoMap.put("IP地址", intToIp(ipAddress))
-        deviceInfoMap.put("手机品牌", android.os.Build.BRAND)
-        deviceInfoMap.put("手机型号", android.os.Build.MODEL)
-        deviceInfoMap.put("屏幕", "${resources.displayMetrics.widthPixels} x ${resources.displayMetrics.heightPixels}")
+        deviceInfoMap["是否ROOT"] = isRoot()
+        deviceInfoMap["总内存"] = talMemSize
+        deviceInfoMap["剩余内存"] = restMemSize
+        deviceInfoMap["MAC地址"] = macAddress
+        deviceInfoMap["当前WIFI"] = curWifi
+        deviceInfoMap["IP地址"] = intToIp(ipAddress)
+        deviceInfoMap["手机品牌"] = Build.BRAND
+        deviceInfoMap["手机型号"] = Build.MODEL
+        deviceInfoMap["屏幕"] = "${resources.displayMetrics.widthPixels} x ${resources.displayMetrics.heightPixels}"
         deviceInfoMap.forEach { (k, v) ->
             val tv = TextView(this)
             tv.text = "$k: $v"

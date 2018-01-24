@@ -144,7 +144,7 @@ class LauncherActivity : BaseActivity() {
         bottom_navigation.inactiveColor = findColor(R.color.match)
         bottom_navigation.accentColor = findColor(R.color.text_white)
         bottom_navigation.isForceTint = true
-        bottom_navigation.titleState = AHBottomNavigation.TitleState.SHOW_WHEN_ACTIVE
+        bottom_navigation.titleState = AHBottomNavigation.TitleState.ALWAYS_HIDE
         bottom_navigation.isBehaviorTranslationEnabled = true
         bottom_navigation.isTranslucentNavigationEnabled = true
 //        bottom_navigation.isColored = true

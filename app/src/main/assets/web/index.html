@@ -3,22 +3,25 @@
 
 <head>
     <meta charset="utf-8">
-    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <!-- <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script> -->
+    <script src="https://cdn.bootcss.com/angular.js/1.6.3/angular.min.js"></script>
 </head>
 
 <body>
 
     <div ng-app="loren" ng-controller="videoCtr">
-        <p>名字 :
-            <input type="text" ng-model="name">
-        </p>
-        <h1>Hello {{name}}</h1>
         <li>
             <a href="http://t66y.com">android学习</a>
         </li>
         <li>
             <a href="http://91.91p17.space">ios学习</a>
         </li>
+        <table>
+            <tr ng-repeat="app in appList">
+                <td ng-click="openApk(app.packageName)">{{ app.pid }}</td>
+                <td>{{ app.apkSize }} MB</td>
+            </tr>
+        </table>
     </div>
 
 </body>
@@ -26,14 +29,34 @@
 <script>
     var app = angular.module("loren", []);
     app.controller("videoCtr", function ($scope, $http) {
-        $http({
-            method: 'GET',
-            url: '/video'
-        }).then(function successCallback(response) {
-            $scope.name = response.data
-        }, function errorCallback(response) {
-            console.log(response.data)
-        });
+        $scope.openApk = function (pkName) {
+            $http({
+                data: { pkName: pkName },
+                method: 'POST',
+                url: '/openApk',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+                transformRequest: function (obj) {
+                    var str = [];
+                    for (var s in obj) {
+                        str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+                    }
+                    return str.join("&");
+                }
+            }).then(function (result) {
+                alert(result.data)
+            });
+        }
+        $scope.getApp = function () {
+            $http({
+                method: 'GET',
+                url: '/appList',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+            }).then(function (result) {
+                $scope.appList = result.data
+                console.log($scope.appList)
+            });
+        }
+        $scope.getApp()
     });
 </script>
 

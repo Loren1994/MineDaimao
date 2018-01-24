@@ -6,7 +6,8 @@ import android.net.wifi.WifiManager
 import android.view.View
 import com.example.loren.minesample.base.ext.log
 import com.example.loren.minesample.base.ui.BaseActivity
-import com.example.loren.minesample.server.VideoHandler
+import com.example.loren.minesample.server.AppHandler
+import com.example.loren.minesample.server.OpenApkHandler
 import com.yanzhenjie.andserver.AndServer
 import com.yanzhenjie.andserver.Server
 import com.yanzhenjie.andserver.filter.HttpCacheFilter
@@ -40,7 +41,8 @@ class HtmlFileActivity : BaseActivity() {
                     .website(AssetsWebsite(assets, "web"))
                     .listener(mListener)
                     .filter(HttpCacheFilter())
-                    .registerHandler("/video", VideoHandler())
+                    .registerHandler("/appList", AppHandler())
+                    .registerHandler("/openApk", OpenApkHandler())
                     .build()
             mServer!!.startup()
         }
