@@ -94,7 +94,7 @@
         <activity android:name=".PwdInputActivity" />
         <activity android:name=".DownloadingActivity" />
         <activity android:name=".SignActivity" />
-        <activity android:name=".HtmlFileActivity" />
+        <activity android:name=".放大镜页面" />
         <activity
             android:name=".HWLockActivity"
             android:theme="@style/ActivityTransparent" />
