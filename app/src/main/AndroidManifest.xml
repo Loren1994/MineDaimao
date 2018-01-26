@@ -16,6 +16,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name = "android.permission.DISABLE_KEYGUARD"/>
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
@@ -94,6 +95,9 @@
         <activity android:name=".DownloadingActivity" />
         <activity android:name=".SignActivity" />
         <activity android:name=".HtmlFileActivity" />
+        <activity
+            android:name=".HWLockActivity"
+            android:theme="@style/ActivityTransparent" />
 
         <receiver android:name=".DemoAppWidget">
             <intent-filter>

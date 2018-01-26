@@ -57,8 +57,8 @@ dependencies {
     implementation 'com.hulab.android:debugkit:1.1.0'
     implementation "io.objectbox:objectbox-kotlin:$objectboxVersion"
     kapt "io.objectbox:objectbox-processor:$objectboxVersion"
-    debugCompile "io.objectbox:objectbox-android-objectbrowser:$objectboxVersion"
-    releaseCompile "io.objectbox:objectbox-android:$objectboxVersion"
+    debugImplementation "io.objectbox:objectbox-android-objectbrowser:$objectboxVersion"
+    releaseImplementation "io.objectbox:objectbox-android:$objectboxVersion"
     implementation 'com.yanzhenjie:andserver:1.1.0'
 }
 androidExtensions {

@@ -68,7 +68,8 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
             layoutMain.addView(titleBar, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
             titleBar?.setLeftDrawable(R.drawable.ic_back)
             titleBar?.setTitleBarLeftClick { finish() }
-            titleBar?.setTitleBarText(intent.getStringExtra("title") ?: getString(R.string.app_name))
+            titleBar?.setTitleBarText(intent.getStringExtra("title")
+                    ?: getString(R.string.app_name))
         }
         if (allowFullScreen()) {
             requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -104,6 +105,21 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
             super.setContentView(layoutMain)
         } else {
             super.setContentView(layoutResID)
+        }
+    }
+
+    open fun isGoneBar() = false
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (isGoneBar() && hasFocus) {
+            val decorView = window.decorView
+            decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_FULLSCREEN
+                    or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
         }
     }
 
@@ -213,7 +229,8 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
                 list.add(it)
             }
         }
-        EasyPermissions.requestPermissions(this, rationale ?: getString(R.string.app_name) + "需要申请权限", 110, *list.toTypedArray())
+        EasyPermissions.requestPermissions(this, rationale ?: getString(R.string.app_name)
+        +"需要申请权限", 110, *list.toTypedArray())
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {

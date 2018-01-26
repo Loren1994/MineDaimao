@@ -94,7 +94,15 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="@drawable/bg_main_coner"
-            android:text="隔空取物"
+            android:text="AndServer通信"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/hw_tv"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/bg_match_coner"
+            android:text="透视效果"
             android:textColor="@color/white" />
     </com.example.loren.minesample.widget.FixedFlowLayout>
 

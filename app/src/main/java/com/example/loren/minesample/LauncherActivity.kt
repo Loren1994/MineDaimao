@@ -105,7 +105,7 @@ class LauncherActivity : BaseActivity() {
             menu_container_ll!!.addView(view)
         }
         head_ll!!.setOnClickListener {
-            Snackbar.make(window.decorView, "this is 胜利哥.png", 3000).show()
+            Snackbar.make(window.decorView, "yo yo yo", 3000).show()
             draw_layout!!.closeDrawer(Gravity.START)
         }
         initBottomNavigation()
