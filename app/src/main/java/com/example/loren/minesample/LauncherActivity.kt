@@ -90,7 +90,7 @@ class LauncherActivity : BaseActivity() {
                 }
             }
         })
-        bottom_navigation!!.setOnTabSelectedListener(AHBottomNavigation.OnTabSelectedListener { position, wasSelected ->
+        bottom_navigation!!.setOnTabSelectedListener(AHBottomNavigation.OnTabSelectedListener { position, _ ->
             if (draw_layout!!.isDrawerVisible(Gravity.START)) {
                 draw_layout!!.closeDrawer(Gravity.START)
                 return@OnTabSelectedListener false
