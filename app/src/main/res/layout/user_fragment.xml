@@ -5,112 +5,126 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <com.example.loren.minesample.widget.FixedFlowLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        app:child_gravity="center"
-        app:columns_per_line="3"
-        app:horizontal_spacing="8dp"
-        app:vertical_spacing="8dp">
+        android:overScrollMode="never">
 
-        <TextView
-            android:id="@+id/amazing_tv"
+        <com.example.loren.minesample.widget.FixedFlowLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/bg_main_coner"
-            android:text="滑动返回"
-            android:textColor="@color/white" />
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            app:child_gravity="center"
+            app:columns_per_line="3"
+            app:horizontal_spacing="8dp"
+            app:vertical_spacing="8dp">
 
-        <TextView
-            android:id="@+id/clip_tv"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/bg_match_coner"
-            android:text="粘贴板"
-            android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/amazing_tv"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_main_coner"
+                android:text="滑动返回"
+                android:textColor="@color/white" />
 
-        <!--<TextView-->
-        <!--android:visibility="gone"-->
-        <!--android:id="@+id/translation_tv"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="100dp"-->
-        <!--android:background="@drawable/bg_match_coner"-->
-        <!--android:text="YouDao翻译"-->
-        <!--android:textColor="@color/white" />-->
+            <TextView
+                android:id="@+id/clip_tv"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_match_coner"
+                android:text="粘贴板"
+                android:textColor="@color/white" />
 
-        <TextView
-            android:id="@+id/phone_tv"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/bg_main_coner"
-            android:text="提取APK"
-            android:textColor="@color/white" />
+            <!--<TextView-->
+            <!--android:visibility="gone"-->
+            <!--android:id="@+id/translation_tv"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="100dp"-->
+            <!--android:background="@drawable/bg_match_coner"-->
+            <!--android:text="YouDao翻译"-->
+            <!--android:textColor="@color/white" />-->
 
-
-        <TextView
-            android:id="@+id/access_tv"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/bg_match_coner"
-            android:text="悬浮窗"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/client_tv"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/bg_main_coner"
-            android:text="Client"
-            android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/phone_tv"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_main_coner"
+                android:text="提取APK"
+                android:textColor="@color/white" />
 
 
-        <TextView
-            android:id="@+id/server_tv"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/bg_match_coner"
-            android:text="Server"
-            android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/access_tv"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_match_coner"
+                android:text="悬浮窗"
+                android:textColor="@color/white" />
 
-        <TextView
-            android:id="@+id/blur_tv"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/bg_main_coner"
-            android:text="仿雅虎天气"
-            android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/client_tv"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_main_coner"
+                android:text="Client"
+                android:textColor="@color/white" />
 
-        <TextView
-            android:id="@+id/input_tv"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/bg_match_coner"
-            android:text="自定义键盘"
-            android:textColor="@color/white" />
 
-        <TextView
-            android:id="@+id/html_tv"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/bg_main_coner"
-            android:text="AndServer通信"
-            android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/server_tv"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_match_coner"
+                android:text="Server"
+                android:textColor="@color/white" />
 
-        <TextView
-            android:id="@+id/hw_tv"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/bg_match_coner"
-            android:text="透视效果"
-            android:textColor="@color/white" />
-        <TextView
-            android:id="@+id/放大镜_tv"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/bg_main_coner"
-            android:text="放大镜"
-            android:textColor="@color/white" />
-    </com.example.loren.minesample.widget.FixedFlowLayout>
+            <TextView
+                android:id="@+id/blur_tv"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_main_coner"
+                android:text="仿雅虎天气"
+                android:textColor="@color/white" />
 
+            <TextView
+                android:id="@+id/input_tv"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_match_coner"
+                android:text="自定义键盘"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/html_tv"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_main_coner"
+                android:text="AndServer通信"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/hw_tv"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_match_coner"
+                android:text="透视效果"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/放大镜_tv"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_main_coner"
+                android:text="放大镜"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/search_tv"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_match_coner"
+                android:text="搜索记录"
+                android:textColor="@color/white" />
+        </com.example.loren.minesample.widget.FixedFlowLayout>
+    </ScrollView>
 </LinearLayout>
