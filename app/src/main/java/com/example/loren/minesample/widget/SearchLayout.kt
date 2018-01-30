@@ -34,15 +34,6 @@ class SearchLayout(context: Context, attributeSet: AttributeSet) : ViewGroup(con
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         measureChildren(widthMeasureSpec, heightMeasureSpec)
-        var height = 0
-        if (childCount > 0) {
-            itemHeight = getChildAt(0).measuredHeight
-            height = (allLines.size - 1) * COLUMNS_SPACE + itemHeight * allLines.size + paddingTop + paddingBottom
-        }
-        setMeasuredDimension(screenWidth, height)
-    }
-
-    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         allLines.clear()
         val lineViews = arrayListOf<View>()
         repeat(childCount) { item ->
@@ -64,9 +55,22 @@ class SearchLayout(context: Context, attributeSet: AttributeSet) : ViewGroup(con
                 allLines.add(copyList(lineViews))
             }
         }
+        refreshHeight()
+    }
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         allLines.forEachIndexed { index, item ->
             renderLineViews(item, index + 1)
         }
+    }
+
+    private fun refreshHeight() {
+        var height = 0
+        if (childCount > 0) {
+            itemHeight = getChildAt(0).measuredHeight
+            height = (allLines.size - 1) * COLUMNS_SPACE + itemHeight * allLines.size + paddingTop + paddingBottom
+        }
+        setMeasuredDimension(screenWidth, height)
     }
 
     private fun copyList(views: ArrayList<View>): ArrayList<View> {
@@ -87,6 +91,7 @@ class SearchLayout(context: Context, attributeSet: AttributeSet) : ViewGroup(con
     }
 
     fun setData(data: ArrayList<String>) {
+        removeAllViews()
         data.filter { !it.isEmpty() }.forEachIndexed { index, it ->
             val tv = TextView(context)
             tv.text = it
