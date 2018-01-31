@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -64,6 +63,9 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
             layoutMain = LinearLayout(this)
             layoutMain.orientation = LinearLayout.VERTICAL
             titleBar = TitleBar(this)
+            if (useImmersive()) {
+                titleBar?.useTitleImmersive()
+            }
             titleBar?.useElevation()
             layoutMain.addView(titleBar, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
             titleBar?.setLeftDrawable(R.drawable.ic_back)
@@ -71,16 +73,25 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
             titleBar?.setTitleBarText(intent.getStringExtra("title")
                     ?: getString(R.string.app_name))
         }
-        if (allowFullScreen()) {
-            requestWindowFeature(Window.FEATURE_NO_TITLE)
-            window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN or WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_FULLSCREEN or WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-        }
+//        if (allowFullScreen()) {
+//            requestWindowFeature(Window.FEATURE_NO_TITLE)
+//            window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN or WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_FULLSCREEN or WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+//        }
         setContentView(bindLayout())
         if (useImmersive()) {
-            window.navigationBarColor = findColor(R.color.transparent)
-            val option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-            window.decorView.systemUiVisibility = option
+            window.navigationBarColor = findColor(R.color.gray_dark)
             window.statusBarColor = findColor(R.color.transparent)
+            val option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            window.decorView.systemUiVisibility = option
+        }
+        if (allowFullScreen()) {
+            val option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
+                    View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+            window.decorView.systemUiVisibility = option
+            window.navigationBarColor = findColor(R.color.transparent)
         }
         window.setBackgroundDrawable(ColorDrawable(findColor(R.color.background)))
         ActivityMgr.add(this)
@@ -113,8 +124,7 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (isGoneBar() && hasFocus) {
-            val decorView = window.decorView
-            decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                     or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                     or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                     or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
@@ -248,8 +258,9 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
         this.onPermissionsGranted = null
     }
 
-    open protected fun allowFullScreen() = false
-    open protected fun useImmersive() = false
+    protected open fun allowFullScreen() = false
+
+    protected open fun useImmersive() = true
 
     fun showLoadingDialog(msg: String = "加载中…", cancelable: Boolean = true) {
         if (loadingDialog.isShowing) {

@@ -149,7 +149,7 @@ class BlurListActivity : BaseActivity() {
 
     override fun useTitleBar() = false
 
-//    override fun allowFullScreen() = false
+    override fun allowFullScreen() = true
 
     override fun useImmersive() = true
 

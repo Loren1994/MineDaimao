@@ -22,9 +22,7 @@ import com.example.loren.minesample.fragment.HomeFragment
 import com.example.loren.minesample.fragment.UserFragment
 import com.example.loren.minesample.fragment.UtilsFragment
 import kotlinx.android.synthetic.main.launcher_activity.*
-import pers.victor.ext.date
-import pers.victor.ext.findColor
-import pers.victor.ext.spSetString
+import pers.victor.ext.*
 
 
 /**
@@ -49,7 +47,20 @@ class LauncherActivity : BaseActivity() {
 
     override fun useTitleBar() = false
 
+    private fun setToolImmersive() {
+        tool_bar.setPaddingTop(getStatusBarHeight())
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+    }
+
     override fun initWidgets() {
+        setToolImmersive()
         setDoubleBackFinish()
         tool_bar!!.title = titleArr[0]
         setSupportActionBar(tool_bar)

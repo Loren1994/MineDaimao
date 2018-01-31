@@ -3,7 +3,9 @@ package com.example.loren.minesample
 import android.view.View
 import com.example.loren.minesample.base.ui.BaseActivity
 import kotlinx.android.synthetic.main.search_activity.*
+import pers.victor.ext.no
 import pers.victor.ext.toast
+import pers.victor.ext.yes
 
 /**
  * Copyright © 2018/1/29 by loren
@@ -18,10 +20,8 @@ class SearchActivity : BaseActivity() {
         search_layout.setData(list)
         search_layout.onItemListener = { pos, tv -> toast("点击 $pos - ${tv.text}") }
         add_btn.setOnClickListener {
-            if (!input_edt.text.toString().isBlank()) {
-                list.add(input_edt.text.toString())
-                search_layout.setData(list)
-            }
+            list.add((!input_edt.text.toString().isBlank()).yes { input_edt.text.toString() }.no { System.currentTimeMillis().toString() })
+            search_layout.setData(list)
         }
     }
 

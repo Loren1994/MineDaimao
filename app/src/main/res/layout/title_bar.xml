@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/title_ll"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:orientation="horizontal">
@@ -27,7 +28,7 @@
                 android:layout_height="18dp"
                 android:layout_gravity="center_vertical"
                 android:scaleType="fitCenter"
-                android:tint="@color/main"
+                android:tint="@color/white"
                 android:visibility="gone" />
 
             <TextView
@@ -35,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textColor="@color/main"
+                android:textColor="@color/text_white"
                 android:textSize="14sp"
                 android:visibility="gone"
                 tools:text="左文字" />
@@ -50,7 +51,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:textColor="@color/text_black"
+            android:textColor="@color/text_white"
             android:textSize="17sp"
             tools:text="标题" />
 
@@ -68,7 +69,7 @@
                 android:id="@+id/title_bar_right_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/main"
+                android:textColor="@color/text_white"
                 android:textSize="14sp"
                 android:visibility="gone"
                 tools:text="右文字" />
@@ -78,7 +79,7 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:scaleType="fitCenter"
-                android:tint="@color/main"
+                android:tint="@color/text_white"
                 android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>

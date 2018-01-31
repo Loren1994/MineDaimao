@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.title_bar.view.*
 import pers.victor.ext.dp2px
 import pers.victor.ext.findColor
 import pers.victor.ext.findDrawable
+import pers.victor.ext.getStatusBarHeight
 
 
 /**
@@ -25,6 +26,13 @@ class TitleBar : FrameLayout {
     init {
         setBackgroundColor(findColor(R.color.background))
         addView(inflate(context, R.layout.title_bar, null), LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+    }
+
+    fun useTitleImmersive() {
+        setBackgroundColor(findColor(R.color.gray_dark))
+        val param = title_ll.layoutParams as LinearLayout.LayoutParams
+        param.topMargin = getStatusBarHeight()
+        layoutParams = param
     }
 
     fun setTitleBarText(title: String?) {

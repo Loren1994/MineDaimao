@@ -10,6 +10,7 @@ import android.view.MotionEvent.ACTION_DOWN
 import android.view.MotionEvent.ACTION_UP
 import android.view.View
 import com.example.loren.minesample.R
+import pers.victor.ext.getVirNavBarHeight
 import pers.victor.ext.screenHeight
 import pers.victor.ext.screenWidth
 
@@ -45,7 +46,7 @@ class 放大镜控件(context: Context, attributeSet: AttributeSet) : View(conte
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        setMeasuredDimension(screenWidth, screenHeight)
+        setMeasuredDimension(screenWidth, screenHeight + getVirNavBarHeight())
     }
 
     override fun onDraw(canvas: Canvas) {
