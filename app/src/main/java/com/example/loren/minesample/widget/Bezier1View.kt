@@ -4,7 +4,6 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import com.example.loren.minesample.R
 import java.util.*
@@ -15,7 +14,7 @@ import java.util.*
  */
 class Bezier1View(context: Context, attributes: AttributeSet) : View(context, attributes) {
 
-    private val BEZIER_COEFICIENT = 0.551915024494f //bezier倍数
+    private val BEZIER_COEFICIENT = 0.551915024494f //bezier倍数(圆形)
     private val DURING = 1000L
     private var RADIUS = 0 //半径
     private var centerPoint = PointF() //坐标系中心点
