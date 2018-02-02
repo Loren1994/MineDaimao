@@ -1,0 +1,81 @@
+package com.example.loren.minesample.adapter
+
+import android.graphics.*
+import android.support.v7.widget.RecyclerView
+import android.view.View
+import pers.victor.ext.dp2px
+
+/**
+ * Copyright © 2018/2/2 by loren
+ */
+class HeaderItemDecoration(private val headerList: List<IndexHeader>) : RecyclerView.ItemDecoration() {
+    private val HEADER_HEIGHT = 100f
+    private val HEADER_PADDING = dp2px(8).toFloat()
+    private val paint = Paint()
+    private val textPaint = Paint()
+    private val indexMap = hashMapOf<String, Int>()
+
+    init {
+        paint.isAntiAlias = true
+        paint.color = Color.GREEN
+        textPaint.isAntiAlias = true
+        textPaint.color = Color.RED
+        textPaint.textSize = HEADER_HEIGHT / 3
+        headerList.forEachIndexed { index, indexHeader ->
+            if (!indexMap.containsKey(indexHeader.getTitle())) {
+                indexMap[indexHeader.getTitle()] = index
+            }
+        }
+    }
+
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+        super.getItemOffsets(outRect, view, parent, state)
+        if (parent.getChildAdapterPosition(view) in indexMap.values) {
+            outRect.top = HEADER_HEIGHT.toInt()
+        }
+    }
+
+    override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+        super.onDraw(c, parent, state)
+        // parent:当前显示的
+        repeat(parent.childCount) {
+            val child = parent.getChildAt(it)
+            if (parent.getChildAdapterPosition(child) in indexMap.values) {
+                c.drawRect(child.left.toFloat(), child.top.toFloat() - HEADER_HEIGHT, child.right.toFloat(), child.bottom.toFloat() - child.measuredHeight, paint)
+                val baseline = (child.bottom.toFloat() - child.measuredHeight + child.top - HEADER_HEIGHT) / 2 + (textPaint.fontMetrics.descent - textPaint.fontMetrics.ascent) / 2 - textPaint.fontMetrics.descent
+                c.drawText(headerList[parent.getChildAdapterPosition(child)].getTitle(), HEADER_PADDING, baseline, textPaint)
+            }
+        }
+    }
+
+    //顶部悬浮
+    override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+        super.onDrawOver(c, parent, state)
+        // parent:只包含当前显示的
+        val curChild = parent.getChildAt(0)
+        val firstPos = parent.getChildAdapterPosition(curChild)
+        val rect = RectF(0f, 0f, parent.measuredWidth.toFloat(), HEADER_HEIGHT)
+        if (firstPos + 1 in indexMap.values) {
+            if (curChild.bottom.toFloat() <= HEADER_HEIGHT && firstPos + 1 in indexMap.values) {
+                rect.top = -(HEADER_HEIGHT - curChild.bottom.toFloat())
+            }
+            rect.bottom = Math.min(curChild.bottom.toFloat(), HEADER_HEIGHT)
+        }
+        c.drawRect(rect, paint)
+        //rect.bottom & rect.height() & (baseline|rect.top - OFFSET)
+        var baseline = (rect.height()) / 2 + (textPaint.fontMetrics.descent - textPaint.fontMetrics.ascent) / 2 - textPaint.fontMetrics.descent
+        if (curChild.bottom.toFloat() <= HEADER_HEIGHT && firstPos + 1 in indexMap.values) {
+            baseline -= (HEADER_HEIGHT - curChild.bottom.toFloat())
+        }
+        c.drawText(headerList[firstPos].getTitle(), HEADER_PADDING, baseline, textPaint)
+    }
+}
+
+interface IndexHeader {
+    fun getTitle(): String
+}
+
+//example
+data class Entity(val age: Int, val name: String) : IndexHeader {
+    override fun getTitle() = name
+}

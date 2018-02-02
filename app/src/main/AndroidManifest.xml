@@ -97,6 +97,7 @@
         <activity android:name=".放大镜页面" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".HtmlFileActivity" />
+        <activity android:name=".StayTopActivity" />
         <activity
             android:name=".HWLockActivity"
             android:theme="@style/ActivityTransparent" />

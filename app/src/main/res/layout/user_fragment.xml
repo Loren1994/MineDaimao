@@ -125,6 +125,14 @@
                 android:background="@drawable/bg_match_coner"
                 android:text="搜索记录"
                 android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/top_tv"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_main_coner"
+                android:text="顶部悬浮列表"
+                android:textColor="@color/white" />
         </com.example.loren.minesample.widget.FixedFlowLayout>
     </ScrollView>
 </LinearLayout>
