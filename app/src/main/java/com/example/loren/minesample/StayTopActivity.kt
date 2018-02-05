@@ -21,6 +21,7 @@ class StayTopActivity : BaseActivity() {
         top_rv.layoutManager = LinearLayoutManager(this)
         top_rv.addItemDecoration(HeaderItemDecoration(data))
         top_rv.adapter = TopListAdapter(data)
+        slide_view.setData(arrayListOf("A", "B", "C", "D", "E", "F", "G", "H"))
     }
 
     override fun setListeners() {
