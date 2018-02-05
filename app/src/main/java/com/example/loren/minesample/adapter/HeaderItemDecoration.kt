@@ -9,7 +9,7 @@ import pers.victor.ext.dp2px
  * Copyright © 2018/2/2 by loren
  */
 class HeaderItemDecoration(private val headerList: List<IndexHeader>) : RecyclerView.ItemDecoration() {
-    private val HEADER_HEIGHT = 100f
+    private val HEADER_HEIGHT = 150f //小于等于ITEM的高度
     private val HEADER_PADDING = dp2px(8).toFloat()
     private val paint = Paint()
     private val textPaint = Paint()
@@ -37,7 +37,6 @@ class HeaderItemDecoration(private val headerList: List<IndexHeader>) : Recycler
 
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDraw(c, parent, state)
-        // parent:当前显示的
         repeat(parent.childCount) {
             val child = parent.getChildAt(it)
             if (parent.getChildAdapterPosition(child) in indexMap.values) {
@@ -48,10 +47,8 @@ class HeaderItemDecoration(private val headerList: List<IndexHeader>) : Recycler
         }
     }
 
-    //顶部悬浮
     override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(c, parent, state)
-        // parent:只包含当前显示的
         val curChild = parent.getChildAt(0)
         val firstPos = parent.getChildAdapterPosition(curChild)
         val rect = RectF(0f, 0f, parent.measuredWidth.toFloat(), HEADER_HEIGHT)
