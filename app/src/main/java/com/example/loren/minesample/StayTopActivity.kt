@@ -38,13 +38,11 @@ class StayTopActivity : BaseActivity() {
             val curPos = headerItemDecoration.indexMap[text]!!
             val curChild = (top_rv.layoutManager as LinearLayoutManager).findViewByPosition(curPos)
             when {
-                curPos <= firstPos -> {
-                    top_rv.scrollToPosition(curPos)
-                }
                 curPos >= lastPos -> {
                     top_rv.scrollToPosition(curPos)
                     isMove = true
                 }
+                curPos <= firstPos -> top_rv.scrollToPosition(curPos)
                 else -> top_rv.scrollBy(0, curChild.top)
             }
         }
