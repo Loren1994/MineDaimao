@@ -8,12 +8,14 @@ import pers.victor.ext.dp2px
 /**
  * Copyright © 2018/2/2 by loren
  */
-class HeaderItemDecoration(private val headerList: List<IndexHeader>) : RecyclerView.ItemDecoration() {
+class HeaderItemDecoration(private val headerList: List<IndexHeader>,val onTitleChange: ((titleIndex: Int) -> Unit)) : RecyclerView.ItemDecoration() {
     private val HEADER_HEIGHT = 150f //小于等于ITEM的高度
     private val HEADER_PADDING = dp2px(8).toFloat()
     private val paint = Paint()
     private val textPaint = Paint()
-    private val indexMap = hashMapOf<String, Int>()
+    val indexMap = hashMapOf<String, Int>()
+    private var titleList = arrayListOf<String>()
+    private var currentTitleIndex = -1
 
     init {
         paint.isAntiAlias = true
@@ -24,6 +26,9 @@ class HeaderItemDecoration(private val headerList: List<IndexHeader>) : Recycler
         headerList.forEachIndexed { index, indexHeader ->
             if (!indexMap.containsKey(indexHeader.getTitle())) {
                 indexMap[indexHeader.getTitle()] = index
+            }
+            if (!titleList.contains(indexHeader.getTitle())) {
+                titleList.add(indexHeader.getTitle())
             }
         }
     }
@@ -59,12 +64,16 @@ class HeaderItemDecoration(private val headerList: List<IndexHeader>) : Recycler
             rect.bottom = Math.min(curChild.bottom.toFloat(), HEADER_HEIGHT)
         }
         c.drawRect(rect, paint)
-        //rect.bottom & rect.height() & (baseline|rect.top - OFFSET)
         var baseline = (rect.height()) / 2 + (textPaint.fontMetrics.descent - textPaint.fontMetrics.ascent) / 2 - textPaint.fontMetrics.descent
         if (curChild.bottom.toFloat() <= HEADER_HEIGHT && firstPos + 1 in indexMap.values) {
             baseline -= (HEADER_HEIGHT - curChild.bottom.toFloat())
         }
         c.drawText(headerList[firstPos].getTitle(), HEADER_PADDING, baseline, textPaint)
+
+        if (currentTitleIndex != titleList.indexOf(headerList[firstPos].getTitle()) || currentTitleIndex == -1) {
+            currentTitleIndex = titleList.indexOf(headerList[firstPos].getTitle())
+            onTitleChange.invoke(currentTitleIndex)
+        }
     }
 }
 
@@ -73,6 +82,6 @@ interface IndexHeader {
 }
 
 //example
-data class Entity(val age: Int, val name: String) : IndexHeader {
+data class Entity(val age: String, val name: String) : IndexHeader {
     override fun getTitle() = name
 }

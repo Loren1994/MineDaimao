@@ -12,8 +12,6 @@ import android.widget.TextView
 import com.example.loren.minesample.R
 import pers.victor.ext.dp2px
 import pers.victor.ext.findColor
-import pers.victor.ext.toast
-import java.util.*
 
 /**
  * Copyright © 2018/2/5 by loren
@@ -22,6 +20,9 @@ class SlideView(context: Context, attributeSet: AttributeSet) : ViewGroup(contex
 
     private var mPaint: Paint = Paint()
     private var textList = arrayListOf<String>()
+    private var clickIndex = 0
+    var onSlideItemListener: ((index: Int, text: String) -> Unit)? = null
+    private var fromScroll = false
 
     init {
         //不设背景默认不走onDraw
@@ -51,7 +52,7 @@ class SlideView(context: Context, attributeSet: AttributeSet) : ViewGroup(contex
     }
 
 
-    fun setData(data: ArrayList<String>) {
+    fun setData(data: MutableList<String>) {
         removeAllViews()
         textList.clear()
         textList.addAll(data)
@@ -62,8 +63,11 @@ class SlideView(context: Context, attributeSet: AttributeSet) : ViewGroup(contex
             tv.gravity = Gravity.CENTER
             tv.setPadding(dp2px(4), dp2px(4), dp2px(4), dp2px(4))
             tv.setOnClickListener {
-                toast("$index - $item")
                 setTvCheck(index)
+                if (!fromScroll) {
+                    onSlideItemListener?.invoke(index, item)
+                }
+                fromScroll = false
             }
             addView(tv)
         }
@@ -78,10 +82,8 @@ class SlideView(context: Context, attributeSet: AttributeSet) : ViewGroup(contex
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        when (event.action) {
-            MotionEvent.ACTION_MOVE -> {
-                scrollTvList(event.y)
-            }
+        if (event.action == MotionEvent.ACTION_MOVE) {
+            scrollTvList(event.y)
         }
         return true
     }
@@ -93,13 +95,16 @@ class SlideView(context: Context, attributeSet: AttributeSet) : ViewGroup(contex
         if (index < 0) {
             index = 0
         }
-        setTvCheck(index)
-        getChildAt(index).performClick()
+        if (clickIndex != index) {
+            setTvCheck(index)
+            getChildAt(index).performClick()
+        }
     }
 
     private fun setTvCheck(index: Int) {
         repeat(childCount) {
             if (index == it) {
+                clickIndex = index
                 (getChildAt(it) as TextView).setTextColor(findColor(R.color.green))
             } else {
                 (getChildAt(it) as TextView).setTextColor(Color.WHITE)
@@ -107,4 +112,12 @@ class SlideView(context: Context, attributeSet: AttributeSet) : ViewGroup(contex
         }
     }
 
+    //外部列表滚动时调用此方法
+    fun setCurrentCheck(index: Int) {
+        if (clickIndex != index) {
+            fromScroll = true
+            setTvCheck(index)
+            getChildAt(index).performClick()
+        }
+    }
 }
