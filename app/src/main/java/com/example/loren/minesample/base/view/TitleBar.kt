@@ -39,6 +39,10 @@ class TitleBar : FrameLayout {
         title_bar_title.text = title
     }
 
+    fun setTitleBarBackgroundColor(colorId: Int) {
+        setBackgroundColor(findColor(R.color.orange))
+    }
+
     fun setTitleBarColor(id: Int) = title_bar_title.setTextColor(id)
 
     fun setLeftDrawable(id: Int) {

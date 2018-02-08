@@ -159,6 +159,8 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
 
     protected fun setTitleBarColor(color: Int) = titleBar?.setTitleBarColor(findColor(color))
 
+    protected fun setTitleBarBackgroundColor(color: Int) = titleBar?.setTitleBarBackgroundColor(findColor(color))
+
     protected fun setTitleBarLeft(drawable: Int) = titleBar?.setLeftDrawable(drawable)
 
     protected fun setTitleBarRight(drawable: Int) = titleBar?.setRightDrawable(drawable)

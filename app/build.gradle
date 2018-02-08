@@ -60,6 +60,7 @@ dependencies {
     debugImplementation "io.objectbox:objectbox-android-objectbrowser:$objectboxVersion"
     releaseImplementation "io.objectbox:objectbox-android:$objectboxVersion"
     implementation 'com.yanzhenjie:andserver:1.1.0'
+    implementation 'androidx.core:core-ktx:0.1'
 }
 androidExtensions {
     experimental = true

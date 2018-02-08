@@ -14,7 +14,7 @@ import pers.victor.ext.toast
 import java.util.*
 
 class ChatActivity : BaseActivity(), AdjustLinearLayout.onSizeChangeListener {
-    //ALI interface 2018.10.30
+    //ALI API 2018.10.30 stop service
     private val ANSWER_URL = "http://jisuznwd.market.alicloudapi.com/iqa/query?question=%s"
     //SecretId: AKIDZzCBxVixrX1ILAs9JGxOcaIpAF4eM1oK
     //SecretKey: QbXQ7YjeNq30qSpxrWx85nGUTDm6B2e1
@@ -38,9 +38,11 @@ class ChatActivity : BaseActivity(), AdjustLinearLayout.onSizeChangeListener {
     }
 
     override fun initWidgets() {
+        setTitleBarText("智能问答")
+        setTitleBarBackgroundColor(R.color.orange)
+        setTitleBarLeftVisibility(View.INVISIBLE)
         setAnim()
         data = Gson().fromJson(Constant.JSON, MessageBean::class.java).data
-        title_tv!!.text = "智能问答"
         mAdapter = ChatAdapter(this, data!!)
 
         chat_rv!!.layoutManager = GridLayoutManager(this, 1)
@@ -102,5 +104,4 @@ class ChatActivity : BaseActivity(), AdjustLinearLayout.onSizeChangeListener {
             chat_rv!!.post { chat_rv!!.scrollBy(0, Integer.MAX_VALUE) }
     }
 
-    override fun useTitleBar() = false
 }
