@@ -98,6 +98,7 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".HtmlFileActivity" />
         <activity android:name=".StayTopActivity" />
+        <activity android:name=".RecyclerTouchActivity" />
         <activity
             android:name=".HWLockActivity"
             android:theme="@style/ActivityTransparent" />
