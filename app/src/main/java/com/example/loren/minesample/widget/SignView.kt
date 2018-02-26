@@ -27,6 +27,7 @@ class SignView(context: Context, attributeSet: AttributeSet) : View(context, att
         signPaint.strokeWidth = SIGN_WIDTH
         signPaint.strokeCap = Paint.Cap.ROUND
         signPaint.strokeJoin = Paint.Join.ROUND
+        signPaint.pathEffect = CornerPathEffect(50f)
     }
 
     override fun onDraw(canvas: Canvas) {
