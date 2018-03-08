@@ -51,7 +51,7 @@ class UserFragment : BaseFragment() {
                 android.provider.Settings.Secure.ACCESSIBILITY_ENABLED) == 1
     }
 
-    @AnimationClick([R.id.top_tv, R.id.search_tv, R.id.放大镜_tv, R.id.hw_tv, R.id.html_tv, R.id.input_tv, R.id.amazing_tv, R.id.phone_tv, R.id.clip_tv, R.id.access_tv, R.id.server_tv, R.id.client_tv, R.id.blur_tv], AnimationClickType.SCALE)
+    @AnimationClick([R.id.path_tv, R.id.top_tv, R.id.search_tv, R.id.放大镜_tv, R.id.hw_tv, R.id.html_tv, R.id.input_tv, R.id.amazing_tv, R.id.phone_tv, R.id.clip_tv, R.id.access_tv, R.id.server_tv, R.id.client_tv, R.id.blur_tv], AnimationClickType.SCALE)
     override fun onClick(v: View) {
         when (v.id) {
 //            R.id.translation_tv -> startActivity(Intent(mContext, TranslationActivity::class.java))
@@ -74,6 +74,7 @@ class UserFragment : BaseFragment() {
             R.id.放大镜_tv -> startActivity(Intent(activity, 放大镜页面::class.java))
             R.id.search_tv -> startActivity(Intent(activity, SearchActivity::class.java))
             R.id.top_tv -> startActivity(Intent(activity, StayTopActivity::class.java))
+            R.id.path_tv -> startActivity(Intent(activity, PathViewActivity::class.java))
         }
     }
 

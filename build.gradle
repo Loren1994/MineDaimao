@@ -7,7 +7,7 @@ ext {
     android_support_version = '27.0.2'
     objectboxVersion = '1.2.1'
 }
-apply from :'config.gradle'
+//apply from :'config.gradle'
 //apply from: 'https://raw.githubusercontent.com/VictorChow/config/master/config.gradle'
 
 allprojects {
