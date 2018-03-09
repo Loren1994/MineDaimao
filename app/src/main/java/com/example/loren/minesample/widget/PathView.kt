@@ -23,7 +23,7 @@ class PathView(context: Context, attributeSet: AttributeSet) : View(context, att
     private var dstPath = Path()
     private var curProgress = 0f
     val DURING_TIME = 10000L
-    val mText = "Loren"
+    val mText = "Loren NB !"
 
 
     init {
@@ -40,7 +40,7 @@ class PathView(context: Context, attributeSet: AttributeSet) : View(context, att
         drawPaint.color = Color.BLACK
         drawPaint.strokeWidth = 3f
         drawPaint.style = Paint.Style.STROKE
-        textPaint.textSize = sp2px(100).toFloat()
+        textPaint.textSize = sp2px(50).toFloat()
         textPaint.getTextPath(mText, 0, mText.length, 0f, textPaint.textSize, textPath)
         textPath.close() // !!!不close,drawPath无效
         pathMeasure.setPath(textPath, false)
