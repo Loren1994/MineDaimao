@@ -7,8 +7,19 @@
 
     <com.example.loren.minesample.widget.PathView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="16dp" />
+
+
+    <TextView
+        android:id="@+id/msg_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="请点击以上文字"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
 </LinearLayout>

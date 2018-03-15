@@ -23,7 +23,7 @@ class PathView(context: Context, attributeSet: AttributeSet) : View(context, att
     private var dstPath = Path()
     private var curProgress = 0f
     val DURING_TIME = 10000L
-    val mText = "Loren NB !"
+    val mText = "Loren"
 
 
     init {

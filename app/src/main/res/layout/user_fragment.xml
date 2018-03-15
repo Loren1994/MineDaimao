@@ -142,6 +142,14 @@
                 android:text="文字进度"
                 android:textColor="@color/white" />
 
+            <TextView
+                android:id="@+id/expand_tv"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_main_coner"
+                android:text="文字展开收缩"
+                android:textColor="@color/white" />
+
         </com.example.loren.minesample.widget.FixedFlowLayout>
     </ScrollView>
 </LinearLayout>
