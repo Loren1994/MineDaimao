@@ -33,12 +33,9 @@ public class EyeView extends FrameLayout {
         init();
     }
 
-    @SuppressLint("NewApi")
     private void init() {
         setDrawingCacheEnabled(true);
-        if (Build.VERSION.SDK_INT >= 11) {
-            setLayerType(LAYER_TYPE_SOFTWARE, null);
-        }
+        setLayerType(LAYER_TYPE_SOFTWARE, null);
         setBackgroundResource(R.drawable.eye);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         // default hide

@@ -2,7 +2,6 @@ package com.example.loren.minesample
 
 import android.animation.ObjectAnimator
 import android.content.Intent
-import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
@@ -44,7 +43,7 @@ class CopyWxPullActivity : BaseActivity() {
                 param.setMargins(0, offset * 3, 0, 0)
                 eyes.layoutParams = param
                 eyes.setRadius(offset)
-                Log.d("loren", "offset=" + offset)
+                Log.d("loren", "offset=$offset")
                 if (offset >= 130) {
 //                    startActivity(Intent(this, CopyWxActivity::class.java))
                     isOpen = true
@@ -67,15 +66,15 @@ class CopyWxPullActivity : BaseActivity() {
 
     private fun reset(radius: Int) {
         val animator = ObjectAnimator.ofInt(eyes, "Y", eyes.y.toInt(), 0).setDuration(800)
-        val radiuAnim = ObjectAnimator.ofInt(eyes, "Y", radius, 0).setDuration(800)
-        radiuAnim.addUpdateListener { radiuAnim -> eyes.setRadius(radiuAnim.animatedValue as Int) }
-        animator.addUpdateListener { animator ->
+        val radiusAnim = ObjectAnimator.ofInt(eyes, "Y", radius, 0).setDuration(800)
+        radiusAnim.addUpdateListener { eyes.setRadius(radiusAnim.animatedValue as Int) }
+        animator.addUpdateListener {
             val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
             params.gravity = Gravity.CENTER
-            params.setMargins(0, animator.animatedValue as Int, 0, 0)
+            params.setMargins(0, it.animatedValue as Int, 0, 0)
             eyes.layoutParams = params
         }
-        radiuAnim.start()
+        radiusAnim.start()
         animator.start()
         text.text = "下拉睁眼"
     }
