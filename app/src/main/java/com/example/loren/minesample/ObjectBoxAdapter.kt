@@ -13,7 +13,7 @@ import pers.victor.ext.inflate
  */
 class ObjectBoxAdapter(val list: MutableList<User>) : RecyclerView.Adapter<ObjectBoxAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int) = ViewHolder(inflate(R.layout.item_test, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(inflate(R.layout.item_test, parent, false))
 
     override fun getItemCount() = list.size
 

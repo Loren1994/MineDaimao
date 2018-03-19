@@ -38,21 +38,22 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.android.support:palette-v7:$android_support_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$android_support_version"
     implementation "com.android.support:support-v4:$android_support_version"
     implementation "com.android.support:recyclerview-v7:$android_support_version"
     implementation "com.android.support:design:$android_support_version"
     implementation "com.android.support:cardview-v7:$android_support_version"
-    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
     implementation 'hanks.xyz:htextview-library:0.1.2'
     implementation 'com.facebook.fresco:fresco:0.13.0'
     implementation 'com.aurelhubert:ahbottomnavigation:2.1.0'
     implementation 'com.balysv.materialmenu:material-menu:2.0.0'
     implementation 'com.google.code.gson:gson:2.8.2'
-    implementation 'pub.devrel:easypermissions:1.0.1'
+    implementation 'pub.devrel:easypermissions:1.1.1'
     implementation 'com.orhanobut:logger:2.1.1'
-    implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation 'org.greenrobot:eventbus:3.1.1'
     implementation('com.github.VictorChow:kotlin-android-lib:1.2.1') {
         transitive = false
     }
@@ -62,10 +63,16 @@ dependencies {
     debugImplementation "io.objectbox:objectbox-android-objectbrowser:$objectboxVersion"
     releaseImplementation "io.objectbox:objectbox-android:$objectboxVersion"
     implementation 'com.yanzhenjie:andserver:1.1.0'
-    implementation 'androidx.core:core-ktx:0.1'
+    implementation 'androidx.core:core-ktx:0.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5'
 }
 androidExtensions {
     experimental = true
 }
 apply plugin: 'io.objectbox'
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
 

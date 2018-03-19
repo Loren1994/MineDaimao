@@ -38,7 +38,7 @@ class ShortcutAdapter(val mContext: Context, val mdata: Array<String>) : Adapter
         holder.itemView.item.text=mdata[position]
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
             ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.message_item, parent, false))
 
     override fun getItemCount(): Int = mdata.size

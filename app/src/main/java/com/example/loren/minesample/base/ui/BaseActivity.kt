@@ -250,14 +250,13 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
 
-    override fun onPermissionsDenied(requestCode: Int, permissions: MutableList<String>?) {
-        permissions?.forEach { this.onPermissionsDenied?.invoke(it) }
-        this.onPermissionsDenied = null
-    }
-
-    override fun onPermissionsGranted(requestCode: Int, permissions: MutableList<String>?) {
-        permissions?.forEach { this.onPermissionsGranted?.invoke(it) }
+    override fun onPermissionsGranted(requestCode: Int, permissions: MutableList<String>) {
+        permissions.forEach { this.onPermissionsGranted?.invoke(it) }
         this.onPermissionsGranted = null
+    }
+    override fun onPermissionsDenied(requestCode: Int, permissions: MutableList<String>) {
+        permissions.forEach { this.onPermissionsDenied?.invoke(it) }
+        this.onPermissionsDenied = null
     }
 
     protected open fun allowFullScreen() = false

@@ -4,7 +4,7 @@ ext {
     build_tools_version = '27.0.3'
     min_sdk_version = 21
     target_sdk_version = compile_sdk_version
-    android_support_version = '27.0.2'
+    android_support_version = '27.1.0'
     objectboxVersion = '1.2.1'
 }
 //apply from :'config.gradle'

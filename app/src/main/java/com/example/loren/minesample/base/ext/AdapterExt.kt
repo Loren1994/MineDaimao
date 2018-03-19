@@ -12,7 +12,7 @@ import pers.victor.ext.inflate
 class Holder(override val containerView: View?) : RecyclerView.ViewHolder(containerView), LayoutContainer
 
 abstract class CommonAdapter : RecyclerView.Adapter<Holder>() {
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int) = Holder(inflate(bindLayout(), parent))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = Holder(inflate(bindLayout(), parent))
 
     abstract fun bindLayout(): Int
 }

@@ -161,13 +161,13 @@ abstract class BaseFragment : Fragment(), View.OnClickListener, EasyPermissions.
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
 
-    override fun onPermissionsDenied(requestCode: Int, permissions: MutableList<String>?) {
-        permissions?.forEach { this.onPermissionsDenied?.invoke(it) }
+    override fun onPermissionsDenied(requestCode: Int, permissions: MutableList<String>) {
+        permissions.forEach { this.onPermissionsDenied?.invoke(it) }
         this.onPermissionsDenied = null
     }
 
-    override fun onPermissionsGranted(requestCode: Int, permissions: MutableList<String>?) {
-        permissions?.forEach { this.onPermissionsGranted?.invoke(it) }
+    override fun onPermissionsGranted(requestCode: Int, permissions: MutableList<String>) {
+        permissions.forEach { this.onPermissionsGranted?.invoke(it) }
         this.onPermissionsGranted = null
     }
 

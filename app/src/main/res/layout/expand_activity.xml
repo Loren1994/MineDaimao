@@ -9,7 +9,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@color/orange"
-        android:padding="8dp"
-        android:text="测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字" />
+        android:padding="8dp" />
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/expand_rv"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content" />-->
+
+    <Button
+        android:id="@+id/test_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Coroutine Test" />
 
 </LinearLayout>

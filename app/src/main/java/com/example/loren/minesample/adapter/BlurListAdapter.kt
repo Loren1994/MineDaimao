@@ -41,7 +41,7 @@ class BlurListAdapter(val data: MutableList<WeatherBean.Data.Forecast>) : Recycl
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return if (viewType == HEADER) {
             ViewHolder(inflate(R.layout.blur_list_header, parent, false))
         } else {
