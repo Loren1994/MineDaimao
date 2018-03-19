@@ -12,6 +12,7 @@ import android.hardware.camera2.*
 import android.media.Image
 import android.media.ImageReader
 import android.os.Build
+import android.os.Environment
 import android.os.Handler
 import android.os.HandlerThread
 import android.support.annotation.RequiresApi
@@ -25,6 +26,9 @@ import com.example.loren.minesample.base.ext.log
 import com.example.loren.minesample.base.ui.BaseActivity
 import com.example.loren.minesample.constant.MessageEvent
 import kotlinx.android.synthetic.main.activity_take_photo.*
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.delay
+import kotlinx.coroutines.experimental.launch
 import org.greenrobot.eventbus.EventBus
 import pers.victor.ext.findColor
 import pers.victor.ext.toast
@@ -54,10 +58,17 @@ class TakePhotoActivity : BaseActivity() {
             return
         }
         initView()
-        Thread {
-            Thread.sleep(1000)
-            takePicture()
-        }.start()
+        toast("请稍等...")
+        takeDelay()
+    }
+
+    private fun takeDelay() {
+        launch {
+            async {
+                delay(2000)
+                takePicture()
+            }
+        }
     }
 
     override fun setListeners() {
@@ -133,8 +144,8 @@ class TakePhotoActivity : BaseActivity() {
         handlerThread.start()
         childHandler = Handler(handlerThread.looper)
         mainHandler = Handler(mainLooper)
-//        mCameraID = "" + CameraCharacteristics.LENS_FACING_FRONT//后摄像头
-        mCameraID = "" + CameraCharacteristics.LENS_FACING_BACK//前摄像头
+        mCameraID = "" + CameraCharacteristics.LENS_FACING_FRONT//后摄像头
+//        mCameraID = "" + CameraCharacteristics.LENS_FACING_BACK//前摄像头
         mImageReader = ImageReader.newInstance(1080, 1920, ImageFormat.JPEG, 1)
         mImageReader!!.setOnImageAvailableListener({ p0 ->
             //可以在这里处理拍照得到的临时照片 例如，写入本地
@@ -207,19 +218,20 @@ class TakePhotoActivity : BaseActivity() {
                 // 打开闪光灯
                 previewRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH)
                 // 显示预览(此处无预览拍照)
-                //val previewRequest = previewRequestBuilder.build()
-                //mCameraCaptureSession!!.setRepeatingRequest(previewRequest, null, childHandler)
+//                val previewRequest = previewRequestBuilder.build()
+//                mCameraCaptureSession!!.setRepeatingRequest(previewRequest, null, childHandler)
             }
         }, childHandler)
     }
 
     @Throws(IOException::class)
     private fun saveMyBitmap(bmp: Bitmap, bitName: String): Boolean {
-        val dirFile = File("./sdcard/DCIM/Camera/")
+        val path = "${Environment.getExternalStorageDirectory()}/Camera/$bitName.png"
+        val dirFile = File("${Environment.getExternalStorageDirectory()}/Camera/")
         if (!dirFile.exists()) {
             dirFile.mkdirs()
         }
-        val f = File("./sdcard/DCIM/Camera/$bitName.png")
+        val f = File(path)
         var flag = false
         f.createNewFile()
         var fOut: FileOutputStream? = null
@@ -242,7 +254,7 @@ class TakePhotoActivity : BaseActivity() {
         } catch (e: IOException) {
             e.printStackTrace()
         }
-        toast("保存成功${dirFile.path}")
+        toast("保存成功$path")
         EventBus.getDefault().post(MessageEvent.TakePhoto(bmp))
         finish()
         return flag
