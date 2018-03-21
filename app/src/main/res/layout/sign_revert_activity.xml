@@ -15,7 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="回退" />
+            android:text="清除" />
 
         <Button
             android:id="@+id/confirm_btn"
@@ -25,7 +25,7 @@
             android:text="完成" />
     </LinearLayout>
 
-    <com.example.loren.minesample.widget.SignView
+    <com.example.loren.minesample.widget.SignWithRevertView
         android:id="@+id/sign_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"

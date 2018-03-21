@@ -94,6 +94,7 @@
         <activity android:name=".PwdInputActivity" />
         <activity android:name=".DownloadingActivity" />
         <activity android:name=".SignActivity" />
+        <activity android:name=".SignWithRevertActivity" />
         <activity android:name=".放大镜页面" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".HtmlFileActivity" />

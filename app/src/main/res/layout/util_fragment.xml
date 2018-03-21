@@ -71,6 +71,7 @@
             android:textColor="@color/grey"
             android:textSize="20sp" />
 
+
         <TextView
             android:id="@+id/sign_tv"
             android:layout_width="match_parent"
@@ -78,6 +79,16 @@
             android:background="@drawable/rectangle_gradient"
             android:gravity="center"
             android:text="签字板"
+            android:textColor="@color/grey"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/sign_revert_tv"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/rectangle_gradient"
+            android:gravity="center"
+            android:text="回退签字板"
             android:textColor="@color/grey"
             android:textSize="20sp" />
 
