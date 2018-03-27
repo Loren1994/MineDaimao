@@ -1,17 +1,18 @@
 package com.example.loren.minesample
 
-import android.bluetooth.*
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.view.View
-import bluetooth.BleServerThread
 import com.example.loren.minesample.adapter.BleAdapter
 import com.example.loren.minesample.base.ext.log
 import com.example.loren.minesample.base.ui.BaseActivity
 import kotlinx.android.synthetic.main.ble_activity.*
-import java.util.*
+import pers.victor.ext.toast
 
 /**
  * Copyright © 2018/3/26 by loren
@@ -21,11 +22,11 @@ class BleActivity : BaseActivity() {
     private lateinit var bleAdapter: BluetoothAdapter
     private var data = arrayListOf<BluetoothDevice>()
     private lateinit var mAdapter: BleAdapter
-    private val mUUID: UUID
-        get() = UUID.fromString("78321152-5f20-400b-9da9-1683d68e8f54")
-    private lateinit var bleServerSocket: BluetoothServerSocket
-    private lateinit var socketThread: Thread
-    private lateinit var bleSocket: BluetoothSocket
+//    private val mUUID: UUID
+//        get() = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
+//    private lateinit var bleServerSocket: BluetoothServerSocket
+//    private lateinit var socketThread: Thread
+//    private lateinit var bleSocket: BluetoothSocket
 
     //三方库:fastBle
 
@@ -38,7 +39,7 @@ class BleActivity : BaseActivity() {
         checkBleDevice()
         mAdapter = BleAdapter(data) {
             if (it.bondState == 12) {
-                startConnection(it)
+                toast("已配对")
             } else {
                 it.createBond()
             }
@@ -53,6 +54,16 @@ class BleActivity : BaseActivity() {
 
     val bleReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
+            if (BluetoothDevice.ACTION_BOND_STATE_CHANGED.contentEquals(intent.action)) {
+                val state = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.BOND_NONE)
+                val title = when (state) {
+                    10 -> "未连接"
+                    11 -> "连接中"
+                    12 -> "已连接"
+                    else -> "SuperApp"
+                }
+                setTitleBarText(title)
+            }
             if (BluetoothDevice.ACTION_FOUND.contentEquals(intent.action)) {
                 val device = intent.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
                 log("${device.name} - ${device.address}")
@@ -64,12 +75,6 @@ class BleActivity : BaseActivity() {
             }
         }
     }
-
-    private fun startConnection(device: BluetoothDevice) {
-//        val server = BleServerThread(device.name)
-//        server.start()
-    }
-
 
     override fun onDestroy() {
         unregisterReceiver(bleReceiver)
