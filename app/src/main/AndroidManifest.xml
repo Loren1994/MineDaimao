@@ -17,6 +17,10 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
@@ -102,6 +106,7 @@
         <activity android:name=".RecyclerTouchActivity" />
         <activity android:name=".PathViewActivity" />
         <activity android:name=".ExpandActivity" />
+        <activity android:name=".BleActivity" />
         <activity
             android:name=".HWLockActivity"
             android:theme="@style/ActivityTransparent" />

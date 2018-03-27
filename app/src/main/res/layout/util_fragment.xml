@@ -52,6 +52,16 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/ble_tv"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/rectangle_gradient"
+            android:gravity="center"
+            android:text="蓝牙"
+            android:textColor="@color/grey"
+            android:textSize="20sp" />
+
+        <TextView
             android:id="@+id/remote_tv"
             android:layout_width="match_parent"
             android:layout_height="80dp"

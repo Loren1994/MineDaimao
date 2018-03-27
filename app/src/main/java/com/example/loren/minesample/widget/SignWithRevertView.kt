@@ -14,11 +14,7 @@ import android.view.View
 class SignWithRevertView(context: Context, attributeSet: AttributeSet) : View(context, attributeSet) {
 
     private var signPaint = Paint()
-    //    private var signPath = Path()
     private val SIGN_WIDTH = 20f
-//    private var preX = 0f
-//    private var preY = 0f
-//    private val MOVE_OFFSET = 20f
 
     private var pathList = arrayListOf<Path>()
 

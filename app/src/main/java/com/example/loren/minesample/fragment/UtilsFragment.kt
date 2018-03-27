@@ -16,7 +16,7 @@ class UtilsFragment : BaseFragment() {
         LorenInject.into(this)
     }
 
-    @AnimationClick([R.id.sign_revert_tv, R.id.touch_tv, R.id.sign_tv, R.id.bezier_tv, R.id.download_tv, R.id.screen_shot_tv, R.id.test_tv, R.id.inject_tv, R.id.remote_tv], AnimationClickType.ALPHA)
+    @AnimationClick([R.id.ble_tv, R.id.sign_revert_tv, R.id.touch_tv, R.id.sign_tv, R.id.bezier_tv, R.id.download_tv, R.id.screen_shot_tv, R.id.test_tv, R.id.inject_tv, R.id.remote_tv], AnimationClickType.ALPHA)
     override fun onClick(v: View) {
         when (v.id) {
             R.id.bezier_tv -> startActivity<BezierActivity>()
@@ -28,6 +28,7 @@ class UtilsFragment : BaseFragment() {
             R.id.sign_tv -> startActivity<SignActivity>()
             R.id.touch_tv -> startActivity<RecyclerTouchActivity>()
             R.id.sign_revert_tv -> startActivity<SignWithRevertActivity>()
+            R.id.ble_tv -> startActivity<BleActivity>()
         }
     }
 
