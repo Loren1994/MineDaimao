@@ -33,14 +33,12 @@ public class ShowActivityService extends Service {
     private boolean isClick = false;
     private boolean isMoving = false;
 
-    public static void setTv(String pkg, String act, String dePkg, String deAct) {
+    public static void setTv(String pkg, String act) {
         if (null == windowView) {
             return;
         }
         ((TextView) windowView.findViewById(R.id.activity_tv)).setText(act);
-        ((TextView) windowView.findViewById(R.id.de_activity_tv)).setText(deAct);
         ((TextView) windowView.findViewById(R.id.package_tv)).setText(pkg);
-        ((TextView) windowView.findViewById(R.id.de_package_tv)).setText(dePkg);
     }
 
     @Override
