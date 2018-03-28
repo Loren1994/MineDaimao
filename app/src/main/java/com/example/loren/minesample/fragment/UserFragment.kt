@@ -51,7 +51,7 @@ class UserFragment : BaseFragment() {
                 android.provider.Settings.Secure.ACCESSIBILITY_ENABLED) == 1
     }
 
-    @AnimationClick([R.id.expand_tv,R.id.path_tv, R.id.top_tv, R.id.search_tv, R.id.放大镜_tv, R.id.hw_tv, R.id.html_tv, R.id.input_tv, R.id.amazing_tv, R.id.phone_tv, R.id.clip_tv, R.id.access_tv, R.id.server_tv, R.id.client_tv, R.id.blur_tv], AnimationClickType.SCALE)
+    @AnimationClick([R.id.expand_tv, R.id.path_tv, R.id.top_tv, R.id.search_tv, R.id.放大镜_tv, R.id.hw_tv, R.id.html_tv, R.id.input_tv, R.id.amazing_tv, R.id.phone_tv, R.id.clip_tv, R.id.access_tv, R.id.server_tv, R.id.client_tv, R.id.blur_tv], AnimationClickType.SCALE)
     override fun onClick(v: View) {
         when (v.id) {
 //            R.id.translation_tv -> startActivity(Intent(mContext, TranslationActivity::class.java))
@@ -62,6 +62,7 @@ class UserFragment : BaseFragment() {
                 if (!hasPermission()) {
                     startActivityForResult(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS), 1)
                 } else {
+                    clickPos = 0
                     dialog.show()
                 }
             }
