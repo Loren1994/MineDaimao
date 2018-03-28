@@ -8,6 +8,7 @@ import android.app.Application;
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.PixelFormat;
+import android.graphics.Point;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.view.Gravity;
@@ -17,8 +18,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
-
-import static pers.victor.ext.DisplayExtKt.getStatusBarHeight;
 
 /**
  * Copyright © 2017/12/27 by loren
@@ -32,6 +31,8 @@ public class ShowActivityService extends Service {
     private long clickTime = 0;
     private boolean isClick = false;
     private boolean isMoving = false;
+
+    private Point preP, curP;
 
     public static void setTv(String pkg, String act) {
         if (null == windowView) {
@@ -84,28 +85,33 @@ public class ShowActivityService extends Service {
             public boolean onTouch(View v, final MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
+                        preP = new Point((int) event.getRawX(), (int) event.getRawY());
                         isClick = true;
                         break;
                     case MotionEvent.ACTION_MOVE:
                         isClick = false;
                         isMoving = true;
-                        windowParams.x = (int) event.getRawX() - windowView.getMeasuredWidth() / 2;
-                        windowParams.y = (int) event.getRawY() - windowView.getMeasuredHeight() / 2 - getStatusBarHeight();
-                        windowManager.updateViewLayout(windowView, windowParams);
+                        curP = new Point((int) event.getRawX(), (int) event.getRawY());
+                        int dx = curP.x - preP.x, dy = curP.y - preP.y;
+                        WindowManager.LayoutParams layoutParams = (WindowManager.LayoutParams) windowView.getLayoutParams();
+                        layoutParams.x += dx;
+                        layoutParams.y += dy;
+                        windowManager.updateViewLayout(windowView, layoutParams);
+                        preP = curP;
                         break;
                     case MotionEvent.ACTION_UP:
                         if (isClick) {
                             return false;
                         }
                         ValueAnimator animator = new ValueAnimator();
-                        animator.setDuration(200);
+                        animator.setDuration(400);
                         animator.setInterpolator(new DecelerateInterpolator());
                         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                             @Override
                             public void onAnimationUpdate(ValueAnimator animation) {
-                                windowParams.x = (int) animation.getAnimatedValue();
-                                windowParams.y = (int) event.getRawY() - windowView.getMeasuredHeight() / 2 - getStatusBarHeight();
-                                windowManager.updateViewLayout(windowView, windowParams);
+                                WindowManager.LayoutParams layoutParams = (WindowManager.LayoutParams) windowView.getLayoutParams();
+                                layoutParams.x = (int) animation.getAnimatedValue();
+                                windowManager.updateViewLayout(windowView, layoutParams);
                             }
                         });
                         animator.addListener(new AnimatorListenerAdapter() {
