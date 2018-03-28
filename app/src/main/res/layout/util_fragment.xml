@@ -57,7 +57,7 @@
             android:layout_height="80dp"
             android:background="@drawable/rectangle_gradient"
             android:gravity="center"
-            android:text="蓝牙"
+            android:text="蓝牙扫描配对"
             android:textColor="@color/grey"
             android:textSize="20sp" />
 
