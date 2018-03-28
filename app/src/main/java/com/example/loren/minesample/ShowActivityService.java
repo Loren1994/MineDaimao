@@ -31,7 +31,6 @@ public class ShowActivityService extends Service {
     private long clickTime = 0;
     private boolean isClick = false;
     private boolean isMoving = false;
-
     private Point preP, curP;
 
     public static void setTv(String pkg, String act) {
@@ -120,7 +119,7 @@ public class ShowActivityService extends Service {
                                 isMoving = false;
                             }
                         });
-                        if (event.getRawX() >= App.Companion.getSCREEN_WIDTH() / 2) {
+                        if (curP.x >= App.Companion.getSCREEN_WIDTH() / 2) {
                             animator.setIntValues((int) event.getRawX() - windowView.getMeasuredWidth() / 2, App.Companion.getSCREEN_WIDTH() - windowView.getMeasuredWidth());
                         } else {
                             animator.setIntValues((int) event.getRawX() - windowView.getMeasuredWidth() / 2, 0);

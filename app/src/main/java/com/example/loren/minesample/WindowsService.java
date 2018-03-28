@@ -8,6 +8,7 @@ import android.app.Application;
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.PixelFormat;
+import android.graphics.Point;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
@@ -15,12 +16,11 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.lang.reflect.Field;
 
 /**
  * Created by loren on 2017/2/16.
@@ -42,6 +42,8 @@ public class WindowsService extends Service {
     private boolean isLeft = true;
     private boolean isClickVisible = false;
     private LinearLayout windowLl;
+    private Point preP, curP;
+    private boolean isClick = false;
 
     @Override
 
@@ -88,23 +90,33 @@ public class WindowsService extends Service {
             public boolean onTouch(View v, final MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
+                        isClick = true;
                         startX = (int) event.getRawX();
                         startY = (int) event.getRawY();
+                        preP = new Point((int) event.getRawX(), (int) event.getRawY());
                         break;
                     case MotionEvent.ACTION_MOVE:
+                        isClick = false;
                         timer.cancel();
                         endX = (int) event.getRawX();
                         endY = (int) event.getRawY();
                         if (isInterrupt()) {
                             isClickVisible = true;
-                            windowParams.x = (int) event.getRawX() - windowView.getMeasuredWidth() / 2;
-                            windowParams.y = (int) event.getRawY() - windowView.getMeasuredHeight() / 2 - getStatusBarHeight();
-                            windowManager.updateViewLayout(windowView, windowParams);
+                            curP = new Point((int) event.getRawX(), (int) event.getRawY());
+                            int dx = curP.x - preP.x, dy = curP.y - preP.y;
+                            WindowManager.LayoutParams layoutParams = (WindowManager.LayoutParams) windowView.getLayoutParams();
+                            layoutParams.x += dx;
+                            layoutParams.y += dy;
+                            windowManager.updateViewLayout(windowView, layoutParams);
+                            preP = curP;
                             windowParent.setVisibility(View.GONE);
                             return true;
                         }
                         break;
                     case MotionEvent.ACTION_UP:
+                        if (isClick) {
+                            return false;
+                        }
                         timer.cancel();
                         timer.start();
                         if (isInterrupt()) {
@@ -117,9 +129,9 @@ public class WindowsService extends Service {
                                 animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                                     @Override
                                     public void onAnimationUpdate(ValueAnimator animation) {
-                                        windowParams.x = (int) animation.getAnimatedValue();
-                                        windowParams.y = (int) event.getRawY() - windowView.getMeasuredHeight() / 2 - getStatusBarHeight();
-                                        windowManager.updateViewLayout(windowView, windowParams);
+                                        WindowManager.LayoutParams layoutParams = (WindowManager.LayoutParams) windowView.getLayoutParams();
+                                        layoutParams.x = (int) animation.getAnimatedValue();
+                                        windowManager.updateViewLayout(windowView, layoutParams);
                                     }
                                 });
                                 animator.start();
@@ -132,9 +144,9 @@ public class WindowsService extends Service {
                                 animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                                     @Override
                                     public void onAnimationUpdate(ValueAnimator animation) {
-                                        windowParams.x = (int) animation.getAnimatedValue();
-                                        windowParams.y = (int) event.getRawY() - windowView.getMeasuredHeight() / 2 - getStatusBarHeight();
-                                        windowManager.updateViewLayout(windowView, windowParams);
+                                        WindowManager.LayoutParams layoutParams = (WindowManager.LayoutParams) windowView.getLayoutParams();
+                                        layoutParams.x = (int) animation.getAnimatedValue();
+                                        windowManager.updateViewLayout(windowView, layoutParams);
                                     }
                                 });
                                 animator.start();
@@ -168,8 +180,9 @@ public class WindowsService extends Service {
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                windowParams.x = (int) animation.getAnimatedValue();
-                windowManager.updateViewLayout(windowView, windowParams);
+                WindowManager.LayoutParams layoutParams = (WindowManager.LayoutParams) windowView.getLayoutParams();
+                layoutParams.x = (int) animation.getAnimatedValue();
+                windowManager.updateViewLayout(windowView, layoutParams);
             }
         });
         animator.addListener(new Animator.AnimatorListener() {
@@ -211,8 +224,9 @@ public class WindowsService extends Service {
                 animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
                     public void onAnimationUpdate(ValueAnimator animation) {
-                        windowParams.x = (int) animation.getAnimatedValue();
-                        windowManager.updateViewLayout(windowView, windowParams);
+                        WindowManager.LayoutParams layoutParams = (WindowManager.LayoutParams) windowView.getLayoutParams();
+                        layoutParams.x = (int) animation.getAnimatedValue();
+                        windowManager.updateViewLayout(windowView, layoutParams);
                     }
                 });
                 animator.addListener(new Animator.AnimatorListener() {
@@ -242,7 +256,7 @@ public class WindowsService extends Service {
     }
 
     private boolean isInterrupt() {
-        return Math.abs(endX - startX) > 30 || Math.abs(endY - startY) > 30;
+        return Math.abs(endX - startX) > ViewConfiguration.get(windowView.getContext()).getScaledTouchSlop() || Math.abs(endY - startY) > ViewConfiguration.get(windowView.getContext()).getScaledTouchSlop();
     }
 
     private void setWindowItemListener(TextView tv, final Class clazz) {
@@ -291,24 +305,6 @@ public class WindowsService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return null;
-    }
-
-    @SuppressLint("PrivateApi")
-    private int getStatusBarHeight() {
-        Class<?> c;
-        Object obj;
-        Field field;
-        int x, sbar = 0;
-        try {
-            c = Class.forName("com.android.internal.R$dimen");
-            obj = c.newInstance();
-            field = c.getField("status_bar_height");
-            x = Integer.parseInt(field.get(obj).toString());
-            sbar = getApplication().getResources().getDimensionPixelSize(x);
-        } catch (Exception e1) {
-            e1.printStackTrace();
-        }
-        return sbar;
     }
 
     @Override
