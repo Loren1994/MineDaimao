@@ -107,6 +107,7 @@
         <activity android:name=".PathViewActivity" />
         <activity android:name=".ExpandActivity" />
         <activity android:name=".BleActivity" />
+        <activity android:name=".TTouchActivity" />
         <activity
             android:name=".HWLockActivity"
             android:theme="@style/ActivityTransparent" />
