@@ -11,10 +11,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:layout_weight="1"
+        android:background="@color/orange"
         android:gravity="center"
         android:padding="8dp"
         android:text="标题1"
-        android:textColor="@color/text_black" />
+        android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/title_second_tv"
@@ -22,9 +23,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:layout_weight="1"
+        android:background="@color/orange"
         android:gravity="center"
         android:padding="8dp"
         android:text="标题2"
-        android:textColor="@color/text_black" />
+        android:textColor="@color/white" />
 
 </LinearLayout>

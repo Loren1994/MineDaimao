@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
@@ -11,8 +11,19 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:background="@drawable/bg_green_coner"
+        android:ellipsize="end"
         android:gravity="center"
+        android:maxLines="1"
         android:padding="8dp"
         android:text="sss"
         android:textColor="@color/white" />
-</LinearLayout>
+
+    <ImageView
+        android:id="@+id/uncheck_close_iv"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/bg_white_coner_black"
+        android:scaleType="fitXY"
+        android:src="@drawable/close" />
+</RelativeLayout>

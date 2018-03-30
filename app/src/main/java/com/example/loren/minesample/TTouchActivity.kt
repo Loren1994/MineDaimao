@@ -13,21 +13,18 @@ import kotlinx.android.synthetic.main.tt_touch_activity.*
  * Copyright © 2018/3/29 by loren
  */
 class TTouchActivity : BaseActivity() {
-    private var data: MutableList<TTouchBean> = arrayListOf()
     private lateinit var mAdapter: TTTouchAdapter
+    private var checkData: MutableList<TTouchBean> = arrayListOf()
+    private var uncheckData: MutableList<TTouchBean> = arrayListOf()
 
     override fun initWidgets() {
-        repeat(40) {
-            var type = 2
-            if (it < 15) {
-                type = 0
-            }
-            if (it > 15) {
-                type = 1
-            }
-            data.add(TTouchBean("ITEM$it", type))
+        repeat(5) {
+            checkData.add(TTouchBean("选择$it", 0))
         }
-        mAdapter = TTTouchAdapter(data)
+        repeat(30) {
+            uncheckData.add(TTouchBean("未选$it", 1))
+        }
+        mAdapter = TTTouchAdapter(checkData, uncheckData)
         val layoutManager = GridLayoutManager(this, 4)
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {

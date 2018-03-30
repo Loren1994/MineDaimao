@@ -15,16 +15,40 @@ import com.example.loren.minesample.entity.TTouchBean
 import kotlinx.android.synthetic.main.item_ttouch_checked.view.*
 import kotlinx.android.synthetic.main.item_ttouch_uncheck.view.*
 import pers.victor.ext.dp2px
+import pers.victor.ext.findDrawable
 import java.util.*
 
 /**
  * Copyright © 2018/3/29 by loren
  */
-class TTTouchAdapter(val data: MutableList<TTouchBean>) : RecyclerView.Adapter<TTTouchAdapter.ViewHolder>() {
+class TTTouchAdapter(val checkData: MutableList<TTouchBean>, val unCheckData: MutableList<TTouchBean>) : RecyclerView.Adapter<TTTouchAdapter.ViewHolder>() {
 
     private val ITEM_CHECK = 0
     private val ITEM_UNCHECK = 1
     private val ITEM_TITLE = 2
+    private val data = arrayListOf<TTouchBean>()
+    private var toPos = -1
+    private var fromPos = -1
+    private lateinit var titleBean: TTouchBean
+
+    init {
+        assembleData()
+    }
+
+    private fun assembleData() {
+        titleBean = TTouchBean("", 2)
+        data.addAll(checkData)
+        data.add(titleBean)
+        data.addAll(unCheckData)
+    }
+
+    fun getCheckList(): MutableList<TTouchBean> {
+        return data.filter { it.itemType == ITEM_CHECK }.toMutableList()
+    }
+
+    fun getUnCheckList(): MutableList<TTouchBean> {
+        return data.filter { it.itemType == ITEM_UNCHECK }.toMutableList()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return when (viewType) {
@@ -42,12 +66,20 @@ class TTTouchAdapter(val data: MutableList<TTouchBean>) : RecyclerView.Adapter<T
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         when (data[position].itemType) {
-        //已选
-            ITEM_CHECK -> holder.itemView.check_tv.text = data[position].content
-        //未选
-            ITEM_UNCHECK -> holder.itemView.uncheck_tv.text = data[position].content
-        //未选标题
+            ITEM_CHECK -> {
+                //已选
+                holder.itemView.check_tv.text = data[position].content
+                holder.itemView.check_tv.background = findDrawable(R.drawable.bg_green_special_coner)
+                holder.itemView.check_close_iv.visibility = View.VISIBLE
+            }
+            ITEM_UNCHECK -> {
+                //未选
+                holder.itemView.uncheck_tv.text = data[position].content
+                holder.itemView.uncheck_tv.background = findDrawable(R.drawable.bg_green_coner)
+                holder.itemView.uncheck_close_iv.visibility = View.INVISIBLE
+            }
             else -> {
+                //未选标题
             }
         }
     }
@@ -57,6 +89,10 @@ class TTTouchAdapter(val data: MutableList<TTouchBean>) : RecyclerView.Adapter<T
     }
 
     fun itemMove(fromPosition: Int, toPosition: Int) {
+        toPos = toPosition
+        if (fromPos == -1) {
+            fromPos = fromPosition
+        }
         if (fromPosition < toPosition) {
             for (i in fromPosition until toPosition) {
                 Collections.swap(data, i, i + 1)
@@ -67,6 +103,20 @@ class TTTouchAdapter(val data: MutableList<TTouchBean>) : RecyclerView.Adapter<T
             }
         }
         notifyItemMoved(fromPosition, toPosition)
+    }
+
+    fun refreshData() {
+        if (toPos == -1 || fromPos == -1) {
+            return
+        }
+        judgeItemType(toPos)
+        toPos = -1
+        fromPos = -1
+        notifyDataSetChanged()
+    }
+
+    private fun judgeItemType(toPosition: Int) {
+        data[toPosition].itemType = if (toPosition > data.indexOf(titleBean)) ITEM_UNCHECK else ITEM_CHECK
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -128,6 +178,7 @@ class TTouchHelp(val mAdapter: TTTouchAdapter) : ItemTouchHelper.Callback() {
         val holder = viewHolder as TTTouchAdapter.ViewHolder
         holder.itemView.alpha = 1f
         holder.itemView.elevation = 0f
+        mAdapter.refreshData()
     }
 
     //滑动
