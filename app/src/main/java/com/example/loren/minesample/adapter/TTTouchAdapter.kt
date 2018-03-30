@@ -15,7 +15,7 @@ import com.example.loren.minesample.entity.TTouchBean
 import kotlinx.android.synthetic.main.item_ttouch_checked.view.*
 import kotlinx.android.synthetic.main.item_ttouch_uncheck.view.*
 import pers.victor.ext.dp2px
-import pers.victor.ext.findDrawable
+import pers.victor.ext.toast
 import java.util.*
 
 /**
@@ -69,14 +69,21 @@ class TTTouchAdapter(val checkData: MutableList<TTouchBean>, val unCheckData: Mu
             ITEM_CHECK -> {
                 //已选
                 holder.itemView.check_tv.text = data[position].content
-                holder.itemView.check_tv.background = findDrawable(R.drawable.bg_green_special_coner)
-                holder.itemView.check_close_iv.visibility = View.VISIBLE
+                holder.itemView.check_close_iv.setOnClickListener {
+                    if (data.indexOf(titleBean) == 1) {
+                        toast("不可以全部移除哦")
+                        return@setOnClickListener
+                    }
+                    data[position].itemType = ITEM_UNCHECK
+                    val temp = data[position]
+                    data.removeAt(position)
+                    data.add(temp)
+                    notifyItemRangeChanged(0, data.size)
+                }
             }
             ITEM_UNCHECK -> {
                 //未选
                 holder.itemView.uncheck_tv.text = data[position].content
-                holder.itemView.uncheck_tv.background = findDrawable(R.drawable.bg_green_coner)
-                holder.itemView.uncheck_close_iv.visibility = View.INVISIBLE
             }
             else -> {
                 //未选标题
