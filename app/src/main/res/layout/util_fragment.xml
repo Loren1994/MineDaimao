@@ -6,81 +6,8 @@
     <LinearLayout
         android:id="@+id/parent_ll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/screen_shot_tv"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@drawable/rectangle_gradient"
-            android:gravity="center"
-            android:text="一个调试工具"
-            android:textColor="@color/grey"
-            android:textSize="20sp"
-            android:visibility="visible" />
-
-        <TextView
-            android:id="@+id/bezier_tv"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@drawable/rectangle_gradient"
-            android:gravity="center"
-            android:text="自定义View - Bezier爱心"
-            android:textColor="@color/grey"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/test_tv"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@drawable/rectangle_gradient"
-            android:gravity="center"
-            android:text="自定义注解动画 + Object Box列表"
-            android:textColor="@color/grey"
-            android:textSize="20sp" />
-
-
-        <TextView
-            android:id="@+id/inject_tv"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@drawable/rectangle_gradient"
-            android:gravity="center"
-            android:text="自定义注解动画 - 各个View"
-            android:textColor="@color/grey"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/ble_tv"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@drawable/rectangle_gradient"
-            android:gravity="center"
-            android:text="蓝牙扫描配对"
-            android:textColor="@color/grey"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/remote_tv"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@drawable/rectangle_gradient"
-            android:gravity="center"
-            android:text="创建/查看PDF"
-            android:textColor="@color/grey"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/download_tv"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@drawable/rectangle_gradient"
-            android:gravity="center"
-            android:text="仿应用宝下载进度条"
-            android:textColor="@color/grey"
-            android:textSize="20sp" />
-
 
         <TextView
             android:id="@+id/sign_tv"
@@ -121,6 +48,80 @@
             android:text="高级拖拽"
             android:textColor="@color/grey"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/bezier_tv"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/rectangle_gradient"
+            android:gravity="center"
+            android:text="自定义View - Bezier爱心"
+            android:textColor="@color/grey"
+            android:textSize="20sp" />
+
+
+        <TextView
+            android:id="@+id/ble_tv"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/rectangle_gradient"
+            android:gravity="center"
+            android:text="蓝牙扫描配对"
+            android:textColor="@color/grey"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/remote_tv"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/rectangle_gradient"
+            android:gravity="center"
+            android:text="创建/查看PDF"
+            android:textColor="@color/grey"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/download_tv"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/rectangle_gradient"
+            android:gravity="center"
+            android:text="仿应用宝下载进度条"
+            android:textColor="@color/grey"
+            android:textSize="20sp" />
+
+
+        <TextView
+            android:id="@+id/test_tv"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/rectangle_gradient"
+            android:gravity="center"
+            android:text="自定义注解动画 + Object Box列表"
+            android:textColor="@color/grey"
+            android:textSize="20sp" />
+
+
+        <TextView
+            android:id="@+id/inject_tv"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/rectangle_gradient"
+            android:gravity="center"
+            android:text="自定义注解动画 - 各个View"
+            android:textColor="@color/grey"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/screen_shot_tv"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/rectangle_gradient"
+            android:gravity="center"
+            android:text="一个调试工具"
+            android:textColor="@color/grey"
+            android:textSize="20sp"
+            android:visibility="visible" />
 
     </LinearLayout>
 </ScrollView>
