@@ -128,7 +128,7 @@
             android:layout_height="80dp"
             android:background="@drawable/rectangle_gradient"
             android:gravity="center"
-            android:text="一个调试工具"
+            android:text="禁止截图"
             android:textColor="@color/grey"
             android:textSize="20sp"
             android:visibility="visible" />
