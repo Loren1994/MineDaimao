@@ -9,7 +9,7 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.view.contains
+import androidx.core.view.contains
 import pers.victor.ext.dp2px
 import pers.victor.ext.screenWidth
 

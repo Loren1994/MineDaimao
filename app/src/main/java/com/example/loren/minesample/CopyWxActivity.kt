@@ -42,10 +42,10 @@ class CopyWxActivity : BaseActivity() {
     }
 
     override fun setListeners() {
-        shoot_button!!.setOnTouchListener { view, motionEvent ->
-            if (motionEvent.action === MotionEvent.ACTION_DOWN) {
+        shoot_button!!.setOnTouchListener { _, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
                 movieRecorderView!!.record { handler.sendEmptyMessage(1) }
-            } else if (motionEvent.action === MotionEvent.ACTION_UP) {
+            } else if (motionEvent.action == MotionEvent.ACTION_UP) {
                 if (movieRecorderView!!.timeCount > 1)
                     handler.sendEmptyMessage(1)
                 else {

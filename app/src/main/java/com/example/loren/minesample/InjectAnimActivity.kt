@@ -22,8 +22,6 @@ class InjectAnimActivity : BaseActivity(), View.OnClickListener {
 //        Thread {
 //            test_tv1.text = "child thread setter"
 //        }.start()
-        var a = 1_1_2_4
-
     }
 
     @AnimationClick(viewIds = [(R.id.test_tv1), (R.id.test_tv2)], animType = AnimationClickType.SCALE)

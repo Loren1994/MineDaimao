@@ -53,7 +53,7 @@ class FlagActivity : BaseActivity() {
 
     private fun AutoCycleStr() {
         while (true) {
-            songArr.forEachIndexed { i, s ->
+            songArr.forEachIndexed { _, s ->
                 SystemClock.sleep(randomArr[Random().nextInt(randomArr.size - 1)].toLong())
                 runOnUiThread { htv.animateText(s) }
             }
