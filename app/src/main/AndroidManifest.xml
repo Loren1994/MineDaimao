@@ -21,6 +21,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
@@ -37,6 +38,16 @@
 
         <service android:name=".WindowsService" />
         <service android:name=".ShowActivityService" />
+        <service
+            android:name=".wallpaper.CustomWallPaper"
+            android:permission="android.permission.BIND_WALLPAPER">
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.wallpaper"
+                android:resource="@xml/livewallpaper" />
+        </service>
         <service
             android:name=".VerySixService"
             android:enabled="true"
@@ -109,6 +120,7 @@
         <activity android:name=".BleActivity" />
         <activity android:name=".TTouchActivity" />
         <activity android:name=".RecordScreenActivity" />
+        <activity android:name=".FlexActivity" />
         <activity
             android:name=".HWLockActivity"
             android:theme="@style/ActivityTransparent" />

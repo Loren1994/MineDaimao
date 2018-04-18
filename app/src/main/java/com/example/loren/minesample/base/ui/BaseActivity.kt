@@ -78,6 +78,11 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
 //            window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN or WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_FULLSCREEN or WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 //        }
         setContentView(bindLayout())
+        //解决特殊机型按home键后重打开重新加载问题
+        if (intent.flags and Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT != 0) {
+            finish()
+            return
+        }
         if (useImmersive()) {
             window.navigationBarColor = findColor(R.color.gray_dark)
             window.statusBarColor = findColor(R.color.transparent)
@@ -254,6 +259,7 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
         permissions.forEach { this.onPermissionsGranted?.invoke(it) }
         this.onPermissionsGranted = null
     }
+
     override fun onPermissionsDenied(requestCode: Int, permissions: MutableList<String>) {
         permissions.forEach { this.onPermissionsDenied?.invoke(it) }
         this.onPermissionsDenied = null
