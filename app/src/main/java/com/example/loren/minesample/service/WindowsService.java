@@ -1,4 +1,4 @@
-package com.example.loren.minesample;
+package com.example.loren.minesample.service;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
@@ -21,6 +21,12 @@ import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.loren.minesample.App;
+import com.example.loren.minesample.ChatActivity;
+import com.example.loren.minesample.FlagActivity;
+import com.example.loren.minesample.OpenScreenActivity;
+import com.example.loren.minesample.R;
 
 /**
  * Created by loren on 2017/2/16.

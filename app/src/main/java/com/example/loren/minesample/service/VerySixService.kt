@@ -1,9 +1,10 @@
-package com.example.loren.minesample
+package com.example.loren.minesample.service
 
 import android.accessibilityservice.AccessibilityService
 import android.app.ActivityManager
 import android.content.ComponentName
 import android.view.accessibility.AccessibilityEvent
+import com.example.loren.minesample.service.ShowActivityService
 import pers.victor.ext.toast
 
 

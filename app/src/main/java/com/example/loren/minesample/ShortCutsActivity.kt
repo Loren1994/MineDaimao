@@ -2,6 +2,7 @@ package com.example.loren.minesample
 
 import android.content.pm.ShortcutManager
 import android.view.View
+import com.example.loren.minesample.adapter.ShortcutAdapter
 import com.example.loren.minesample.base.ui.BaseActivity
 
 class ShortCutsActivity : BaseActivity() {

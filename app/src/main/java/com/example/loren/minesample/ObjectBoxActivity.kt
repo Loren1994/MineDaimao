@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import com.example.loren.minesample.adapter.ObjectBoxAdapter
 import com.example.loren.minesample.annotation.AnimationItemClick
 import com.example.loren.minesample.annotation.AnimationItemClickType
 import com.example.loren.minesample.annotation.LorenAnn

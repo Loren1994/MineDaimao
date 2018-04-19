@@ -1,4 +1,4 @@
-package com.example.loren.minesample;
+package com.example.loren.minesample.util;
 
 /**
  * Copyright (c) 16-9-9 by loren

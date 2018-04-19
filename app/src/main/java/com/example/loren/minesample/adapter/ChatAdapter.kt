@@ -1,8 +1,9 @@
-package com.example.loren.minesample
+package com.example.loren.minesample.adapter
 
 import android.content.Context
 import android.view.View
 import bean.MessageBean
+import com.example.loren.minesample.R
 import com.example.loren.minesample.base.ext.CommonAdapter
 import com.example.loren.minesample.base.ext.Holder
 import kotlinx.android.synthetic.main.item_chat_list_other.view.*

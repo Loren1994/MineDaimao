@@ -1,4 +1,4 @@
-package com.example.loren.minesample;
+package com.example.loren.minesample.service;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -18,6 +18,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
+
+import com.example.loren.minesample.App;
+import com.example.loren.minesample.R;
 
 /**
  * Copyright © 2017/12/27 by loren

@@ -4,6 +4,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.transition.Explode
 import android.view.View
 import bean.MessageBean
+import com.example.loren.minesample.adapter.ChatAdapter
 import com.example.loren.minesample.base.ui.BaseActivity
 import com.example.loren.minesample.util.Constant
 import com.example.loren.minesample.util.http

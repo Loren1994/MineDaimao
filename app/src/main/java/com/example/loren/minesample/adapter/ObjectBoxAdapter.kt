@@ -1,8 +1,9 @@
-package com.example.loren.minesample
+package com.example.loren.minesample.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import com.example.loren.minesample.R
 import com.example.loren.minesample.entity.User
 import kotlinx.android.synthetic.main.item_test.view.*
 import pers.victor.ext.findColor

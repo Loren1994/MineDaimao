@@ -1,4 +1,4 @@
-package com.example.loren.minesample
+package com.example.loren.minesample.widget
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -8,6 +8,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.RemoteViews
+import com.example.loren.minesample.LauncherActivity
+import com.example.loren.minesample.R
 import pers.victor.ext.spGetString
 import pers.victor.ext.toast
 
