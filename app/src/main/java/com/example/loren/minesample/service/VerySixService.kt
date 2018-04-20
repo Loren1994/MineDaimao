@@ -1,10 +1,13 @@
 package com.example.loren.minesample.service
 
 import android.accessibilityservice.AccessibilityService
-import android.app.ActivityManager
+import android.app.Notification
 import android.content.ComponentName
+import android.os.Handler
+import android.os.Looper
 import android.view.accessibility.AccessibilityEvent
-import com.example.loren.minesample.service.ShowActivityService
+import android.view.accessibility.AccessibilityNodeInfo
+import com.example.loren.minesample.base.ext.log
 import pers.victor.ext.toast
 
 
@@ -12,11 +15,11 @@ import pers.victor.ext.toast
  * Copyright © 27/12/2017 by loren
  */
 class VerySixService : AccessibilityService() {
-    private lateinit var am: ActivityManager
+
+    private val handler = Handler(Looper.getMainLooper())
 
     override fun onServiceConnected() {
         toast("SuperApp已开启AccessibilityService")
-        am = getSystemService(ACTIVITY_SERVICE) as ActivityManager
         super.onServiceConnected()
     }
 
@@ -25,9 +28,73 @@ class VerySixService : AccessibilityService() {
     }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
+        //显示当前Activity
         if (event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
             val cName = ComponentName(event.packageName.toString(), event.className.toString())
             ShowActivityService.setTv(event.packageName.toString(), cName.className)
+            //抢红包
+            //窗口
+            val className = cName.className
+            when (className) {
+                "com.tencent.mm.ui.LauncherUI" -> openRedPacket()
+                "com.tencent.mm.plugin.luckymoney.ui.LuckyMoneyReceiveUI" -> clickRedPacket()
+                "com.tencent.mm.plugin.luckymoney.ui.LuckyMoneyDetailUI" -> performBackClick()
+            }
         }
+        //监测通知
+        if (event.eventType == AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED) {
+            log("收到通知>>> " + event.text.toString())
+            if (event.parcelableData != null && event.parcelableData is Notification) {
+                val notification = event.parcelableData as Notification
+//                val content = notification.tickerText.toString()
+                val content = event.text.toString()
+                if (content.contains("[微信红包]")) {
+                    val pendingIntent = notification.contentIntent
+                    pendingIntent.send()
+                }
+            }
+        }
+        //监测滚动
+//        if (event.eventType == AccessibilityEvent.TYPE_VIEW_SCROLLED) {
+//            if (event.className == "android.widget.ListView") {
+//                openRedPacket()
+//            }
+//        }
+    }
+
+    private fun openRedPacket() {
+        log(">>>openRedPacket")
+        val rootNode = rootInActiveWindow
+        if (rootNode != null) {
+            val listNode = rootNode.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/a_c")
+            if (null != listNode && listNode.size > 0) {
+                val msgNode = listNode[0].findAccessibilityNodeInfosByViewId("com.tencent.mm:id/ad8")
+                if (msgNode != null && msgNode.size > 0) {
+                    for (accessibilityNodeInfo in msgNode) {
+                        val redPackage = accessibilityNodeInfo.findAccessibilityNodeInfosByText("领取红包")
+                        if (null != redPackage && redPackage.size > 0) {
+                            accessibilityNodeInfo.performAction(AccessibilityNodeInfo.ACTION_CLICK)
+                            break
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun clickRedPacket() {
+        log(">>>clickRedPacket")
+        val rootNode = rootInActiveWindow
+        val clickNode = rootNode.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/c31")
+        if (null != clickNode && clickNode.size > 0) {
+            clickNode[0].performAction(AccessibilityNodeInfo.ACTION_CLICK)
+        } else {
+            performBackClick()
+        }
+    }
+
+    private fun performBackClick() {
+        log(">>>performBackClick")
+        handler.postDelayed({ performGlobalAction(AccessibilityService.GLOBAL_ACTION_BACK) }, 200L)
     }
 }

@@ -20,6 +20,14 @@
             app:vertical_spacing="8dp">
 
             <TextView
+                android:id="@+id/red_package_tv"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_match_coner"
+                android:text="抢红包"
+                android:textColor="@color/white" />
+
+            <TextView
                 android:id="@+id/amazing_tv"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
@@ -60,6 +68,7 @@
                 android:background="@drawable/bg_match_coner"
                 android:text="悬浮窗"
                 android:textColor="@color/white" />
+
 
             <TextView
                 android:id="@+id/client_tv"
