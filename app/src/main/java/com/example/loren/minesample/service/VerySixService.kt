@@ -13,6 +13,9 @@ import pers.victor.ext.toast
 
 /**
  * Copyright © 27/12/2017 by loren
+ * 部分机型TYPE_NOTIFICATION_STATE_CHANGED是监测toast通知
+ * 此方式不能保证所有机型都好用
+ * 另一种方式:NotificationListenerService(4.3)
  */
 class VerySixService : AccessibilityService() {
 
