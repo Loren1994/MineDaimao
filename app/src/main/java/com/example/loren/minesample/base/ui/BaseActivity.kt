@@ -42,8 +42,8 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
     private var fakeFinish = false
     private var registerEventBus = false
     private var loadDataAtOnce = true
-    private var onPermissionsDenied: ((String) -> Unit)? = null
-    private var onPermissionsGranted: ((String) -> Unit)? = null
+    private var onPermissionsDenied: (() -> Unit)? = null
+    private var onPermissionsGranted: (() -> Unit)? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -235,19 +235,20 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
 
     protected fun click(vararg views: View) = views.forEach { it.setOnClickListener(this) }
 
-    protected fun requestPermission(vararg permission: String, granted: ((String) -> Unit)? = null, denied: ((String) -> Unit)? = null, rationale: String? = null) {
+    protected fun requestPermission(vararg permission: String, granted: (() -> Unit)? = null, denied: (() -> Unit)? = null, rationale: String? = null) {
         this.onPermissionsGranted = granted
         this.onPermissionsDenied = denied
-        val list = arrayListOf<String>()
+        val permissionList = arrayListOf<String>()
         permission.forEach {
-            if (EasyPermissions.hasPermissions(this, it)) {
-                this.onPermissionsGranted?.invoke(it)
-            } else {
-                list.add(it)
+            if (!EasyPermissions.hasPermissions(this, it)) {
+                permissionList.add(it)
             }
         }
-        EasyPermissions.requestPermissions(this, rationale ?: getString(R.string.app_name)
-        +"需要申请权限", 110, *list.toTypedArray())
+        if (permissionList.size == 0) {
+            this.onPermissionsGranted?.invoke()
+        }
+        EasyPermissions.requestPermissions(this, rationale
+                ?: "${getString(R.string.app_name)}需要申请权限", 110, *permissionList.toTypedArray())
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
@@ -256,12 +257,12 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
     }
 
     override fun onPermissionsGranted(requestCode: Int, permissions: MutableList<String>) {
-        permissions.forEach { this.onPermissionsGranted?.invoke(it) }
+        this.onPermissionsGranted?.invoke()
         this.onPermissionsGranted = null
     }
 
     override fun onPermissionsDenied(requestCode: Int, permissions: MutableList<String>) {
-        permissions.forEach { this.onPermissionsDenied?.invoke(it) }
+        this.onPermissionsDenied?.invoke()
         this.onPermissionsDenied = null
     }
 

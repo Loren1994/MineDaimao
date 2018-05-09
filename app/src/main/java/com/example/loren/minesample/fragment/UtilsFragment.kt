@@ -1,5 +1,6 @@
 package com.example.loren.minesample.fragment
 
+import android.Manifest
 import android.view.View
 import com.example.loren.minesample.*
 import com.example.loren.minesample.annotation.AnimationClick
@@ -30,7 +31,8 @@ class UtilsFragment : BaseFragment() {
             R.id.sign_revert_tv -> startActivity<SignWithRevertActivity>()
             R.id.ble_tv -> startActivity<BleActivity>()
             R.id.high_tv -> startActivity<TTouchActivity>()
-            R.id.record_tv -> startActivity<RecordScreenActivity>()
+            R.id.record_tv -> requestPermission(Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    granted = { startActivity<RecordScreenActivity>() }, denied = {})
             R.id.flex_tv -> startActivity<FlexActivity>()
         }
     }

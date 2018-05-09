@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.protobuf'
 
 android.sourceSets.main.java.srcDirs += 'build/generated/source/objectbox'
 
@@ -28,11 +29,17 @@ android {
         debug {
             applicationIdSuffix '.debug'
             versionNameSuffix '-DEBUG'
-            minifyEnabled false
+//            minifyEnabled true
+//            shrinkResources true
+//            zipAlignEnabled true
         }
     }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
+        main.proto {
+            srcDir 'src/main/proto'
+            include '*.proto'
+        }
     }
     lintOptions {
         disable 'GoogleAppIndexingWarning'
@@ -69,7 +76,31 @@ dependencies {
     implementation 'androidx.core:core-ktx:0.3'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5'
     implementation 'com.google.android:flexbox:0.3.2'
+    // 定义protobuf依赖，使用精简版
+    implementation "com.google.protobuf:protobuf-lite:3.0.0"
+    implementation('com.squareup.retrofit2:converter-protobuf:2.2.0') {
+        exclude group: 'com.google.protobuf', module: 'protobuf-java'
+    }
 }
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.0.0'
+    }
+    plugins {
+        javalite {
+            artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.0'
+        }
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.plugins {
+                javalite {}
+            }
+        }
+    }
+}
+
 androidExtensions {
     experimental = true
 }

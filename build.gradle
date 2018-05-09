@@ -1,5 +1,5 @@
 ext {
-    kotlin_version = '1.2.31'
+    kotlin_version = '1.2.30'
     compile_sdk_version = 27
     build_tools_version = '27.0.3'
     min_sdk_version = 21
@@ -19,9 +19,10 @@ allprojects {
             maven { url "http://objectbox.net/beta-repo/" }
         }
         dependencies {
-            classpath 'com.android.tools.build:gradle:3.2.0-alpha11'
+            classpath 'com.android.tools.build:gradle:3.1.2'
             classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
             classpath "io.objectbox:objectbox-gradle-plugin:$objectboxVersion"
+            classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.5'
         }
     }
 

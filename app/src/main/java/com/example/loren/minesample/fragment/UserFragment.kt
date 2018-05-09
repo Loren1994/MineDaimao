@@ -49,7 +49,8 @@ class UserFragment : BaseFragment() {
     }
 
     private fun hasPermission(): Boolean {
-        return Settings.Secure.getInt(mContext.applicationContext.contentResolver,
+        return Settings.Secure.getInt(
+                mContext.applicationContext.contentResolver,
                 android.provider.Settings.Secure.ACCESSIBILITY_ENABLED) == 1
     }
 
