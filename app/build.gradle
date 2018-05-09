@@ -35,10 +35,14 @@ android {
         }
     }
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-        main.proto {
-            srcDir 'src/main/proto'
-            include '*.proto'
+        main {
+            proto {
+                srcDir 'src/main/proto'
+                include '*.proto'
+            }
+            java {
+                srcDir 'src/main/kotlin'
+            }
         }
     }
     lintOptions {
@@ -99,6 +103,7 @@ protobuf {
             }
         }
     }
+    generatedFilesBaseDir = "$projectDir/src/generated"
 }
 
 androidExtensions {
