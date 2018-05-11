@@ -40,9 +40,9 @@ android {
                 srcDir 'src/main/proto'
                 include '*.proto'
             }
-            java {
-                srcDir 'src/main/kotlin'
-            }
+//            java {
+//                srcDir 'src/main/kotlin'
+//            }
         }
     }
     lintOptions {

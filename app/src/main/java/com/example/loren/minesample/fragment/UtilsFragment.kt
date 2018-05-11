@@ -17,7 +17,7 @@ class UtilsFragment : BaseFragment() {
         LorenInject.into(this)
     }
 
-    @AnimationClick([R.id.flex_tv, R.id.record_tv, R.id.high_tv, R.id.ble_tv, R.id.sign_revert_tv, R.id.touch_tv, R.id.sign_tv, R.id.bezier_tv, R.id.download_tv, R.id.screen_shot_tv, R.id.test_tv, R.id.inject_tv, R.id.remote_tv], AnimationClickType.ALPHA)
+    @AnimationClick([R.id.clear_tv, R.id.flex_tv, R.id.record_tv, R.id.high_tv, R.id.ble_tv, R.id.sign_revert_tv, R.id.touch_tv, R.id.sign_tv, R.id.bezier_tv, R.id.download_tv, R.id.screen_shot_tv, R.id.test_tv, R.id.inject_tv, R.id.remote_tv], AnimationClickType.ALPHA)
     override fun onClick(v: View) {
         when (v.id) {
             R.id.bezier_tv -> startActivity<BezierActivity>()
@@ -34,6 +34,7 @@ class UtilsFragment : BaseFragment() {
             R.id.record_tv -> requestPermission(Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     granted = { startActivity<RecordScreenActivity>() }, denied = {})
             R.id.flex_tv -> startActivity<FlexActivity>()
+            R.id.clear_tv -> startActivity<橡皮擦页面>()
         }
     }
 
