@@ -39,15 +39,24 @@
             android:text="清除" />
     </LinearLayout>
 
+
     <com.example.loren.minesample.widget.橡皮擦
         android:id="@+id/board_view"
         android:layout_width="match_parent"
         android:layout_height="200dp" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:background="@color/background_grey" />
+
     <ImageView
         android:id="@+id/complete_iv"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:layout_marginTop="16dp" />
+        android:layout_height="200dp" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:background="@color/background_grey" />
 </LinearLayout>

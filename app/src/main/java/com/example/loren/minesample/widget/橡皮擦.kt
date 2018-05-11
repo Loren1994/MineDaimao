@@ -23,6 +23,8 @@ class 橡皮擦(context: Context, attributeSet: AttributeSet) : View(context, at
     private var mCanvas: Canvas
     private var mX = 0f
     private var mY = 0f
+    private var WIDTH = screenWidth
+    private var HEIGHT = dp2px(200)
     var isClear = false
 
     init {
@@ -42,7 +44,7 @@ class 橡皮擦(context: Context, attributeSet: AttributeSet) : View(context, at
         clearPaint.pathEffect = CornerPathEffect(50f)
         clearPaint.alpha = 0
 
-        mBitmap = Bitmap.createBitmap(screenWidth, dp2px(300), Bitmap.Config.ARGB_8888)
+        mBitmap = Bitmap.createBitmap(WIDTH, HEIGHT, Bitmap.Config.ARGB_8888)
         mCanvas = Canvas(mBitmap)
     }
 
@@ -87,7 +89,7 @@ class 橡皮擦(context: Context, attributeSet: AttributeSet) : View(context, at
     }
 
     fun resetSign() {
-        mBitmap = Bitmap.createBitmap(screenWidth, dp2px(300), Bitmap.Config.ARGB_8888)
+        mBitmap = Bitmap.createBitmap(WIDTH, HEIGHT, Bitmap.Config.ARGB_8888)
         mCanvas = Canvas(mBitmap)
         invalidate()
     }
