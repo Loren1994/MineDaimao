@@ -17,9 +17,9 @@ android {
         renderscriptSupportModeEnabled true
         versionCode 1
         versionName "1.0"
-        ndk {
-            abiFilters "armeabi-v7a"
-        }
+//        ndk {
+//            abiFilters "armeabi-v7a"
+//        }
     }
     buildTypes {
         release {
@@ -37,12 +37,10 @@ android {
     sourceSets {
         main {
             proto {
-                srcDir 'src/main/proto'
+                srcDirs 'src/main/proto'
                 include '*.proto'
             }
-//            java {
-//                srcDir 'src/main/kotlin'
-//            }
+            java.srcDirs = ['src/main/java', 'src/main/aidl']
         }
     }
     lintOptions {
