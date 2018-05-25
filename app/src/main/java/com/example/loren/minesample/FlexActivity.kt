@@ -8,7 +8,11 @@ import android.graphics.Color
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.example.loren.minesample.base.ext.log
 import com.example.loren.minesample.base.ui.BaseActivity
+import com.example.loren.minesample.threadPool.Priority
+import com.example.loren.minesample.threadPool.PriorityExecutor
+import com.example.loren.minesample.threadPool.PriorityRunnable
 import com.example.loren.minesample.wallpaper.CustomWallPaper
 import kotlinx.android.synthetic.main.flex_activity.*
 import pers.victor.ext.dp2px
@@ -18,6 +22,8 @@ import pers.victor.ext.findDrawable
  * Copyright © 2018/4/17 by loren
  */
 class FlexActivity : BaseActivity() {
+
+    private val threadExecuter = PriorityExecutor()
 
     @SuppressLint("SetTextI18n")
     override fun initWidgets() {
@@ -33,6 +39,7 @@ class FlexActivity : BaseActivity() {
             flex_fl.addView(tv)
         }
         video_btn.setOnClickListener { setWallpaper() }
+        thread_btn.setOnClickListener { testThreadPool() }
     }
 
     private fun setWallpaper() {
@@ -43,6 +50,31 @@ class FlexActivity : BaseActivity() {
 //        val pickWallpaper = Intent(Intent.ACTION_SET_WALLPAPER)
 //        val chooser = Intent.createChooser(pickWallpaper, getString(R.string.app_name))
 //        startActivity(chooser)
+    }
+
+    private fun testThreadPool() {
+        repeat(25) {
+            val runnable = when (it % 3) {
+                0 -> PriorityRunnable(Priority.HIGH, Runnable {
+                    Thread.sleep(1000)
+                    log("${Thread.currentThread().name}优先级HIGH线程 - $it 执行")
+                })
+                1 -> PriorityRunnable(Priority.NORMAL, Runnable {
+                    Thread.sleep(1000)
+                    log("${Thread.currentThread().name}优先级NORMAL线程 - $it 执行")
+                })
+                else -> PriorityRunnable(Priority.LOW, Runnable {
+                    Thread.sleep(1000)
+                    log("${Thread.currentThread().name}优先级LOW线程 - $it 执行")
+                })
+            }
+            threadExecuter.execute(runnable)
+        }
+    }
+
+    override fun onDestroy() {
+        threadExecuter.shutdown()
+        super.onDestroy()
     }
 
     override fun setListeners() {

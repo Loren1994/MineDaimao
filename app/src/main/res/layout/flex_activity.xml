@@ -6,6 +6,13 @@
     android:orientation="vertical">
 
     <Button
+        android:id="@+id/thread_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="线程池测试" />
+
+    <Button
         android:id="@+id/video_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
