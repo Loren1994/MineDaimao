@@ -13,6 +13,9 @@ import com.example.loren.minesample.base.ext.log
 import com.example.loren.minesample.base.ui.BaseActivity
 import com.example.loren.minesample.entity.User
 import com.example.loren.minesample.widget.ClickRecyclerView
+import com.google.gson.TypeAdapter
+import com.google.gson.stream.JsonReader
+import com.google.gson.stream.JsonWriter
 import kotlinx.android.synthetic.main.object_box_layout.*
 import pers.victor.ext.toast
 
@@ -61,4 +64,20 @@ class ObjectBoxActivity : BaseActivity(), ClickRecyclerView.OnItemClickListener 
     }
 
     override fun bindLayout() = R.layout.object_box_layout
+}
+
+class CustomTypeAdapter : TypeAdapter<User>() {
+    override fun write(out: JsonWriter?, value: User?) {
+
+    }
+
+    override fun read(reader: JsonReader): User {
+        val user = User(0, "", 0)
+        reader.beginObject()
+        while (reader.hasNext()) {
+            log("${reader.nextName()} - ${reader.nextString()}")
+        }
+        reader.endObject()
+        return user
+    }
 }
