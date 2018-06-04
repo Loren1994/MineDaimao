@@ -45,6 +45,7 @@ android {
     }
     lintOptions {
         disable 'GoogleAppIndexingWarning'
+        abortOnError false
     }
 }
 
@@ -114,4 +115,3 @@ kotlin {
         coroutines "enable"
     }
 }
-
