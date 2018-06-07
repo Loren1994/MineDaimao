@@ -122,6 +122,7 @@
         <activity android:name=".RecordScreenActivity" />
         <activity android:name=".FlexActivity" />
         <activity android:name=".橡皮擦页面" />
+        <activity android:name=".FaceActivity" />
         <activity
             android:name=".HWLockActivity"
             android:theme="@style/ActivityTransparent" />

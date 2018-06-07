@@ -2,6 +2,7 @@ package com.example.loren.minesample
 
 import android.app.Application
 import android.content.Context
+import android.support.multidex.MultiDex
 import com.example.loren.minesample.entity.MyObjectBox
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.orhanobut.logger.AndroidLogAdapter
@@ -58,6 +59,11 @@ class App : Application() {
 
 //        val activityManager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
 //        activityManager.memoryClass
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 
     private fun initLogger() {
