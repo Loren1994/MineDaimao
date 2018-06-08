@@ -1,9 +1,9 @@
 package com.example.loren.minesample
 
 import android.graphics.Canvas
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ItemTouchHelper
 import android.view.View
 import com.example.loren.minesample.adapter.TouchAdapter
 import com.example.loren.minesample.base.ui.BaseActivity
@@ -23,11 +23,11 @@ class RecyclerTouchActivity : BaseActivity() {
             data.add("ITEM - $it")
         }
         val adapter = TouchAdapter(data)
-        touch_rv.layoutManager = LinearLayoutManager(this)
+        touch_rv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         touch_rv.adapter = adapter
 //        ItemTouchHelper(CustomTouchHelp(adapter)).attachToRecyclerView(touch_rv)
         val callback = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT) {
-            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+            override fun onMove(recyclerView: androidx.recyclerview.widget.RecyclerView, viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder, target: androidx.recyclerview.widget.RecyclerView.ViewHolder): Boolean {
                 val fromPosition = viewHolder.adapterPosition
                 val toPosition = target.adapterPosition
                 if (fromPosition < toPosition) {
@@ -39,16 +39,16 @@ class RecyclerTouchActivity : BaseActivity() {
                         Collections.swap(data, i, i - 1)
                     }
                 }
-                recyclerView.adapter.notifyItemMoved(fromPosition, toPosition)
+                recyclerView.adapter!!.notifyItemMoved(fromPosition, toPosition)
                 return false
             }
 
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            override fun onSwiped(viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder, direction: Int) {
                 data.removeAt(viewHolder.adapterPosition)
-                touch_rv.adapter.notifyItemRemoved(viewHolder.adapterPosition)
+                touch_rv.adapter!!.notifyItemRemoved(viewHolder.adapterPosition)
             }
 
-            override fun onChildDraw(c: Canvas?, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+            override fun onChildDraw(c: Canvas, recyclerView: androidx.recyclerview.widget.RecyclerView, viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
                 if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
                     val alpha = 1 - Math.abs(dX) / viewHolder.itemView.width

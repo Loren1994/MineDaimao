@@ -2,18 +2,20 @@ package com.example.loren.minesample.base.ui
 
 import android.app.LauncherActivity
 import android.content.ComponentName
+import android.content.Context.BIND_AUTO_CREATE
 import android.content.Intent
 import android.content.ServiceConnection
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.LinearLayout
 import com.example.loren.minesample.App
+import com.example.loren.minesample.App.Companion.application
 import com.example.loren.minesample.R
 import com.example.loren.minesample.base.view.AutoRecyclerView
 import com.example.loren.minesample.base.view.LoadingDialog
@@ -84,8 +86,8 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
             return
         }
         if (useImmersive()) {
-//            window.navigationBarColor = findColor(R.color.gray_dark)
-//            window.statusBarColor = findColor(R.color.transparent)
+            window.navigationBarColor = findColor(R.color.gray_dark)
+            window.statusBarColor = findColor(R.color.transparent)
             val option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
                     View.SYSTEM_UI_FLAG_LAYOUT_STABLE
             window.decorView.systemUiVisibility = option
@@ -96,7 +98,7 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
                     View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
                     View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
             window.decorView.systemUiVisibility = option
-//            window.navigationBarColor = findColor(R.color.transparent)
+            window.navigationBarColor = findColor(R.color.transparent)
         }
         window.setBackgroundDrawable(ColorDrawable(findColor(R.color.background)))
         ActivityMgr.add(this)
@@ -309,12 +311,12 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
                 recyclerView.scrollToPosition(0)
                 oldList.clear()
                 oldList.addAll(newList)
-                recyclerView.adapter.notifyDataSetChanged()
+                recyclerView.adapter!!.notifyDataSetChanged()
                 recyclerView.setOnLoadingListener { loadDataListener() }
             } else {
                 val size = oldList.size
                 oldList.addAll(newList)
-                recyclerView.adapter.notifyItemRangeInserted(size, newList.size)
+                recyclerView.adapter!!.notifyItemRangeInserted(size, newList.size)
             }
             recyclerView.hasNextPage(hasNextPage)
         }

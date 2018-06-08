@@ -4,12 +4,12 @@ import android.appwidget.AppWidgetManager
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.ViewPager
-import android.support.v4.widget.DrawerLayout
+import com.google.android.material.snackbar.Snackbar
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
+import androidx.drawerlayout.widget.DrawerLayout
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +17,7 @@ import android.widget.TextView
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.balysv.materialmenu.MaterialMenuDrawable
+import com.example.loren.minesample.R.id.*
 import com.example.loren.minesample.base.ui.BaseActivity
 import com.example.loren.minesample.fragment.HomeFragment
 import com.example.loren.minesample.fragment.UserFragment
@@ -75,7 +76,7 @@ class LauncherActivity : BaseActivity() {
                 draw_layout!!.openDrawer(Gravity.START)
             }
         }
-        draw_layout!!.addDrawerListener(object : DrawerLayout.DrawerListener {
+        draw_layout!!.addDrawerListener(object : androidx.drawerlayout.widget.DrawerLayout.DrawerListener {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
                 materialDrawable.setTransformationOffset(
                         MaterialMenuDrawable.AnimationState.BURGER_ARROW,
@@ -92,7 +93,7 @@ class LauncherActivity : BaseActivity() {
             }
 
             override fun onDrawerStateChanged(newState: Int) {
-                if (newState == DrawerLayout.STATE_IDLE) {
+                if (newState == androidx.drawerlayout.widget.DrawerLayout.STATE_IDLE) {
                     if (isDrawerOpened) {
                         materialDrawable.iconState = MaterialMenuDrawable.IconState.ARROW
                     } else {
@@ -116,7 +117,7 @@ class LauncherActivity : BaseActivity() {
             menu_container_ll!!.addView(view)
         }
         head_ll!!.setOnClickListener {
-            Snackbar.make(window.decorView, "yo yo yo", 3000).show()
+            com.google.android.material.snackbar.Snackbar.make(window.decorView, "yo yo yo", 3000).show()
             draw_layout!!.closeDrawer(Gravity.START)
         }
         initBottomNavigation()
@@ -164,7 +165,7 @@ class LauncherActivity : BaseActivity() {
     private fun initViewpager() {
         mAdapter = VpAdapter(supportFragmentManager)
         ah_vp!!.adapter = mAdapter
-        ah_vp!!.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        ah_vp!!.addOnPageChangeListener(object : androidx.viewpager.widget.ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 
             }
@@ -179,9 +180,9 @@ class LauncherActivity : BaseActivity() {
         })
     }
 
-    internal inner class VpAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+    internal inner class VpAdapter(fm: androidx.fragment.app.FragmentManager) : androidx.fragment.app.FragmentPagerAdapter(fm) {
 
-        override fun getItem(position: Int): Fragment {
+        override fun getItem(position: Int): androidx.fragment.app.Fragment {
             val fragment = frag[position]
             val bundle = Bundle()
             bundle.putString("title", titleArr[position])

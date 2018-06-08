@@ -1,6 +1,6 @@
 package com.example.loren.minesample.annotation
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.example.loren.minesample.R
@@ -11,7 +11,7 @@ import com.example.loren.minesample.widget.ClickRecyclerView
  * Copyright © 24/11/2017 by loren
  */
 class DynamicOnItemClickListener(var onClickListener: ClickRecyclerView.OnItemClickListener, var type: AnimationItemClickType) : ClickRecyclerView.OnItemClickListener by onClickListener {
-    override fun onItemClick(v: RecyclerView.ViewHolder, position: Int) {
+    override fun onItemClick(v: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         val animations: Array<Animation> = when (type) {
             AnimationItemClickType.ALPHA ->
                 arrayOf(AnimationUtils.loadAnimation(v.itemView.context, R.anim.anim_alpha_100_50),

@@ -1,6 +1,6 @@
 package com.example.loren.minesample
 
-import android.support.v7.widget.GridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import android.transition.Explode
 import android.view.View
 import bean.MessageBean
@@ -46,9 +46,9 @@ class ChatActivity : BaseActivity(), AdjustLinearLayout.onSizeChangeListener {
         data = Gson().fromJson(Constant.JSON, MessageBean::class.java).data
         mAdapter = ChatAdapter(this, data!!)
 
-        chat_rv!!.layoutManager = GridLayoutManager(this, 1)
+        chat_rv!!.layoutManager = androidx.recyclerview.widget.GridLayoutManager(this, 1)
         chat_rv!!.adapter = mAdapter
-        chat_rv!!.adapter.notifyDataSetChanged()
+        chat_rv!!.adapter!!.notifyDataSetChanged()
 
         send_btn!!.setOnClickListener(View.OnClickListener {
             if (input_edt!!.text.toString().trim { it <= ' ' } == "")
@@ -96,7 +96,7 @@ class ChatActivity : BaseActivity(), AdjustLinearLayout.onSizeChangeListener {
     private fun refresh(bean: MessageBean.DataBean) {
         val temp = data!!.size
         data!!.add(bean)
-        chat_rv!!.adapter.notifyItemRangeInserted(temp, data!!.size)
+        chat_rv!!.adapter!!.notifyItemRangeInserted(temp, data!!.size)
         chat_rv!!.scrollBy(0, Integer.MAX_VALUE)
     }
 

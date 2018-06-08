@@ -15,8 +15,8 @@ import android.os.Build
 import android.os.Environment
 import android.os.Handler
 import android.os.HandlerThread
-import android.support.annotation.RequiresApi
-import android.support.v4.app.ActivityCompat
+import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import android.util.Log
 import android.util.SparseIntArray
 import android.view.Surface
