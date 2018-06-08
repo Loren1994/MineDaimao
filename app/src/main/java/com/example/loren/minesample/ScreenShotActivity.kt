@@ -7,8 +7,6 @@ import android.view.View
 import android.view.WindowManager
 import com.example.loren.minesample.base.ext.log
 import com.example.loren.minesample.base.ui.BaseActivity
-import com.hulab.debugkit.DebugFunction
-import com.hulab.debugkit.DevTool
 import kotlinx.android.synthetic.main.screen_shot_activity.*
 import pers.victor.ext.toast
 import java.io.File
@@ -34,18 +32,18 @@ class ScreenShotActivity : BaseActivity() {
             toast("没有权限，请授权后重试")
         })
 
-        DevTool.Builder(this)
-                .addFunction(object : DebugFunction() {
-                    override fun call(): String {
-                        screen_iv.visibility = View.VISIBLE
-                        return "显示狗"
-                    }
-                }).addFunction(object : DebugFunction() {
-                    override fun call(): String {
-                        screen_iv.visibility = View.GONE
-                        return "隐藏狗"
-                    }
-                }).build()
+//        DevTool.Builder(this)
+//                .addFunction(object : DebugFunction() {
+//                    override fun call(): String {
+//                        screen_iv.visibility = View.VISIBLE
+//                        return "显示狗"
+//                    }
+//                }).addFunction(object : DebugFunction() {
+//                    override fun call(): String {
+//                        screen_iv.visibility = View.GONE
+//                        return "隐藏狗"
+//                    }
+//                }).build()
     }
 
     override fun setListeners() {

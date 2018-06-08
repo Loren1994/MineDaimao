@@ -84,8 +84,8 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
             return
         }
         if (useImmersive()) {
-            window.navigationBarColor = findColor(R.color.gray_dark)
-            window.statusBarColor = findColor(R.color.transparent)
+//            window.navigationBarColor = findColor(R.color.gray_dark)
+//            window.statusBarColor = findColor(R.color.transparent)
             val option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
                     View.SYSTEM_UI_FLAG_LAYOUT_STABLE
             window.decorView.systemUiVisibility = option
@@ -96,7 +96,7 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener, EasyPer
                     View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
                     View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
             window.decorView.systemUiVisibility = option
-            window.navigationBarColor = findColor(R.color.transparent)
+//            window.navigationBarColor = findColor(R.color.transparent)
         }
         window.setBackgroundDrawable(ColorDrawable(findColor(R.color.background)))
         ActivityMgr.add(this)

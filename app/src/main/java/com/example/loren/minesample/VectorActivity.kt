@@ -10,8 +10,8 @@ import android.view.View
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.example.loren.minesample.base.ui.BaseActivity
-import com.hanks.htextview.util.DisplayUtils
 import kotlinx.android.synthetic.main.activity_vector.*
+import pers.victor.ext.dp2px
 import pers.victor.ext.toast
 import java.util.*
 
@@ -25,7 +25,7 @@ class VectorActivity : BaseActivity() {
             volume_container_ll!!.addView(item)
         }
         mAudioRecord = AudioRecordDemo(AudioRecordDemo.OnVolumeListener { volume ->
-            Log.d("loren", "分贝值：" + volume)
+            Log.d("loren", "分贝值：$volume")
             runOnUiThread { cur_volume_tv!!.text = "分贝值：" + String.format(Locale.CHINA, "%.2f", volume) }
             for (i in 0 until volume_container_ll!!.childCount) {
                 val view = (volume_container_ll!!.getChildAt(i) as RelativeLayout).getChildAt(0) as TextView
@@ -34,8 +34,7 @@ class VectorActivity : BaseActivity() {
                 view.postDelayed({
                     val params = view.layoutParams
                     val heightTemp = params.height
-                    val animator = ValueAnimator.ofInt(heightTemp,
-                            DisplayUtils.dp2px(this@VectorActivity, heightNum))
+                    val animator = ValueAnimator.ofInt(heightTemp, dp2px(heightNum))
                     animator.duration = 100
                     animator.addUpdateListener { animation ->
                         params.height = animation.animatedValue as Int
