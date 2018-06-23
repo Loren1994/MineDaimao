@@ -25,9 +25,9 @@ class StayTopActivity : BaseActivity() {
         }
         data.sortBy { it.getTitle() }
         top_rv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
-        headerItemDecoration = HeaderItemDecoration(data, {
+        headerItemDecoration = HeaderItemDecoration(data) {
             slide_view.setCurrentCheck(it)
-        })
+        }
         top_rv.addItemDecoration(headerItemDecoration)
         top_rv.adapter = TopListAdapter(data)
         slide_view.setData(headerItemDecoration.indexMap.keys.sortedBy { it }.toMutableList())

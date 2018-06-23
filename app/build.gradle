@@ -67,7 +67,7 @@ dependencies {
     implementation "androidx.core:core-ktx:$android_support_version"
     implementation 'com.google.android:flexbox:0.3.2'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-    implementation 'com.google.code.gson:gson:2.8.4'
+    implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.facebook.fresco:fresco:0.13.0'
     implementation 'com.aurelhubert:ahbottomnavigation:2.1.0'
     implementation 'com.balysv.materialmenu:material-menu:2.0.0'
@@ -81,12 +81,12 @@ dependencies {
     implementation "io.objectbox:objectbox-kotlin:$objectboxVersion"
     kapt "io.objectbox:objectbox-processor:$objectboxVersion"
     implementation 'com.yanzhenjie:andserver:1.1.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5'
     // 定义protobuf依赖，使用精简版
     implementation "com.google.protobuf:protobuf-lite:3.0.0"
     implementation('com.squareup.retrofit2:converter-protobuf:2.2.0') {
         exclude group: 'com.google.protobuf', module: 'protobuf-java'
     }
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.22.5"
     implementation 'org.bytedeco:javacv:1.4.1'
     implementation 'org.bytedeco.javacpp-presets:opencv:3.4.1-1.4.1:android-arm'

@@ -31,7 +31,7 @@ class ObjectBoxActivity : BaseActivity(), ClickRecyclerView.OnItemClickListener 
     @SuppressLint("SetTextI18n")
     override fun initWidgets() {
         LorenInject.into(this)
-        log(">>>>" + annoStr)
+        log(">>>>$annoStr")
         val user = boxStore.boxFor(User::class.java)
         val removeStartTime = System.currentTimeMillis()
         user.removeAll()
