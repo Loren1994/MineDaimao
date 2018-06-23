@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.google.protobuf'
+//apply plugin: 'com.google.protobuf'
 
 android.sourceSets.main.java.srcDirs += 'build/generated/source/objectbox'
 
@@ -36,10 +36,10 @@ android {
     }
     sourceSets {
         main {
-            proto {
-                srcDirs 'src/main/proto'
-                include '*.proto'
-            }
+//            proto {
+//                srcDirs 'src/main/proto'
+//                include '*.proto'
+//            }
             java.srcDirs = ['src/main/java', 'src/main/aidl']
         }
     }
@@ -81,39 +81,40 @@ dependencies {
     implementation "io.objectbox:objectbox-kotlin:$objectboxVersion"
     kapt "io.objectbox:objectbox-processor:$objectboxVersion"
     implementation 'com.yanzhenjie:andserver:1.1.0'
-    // 定义protobuf依赖，使用精简版
-    implementation "com.google.protobuf:protobuf-lite:3.0.0"
-    implementation('com.squareup.retrofit2:converter-protobuf:2.2.0') {
-        exclude group: 'com.google.protobuf', module: 'protobuf-java'
-    }
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.22.5"
     implementation 'org.bytedeco:javacv:1.4.1'
     implementation 'org.bytedeco.javacpp-presets:opencv:3.4.1-1.4.1:android-arm'
     implementation 'org.bytedeco.javacpp-presets:ffmpeg:3.4.2-1.4.1:android-arm'
+    // 定义protobuf依赖，使用精简版
+//    implementation "com.google.protobuf:protobuf-lite:3.0.0"
+//    implementation('com.squareup.retrofit2:converter-protobuf:2.2.0') {
+//        exclude group: 'com.google.protobuf', module: 'protobuf-java'
+//    }
+
 //    implementation "com.android.support:palette-v7:$android_support_version"
 //    implementation 'hanks.xyz:htextview-library:0.1.2'
 //    implementation 'com.hulab.android:debugkit:1.1.0'
 }
 
-protobuf {
-    protoc {
-        artifact = 'com.google.protobuf:protoc:3.0.0'
-    }
-    plugins {
-        javalite {
-            artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.0'
-        }
-    }
-    generateProtoTasks {
-        all().each { task ->
-            task.plugins {
-                javalite {}
-            }
-        }
-    }
-    generatedFilesBaseDir = "$projectDir/src/generated"
-}
+//protobuf {
+//    protoc {
+//        artifact = 'com.google.protobuf:protoc:3.0.0'
+//    }
+//    plugins {
+//        javalite {
+//            artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.0'
+//        }
+//    }
+//    generateProtoTasks {
+//        all().each { task ->
+//            task.plugins {
+//                javalite {}
+//            }
+//        }
+//    }
+//    generatedFilesBaseDir = "$projectDir/src/generated"
+//}
 
 androidExtensions {
     experimental = true
