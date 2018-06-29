@@ -3,6 +3,8 @@ package com.example.loren.minesample.fragment
 import android.app.ActivityOptions
 import android.app.AlertDialog
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.provider.Settings
 import android.view.View
 import com.example.loren.minesample.*
@@ -29,8 +31,8 @@ class UserFragment : BaseFragment() {
         val list = arrayOf("TopActivity悬浮框", "吸附式悬浮框")
         dialog = AlertDialog.Builder(activity)
                 .setTitle("请选择悬浮框")
-                .setSingleChoiceItems(list, 0, { _, p -> clickPos = p })
-                .setPositiveButton("嗯", { _, _ -> startWindowService() })
+                .setSingleChoiceItems(list, 0) { _, p -> clickPos = p }
+                .setPositiveButton("嗯") { _, _ -> startWindowService() }
     }
 
     override fun useTitleBar() = false
@@ -44,6 +46,13 @@ class UserFragment : BaseFragment() {
             if (!hasPermission()) {
                 toast("未开启权限")
                 startActivityForResult(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS), 1)
+            }
+        }
+        if (requestCode == 10) {
+            if (Build.VERSION.SDK_INT >= 23) {
+                if (!Settings.canDrawOverlays(activity)) {
+                    toast("无悬浮窗权限")
+                }
             }
         }
     }
@@ -98,7 +107,17 @@ class UserFragment : BaseFragment() {
 
     private fun startWindowService() {
         when (clickPos) {
-            0 -> activity!!.startService(Intent(activity, ShowActivityService::class.java))
+            0 -> {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (!Settings.canDrawOverlays(activity!!.applicationContext)) {
+                        val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + activity!!.packageName))
+                        activity!!.startActivityForResult(intent, 10)
+                        return
+                    } else {
+                        activity!!.startService(Intent(activity, ShowActivityService::class.java))
+                    }
+                }
+            }
             1 -> activity!!.startService(Intent(activity, WindowsService::class.java))
         }
     }

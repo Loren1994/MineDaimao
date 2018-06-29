@@ -9,8 +9,8 @@ import android.app.Service;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.IBinder;
-import androidx.annotation.Nullable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -21,6 +21,8 @@ import android.widget.TextView;
 
 import com.example.loren.minesample.App;
 import com.example.loren.minesample.R;
+
+import androidx.annotation.Nullable;
 
 /**
  * Copyright © 2017/12/27 by loren
@@ -56,7 +58,11 @@ public class ShowActivityService extends Service {
         windowManager = (WindowManager) getApplication().getSystemService(Application.WINDOW_SERVICE);
         //TYPE_TOAST:无需申请悬浮窗权限(<=Build.VERSION_CODES.N) - TYPE_PHONE:需申请
         //android OREO:TYPE_APPLICATION_OVERLAY
-        windowParams = new WindowManager.LayoutParams(WindowManager.LayoutParams.TYPE_TOAST);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            windowParams = new WindowManager.LayoutParams(WindowManager.LayoutParams.TYPE_TOAST);
+        } else {
+            windowParams = new WindowManager.LayoutParams(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
+        }
         windowParams.format = PixelFormat.TRANSLUCENT;
         windowParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         //|WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS;
