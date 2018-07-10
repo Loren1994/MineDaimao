@@ -10,6 +10,16 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/observe_tv"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/rectangle_gradient"
+            android:gravity="center"
+            android:text="Observe实现双向绑定"
+            android:textColor="@color/grey"
+            android:textSize="20sp" />
+
+        <TextView
             android:id="@+id/face_tv"
             android:layout_width="match_parent"
             android:layout_height="80dp"

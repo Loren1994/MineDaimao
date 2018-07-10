@@ -2,25 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <com.example.loren.minesample.widget.ExpandTextLayout
+    <EditText
+        android:id="@+id/input_edt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@color/orange"
+        android:hint="please input something"
         android:padding="8dp" />
 
-    <!--<android.support.v7.widget.RecyclerView-->
-    <!--android:id="@+id/expand_rv"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content" />-->
-
-    <Button
-        android:id="@+id/test_btn"
+    <TextView
+        android:id="@+id/result_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Coroutine Test"
-        android:visibility="gone" />
-
+        android:layout_marginTop="16dp" />
 </LinearLayout>

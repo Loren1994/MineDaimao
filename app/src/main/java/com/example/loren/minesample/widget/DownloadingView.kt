@@ -24,8 +24,8 @@ class DownloadingView(context: Context, attributeSet: AttributeSet) : View(conte
     private var RADIUS = 0f
     private var DEFAULT_HEIGHT = dp2px(40)
     private var text = ""
-    private var curProgress = 0f
-    private var maxProgress = 100f
+    private var curProgress = 0.0f
+    private var maxProgress = 100.0f
     private val loadingColor = Color.YELLOW //进度条颜色和初始文字颜色
     private val initColor = Color.GRAY //初始背景颜色
     private val initTextColor = Color.BLUE //进度条中的文字颜色

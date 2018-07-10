@@ -17,9 +17,9 @@ class DownloadingActivity : BaseActivity() {
             }
             if (!download_view.isDownloading()) {
                 Thread {
-                    repeat(100) {
-                        download_view.setProgress(it + 1f)
-                        SystemClock.sleep(100)
+                    repeat(1000) {
+                        download_view.setProgress(it / 10.0f)
+                        SystemClock.sleep(10)
                     }
                 }.start()
             }
