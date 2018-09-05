@@ -15,15 +15,16 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.text.TextUtils;
+import android.util.AttributeSet;
+
+import com.example.loren.minesample.R;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.AppCompatImageView;
-import android.text.TextUtils;
-import android.util.AttributeSet;
-
-import com.example.loren.minesample.R;
 
 
 public class CircleTextImageView extends AppCompatImageView {
@@ -56,7 +57,7 @@ public class CircleTextImageView extends AppCompatImageView {
     private String mTextString;
     private int mTextColor = DEFAULT_TEXT_COLOR;
     private int mTextSize = DEFAULT_TEXT_SIZE;
-    private int mTextPadding=DEFAULT_TEXT_PADDING;
+    private int mTextPadding = DEFAULT_TEXT_PADDING;
 
     private Bitmap mBitmap;
     private BitmapShader mBitmapShader;
@@ -94,7 +95,7 @@ public class CircleTextImageView extends AppCompatImageView {
         mTextString = a.getString(R.styleable.CircleTextImageView_citv_text_text);
         mTextColor = a.getColor(R.styleable.CircleTextImageView_citv_text_color, DEFAULT_TEXT_COLOR);
         mTextSize = a.getDimensionPixelSize(R.styleable.CircleTextImageView_citv_text_size, DEFAULT_TEXT_SIZE);
-        mTextPadding=a.getDimensionPixelSize(R.styleable.CircleTextImageView_citv_text_padding, DEFAULT_TEXT_PADDING);
+        mTextPadding = a.getDimensionPixelSize(R.styleable.CircleTextImageView_citv_text_padding, DEFAULT_TEXT_PADDING);
         a.recycle();
 
         init();
@@ -131,14 +132,14 @@ public class CircleTextImageView extends AppCompatImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (mBitmap == null&&TextUtils.isEmpty(mTextString)) {
+        if (mBitmap == null && TextUtils.isEmpty(mTextString)) {
             return;
         }
 
         if (mFillColor != Color.TRANSPARENT) {
             canvas.drawCircle(getWidth() / 2.0f, getHeight() / 2.0f, mDrawableRadius, mFillPaint);
         }
-        if(mBitmap!=null) {
+        if (mBitmap != null) {
             canvas.drawCircle(getWidth() / 2.0f, getHeight() / 2.0f, mDrawableRadius, mBitmapPaint);
         }
         if (mBorderWidth != 0) {
@@ -167,9 +168,9 @@ public class CircleTextImageView extends AppCompatImageView {
     public void setText(@StringRes int TextResId) {
         setText(getResources().getString(TextResId));
     }
-    public void setText(String textString)
-    {
-        this.mTextString=textString;
+
+    public void setText(String textString) {
+        this.mTextString = textString;
         invalidate();
 
     }
@@ -191,9 +192,9 @@ public class CircleTextImageView extends AppCompatImageView {
     public int getTextSize() {
         return mTextSize;
     }
-    public void setTextSize(int textSize)
-    {
-        this.mTextSize=textSize;
+
+    public void setTextSize(int textSize) {
+        this.mTextSize = textSize;
         mTextPaint.setTextSize(textSize);
         invalidate();
     }
@@ -347,12 +348,10 @@ public class CircleTextImageView extends AppCompatImageView {
         }
 
 
-
-        if (mBitmap == null&&TextUtils.isEmpty(mTextString)) {
+        if (mBitmap == null && TextUtils.isEmpty(mTextString)) {
             invalidate();
             return;
         }
-
 
 
         mTextPaint.setAntiAlias(true);
@@ -370,7 +369,6 @@ public class CircleTextImageView extends AppCompatImageView {
         mFillPaint.setColor(mFillColor);
 
 
-
         mBorderRect.set(0, 0, getWidth(), getHeight());
         mBorderRadius = Math.min((mBorderRect.height() - mBorderWidth) / 2.0f, (mBorderRect.width() - mBorderWidth) / 2.0f);
 
@@ -380,8 +378,7 @@ public class CircleTextImageView extends AppCompatImageView {
         }
         mDrawableRadius = Math.min(mDrawableRect.height() / 2.0f, mDrawableRect.width() / 2.0f);
 
-        if(mBitmap!=null)
-        {
+        if (mBitmap != null) {
             mBitmapShader = new BitmapShader(mBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
             mBitmapHeight = mBitmap.getHeight();
             mBitmapWidth = mBitmap.getWidth();
@@ -416,20 +413,17 @@ public class CircleTextImageView extends AppCompatImageView {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int widthMeasureSpecMode=MeasureSpec.getMode(widthMeasureSpec);
-        int widthMeasureSpecSize=MeasureSpec.getSize(widthMeasureSpec);
-        int heightMeasureSpecMode=MeasureSpec.getMode(heightMeasureSpec);
-        int heightMeasureSpecSize=MeasureSpec.getSize(heightMeasureSpec);
+        int widthMeasureSpecMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthMeasureSpecSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightMeasureSpecMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightMeasureSpecSize = MeasureSpec.getSize(heightMeasureSpec);
 
-        if(!TextUtils.isEmpty(mTextString))
-        {
-            int textMeasuredSize= (int) (mTextPaint.measureText(mTextString));
-            textMeasuredSize+=2*mTextPadding;
-            if(widthMeasureSpecMode==MeasureSpec.AT_MOST&&heightMeasureSpecMode==MeasureSpec.AT_MOST)
-            {
-                if(textMeasuredSize>getMeasuredWidth()||textMeasuredSize>getMeasuredHeight())
-                {
-                    setMeasuredDimension(textMeasuredSize,textMeasuredSize);
+        if (!TextUtils.isEmpty(mTextString)) {
+            int textMeasuredSize = (int) (mTextPaint.measureText(mTextString));
+            textMeasuredSize += 2 * mTextPadding;
+            if (widthMeasureSpecMode == MeasureSpec.AT_MOST && heightMeasureSpecMode == MeasureSpec.AT_MOST) {
+                if (textMeasuredSize > getMeasuredWidth() || textMeasuredSize > getMeasuredHeight()) {
+                    setMeasuredDimension(textMeasuredSize, textMeasuredSize);
                 }
             }
         }

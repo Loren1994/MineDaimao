@@ -127,6 +127,7 @@
         <activity android:name=".橡皮擦页面" />
         <activity android:name=".FaceActivity" />
         <activity android:name=".ObserveActivity" />
+        <activity android:name=".ApolloActivity" />
         <activity
             android:name=".HWLockActivity"
             android:theme="@style/ActivityTransparent" />

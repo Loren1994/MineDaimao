@@ -154,7 +154,7 @@ abstract class BaseFragment : androidx.fragment.app.Fragment(), View.OnClickList
         if (permissionList.size == 0) {
             this.onPermissionsGranted?.invoke()
         }
-        EasyPermissions.requestPermissions(this, rationale
+        EasyPermissions.requestPermissions(activity!!, rationale
                 ?: "${getString(R.string.app_name)}需要申请权限", 110, *permissionList.toTypedArray())
     }
 

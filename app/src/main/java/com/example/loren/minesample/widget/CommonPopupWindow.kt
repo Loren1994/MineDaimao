@@ -44,7 +44,7 @@ class CommonPopupWindow(context: Activity, itemsOnClick: View.OnClickListener) :
         this.setBackgroundDrawable(dw)
         this.isOutsideTouchable = true
         val params = context.window.attributes
-        animator.duration = 300
+        animator.duration = 200
         animator.addUpdateListener {
             params.alpha = animator.animatedValue as Float
             if (animator.animatedValue as Float == 1.0f) {

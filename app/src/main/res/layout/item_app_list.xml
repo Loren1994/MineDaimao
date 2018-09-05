@@ -6,15 +6,15 @@
     android:clipToPadding="false"
     android:gravity="center"
     android:orientation="horizontal"
-    android:paddingBottom="8dp"
-    android:paddingEnd="16dp"
     android:paddingStart="16dp"
-    android:paddingTop="8dp">
+    android:paddingTop="8dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="8dp">
 
     <com.example.loren.minesample.base.view.RoundImageView
         android:id="@+id/app_iv"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
         app:img_radius="5dp" />
 
     <LinearLayout
@@ -40,6 +40,7 @@
             android:textColor="@color/grey"
             android:textSize="12sp"
             android:textStyle="bold" />
+
         <TextView
             android:id="@+id/app_size_tv"
             android:layout_width="wrap_content"
@@ -67,7 +68,14 @@
             android:textSize="12sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/target_sdk_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TargetSDK"
+            android:textColor="@color/grey"
+            android:textSize="12sp"
+            android:textStyle="bold" />
     </LinearLayout>
-
 
 </LinearLayout>

@@ -16,6 +16,8 @@ import pers.victor.ext.toast
  * 部分机型TYPE_NOTIFICATION_STATE_CHANGED是监测toast通知
  * 此方式不能保证所有机型都好用
  * 另一种方式:NotificationListenerService(4.3)
+ * 微信每个版本都会更新关键控件ID
+ * 故抢红包插件要跟随微信升级控件ID
  */
 class VerySixService : AccessibilityService() {
 
@@ -31,8 +33,8 @@ class VerySixService : AccessibilityService() {
     }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
-        //显示当前Activity
         if (event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+            //显示当前Activity
             val cName = ComponentName(event.packageName.toString(), event.className.toString())
             ShowActivityService.setTv(event.packageName.toString(), cName.className)
             //抢红包
@@ -69,9 +71,9 @@ class VerySixService : AccessibilityService() {
         log(">>>openRedPacket")
         val rootNode = rootInActiveWindow
         if (rootNode != null) {
-            val listNode = rootNode.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/a_c")
+            val listNode = rootNode.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/aem")
             if (null != listNode && listNode.size > 0) {
-                val msgNode = listNode[0].findAccessibilityNodeInfosByViewId("com.tencent.mm:id/ad8")
+                val msgNode = listNode[0].findAccessibilityNodeInfosByViewId("com.tencent.mm:id/afo")
                 if (msgNode != null && msgNode.size > 0) {
                     for (accessibilityNodeInfo in msgNode) {
                         val redPackage = accessibilityNodeInfo.findAccessibilityNodeInfosByText("领取红包")
@@ -88,7 +90,7 @@ class VerySixService : AccessibilityService() {
     private fun clickRedPacket() {
         log(">>>clickRedPacket")
         val rootNode = rootInActiveWindow
-        val clickNode = rootNode.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/c31")
+        val clickNode = rootNode.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/c85")
         if (null != clickNode && clickNode.size > 0) {
             clickNode[0].performAction(AccessibilityNodeInfo.ACTION_CLICK)
         } else {

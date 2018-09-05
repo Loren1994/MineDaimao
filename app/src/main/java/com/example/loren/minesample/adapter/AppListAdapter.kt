@@ -2,6 +2,7 @@ package com.example.loren.minesample.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
 import android.view.View
 import com.example.loren.minesample.R
 import com.example.loren.minesample.base.ext.CommonAdapter
@@ -25,6 +26,10 @@ class AppListAdapter(val context: Context, private val list: List<AppBean>, val 
         holder.app_name_tv.text = list[position].applicationInfo.loadLabel(context.packageManager)
         holder.app_package_tv.text = list[position].packageName
         holder.app_size_tv.text = "apk:${list[position].apkSize}M"
+        holder.target_sdk_tv.text = "targetSdk:${list[position].applicationInfo.targetSdkVersion}"
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            holder.target_sdk_tv.text = "targetSdk:${list[position].applicationInfo.targetSdkVersion} / minSdk:${list[position].applicationInfo.minSdkVersion}"
+        }
         holder.update_time_tv.text = "修改时间:${list[position].lastUpdateTime.date()}"
         holder.process_tv.text = "PID:${list[position].pid}"
         holder.process_tv.visibility = list[position].pid.isEmpty().yes { View.GONE }.no { View.VISIBLE }

@@ -72,10 +72,10 @@ class AppManagerActivity : BaseActivity() {
         am = this.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         initTv()
         requestPermission(Manifest.permission.READ_SMS, granted = { initDeviceInfo() }, denied = { toast("无权限,请重试") })
-        allAdapter = AppListAdapter(this, data, {
+        allAdapter = AppListAdapter(this, data) {
             clickPos = it
             popupWindow.show(window.decorView)
-        })
+        }
         app_rv.adapter = allAdapter
         setAllAppList()
 
@@ -159,7 +159,7 @@ class AppManagerActivity : BaseActivity() {
             i.pkgList.forEach {
                 tempList.add(it)
                 data.forEach { item ->
-                    if (item.packageName.contentEquals(it)) {
+                    if (item.packageName!!.contentEquals(it)) {
                         item.pid = i.pid.toString()
                     }
                 }
