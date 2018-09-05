@@ -15,8 +15,8 @@ import android.os.Build
 import android.os.Environment
 import android.os.Handler
 import android.os.HandlerThread
-import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
+import android.support.annotation.RequiresApi
+import android.support.v4.app.ActivityCompat
 import android.util.Log
 import android.util.SparseIntArray
 import android.view.Surface
@@ -26,9 +26,10 @@ import com.example.loren.minesample.base.ext.log
 import com.example.loren.minesample.base.ui.BaseActivity
 import com.example.loren.minesample.constant.MessageEvent
 import kotlinx.android.synthetic.main.activity_take_photo.*
-import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.DefaultDispatcher
 import kotlinx.coroutines.experimental.delay
 import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.withContext
 import org.greenrobot.eventbus.EventBus
 import pers.victor.ext.findColor
 import pers.victor.ext.toast
@@ -64,7 +65,7 @@ class TakePhotoActivity : BaseActivity() {
 
     private fun takeDelay() {
         launch {
-            async {
+            withContext(DefaultDispatcher) {
                 delay(2000)
                 takePicture()
             }

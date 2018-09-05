@@ -1,8 +1,6 @@
 package com.example.loren.minesample
 
 import android.graphics.Color
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.transition.Fade
 import android.view.View
 import android.widget.SeekBar
@@ -63,7 +61,7 @@ class CustomViewActivity : BaseActivity() {
     override fun onWidgetsClick(v: View) {
     }
 
-    override fun bindLayout()=R.layout.custom_view_activity
+    override fun bindLayout() = R.layout.custom_view_activity
 
     private var mR: Int = 0
     private var mG: Int = 0

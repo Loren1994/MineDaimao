@@ -25,7 +25,7 @@
             android:textColor="#ff0000"
             android:textSize="20sp" />
 
-        <androidx.appcompat.widget.AppCompatSeekBar
+        <android.support.v7.widget.AppCompatSeekBar
             android:id="@+id/r"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
             android:textColor="#00ff00"
             android:textSize="20sp" />
 
-        <androidx.appcompat.widget.AppCompatSeekBar
+        <android.support.v7.widget.AppCompatSeekBar
             android:id="@+id/g"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
             android:textColor="#0000ff"
             android:textSize="20sp" />
 
-        <androidx.appcompat.widget.AppCompatSeekBar
+        <android.support.v7.widget.AppCompatSeekBar
             android:id="@+id/b"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

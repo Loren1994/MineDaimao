@@ -1,8 +1,7 @@
 package com.example.loren.minesample.adapter
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Adapter
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,9 +33,9 @@ import kotlinx.android.synthetic.main.message_item.view.*
  *
  *                Copyright (c) 16-10-26 by loren
  */
-class ShortcutAdapter(val mContext: Context, val mdata: Array<String>) : Adapter<ShortcutAdapter.ViewHolder>() {
+class ShortcutAdapter(val mContext: Context, val mdata: Array<String>) : RecyclerView.Adapter<ShortcutAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemView.item.text=mdata[position]
+        holder.itemView.item.text = mdata[position]
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -44,5 +43,5 @@ class ShortcutAdapter(val mContext: Context, val mdata: Array<String>) : Adapter
 
     override fun getItemCount(): Int = mdata.size
 
-    class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView)
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

@@ -1,6 +1,6 @@
 package com.example.loren.minesample
 
-import androidx.recyclerview.widget.GridLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.transition.Explode
 import android.view.View
 import bean.MessageBean
@@ -46,7 +46,7 @@ class ChatActivity : BaseActivity(), AdjustLinearLayout.onSizeChangeListener {
         data = Gson().fromJson(Constant.JSON, MessageBean::class.java).data
         mAdapter = ChatAdapter(this, data!!)
 
-        chat_rv!!.layoutManager = androidx.recyclerview.widget.GridLayoutManager(this, 1)
+        chat_rv!!.layoutManager = GridLayoutManager(this, 1)
         chat_rv!!.adapter = mAdapter
         chat_rv!!.adapter!!.notifyDataSetChanged()
 

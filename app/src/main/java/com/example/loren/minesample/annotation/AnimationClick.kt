@@ -1,6 +1,6 @@
 package com.example.loren.minesample.annotation
 
-import androidx.annotation.IdRes
+import android.support.annotation.IdRes
 import android.view.View
 
 /**
@@ -8,7 +8,7 @@ import android.view.View
  */
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class AnimationClick(@IdRes val viewIds: IntArray = intArrayOf(View.NO_ID), val animType: AnimationClickType = AnimationClickType.ALPHA)
+annotation class AnimationClick(@IdRes val viewIds: IntArray = [View.NO_ID], val animType: AnimationClickType = AnimationClickType.ALPHA)
 
 enum class AnimationClickType {
     ALPHA,

@@ -1,7 +1,7 @@
 package com.example.loren.minesample
 
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.ItemTouchHelper
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
 import com.example.loren.minesample.adapter.TTTouchAdapter
 import com.example.loren.minesample.adapter.TTouchHelp
@@ -25,8 +25,8 @@ class TTouchActivity : BaseActivity() {
             uncheckData.add(TTouchBean("未选$it", 1))
         }
         mAdapter = TTTouchAdapter(checkData, uncheckData)
-        val layoutManager = androidx.recyclerview.widget.GridLayoutManager(this, 4)
-        layoutManager.spanSizeLookup = object : androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup() {
+        val layoutManager = GridLayoutManager(this, 4)
+        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 return if (mAdapter.isTitle(position)) 4 else 1
             }

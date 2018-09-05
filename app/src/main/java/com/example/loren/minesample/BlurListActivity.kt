@@ -7,7 +7,7 @@ import android.renderscript.Allocation
 import android.renderscript.Element
 import android.renderscript.RenderScript
 import android.renderscript.ScriptIntrinsicBlur
-import androidx.recyclerview.widget.RecyclerView
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.example.loren.minesample.adapter.BlurListAdapter
 import com.example.loren.minesample.base.ext.parseObject
@@ -49,8 +49,8 @@ class BlurListActivity : BaseActivity() {
         list_rv.adapter = mAdapter
         initImage()
         getWeather()
-        list_rv.addOnScrollListener(object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: androidx.recyclerview.widget.RecyclerView, dx: Int, dy: Int) {
+        list_rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 mScrollY += dy
                 mAlpha = if (mScrollY <= 1000) {

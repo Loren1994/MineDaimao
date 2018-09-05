@@ -1,14 +1,14 @@
 package com.example.loren.minesample.adapter
 
 import android.graphics.*
-import androidx.recyclerview.widget.RecyclerView
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import pers.victor.ext.dp2px
 
 /**
  * Copyright © 2018/2/2 by loren
  */
-class HeaderItemDecoration(private val headerList: List<IndexHeader>,val onTitleChange: ((titleIndex: Int) -> Unit)) : androidx.recyclerview.widget.RecyclerView.ItemDecoration() {
+class HeaderItemDecoration(private val headerList: List<IndexHeader>, val onTitleChange: ((titleIndex: Int) -> Unit)) : RecyclerView.ItemDecoration() {
     private val HEADER_HEIGHT = 150f //小于等于ITEM的高度
     private val HEADER_PADDING = dp2px(8).toFloat()
     private val paint = Paint()
@@ -33,14 +33,14 @@ class HeaderItemDecoration(private val headerList: List<IndexHeader>,val onTitle
         }
     }
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         super.getItemOffsets(outRect, view, parent, state)
         if (parent.getChildAdapterPosition(view) in indexMap.values) {
             outRect.top = HEADER_HEIGHT.toInt()
         }
     }
 
-    override fun onDraw(c: Canvas, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
+    override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDraw(c, parent, state)
         repeat(parent.childCount) {
             val child = parent.getChildAt(it)
@@ -52,7 +52,7 @@ class HeaderItemDecoration(private val headerList: List<IndexHeader>,val onTitle
         }
     }
 
-    override fun onDrawOver(c: Canvas, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
+    override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(c, parent, state)
         val curChild = parent.getChildAt(0)
         val firstPos = parent.getChildAdapterPosition(curChild)

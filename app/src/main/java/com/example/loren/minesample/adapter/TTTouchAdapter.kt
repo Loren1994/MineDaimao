@@ -4,11 +4,12 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.DashPathEffect
 import android.graphics.Paint
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
+import android.support.v7.widget.helper.ItemTouchHelper.ACTION_STATE_DRAG
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.ItemTouchHelper.ACTION_STATE_DRAG
 import com.example.loren.minesample.R
 import com.example.loren.minesample.entity.TTouchBean
 import kotlinx.android.synthetic.main.item_ttouch_checked.view.*
@@ -20,7 +21,7 @@ import java.util.*
 /**
  * Copyright © 2018/3/29 by loren
  */
-class TTTouchAdapter(val checkData: MutableList<TTouchBean>, val unCheckData: MutableList<TTouchBean>) : androidx.recyclerview.widget.RecyclerView.Adapter<TTTouchAdapter.ViewHolder>() {
+class TTTouchAdapter(val checkData: MutableList<TTouchBean>, val unCheckData: MutableList<TTouchBean>) : RecyclerView.Adapter<TTTouchAdapter.ViewHolder>() {
 
     private val ITEM_CHECK = 0
     private val ITEM_UNCHECK = 1
@@ -125,7 +126,7 @@ class TTTouchAdapter(val checkData: MutableList<TTouchBean>, val unCheckData: Mu
         data[toPosition].itemType = if (toPosition > data.indexOf(titleBean)) ITEM_UNCHECK else ITEM_CHECK
     }
 
-    class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView)
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }
 
 class TTouchHelp(val mAdapter: TTTouchAdapter) : ItemTouchHelper.Callback() {
@@ -140,7 +141,7 @@ class TTouchHelp(val mAdapter: TTTouchAdapter) : ItemTouchHelper.Callback() {
     }
 
     //返回拖拽和滑动的方向
-    override fun getMovementFlags(recyclerView: androidx.recyclerview.widget.RecyclerView, viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder): Int {
+    override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
         val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN or ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         if (mAdapter.isTitle(viewHolder.layoutPosition)) {
             return makeMovementFlags(0, 0)
@@ -149,7 +150,7 @@ class TTouchHelp(val mAdapter: TTTouchAdapter) : ItemTouchHelper.Callback() {
     }
 
     //拖动item进行移动时回调
-    override fun onMove(recyclerView: androidx.recyclerview.widget.RecyclerView, viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder, target: androidx.recyclerview.widget.RecyclerView.ViewHolder): Boolean {
+    override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
         val fromPosition = viewHolder.adapterPosition   //拖动的position
         val toPosition = target.adapterPosition     //释放的position
         if (mAdapter.isTitle(toPosition)) {
@@ -159,7 +160,7 @@ class TTouchHelp(val mAdapter: TTTouchAdapter) : ItemTouchHelper.Callback() {
         return true
     }
 
-    override fun onChildDrawOver(c: Canvas, recyclerView: androidx.recyclerview.widget.RecyclerView, viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+    override fun onChildDrawOver(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
         super.onChildDrawOver(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
         if (dX != 0f && dY != 0f || isCurrentlyActive) {
             c.drawRoundRect(viewHolder.itemView.left.toFloat(), viewHolder.itemView.top.toFloat(),
@@ -169,7 +170,7 @@ class TTouchHelp(val mAdapter: TTTouchAdapter) : ItemTouchHelper.Callback() {
     }
 
     //拖拽或滑动时回调
-    override fun onSelectedChanged(viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder?, actionState: Int) {
+    override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
         super.onSelectedChanged(viewHolder, actionState)
         if (actionState == ACTION_STATE_DRAG) {
             val holder = viewHolder as TTTouchAdapter.ViewHolder
@@ -179,7 +180,7 @@ class TTouchHelp(val mAdapter: TTTouchAdapter) : ItemTouchHelper.Callback() {
     }
 
     //交互完成后回调
-    override fun clearView(recyclerView: androidx.recyclerview.widget.RecyclerView, viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder) {
+    override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
         super.clearView(recyclerView, viewHolder)
         val holder = viewHolder as TTTouchAdapter.ViewHolder
         holder.itemView.alpha = 1f
@@ -188,7 +189,7 @@ class TTouchHelp(val mAdapter: TTTouchAdapter) : ItemTouchHelper.Callback() {
     }
 
     //滑动
-    override fun onSwiped(viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder, direction: Int) {
+    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
     }
 
 }

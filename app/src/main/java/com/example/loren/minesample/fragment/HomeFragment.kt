@@ -2,7 +2,7 @@ package com.example.loren.minesample.fragment
 
 import android.app.ActivityOptions
 import android.content.Intent
-import androidx.core.content.ContextCompat
+import android.support.v4.content.ContextCompat
 import android.view.View
 import com.example.loren.minesample.*
 import com.example.loren.minesample.annotation.AnimationClick

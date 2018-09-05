@@ -1,7 +1,7 @@
 package com.example.loren.minesample.base.view
 
 import android.app.Activity
-import androidx.appcompat.app.AlertDialog
+import android.support.v7.app.AlertDialog
 import com.example.loren.minesample.R
 import kotlinx.android.synthetic.main.loading_dialog.view.*
 import pers.victor.ext.inflate

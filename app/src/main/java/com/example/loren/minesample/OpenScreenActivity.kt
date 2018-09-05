@@ -4,7 +4,7 @@ import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.graphics.drawable.ColorDrawable
 import android.os.CountDownTimer
-import androidx.core.content.ContextCompat
+import android.support.v4.content.ContextCompat
 import android.transition.Fade
 import android.util.Log
 import android.view.View

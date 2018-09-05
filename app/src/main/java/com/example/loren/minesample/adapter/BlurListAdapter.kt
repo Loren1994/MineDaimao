@@ -1,7 +1,7 @@
 package com.example.loren.minesample.adapter
 
 import android.annotation.SuppressLint
-import androidx.recyclerview.widget.RecyclerView
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.example.loren.minesample.R
@@ -16,7 +16,7 @@ import pers.victor.ext.screenHeight
 /**
  * Copyright © 03/01/2018 by loren
  */
-class BlurListAdapter(val data: MutableList<WeatherBean.Data.Forecast>) : androidx.recyclerview.widget.RecyclerView.Adapter<BlurListAdapter.ViewHolder>() {
+class BlurListAdapter(val data: MutableList<WeatherBean.Data.Forecast>) : RecyclerView.Adapter<BlurListAdapter.ViewHolder>() {
 
     private val HEADER = 0
     private val ITEM = 1
@@ -58,5 +58,5 @@ class BlurListAdapter(val data: MutableList<WeatherBean.Data.Forecast>) : androi
     }
 
 
-    class ViewHolder(override val containerView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(containerView), LayoutContainer
+    class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer
 }

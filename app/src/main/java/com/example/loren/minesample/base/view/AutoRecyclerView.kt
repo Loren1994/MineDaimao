@@ -1,10 +1,10 @@
 package com.example.loren.minesample.base.view
 
 import android.content.Context
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +12,10 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.example.loren.minesample.R
 
-class AutoRecyclerView(val mContext: Context, attrs: AttributeSet) : androidx.recyclerview.widget.RecyclerView(mContext, attrs), Runnable {
+class AutoRecyclerView(val mContext: Context, attrs: AttributeSet) : RecyclerView(mContext, attrs), Runnable {
     private val mHeaderViews = arrayListOf<View>()
     private val mFootViews = arrayListOf<View>()
-    private var mAdapter: Adapter<ViewHolder>? = null
+    private var mAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>? = null
     private var isLoadingData = false
     private var mLoadDataListenerKotlin: (() -> Unit)? = null
 
@@ -26,9 +26,9 @@ class AutoRecyclerView(val mContext: Context, attrs: AttributeSet) : androidx.re
 
     override fun run() {
         val manager = layoutManager
-        if (manager is androidx.recyclerview.widget.GridLayoutManager) {
+        if (manager is GridLayoutManager) {
             layoutGridAttach(manager)
-        } else if (manager is androidx.recyclerview.widget.StaggeredGridLayoutManager) {
+        } else if (manager is StaggeredGridLayoutManager) {
             layoutStaggeredGridHeadAttach(manager)
         }
         if (mAdapter != null) {
@@ -107,9 +107,9 @@ class AutoRecyclerView(val mContext: Context, attrs: AttributeSet) : androidx.re
         mAdapter = adapterT
     }
 
-    private fun layoutGridAttach(manager: androidx.recyclerview.widget.GridLayoutManager) {
+    private fun layoutGridAttach(manager: GridLayoutManager) {
         val originLookUp = manager.spanSizeLookup
-        manager.spanSizeLookup = object : androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup() {
+        manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 return if ((mAdapter as WrapAdapter).isHeader(position) || (mAdapter as WrapAdapter).isFooter(position))
                     manager.spanCount
@@ -120,11 +120,11 @@ class AutoRecyclerView(val mContext: Context, attrs: AttributeSet) : androidx.re
         requestLayout()
     }
 
-    private fun layoutStaggeredGridHeadAttach(manager: androidx.recyclerview.widget.StaggeredGridLayoutManager) {
+    private fun layoutStaggeredGridHeadAttach(manager: StaggeredGridLayoutManager) {
         for (i in 0..mAdapter!!.itemCount - 1) {
             if ((mAdapter as WrapAdapter).isHeader(i)) {
                 val view = getChildAt(i)
-                (view.layoutParams as androidx.recyclerview.widget.StaggeredGridLayoutManager.LayoutParams).isFullSpan = true
+                (view.layoutParams as StaggeredGridLayoutManager.LayoutParams).isFullSpan = true
                 view.requestLayout()
             } else {
                 break
@@ -140,14 +140,14 @@ class AutoRecyclerView(val mContext: Context, attrs: AttributeSet) : androidx.re
             val layoutManager = layoutManager
             val lastVisibleItemPosition: Int
             // 获取最后一个正在显示的Item的位置
-            if (layoutManager is androidx.recyclerview.widget.GridLayoutManager) {
+            if (layoutManager is GridLayoutManager) {
                 lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
-            } else if (layoutManager is androidx.recyclerview.widget.StaggeredGridLayoutManager) {
+            } else if (layoutManager is StaggeredGridLayoutManager) {
                 val into = IntArray(layoutManager.spanCount)
                 layoutManager.findLastVisibleItemPositions(into)
                 lastVisibleItemPosition = findMax(into)
             } else {
-                lastVisibleItemPosition = (layoutManager as androidx.recyclerview.widget.LinearLayoutManager).findLastVisibleItemPosition()
+                lastVisibleItemPosition = (layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
             }
 
             if (layoutManager.childCount > 0 && lastVisibleItemPosition >= layoutManager.itemCount - 1) {
@@ -226,9 +226,9 @@ class AutoRecyclerView(val mContext: Context, attrs: AttributeSet) : androidx.re
             if (viewType == INVALID_TYPE) {
                 return HeaderViewHolder(mHeaderViews!![headerPosition++])
             } else if (viewType == INVALID_TYPE - 1) {
-                val params = androidx.recyclerview.widget.StaggeredGridLayoutManager.LayoutParams(
-                        androidx.recyclerview.widget.StaggeredGridLayoutManager.LayoutParams.MATCH_PARENT,
-                        androidx.recyclerview.widget.StaggeredGridLayoutManager.LayoutParams.WRAP_CONTENT)
+                val params = StaggeredGridLayoutManager.LayoutParams(
+                        StaggeredGridLayoutManager.LayoutParams.MATCH_PARENT,
+                        StaggeredGridLayoutManager.LayoutParams.WRAP_CONTENT)
                 params.isFullSpan = true
                 mFootViews!![0].layoutParams = params
                 return HeaderViewHolder(mFootViews!![0])

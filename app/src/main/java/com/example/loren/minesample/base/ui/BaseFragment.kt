@@ -3,7 +3,7 @@ package com.example.loren.minesample.base.ui
 import android.content.Context
 import android.content.ServiceConnection
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +20,7 @@ import pub.devrel.easypermissions.EasyPermissions
  * Author : victor
  * Time : 16-9-11 20:42
  */
-abstract class BaseFragment : androidx.fragment.app.Fragment(), View.OnClickListener, EasyPermissions.PermissionCallbacks {
+abstract class BaseFragment : Fragment(), View.OnClickListener, EasyPermissions.PermissionCallbacks {
     protected lateinit var mContext: BaseActivity
     private var titleBar: TitleBar? = null
     private var lastClickTime = 0L

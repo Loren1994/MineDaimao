@@ -11,6 +11,7 @@ import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.IBinder;
+import android.support.annotation.Nullable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -21,8 +22,6 @@ import android.widget.TextView;
 
 import com.example.loren.minesample.App;
 import com.example.loren.minesample.R;
-
-import androidx.annotation.Nullable;
 
 /**
  * Copyright © 2017/12/27 by loren

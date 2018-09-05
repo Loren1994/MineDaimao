@@ -1,8 +1,8 @@
 package com.example.loren.minesample
 
 import android.annotation.SuppressLint
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.example.loren.minesample.adapter.ObjectBoxAdapter
 import com.example.loren.minesample.annotation.AnimationItemClick
@@ -41,7 +41,7 @@ class ObjectBoxActivity : BaseActivity(), ClickRecyclerView.OnItemClickListener 
             userList.add(User(name = "name - $i", age = i))
         }
         val adapter = ObjectBoxAdapter(userList)
-        test_rv.layoutManager = androidx.recyclerview.widget.GridLayoutManager(this, 4)
+        test_rv.layoutManager = GridLayoutManager(this, 4)
         test_rv.adapter = adapter
         val insertStartTime = System.currentTimeMillis()
         user.put(userList)
@@ -50,11 +50,11 @@ class ObjectBoxActivity : BaseActivity(), ClickRecyclerView.OnItemClickListener 
 
     //用注解则不能在activity里setListener,否则无效
     @AnimationItemClick(R.id.test_rv, AnimationItemClickType.SCALE)
-    override fun onItemClick(vh: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
+    override fun onItemClick(vh: RecyclerView.ViewHolder, position: Int) {
         toast("$position - item click")
     }
 
-    override fun onItemLongClick(vh: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
+    override fun onItemLongClick(vh: RecyclerView.ViewHolder, position: Int) {
     }
 
     override fun setListeners() {
