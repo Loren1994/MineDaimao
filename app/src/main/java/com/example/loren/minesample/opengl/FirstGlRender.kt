@@ -35,12 +35,14 @@ class FirstGlRender(val context: Context) : GLSurfaceView.Renderer {
     )
     //屏幕顶点为(-1,1)(1,1)(-1,-1)(1,-1)
     private var tableVerticlesWithTriangles = floatArrayOf(
-            -0.5f, -0.5f,
-            0.5f, 0.5f,
-            -0.5f, 0.5f,
+            //triangle fan
+            0f, 0f,
             -0.5f, -0.5f,
             0.5f, -0.5f,
             0.5f, 0.5f,
+            -0.5f, 0.5f,
+            -0.5f, -0.5f,
+            //others
             -0.5f, 0f,
             0.5f, 0f,
             0f, -0.25f,
@@ -66,7 +68,7 @@ class FirstGlRender(val context: Context) : GLSurfaceView.Renderer {
     override fun onDrawFrame(gl: GL10?) {
         GLES20.glClear(GL_COLOR_BUFFER_BIT)
         GLES20.glUniform4f(uColorLocation, 1.0f, 1.0f, 1.0f, 1.0f)
-        GLES20.glDrawArrays(GL_TRIANGLES, 0, 6)
+        GLES20.glDrawArrays(GL_TRIANGLE_FAN, 0, 6)
         GLES20.glUniform4f(uColorLocation, 1.0f, 0f, 0f, 1f)
         GLES20.glDrawArrays(GL_LINES, 6, 2)
         GLES20.glUniform4f(uColorLocation, 0.0f, 0f, 1f, 1f)
