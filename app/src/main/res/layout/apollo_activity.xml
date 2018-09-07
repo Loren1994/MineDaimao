@@ -4,10 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--<cn.nodemedia.NodeCameraView-->
-        <!--android:id="@+id/preview_nv"-->
-        <!--android:layout_width="30px"-->
-        <!--android:layout_height="30px">-->
-    <!--</cn.nodemedia.NodeCameraView>-->
+    <android.opengl.GLSurfaceView
+        android:id="@+id/gl_surface"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>
