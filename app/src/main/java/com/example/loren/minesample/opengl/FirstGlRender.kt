@@ -16,46 +16,30 @@ import javax.microedition.khronos.opengles.GL10
  */
 class FirstGlRender(val context: Context) : GLSurfaceView.Renderer {
 
-    //只能画点/线/三角形
-    private var tableVerticlesWithTrianglesOrigin = floatArrayOf(
-            //Triangles 1
-            0f, 0f,
-            9f, 14f,
-            0f, 14f,
-            //Triangles 2
-            0f, 0f,
-            9f, 0f,
-            9f, 14f,
-            //line
-            0f, 7f,
-            9f, 7f,
-            //point
-            4.5f, 2f,
-            4.5f, 12f
-    )
-    //屏幕顶点为(-1,1)(1,1)(-1,-1)(1,-1)
     private var tableVerticlesWithTriangles = floatArrayOf(
-            //triangle fan
-            0f, 0f,
-            -0.5f, -0.5f,
-            0.5f, -0.5f,
-            0.5f, 0.5f,
-            -0.5f, 0.5f,
-            -0.5f, -0.5f,
-            //others
-            -0.5f, 0f,
-            0.5f, 0f,
-            0f, -0.25f,
-            0f, 0.25f
+            //增加颜色属性x,y,r,g,b
+            0f, 0f, 1f, 1f, 1f,
+            -0.5f, -0.5f, 0.7f, 0.7f, 0.7f,
+            0.5f, -0.5f, 0.7f, 0.7f, 0.7f,
+            0.5f, 0.5f, 0.7f, 0.7f, 0.7f,
+            -0.5f, 0.5f, 0.7f, 0.7f, 0.7f,
+            -0.5f, -0.5f, 0.7f, 0.7f, 0.7f,
+            //line & point
+            -0.5f, 0f, 1f, 0f, 0f,
+            0.5f, 0f, 1f, 0f, 0f,
+            0f, -0.25f, 0f, 0f, 1f,
+            0f, 0.25f, 1f, 0f, 0f
     )
-    private var POSITION_COMPONENT_COUNT = 2
-    private var BYTE_PER_FLOAT = 4
     private var vertexData: FloatBuffer
     private var programId = 0
-    private var U_COLOR = "u_Color"
-    private var uColorLocation = 0
+    private var A_COLOR = "a_Color"
+    private var aColorLocation = 0
     private var A_POSITION = "a_Position"
     private var aPositionLocation = 0
+    private var POSITION_COMPONENT_COUNT = 2
+    private var BYTE_PER_FLOAT = 4
+    private var COLOR_COMPONENT_COUNT = 3
+    private var STRIDE = (POSITION_COMPONENT_COUNT + COLOR_COMPONENT_COUNT) * BYTE_PER_FLOAT
 
     init {
         vertexData = ByteBuffer
@@ -67,13 +51,9 @@ class FirstGlRender(val context: Context) : GLSurfaceView.Renderer {
 
     override fun onDrawFrame(gl: GL10?) {
         GLES20.glClear(GL_COLOR_BUFFER_BIT)
-        GLES20.glUniform4f(uColorLocation, 1.0f, 1.0f, 1.0f, 1.0f)
         GLES20.glDrawArrays(GL_TRIANGLE_FAN, 0, 6)
-        GLES20.glUniform4f(uColorLocation, 1.0f, 0f, 0f, 1f)
         GLES20.glDrawArrays(GL_LINES, 6, 2)
-        GLES20.glUniform4f(uColorLocation, 0.0f, 0f, 1f, 1f)
         GLES20.glDrawArrays(GL_POINTS, 8, 1)
-        GLES20.glUniform4f(uColorLocation, 0.0f, 0f, 1f, 1f)
         GLES20.glDrawArrays(GL_POINTS, 9, 1)
 
     }
@@ -92,10 +72,13 @@ class FirstGlRender(val context: Context) : GLSurfaceView.Renderer {
         ShaderHelper.validateProgram(programId)
         GLES20.glUseProgram(programId)
 
-        uColorLocation = GLES20.glGetUniformLocation(programId, U_COLOR)
+        aColorLocation = GLES20.glGetAttribLocation(programId, A_COLOR)
         aPositionLocation = GLES20.glGetAttribLocation(programId, A_POSITION)
         vertexData.position(0)
-        GLES20.glVertexAttribPointer(aPositionLocation, POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexData)
+        GLES20.glVertexAttribPointer(aPositionLocation, POSITION_COMPONENT_COUNT, GL_FLOAT, false, STRIDE, vertexData)
         GLES20.glEnableVertexAttribArray(aPositionLocation)
+        vertexData.position(POSITION_COMPONENT_COUNT)
+        GLES20.glVertexAttribPointer(aColorLocation, COLOR_COMPONENT_COUNT, GL_FLOAT, false, STRIDE, vertexData)
+        GLES20.glEnableVertexAttribArray(aColorLocation)
     }
 }
