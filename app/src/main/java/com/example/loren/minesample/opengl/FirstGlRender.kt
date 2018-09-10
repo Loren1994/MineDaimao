@@ -4,6 +4,7 @@ import android.content.Context
 import android.opengl.GLES20
 import android.opengl.GLES20.*
 import android.opengl.GLSurfaceView
+import android.opengl.Matrix
 import com.example.loren.minesample.R
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
@@ -19,16 +20,16 @@ class FirstGlRender(val context: Context) : GLSurfaceView.Renderer {
     private var tableVerticlesWithTriangles = floatArrayOf(
             //增加颜色属性x,y,r,g,b
             0f, 0f, 1f, 1f, 1f,
-            -0.5f, -0.5f, 0.7f, 0.7f, 0.7f,
-            0.5f, -0.5f, 0.7f, 0.7f, 0.7f,
-            0.5f, 0.5f, 0.7f, 0.7f, 0.7f,
-            -0.5f, 0.5f, 0.7f, 0.7f, 0.7f,
-            -0.5f, -0.5f, 0.7f, 0.7f, 0.7f,
+            -0.5f, -0.8f, 0.7f, 0.7f, 0.7f,
+            0.5f, -0.8f, 0.7f, 0.7f, 0.7f,
+            0.5f, 0.8f, 0.7f, 0.7f, 0.7f,
+            -0.5f, 0.8f, 0.7f, 0.7f, 0.7f,
+            -0.5f, -0.8f, 0.7f, 0.7f, 0.7f,
             //line & point
             -0.5f, 0f, 1f, 0f, 0f,
             0.5f, 0f, 1f, 0f, 0f,
-            0f, -0.25f, 0f, 0f, 1f,
-            0f, 0.25f, 1f, 0f, 0f
+            0f, -0.4f, 0f, 0f, 1f,
+            0f, 0.4f, 1f, 0f, 0f
     )
     private var vertexData: FloatBuffer
     private var programId = 0
@@ -36,6 +37,9 @@ class FirstGlRender(val context: Context) : GLSurfaceView.Renderer {
     private var aColorLocation = 0
     private var A_POSITION = "a_Position"
     private var aPositionLocation = 0
+    private var U_MATRIX = "u_Matrix"
+    private var uMatrixLocation = 0
+    private var projectionMatrix = FloatArray(16)
     private var POSITION_COMPONENT_COUNT = 2
     private var BYTE_PER_FLOAT = 4
     private var COLOR_COMPONENT_COUNT = 3
@@ -51,15 +55,21 @@ class FirstGlRender(val context: Context) : GLSurfaceView.Renderer {
 
     override fun onDrawFrame(gl: GL10?) {
         GLES20.glClear(GL_COLOR_BUFFER_BIT)
+        GLES20.glUniformMatrix4fv(uMatrixLocation, 1, false, projectionMatrix, 0)
         GLES20.glDrawArrays(GL_TRIANGLE_FAN, 0, 6)
         GLES20.glDrawArrays(GL_LINES, 6, 2)
         GLES20.glDrawArrays(GL_POINTS, 8, 1)
         GLES20.glDrawArrays(GL_POINTS, 9, 1)
-
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
         GLES20.glViewport(0, 0, width, height)
+        val aspectRatio = if (width > height) width.toFloat() / height.toFloat() else height.toFloat() / width.toFloat()
+        if (width > height) {
+            Matrix.orthoM(projectionMatrix, 0, -aspectRatio, aspectRatio, -1f, 1f, -1f, 1f)
+        } else {
+            Matrix.orthoM(projectionMatrix, 0, -1f, 1f, -aspectRatio, aspectRatio, -1f, 1f)
+        }
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
@@ -72,6 +82,7 @@ class FirstGlRender(val context: Context) : GLSurfaceView.Renderer {
         ShaderHelper.validateProgram(programId)
         GLES20.glUseProgram(programId)
 
+        uMatrixLocation = GLES20.glGetUniformLocation(programId, U_MATRIX)
         aColorLocation = GLES20.glGetAttribLocation(programId, A_COLOR)
         aPositionLocation = GLES20.glGetAttribLocation(programId, A_POSITION)
         vertexData.position(0)
