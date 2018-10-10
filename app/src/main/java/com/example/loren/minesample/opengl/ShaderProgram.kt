@@ -10,6 +10,7 @@ open class ShaderProgram(context: Context, vertexSourceId: Int, fragmentSourceId
     //uniform
     val U_MATRIX = "u_Matrix"
     val U_TEXTURE_UNIT = "u_TextureUnit"
+    val U_COLOR = "u_Color"
     //attribute
     var A_COLOR = "a_Color"
     val A_POSITION = "a_Position"

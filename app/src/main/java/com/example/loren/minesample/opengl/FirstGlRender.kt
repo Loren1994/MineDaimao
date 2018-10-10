@@ -18,38 +18,63 @@ class FirstGlRender(val context: Context) : GLSurfaceView.Renderer {
     private lateinit var textureShaderProgram: TextureShaderProgram
     private lateinit var colorShaderProgram: ColorShaderProgram
     private var table = Table()
-    private var mallet = Mallet()
     private var texture = 0
+    private var viewMatrix = FloatArray(16)
+    private var viewProjectionMatrix = FloatArray(16)
+    private var modelViewProjectionMatrix = FloatArray(16)
+    private lateinit var puck: Puck
+    private lateinit var mallet: Mallet
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
         GLES20.glClearColor(0f, 0f, 0f, 0f)
         textureShaderProgram = TextureShaderProgram(context)
         colorShaderProgram = ColorShaderProgram(context)
         texture = TextureHelper.loadTexture(context, R.drawable.air_hockey_surface)
+        puck = Puck(0.06f, 0.02f, 32)
+        mallet = Mallet(0.08f, 0.15f, 32)
     }
 
     override fun onDrawFrame(gl: GL10?) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT)
-        //table
+        Matrix.multiplyMM(viewProjectionMatrix, 0, projectionMatrix, 0, viewMatrix, 0)
+        //draw table
+        positionTableInScene()
         textureShaderProgram.useProgram()
-        textureShaderProgram.setUniforms(projectionMatrix, texture)
+        textureShaderProgram.setUniforms(modelViewProjectionMatrix, texture)
         table.bindData(textureShaderProgram)
         table.draw()
-        //mallet
+        //draw mallet
+        positionObjectInScene(0f, mallet.height / 2f, -0.4f)
         colorShaderProgram.useProgram()
-        colorShaderProgram.setUniforms(projectionMatrix)
+        colorShaderProgram.setUniforms(modelViewProjectionMatrix, 1f, 0f, 0f)
         mallet.bindData(colorShaderProgram)
         mallet.draw()
+        positionObjectInScene(0f, mallet.height / 2f, 0.4f)
+        colorShaderProgram.setUniforms(modelViewProjectionMatrix, 0f, 0f, 1f)
+        mallet.draw()
+        //draw puck
+        positionObjectInScene(0f, puck.height / 2f, 0f)
+        colorShaderProgram.setUniforms(modelViewProjectionMatrix, 0.8f, 0.8f, 1f)
+        puck.bindData(colorShaderProgram)
+        puck.draw()
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
         GLES20.glViewport(0, 0, width, height)
-        Matrix.perspectiveM(projectionMatrix, 0, 45f, width.toFloat() / height.toFloat(), 1f, 10f)
+        Matrix.perspectiveM(projectionMatrix, 0, 50f, width.toFloat() / height.toFloat(), 1f, 10f)
+        Matrix.setLookAtM(viewMatrix, 0, 0f, 1.2f, 2.2f, 0f, 0f, 0f, 0f, 1f, 0f)
+    }
+
+    fun positionTableInScene() {
         Matrix.setIdentityM(modelMatrix, 0)
-        Matrix.translateM(modelMatrix, 0, 0f, 0f, -3f)
-        Matrix.rotateM(modelMatrix, 0, -60f, 1f, 0f, 0f)
-        val temp = FloatArray(16)
-        Matrix.multiplyMM(temp, 0, projectionMatrix, 0, modelMatrix, 0)
-        System.arraycopy(temp, 0, projectionMatrix, 0, temp.size)
+        Matrix.rotateM(modelMatrix, 0, -90f, 1f, 0f, 0f)
+        Matrix.multiplyMM(modelViewProjectionMatrix, 0, viewProjectionMatrix, 0, modelMatrix, 0)
+    }
+
+    fun positionObjectInScene(x: Float, y: Float, z: Float) {
+        Matrix.setIdentityM(modelMatrix, 0)
+        Matrix.translateM(modelMatrix, 0, x, y, z)
+        Matrix.multiplyMM(modelViewProjectionMatrix, 0, viewProjectionMatrix, 0, modelMatrix, 0)
+
     }
 }

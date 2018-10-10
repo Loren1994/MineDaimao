@@ -13,9 +13,10 @@ class ColorShaderProgram(context: Context) : ShaderProgram(context, R.raw.simple
     var uMatrixLocation = GLES20.glGetUniformLocation(programId, U_MATRIX)
     //attribute
     var aPositionLocation = GLES20.glGetAttribLocation(programId, A_POSITION)
-    var aColorLocation = GLES20.glGetAttribLocation(programId, A_COLOR)
+    var uColorLocation = GLES20.glGetUniformLocation(programId, U_COLOR)
 
-    fun setUniforms(matrix: FloatArray) {
+    fun setUniforms(matrix: FloatArray, r: Float, g: Float, b: Float) {
         GLES20.glUniformMatrix4fv(uMatrixLocation, 1, false, matrix, 0)
+        GLES20.glUniform4f(uColorLocation, r, g, b, 1f)
     }
 }
