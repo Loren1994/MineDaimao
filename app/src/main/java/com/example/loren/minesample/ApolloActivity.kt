@@ -1,12 +1,12 @@
 package com.example.loren.minesample
 
 import android.app.ActivityManager
+import android.content.Context
 import android.view.View
-import androidx.core.content.systemService
-import androidx.core.widget.toast
 import com.example.loren.minesample.base.ui.BaseActivity
 import com.example.loren.minesample.opengl.FirstGlRender
 import kotlinx.android.synthetic.main.apollo_activity.*
+import pers.victor.ext.toast
 
 /**
  * Copyright © 2018/7/17 by loren
@@ -16,10 +16,10 @@ class ApolloActivity : BaseActivity() {
     private var renderSet = false
 
     override fun initWidgets() {
-        val activityManager = systemService<ActivityManager>()
+        val activityManager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         val support2 = activityManager.deviceConfigurationInfo.reqGlEsVersion >= 0x20000
         if (support2) {
-            initGL()
+            runOnUiThread { initGL() }
         } else {
             toast("设备不支持GLES-2.0")
         }
@@ -27,7 +27,7 @@ class ApolloActivity : BaseActivity() {
 
     private fun initGL() {
         gl_surface.setEGLContextClientVersion(2)
-        gl_surface.setRenderer(FirstGlRender(this))
+        gl_surface.setRenderer(FirstGlRender(this@ApolloActivity))
         renderSet = true
     }
 

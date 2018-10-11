@@ -57,21 +57,41 @@ class FirstGlRender(val context: Context) : GLSurfaceView.Renderer {
         colorShaderProgram.setUniforms(modelViewProjectionMatrix, 0.8f, 0.8f, 1f)
         puck.bindData(colorShaderProgram)
         puck.draw()
+
+        if (eyeX > 0.0f) eyeX -= 0.01f
+        if (eyeY < 1.2f) eyeY += 0.01f
+        if (eyeZ < 2.2f) eyeZ += 0.02f
+        if (centerY < 0f) centerY += 0.01f
+//        if (centerZ < 0f) centerZ += 0.02f
+//        if (upX < 0f) upX += 1f
+        Matrix.setLookAtM(viewMatrix, 0,
+                eyeX, eyeY, eyeZ,
+                0f, centerY, centerZ,
+                upX, 1f, 0f)
     }
 
+    var eyeX = 1f
+    var eyeY = 1f
+    var eyeZ = 1f
+    var centerY = -1f
+    var centerZ = 0f
+    var upX = 0f
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
         GLES20.glViewport(0, 0, width, height)
         Matrix.perspectiveM(projectionMatrix, 0, 50f, width.toFloat() / height.toFloat(), 1f, 10f)
-        Matrix.setLookAtM(viewMatrix, 0, 0f, 1.2f, 2.2f, 0f, 0f, 0f, 0f, 1f, 0f)
+        Matrix.setLookAtM(viewMatrix, 0,
+                eyeX, eyeY, eyeZ,
+                0f, centerY, centerZ,
+                0f, 1f, 0f)
     }
 
-    fun positionTableInScene() {
+    private fun positionTableInScene() {
         Matrix.setIdentityM(modelMatrix, 0)
         Matrix.rotateM(modelMatrix, 0, -90f, 1f, 0f, 0f)
         Matrix.multiplyMM(modelViewProjectionMatrix, 0, viewProjectionMatrix, 0, modelMatrix, 0)
     }
 
-    fun positionObjectInScene(x: Float, y: Float, z: Float) {
+    private fun positionObjectInScene(x: Float, y: Float, z: Float) {
         Matrix.setIdentityM(modelMatrix, 0)
         Matrix.translateM(modelMatrix, 0, x, y, z)
         Matrix.multiplyMM(modelViewProjectionMatrix, 0, viewProjectionMatrix, 0, modelMatrix, 0)
