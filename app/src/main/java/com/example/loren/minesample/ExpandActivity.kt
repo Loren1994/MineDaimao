@@ -3,7 +3,7 @@ package com.example.loren.minesample
 import android.view.View
 import com.example.loren.minesample.base.ui.BaseActivity
 import kotlinx.android.synthetic.main.expand_activity.*
-import kotlinx.coroutines.experimental.*
+import kotlinx.coroutines.*
 import pers.victor.ext.toast
 
 /**

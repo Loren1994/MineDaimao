@@ -18,10 +18,12 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.balysv.materialmenu.MaterialMenuDrawable
 import com.example.loren.minesample.R.id.*
+import com.example.loren.minesample.base.ext.log
 import com.example.loren.minesample.base.ui.BaseActivity
 import com.example.loren.minesample.fragment.HomeFragment
 import com.example.loren.minesample.fragment.UserFragment
 import com.example.loren.minesample.fragment.UtilsFragment
+import com.example.loren.minesample.jniutil.JniUtil
 import kotlinx.android.synthetic.main.launcher_activity.*
 import pers.victor.ext.*
 
@@ -122,6 +124,8 @@ class LauncherActivity : BaseActivity() {
         }
         initBottomNavigation()
         initViewpager()
+
+        log(JniUtil().test())
     }
 
     override fun onResume() {

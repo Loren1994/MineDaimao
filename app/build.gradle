@@ -18,9 +18,19 @@ android {
         versionCode 1
         versionName "1.0"
         ndk {
-            abiFilters "armeabi-v7a", "x86"
+            abiFilters "armeabi-v7a"//, "x86"
         }
+//        externalNativeBuild {
+//            cmake {
+//                cppFlags ""
+//            }
+//        }
     }
+//    externalNativeBuild {
+//        cmake {
+//            path "CMakeLists.txt"
+//        }
+//    }
     buildTypes {
         release {
             minifyEnabled false
@@ -41,6 +51,7 @@ android {
 //                include '*.proto'
 //            }
             java.srcDirs = ['src/main/java', 'src/main/aidl']
+            jniLibs.srcDirs 'src/main/jniLibs'
         }
     }
     lintOptions {
@@ -81,9 +92,9 @@ dependencies {
     releaseImplementation "io.objectbox:objectbox-android:$objectboxVersion"
     implementation 'com.yanzhenjie:andserver:1.1.0'
     implementation 'androidx.core:core-ktx:0.3'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.27.0-eap13'
     implementation 'com.google.android:flexbox:0.3.2'
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.22.5"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.27.0-eap13"
     implementation 'org.bytedeco:javacv:1.4.1'
     implementation 'org.bytedeco.javacpp-presets:opencv:3.4.1-1.4.1:android-arm'
     implementation 'org.bytedeco.javacpp-presets:ffmpeg:3.4.2-1.4.1:android-arm'

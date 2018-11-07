@@ -26,10 +26,10 @@ import com.example.loren.minesample.base.ext.log
 import com.example.loren.minesample.base.ui.BaseActivity
 import com.example.loren.minesample.constant.MessageEvent
 import kotlinx.android.synthetic.main.activity_take_photo.*
-import kotlinx.coroutines.experimental.DefaultDispatcher
-import kotlinx.coroutines.experimental.delay
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.withContext
+import kotlinx.coroutines.DefaultDispatcher
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.greenrobot.eventbus.EventBus
 import pers.victor.ext.findColor
 import pers.victor.ext.toast

@@ -15,8 +15,8 @@ import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber
 import com.facebook.imagepipeline.image.CloseableImage
 import com.facebook.imagepipeline.request.ImageRequestBuilder
 import kotlinx.android.synthetic.main.face_activity.*
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import org.bytedeco.javacpp.opencv_core
 import org.bytedeco.javacpp.opencv_imgcodecs.imread
 import org.bytedeco.javacpp.opencv_imgcodecs.imwrite
