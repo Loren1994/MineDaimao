@@ -67,6 +67,20 @@ android {
     }
 }
 
+// compileSdkVersion及targetSdkVersion是28，测试手机是27，
+// 开机一堆not found异常(27/28的api差异问题)
+// 改为和手机版本一直即可
+//configurations.all {
+//    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+//        def requested = details.requested
+//        if (requested.group == "com.android.support") {
+//            if (!requested.name.startsWith("multidex")) {
+//                details.useVersion "26.+"
+//            }
+//        }
+//    }
+//}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

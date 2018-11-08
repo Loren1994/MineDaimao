@@ -21,7 +21,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
 
     <uses-permission
@@ -62,6 +62,15 @@
             <meta-data
                 android:name="android.accessibilityservice"
                 android:resource="@xml/accessibility_service_config" />
+        </service>
+
+        <service
+            android:name=".service.MessageService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="pers.loren.aidl" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </service>
 
         <!--android:excludeFromRecents="true"-->
