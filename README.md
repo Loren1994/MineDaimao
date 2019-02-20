@@ -96,7 +96,7 @@
 
   >  主要是[AndServer](https://github.com/yanzhenjie/AndServer)库的使用
   >
-  > 实现手机作为服务器，网页为终端调用手机接口。
+  > 实现手机作为服务器，网页作为终端调用手机接口。
 
 * [透视效果](https://github.com/Loren1994/MineDaimao/blob/master/app/src/main/java/com/example/loren/minesample/widget/HWLockView.kt)
 
@@ -176,5 +176,8 @@
 
   > 曲棍球游戏(更新中)
 
+* [FEventBus](https://github.com/Loren1994/MineDaimao/blob/master/app/src/main/java/com/example/loren/minesample/eventbus/FEventbus.kt)
+
+  > 仿写EventBus发送和接收消息的功能，使用interface代替注解。
 
 ## 持续更新中...
