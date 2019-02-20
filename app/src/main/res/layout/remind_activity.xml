@@ -11,7 +11,7 @@
         android:background="@color/grey"
         android:gravity="center"
         android:padding="10dp"
-        android:text="预览拍照"
+        android:text="Preview"
         android:textColor="@color/background_grey"
         android:textSize="30sp" />
 
@@ -23,7 +23,7 @@
         android:background="@color/grey"
         android:gravity="center"
         android:padding="10dp"
-        android:text="无预览拍照"
+        android:text="No-Preview"
         android:textColor="@color/background_grey"
         android:textSize="30sp" />
 

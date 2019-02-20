@@ -2,6 +2,8 @@ package com.example.loren.minesample
 
 import android.app.ActivityManager
 import android.content.Context
+import android.view.MotionEvent.ACTION_DOWN
+import android.view.MotionEvent.ACTION_MOVE
 import android.view.View
 import com.example.loren.minesample.base.ui.BaseActivity
 import com.example.loren.minesample.opengl.FirstGlRender
@@ -14,6 +16,7 @@ import pers.victor.ext.toast
 class ApolloActivity : BaseActivity() {
 
     private var renderSet = false
+    private var glSurfaceRender = FirstGlRender(this)
 
     override fun initWidgets() {
         val activityManager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
@@ -27,7 +30,17 @@ class ApolloActivity : BaseActivity() {
 
     private fun initGL() {
         gl_surface.setEGLContextClientVersion(2)
-        gl_surface.setRenderer(FirstGlRender(this@ApolloActivity))
+        gl_surface.setRenderer(glSurfaceRender)
+        gl_surface.setOnTouchListener { v, event ->
+            val normalizedX = (event.x / v.width) * 2 - 1
+            val normalizedY = -((event.y / v.height) * 2 - 1)
+            when (event.action) {
+                ACTION_DOWN -> gl_surface.queueEvent { glSurfaceRender.handleTouchPress(normalizedX, normalizedY) }
+                ACTION_MOVE -> gl_surface.queueEvent { glSurfaceRender.handleTouchDrag(normalizedX, normalizedY) }
+                else -> return@setOnTouchListener false
+            }
+            true
+        }
         renderSet = true
     }
 

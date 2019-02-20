@@ -20,4 +20,13 @@ object Geometry {
 
     class Cylinder(val radius: Float, val height: Float, val center: Point)
 
+    class Vector(x: Float, y: Float, z: Float)
+
+    class Ray(point: Point, vector: Vector)
+
+    fun vectorBetween(from: Point, to: Point): Vector {
+        return Vector(to.x - from.x,
+                to.y - from.y,
+                to.z - from.z)
+    }
 }

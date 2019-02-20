@@ -20,6 +20,14 @@
             app:vertical_spacing="8dp">
 
             <TextView
+                android:id="@+id/eventbus_tv"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_main_coner"
+                android:text="仿EventBus"
+                android:textColor="@color/white" />
+
+            <TextView
                 android:id="@+id/red_package_tv"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"

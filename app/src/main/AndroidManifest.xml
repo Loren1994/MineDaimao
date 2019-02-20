@@ -140,6 +140,8 @@
         <activity
             android:name=".HWLockActivity"
             android:theme="@style/ActivityTransparent" />
+        <activity android:name=".EventBusActivity" />
+        <activity android:name=".EventBusSendActivity" />
 
         <receiver android:name=".widget.DemoAppWidget">
             <intent-filter>

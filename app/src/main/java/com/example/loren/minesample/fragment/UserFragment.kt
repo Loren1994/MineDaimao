@@ -11,7 +11,11 @@ import com.example.loren.minesample.*
 import com.example.loren.minesample.annotation.AnimationClick
 import com.example.loren.minesample.annotation.AnimationClickType
 import com.example.loren.minesample.annotation.LorenInject
+import com.example.loren.minesample.base.ext.log
 import com.example.loren.minesample.base.ui.BaseFragment
+import com.example.loren.minesample.eventbus.EventMsg
+import com.example.loren.minesample.eventbus.FEventbus
+import com.example.loren.minesample.eventbus.OnEventListener
 import com.example.loren.minesample.service.ShowActivityService
 import com.example.loren.minesample.service.WindowsService
 import pers.victor.ext.toast
@@ -23,10 +27,15 @@ import socket.SocketServerActivity
  * Created by loren on 2017/3/7.
  */
 
-class UserFragment : BaseFragment() {
+class UserFragment : BaseFragment(), OnEventListener<EventMsg.LorenEventMsg1> {
+    override fun onEvent(event: EventMsg.LorenEventMsg1) {
+        log("UserFragment收到消息:${event.type} - ${event.msg}")
+    }
+
     private lateinit var dialog: AlertDialog.Builder
     private var clickPos = 0
     override fun initWidgets() {
+        FEventbus.register(this)
         LorenInject.into(this)
         val list = arrayOf("TopActivity悬浮框", "吸附式悬浮框")
         dialog = AlertDialog.Builder(activity)
@@ -63,7 +72,7 @@ class UserFragment : BaseFragment() {
                 android.provider.Settings.Secure.ACCESSIBILITY_ENABLED) == 1
     }
 
-    @AnimationClick([R.id.red_package_tv, R.id.expand_tv, R.id.path_tv, R.id.top_tv, R.id.search_tv, R.id.放大镜_tv, R.id.hw_tv, R.id.html_tv, R.id.input_tv, R.id.amazing_tv, R.id.phone_tv, R.id.clip_tv, R.id.access_tv, R.id.server_tv, R.id.client_tv, R.id.blur_tv], AnimationClickType.SCALE)
+    @AnimationClick([R.id.eventbus_tv, R.id.red_package_tv, R.id.expand_tv, R.id.path_tv, R.id.top_tv, R.id.search_tv, R.id.放大镜_tv, R.id.hw_tv, R.id.html_tv, R.id.input_tv, R.id.amazing_tv, R.id.phone_tv, R.id.clip_tv, R.id.access_tv, R.id.server_tv, R.id.client_tv, R.id.blur_tv], AnimationClickType.SCALE)
     override fun onClick(v: View) {
         when (v.id) {
 //            R.id.translation_tv -> startActivity(Intent(mContext, TranslationActivity::class.java))
@@ -90,6 +99,7 @@ class UserFragment : BaseFragment() {
             R.id.path_tv -> startActivity(Intent(activity, PathViewActivity::class.java))
             R.id.expand_tv -> startActivity(Intent(activity, ExpandActivity::class.java))
             R.id.red_package_tv -> startRedPackage()
+            R.id.eventbus_tv -> startActivity<EventBusActivity>()
         }
     }
 

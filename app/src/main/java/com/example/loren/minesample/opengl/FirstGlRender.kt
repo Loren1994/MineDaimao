@@ -5,6 +5,7 @@ import android.opengl.GLES20
 import android.opengl.GLSurfaceView
 import android.opengl.Matrix
 import com.example.loren.minesample.R
+import com.example.loren.minesample.base.ext.log
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
@@ -37,6 +38,7 @@ class FirstGlRender(val context: Context) : GLSurfaceView.Renderer {
     override fun onDrawFrame(gl: GL10?) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT)
         Matrix.multiplyMM(viewProjectionMatrix, 0, projectionMatrix, 0, viewMatrix, 0)
+        Matrix.invertM(invertViewProjectionMatrix, 0, viewProjectionMatrix, 0)
         //draw table
         positionTableInScene()
         textureShaderProgram.useProgram()
@@ -96,5 +98,26 @@ class FirstGlRender(val context: Context) : GLSurfaceView.Renderer {
         Matrix.translateM(modelMatrix, 0, x, y, z)
         Matrix.multiplyMM(modelViewProjectionMatrix, 0, viewProjectionMatrix, 0, modelMatrix, 0)
 
+    }
+
+//    private var malletPress = false
+//    private var blueMalletPosition = Geometry.Point(0f, mallet.height / 2f, 0.4f)
+    private var invertViewProjectionMatrix = FloatArray(16)
+
+    fun handleTouchPress(x: Float, y: Float) {
+        log("press: $x - $y")
+    }
+
+    fun handleTouchDrag(x: Float, y: Float) {
+        log("drag: $x - $y")
+    }
+
+    private fun convertNormalized2DPointToRay(normalizedX: Float, normalizedY: Float) {
+        val nearPointNdc = floatArrayOf(normalizedX, normalizedY, -1f, 1f)
+        val farPointNdc = floatArrayOf(normalizedX, normalizedY, 1f, 1f)
+        val nearPointWorld = FloatArray(4)
+        val farPointWorld = FloatArray(4)
+        Matrix.multiplyMV(nearPointWorld, 0, invertViewProjectionMatrix, 0, nearPointNdc, 0)
+        Matrix.multiplyMV(farPointWorld, 0, invertViewProjectionMatrix, 0, farPointNdc, 0)
     }
 }

@@ -145,8 +145,8 @@ class TakePhotoActivity : BaseActivity() {
         handlerThread.start()
         childHandler = Handler(handlerThread.looper)
         mainHandler = Handler(mainLooper)
-        mCameraID = "" + CameraCharacteristics.LENS_FACING_FRONT//后摄像头
-//        mCameraID = "" + CameraCharacteristics.LENS_FACING_BACK//前摄像头
+//        mCameraID = "" + CameraCharacteristics.LENS_FACING_FRONT//后摄像头
+        mCameraID = "" + CameraCharacteristics.LENS_FACING_BACK//前摄像头
         mImageReader = ImageReader.newInstance(1080, 1920, ImageFormat.JPEG, 1)
         mImageReader!!.setOnImageAvailableListener({ p0 ->
             //可以在这里处理拍照得到的临时照片 例如，写入本地

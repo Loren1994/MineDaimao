@@ -174,6 +174,7 @@
 
 * [OpenGL ES](https://github.com/Loren1994/MineDaimao/blob/master/app/src/main/java/com/example/loren/minesample/opengl/FirstGlRender.kt)
 
-  > 曲棍球游戏
+  > 曲棍球游戏(更新中)
+
 
 ## 持续更新中...

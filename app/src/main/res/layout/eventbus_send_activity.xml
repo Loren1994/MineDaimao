@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/event_bus_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发送消息1" />
+ <Button
+        android:id="@+id/event_bus1_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发送消息2" />
+
+    <EditText
+        android:text="11111"
+        android:id="@+id/type_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="消息参数1" />
+
+    <EditText
+        android:text="test message"
+        android:id="@+id/msg_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="消息参数2" />
+
+    <LinearLayout
+        android:id="@+id/msg_send_container_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+
+</LinearLayout>
