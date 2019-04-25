@@ -26,6 +26,7 @@ import com.example.loren.minesample.fragment.UtilsFragment
 import com.example.loren.minesample.jniutil.JniUtil
 import kotlinx.android.synthetic.main.launcher_activity.*
 import pers.victor.ext.*
+import socket.WebSocketService
 
 
 /**
@@ -126,6 +127,8 @@ class LauncherActivity : BaseActivity() {
         initViewpager()
 
         log(JniUtil().test())
+
+//        startService<WebSocketService>()
     }
 
     override fun onResume() {

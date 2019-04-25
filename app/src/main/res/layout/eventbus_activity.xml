@@ -5,6 +5,12 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
+    <!--<androidx.viewpager2.widget.ViewPager2-->
+        <!--android:id="@+id/test_vp2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="200dp"-->
+        <!--android:orientation="vertical" />-->
+
     <Button
         android:id="@+id/event_bus_btn"
         android:layout_width="wrap_content"

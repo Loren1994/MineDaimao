@@ -72,6 +72,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
+        <service android:name="socket.WebSocketService" />
 
         <!--android:excludeFromRecents="true"-->
         <activity android:name=".LauncherActivity">
