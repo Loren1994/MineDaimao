@@ -15,6 +15,8 @@ import com.example.loren.minesample.base.ext.log
  */
 class BinderClient : Service() {
 
+    private lateinit var iMyAidlInterface: IMyAidlInterface
+
     private val stub = object : IMyAidlInterface.Stub() {
         override fun bindSuccess() {
             log("BinderClient绑定成功")
@@ -34,9 +36,16 @@ class BinderClient : Service() {
 
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             log(">>>onServiceConnected")
+            iMyAidlInterface = IMyAidlInterface.Stub.asInterface(service)
+            iMyAidlInterface.bindSuccess()
             bindServerService()
         }
 
+    }
+
+    override fun onUnbind(intent: Intent?): Boolean {
+        iMyAidlInterface.unbind()
+        return super.onUnbind(intent)
     }
 
     override fun onCreate() {
@@ -53,7 +62,7 @@ class BinderClient : Service() {
         val intent = Intent()
         intent.component = ComponentName("com.example.loren.minesample.debug", "binder.BinderServer")
         if (!applicationContext.bindService(intent, connection, Context.BIND_AUTO_CREATE)) {
-            log("bindLocalService: 绑定 LocalService 失败")
+            log("bindServerService: 绑定 ServerService 失败")
             stopSelf()
         }
     }
