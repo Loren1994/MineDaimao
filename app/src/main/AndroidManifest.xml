@@ -73,6 +73,14 @@
             </intent-filter>
         </service>
         <service android:name="socket.WebSocketService" />
+        <service
+            android:name="binder.BinderServer"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name="binder.BinderClient"
+            android:enabled="true"
+            android:exported="true" />
 
         <!--android:excludeFromRecents="true"-->
         <activity android:name=".LauncherActivity">

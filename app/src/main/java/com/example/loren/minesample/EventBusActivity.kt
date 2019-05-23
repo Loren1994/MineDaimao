@@ -1,18 +1,13 @@
 package com.example.loren.minesample
 
 import android.annotation.SuppressLint
-import android.service.autofill.AutofillService
 import android.view.View
 import android.widget.TextView
-import androidx.core.view.setPadding
-import com.example.loren.minesample.base.ext.CommonAdapter
-import com.example.loren.minesample.base.ext.Holder
 import com.example.loren.minesample.base.ui.BaseActivity
 import com.example.loren.minesample.eventbus.EventMsg
 import com.example.loren.minesample.eventbus.FEventbus
 import com.example.loren.minesample.eventbus.OnEventListener
 import kotlinx.android.synthetic.main.eventbus_activity.*
-import kotlinx.android.synthetic.main.item_test.*
 import pers.victor.ext.dp2px
 
 /**
@@ -24,7 +19,7 @@ class EventBusActivity : BaseActivity(), OnEventListener<EventMsg.LorenEventMsg>
     override fun onEvent(event: EventMsg.LorenEventMsg) {
         val tv = TextView(this)
         tv.text = "收到消息:${event.type} - ${event.msg}"
-        tv.setPadding(dp2px(8))
+        tv.setPadding(dp2px(8),dp2px(8),dp2px(8),dp2px(8))
         msg_container_ll.addView(tv)
 //        val mAdapter = TestAdapter()
 //        test_vp2.adapter = mAdapter as RecyclerView.Adapter<*>

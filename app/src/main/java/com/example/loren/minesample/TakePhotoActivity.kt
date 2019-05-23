@@ -26,10 +26,7 @@ import com.example.loren.minesample.base.ext.log
 import com.example.loren.minesample.base.ui.BaseActivity
 import com.example.loren.minesample.constant.MessageEvent
 import kotlinx.android.synthetic.main.activity_take_photo.*
-import kotlinx.coroutines.DefaultDispatcher
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import org.greenrobot.eventbus.EventBus
 import pers.victor.ext.findColor
 import pers.victor.ext.toast
@@ -64,8 +61,8 @@ class TakePhotoActivity : BaseActivity() {
     }
 
     private fun takeDelay() {
-        launch {
-            withContext(DefaultDispatcher) {
+        GlobalScope.launch {
+            withContext(Dispatchers.Default) {
                 delay(2000)
                 takePicture()
             }

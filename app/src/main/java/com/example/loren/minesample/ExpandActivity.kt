@@ -20,7 +20,7 @@ class ExpandActivity : BaseActivity() {
 
     private fun doAny() = runBlocking {
         launch {
-            val a = async(CommonPool) {
+            val a = async {
                 delay(1000)
                 runOnUiThread { toast("launch") }
             }

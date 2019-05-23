@@ -70,12 +70,13 @@ android {
 // compileSdkVersion及targetSdkVersion是28，测试手机是27，
 // 开机一堆not found异常(27/28的api差异问题)
 // 改为和手机版本一直即可
+
 //configurations.all {
 //    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
 //        def requested = details.requested
 //        if (requested.group == "com.android.support") {
-//            if (!requested.name.startsWith("multidex")) {
-//                details.useVersion "26.+"
+//            if (!requested.name.startsWith("support-v4")) {
+//                details.useVersion "28.0.0"
 //            }
 //        }
 //    }
@@ -84,6 +85,10 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+//    implementation 'androidx.appcompat:appcompat:1.0.2'
+//    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+//    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+//    implementation 'com.google.android.material:material:1.0.0-rc01'
     implementation "com.android.support:appcompat-v7:$android_support_version"
     implementation "com.android.support:support-v4:$android_support_version"
     implementation "com.android.support:recyclerview-v7:$android_support_version"
@@ -106,10 +111,10 @@ dependencies {
     debugImplementation "io.objectbox:objectbox-android-objectbrowser:$objectboxVersion"
     releaseImplementation "io.objectbox:objectbox-android:$objectboxVersion"
     implementation 'com.yanzhenjie:andserver:1.1.0'
-    implementation 'androidx.core:core-ktx:0.3'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.27.0-eap13'
+//    implementation 'androidx.core:core-ktx:1.0.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.0'
     implementation 'com.google.android:flexbox:0.3.2'
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.27.0-eap13"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.0"
     implementation 'org.bytedeco:javacv:1.4.1'
     implementation 'org.bytedeco.javacpp-presets:opencv:3.4.1-1.4.1:android-arm'
     implementation 'org.bytedeco.javacpp-presets:ffmpeg:3.4.2-1.4.1:android-arm'

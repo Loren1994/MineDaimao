@@ -15,8 +15,10 @@ import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber
 import com.facebook.imagepipeline.image.CloseableImage
 import com.facebook.imagepipeline.request.ImageRequestBuilder
 import kotlinx.android.synthetic.main.face_activity.*
-import kotlinx.coroutines.async
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.bytedeco.javacpp.opencv_core
 import org.bytedeco.javacpp.opencv_imgcodecs.imread
 import org.bytedeco.javacpp.opencv_imgcodecs.imwrite
@@ -46,8 +48,8 @@ class FaceActivity : BaseActivity() {
         know_btn.setOnClickListener {
             val picPath = "${Environment.getExternalStorageDirectory()}/home.png"
             startTime = System.currentTimeMillis()
-            launch {
-                async { faceDetect(picPath) }.await()
+            GlobalScope.launch {
+                withContext(Dispatchers.Default) { faceDetect(picPath) }
             }
         }
         down_btn.setOnClickListener { downloadPic() }

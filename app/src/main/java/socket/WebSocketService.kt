@@ -18,7 +18,9 @@ class WebSocketService : Service() {
     private var webSocket: WebSocket? = null
     private var timer: Timer? = null
     private var timerTask: TimerTask? = null
-    private val url = "ws://106.15.185.23:8080/smartlab/websocket/${Build.SERIAL}"
+//        private val url = "ws://106.15.185.23:8080/smartlab/websocket/${Build.SERIAL}"
+    private val url = "ws://172.20.10.2:8089/websocket/${Build.SERIAL}"
+//    private val url = "ws://10.6.6.146:9999/smartlab/websocket/${Build.SERIAL}"
     private val interval = 6000L
 
     override fun onBind(intent: Intent?) = null
@@ -29,7 +31,6 @@ class WebSocketService : Service() {
     }
 
     private fun connect() {
-        log("connect")
         val request = Request.Builder()
                 .url(url)
                 .build()

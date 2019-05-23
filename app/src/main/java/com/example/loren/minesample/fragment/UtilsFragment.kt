@@ -2,6 +2,8 @@ package com.example.loren.minesample.fragment
 
 import android.Manifest
 import android.view.View
+import binder.BinderClient
+import binder.BinderServer
 import com.example.loren.minesample.*
 import com.example.loren.minesample.annotation.AnimationClick
 import com.example.loren.minesample.annotation.AnimationClickType
@@ -17,9 +19,11 @@ class UtilsFragment : BaseFragment() {
         LorenInject.into(this)
     }
 
-    @AnimationClick([R.id.opengl_tv,R.id.observe_tv, R.id.face_tv, R.id.clear_tv, R.id.flex_tv, R.id.record_tv, R.id.high_tv, R.id.ble_tv, R.id.sign_revert_tv, R.id.touch_tv, R.id.sign_tv, R.id.bezier_tv, R.id.download_tv, R.id.screen_shot_tv, R.id.test_tv, R.id.inject_tv, R.id.remote_tv], AnimationClickType.ALPHA)
+    @AnimationClick([R.id.binder_client_tv, R.id.binder_server_tv, R.id.opengl_tv, R.id.observe_tv, R.id.face_tv, R.id.clear_tv, R.id.flex_tv, R.id.record_tv, R.id.high_tv, R.id.ble_tv, R.id.sign_revert_tv, R.id.touch_tv, R.id.sign_tv, R.id.bezier_tv, R.id.download_tv, R.id.screen_shot_tv, R.id.test_tv, R.id.inject_tv, R.id.remote_tv], AnimationClickType.ALPHA)
     override fun onClick(v: View) {
         when (v.id) {
+            R.id.binder_client_tv -> startService<BinderClient>()
+            R.id.binder_server_tv -> startService<BinderServer>()
             R.id.bezier_tv -> startActivity<BezierActivity>()
             R.id.screen_shot_tv -> startActivity<ScreenShotActivity>()
             R.id.test_tv -> startActivity<ObjectBoxActivity>()

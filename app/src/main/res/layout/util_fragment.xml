@@ -10,6 +10,26 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/binder_client_tv"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/rectangle_gradient"
+            android:gravity="center"
+            android:text="Binder Client"
+            android:textColor="@color/grey"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/binder_server_tv"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/rectangle_gradient"
+            android:gravity="center"
+            android:text="Binder Server"
+            android:textColor="@color/grey"
+            android:textSize="20sp" />
+
+        <TextView
             android:id="@+id/opengl_tv"
             android:layout_width="match_parent"
             android:layout_height="80dp"

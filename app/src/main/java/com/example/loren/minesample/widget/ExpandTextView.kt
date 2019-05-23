@@ -9,7 +9,6 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.view.contains
 import pers.victor.ext.dp2px
 import pers.victor.ext.screenWidth
 
@@ -61,12 +60,12 @@ class ExpandTextLayout(context: Context, attributeSet: AttributeSet) : LinearLay
 
     private fun refreshHeight() {
         val contentHeight = computeLineCount()
-        setMeasuredDimension(VIEW_WIDTH, paddingTop + paddingBottom + contentHeight + (if (contains(expandTv)) expandTv.measuredHeight else 0))
+        setMeasuredDimension(VIEW_WIDTH, paddingTop + paddingBottom + contentHeight + (if (indexOfChild(expandTv) != -1) expandTv.measuredHeight else 0))
     }
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         contentTv.layout(paddingStart, paddingTop, paddingStart + contentTv.measuredWidth, paddingTop + contentTv.measuredHeight)
-        if (contains(expandTv)) {
+        if (indexOfChild(expandTv) != -1) {
             expandTv.layout(paddingStart, paddingTop + contentTv.measuredHeight, paddingStart + expandTv.measuredWidth, paddingTop + contentTv.measuredHeight + expandTv.measuredHeight)
         }
     }
