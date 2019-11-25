@@ -1,4 +1,4 @@
-package com.example.loren.minesample.util;
+package com.example.loren.minesample.constant;
 
 /**
  * _ooOoo_
@@ -25,7 +25,6 @@ package com.example.loren.minesample.util;
  * <p>
  * Copyright (c) 17-1-17 by loren
  */
-
 public class Constant {
     public static String JSON = "{\n" +
             "\"data\":[\n" +

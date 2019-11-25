@@ -13,7 +13,7 @@ import com.example.loren.minesample.adapter.BlurListAdapter
 import com.example.loren.minesample.base.ext.parseObject
 import com.example.loren.minesample.base.ui.BaseActivity
 import com.example.loren.minesample.entity.WeatherBean
-import com.example.loren.minesample.util.Constant
+import com.example.loren.minesample.constant.Constant
 import com.example.loren.minesample.util.http
 import kotlinx.android.synthetic.main.blur_list_activity.*
 import pers.victor.ext.*

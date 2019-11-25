@@ -6,7 +6,7 @@ import android.view.View
 import bean.MessageBean
 import com.example.loren.minesample.adapter.ChatAdapter
 import com.example.loren.minesample.base.ui.BaseActivity
-import com.example.loren.minesample.util.Constant
+import com.example.loren.minesample.constant.Constant
 import com.example.loren.minesample.util.http
 import com.example.loren.minesample.widget.AdjustLinearLayout
 import com.google.gson.Gson

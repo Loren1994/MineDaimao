@@ -9,6 +9,7 @@ import com.example.loren.minesample.annotation.AnimationClick
 import com.example.loren.minesample.annotation.AnimationClickType
 import com.example.loren.minesample.annotation.LorenInject
 import com.example.loren.minesample.base.ui.BaseFragment
+import com.example.loren.minesample.constant.SetTest
 
 /**
  * Copyright © 2017/3/7 by loren
@@ -17,6 +18,11 @@ import com.example.loren.minesample.base.ui.BaseFragment
 class UtilsFragment : BaseFragment() {
     override fun initWidgets() {
         LorenInject.into(this)
+
+        SetTest.setSex(SetTest.MAN)
+        SetTest.setSex(SetTest.WOMAN)
+        SetTest.setSex(3)
+
     }
 
     @AnimationClick([R.id.binder_client_tv, R.id.binder_server_tv, R.id.opengl_tv, R.id.observe_tv, R.id.face_tv, R.id.clear_tv, R.id.flex_tv, R.id.record_tv, R.id.high_tv, R.id.ble_tv, R.id.sign_revert_tv, R.id.touch_tv, R.id.sign_tv, R.id.bezier_tv, R.id.download_tv, R.id.screen_shot_tv, R.id.test_tv, R.id.inject_tv, R.id.remote_tv], AnimationClickType.ALPHA)
@@ -56,4 +62,11 @@ class UtilsFragment : BaseFragment() {
 
     override fun bindLayout() = R.layout.util_fragment
 
+}
+
+class LRUHashMap<K, V>() : LinkedHashMap<K, V>(5,0.75f,true) {
+
+    override fun removeEldestEntry(eldest: MutableMap.MutableEntry<K, V>?): Boolean {
+        return size > 6
+    }
 }

@@ -21,7 +21,7 @@ class SocketClientActivity : BaseActivity() {
     private var ip: String? = null
     private var data: String = ""
     private var socketStatus = false
-    private val PORT = 8000
+    private val PORT = 8886//8000
 
     private fun connect() {
         ip = input_edt.text.toString()
@@ -34,7 +34,7 @@ class SocketClientActivity : BaseActivity() {
                         socketStatus = true
                     }
                     outputStream = socket!!.getOutputStream()
-                } catch (e: IOException) {
+                } catch (e: Exception) {
                     e.printStackTrace()
                 }
             }

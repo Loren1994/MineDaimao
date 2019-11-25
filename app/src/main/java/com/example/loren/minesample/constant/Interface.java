@@ -1,10 +1,14 @@
-package com.example.loren.minesample.util;
+package com.example.loren.minesample.constant;
 
 /**
  * Copyright (c) 16-9-9 by loren
  */
 
 public class Interface {
+    private static String DOMAIN = "http://139.129.13.86/cef/mobile";
+    private static String BASE_URL = DOMAIN + "/index.php?act=";
+    public static String COLLECTION_LIST = BASE_URL + "favorites&op=favorites_list&page=%d&curpage=%d";
+
     public static String JSONSTR = "{\n" +
             "  \"statusCode\": 200,\n" +
             "  \"statusMsg\": \"\",\n" +
@@ -489,7 +493,4 @@ public class Interface {
             "    \"page_total\": 1\n" +
             "  }\n" +
             "}";
-    private static String DOMAIN = "http://139.129.13.86/cef/mobile";
-    private static String BASE_URL = DOMAIN + "/index.php?act=";
-    public static String COLLECTION_LIST = BASE_URL + "favorites&op=favorites_list&page=%d&curpage=%d";
 }
