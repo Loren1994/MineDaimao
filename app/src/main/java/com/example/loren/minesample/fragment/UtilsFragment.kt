@@ -16,6 +16,8 @@ import com.example.loren.minesample.constant.SetTest
  */
 
 class UtilsFragment : BaseFragment() {
+
+
     override fun initWidgets() {
         LorenInject.into(this)
 
